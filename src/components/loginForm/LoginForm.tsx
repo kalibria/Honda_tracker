@@ -5,16 +5,16 @@ import '../../App.css';
 
 export const LoginForm = () => {
   return (
-    <div className="loginForm">
-      <main className="flex flex-col justify-center items-center">
-        <div className="w-24">
+    <div className="loginForm ">
+      <main className="flex flex-col justify-center items-center ">
+        <div className="w-24 mb-4">
           <img
             src="https://www.nicepng.com/png/detail/138-1388174_login-account-icon.png"
             alt="logIn"
           />
           <h1 className="text-center">Sigh in</h1>
         </div>
-        <form className="flex flex-col gap-1">
+        <form className="flex flex-col sm:w-96 space-y-3.5">
           <TextField
             id="outlined-login-input"
             label="Login"
