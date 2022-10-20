@@ -1,50 +1,12 @@
 import React from 'react';
-import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { Formik, Form, useField, FieldHookConfig } from 'formik';
+import { Formik, Form } from 'formik';
+import {
+  MyCheckbox,
+  MyTextInput,
+} from 'src/components/loginForm/inputsForLoginForm';
 import * as Yup from 'yup';
 import '../../App.css';
-
-interface MyTextInputProps {
-  label: string;
-  name: string;
-  [key: string]: string | FieldHookConfig<any>;
-}
-
-const MyTextInput: React.FC<MyTextInputProps> = ({ label, ...props }) => {
-  const [field, meta] = useField(props);
-  return (
-    <>
-      <TextField label={label} {...field} {...props} />
-
-      {meta.touched && meta.error ? (
-        <div className="text-red-600">{meta.error}</div>
-      ) : null}
-    </>
-  );
-};
-
-interface MyCheckboxProps {
-  name: string;
-  [key: string]: string | FieldHookConfig<any>;
-}
-
-const MyCheckbox: React.FC<MyCheckboxProps> = ({ children, ...props }) => {
-  const [field, meta] = useField({ ...props, type: 'checkbox' });
-  return (
-    <>
-      <label>
-        <>
-          <input type="checkbox" {...field} {...props} className="mr-1.5" />
-          {children}
-        </>
-      </label>
-      {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
-      ) : null}
-    </>
-  );
-};
 
 export const LoginForm = () => {
   return (
