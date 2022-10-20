@@ -587,6 +587,16 @@ video {
   }
 }
 
+.mx-1\.5 {
+  margin-left: 0.375rem;
+  margin-right: 0.375rem;
+}
+
+.mx-1 {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
+
 .mb-0\.5 {
   margin-bottom: 0.125rem;
 }
@@ -605,6 +615,18 @@ video {
 
 .mb-4 {
   margin-bottom: 1rem;
+}
+
+.mr-px {
+  margin-right: 1px;
+}
+
+.mr-1\.5 {
+  margin-right: 0.375rem;
+}
+
+.mr-1 {
+  margin-right: 0.25rem;
 }
 
 .flex {
@@ -653,6 +675,20 @@ video {
 
 .text-center {
   text-align: center;
+}
+
+.text-red-100 {
+  --tw-text-opacity: 1;
+  color: rgb(254 226 226 / var(--tw-text-opacity));
+}
+
+.text-red-600 {
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity));
+}
+
+.decoration-red-50 {
+  text-decoration-color: #fef2f2;
 }
 
 @media (min-width: 640px) {
