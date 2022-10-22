@@ -13,7 +13,8 @@ export const authSlice = createSlice({
   initialState: initialAuth,
   reducers: {
     isAuth: (state, action) => {
-      if (action.payload.status === 'Success') {
+      if (action.payload === 'Success') {
+        console.log(action.payload);
         state.loggedIn = true;
       }
     },

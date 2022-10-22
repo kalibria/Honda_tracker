@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '@mui/material/Button';
 import { Formik, Form } from 'formik';
+import { useDispatch } from 'react-redux';
 import {
   MyCheckbox,
   MyTextInput,
 } from 'src/components/loginForm/inputsForLoginForm';
+import { isAuth } from 'src/redux/authSlice';
+import { hondaApi } from 'src/services/hondaApi';
+
 import * as Yup from 'yup';
 import '../../App.css';
 
 export const LoginForm = () => {
+  const [trigger, result] = hondaApi.useLazyStatusLoginQuery();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (result.isSuccess) {
+      dispatch(isAuth(result.currentData.status));
+    }
+  }, [result.isSuccess, dispatch, result.currentData]);
   return (
     <div className="loginForm ">
       <main className="flex flex-col justify-center items-center ">
@@ -34,8 +46,9 @@ export const LoginForm = () => {
               .required('Required'),
           })}
           onSubmit={(values, { setSubmitting }) => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
+            let password = values.password;
+            let username = values.login;
+            trigger({ password, username });
           }}>
           <Form className="flex flex-col sm:w-96 space-y-3.5">
             <MyTextInput
