@@ -1,3 +1,5 @@
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 import TextField from '@mui/material/TextField';
 import { FieldHookConfig, useField } from 'formik';
 import React from 'react';
@@ -46,5 +48,18 @@ export const MyCheckbox: React.FC<MyCheckboxProps> = ({
         <div className="error">{meta.error}</div>
       ) : null}
     </>
+  );
+};
+
+interface IAlertForm {
+  message: string;
+}
+
+export const AlertForm: React.FC<IAlertForm> = ({ message }: IAlertForm) => {
+  return (
+    <Alert severity="error">
+      <AlertTitle>Error</AlertTitle>
+      {message}
+    </Alert>
   );
 };

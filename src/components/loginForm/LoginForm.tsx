@@ -1,28 +1,36 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import { Formik, Form } from 'formik';
 import { useDispatch } from 'react-redux';
 import {
+  AlertForm,
   MyCheckbox,
   MyTextInput,
-} from 'src/components/loginForm/inputsForLoginForm';
+} from 'src/components/loginForm/componentsForLoginForm';
 import { isAuth } from 'src/redux/authSlice';
 import { hondaApi } from 'src/services/hondaApi';
+import { isErrorInFetchBaseQuery } from 'src/utils/isErrorInFetchBaseQuery';
 
 import * as Yup from 'yup';
 import '../../App.css';
 
 export const LoginForm = () => {
   const [trigger, result] = hondaApi.useLazyStatusLoginQuery();
+  const [error, setError] = useState('');
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (result.isSuccess) {
       dispatch(isAuth(result.currentData.status));
+      setError('');
+    } else if (result.error) {
+      setError(isErrorInFetchBaseQuery(result.error));
     }
-  }, [result.isSuccess, dispatch, result.currentData]);
+  }, [result.isSuccess, dispatch, result.error, result.currentData]);
+
   return (
     <div className="loginForm ">
+      {error && <AlertForm message={error} />}
       <main className="flex flex-col justify-center items-center ">
         <div className="w-24 mb-4">
           <img
@@ -49,6 +57,7 @@ export const LoginForm = () => {
             let password = values.password;
             let username = values.login;
             trigger({ password, username });
+            setSubmitting(false);
           }}>
           <Form className="flex flex-col sm:w-96 space-y-3.5">
             <MyTextInput
