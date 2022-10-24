@@ -20,10 +20,14 @@ export const LoginForm = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log('statusCode', result);
+
     if (result.isSuccess) {
-      dispatch(isAuth(result.currentData.status));
+      dispatch(isAuth());
+      localStorage.setItem('sessionID', 'true');
       setError('');
     } else if (result.error) {
+      localStorage.removeItem('sessionID');
       setError(isErrorInFetchBaseQuery(result.error));
     }
   }, [result.isSuccess, dispatch, result.error, result.currentData]);

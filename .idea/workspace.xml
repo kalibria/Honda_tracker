@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="19854902-28a3-42e5-99d6-ba9ad0aa01c8" name="Changes" comment="login request">
-      <change afterPath="$PROJECT_DIR$/src/utils/isErrorInFetchBaseQuery.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/constants.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/localStorageData.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/loginForm/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/loginForm/LoginForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/loginForm/inputsForLoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/loginForm/componentsForLoginForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/authSlice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/authSlice.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/hondaApi.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/hondaApi.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +47,7 @@
       <recent name="$PROJECT_DIR$/public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/utils" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>

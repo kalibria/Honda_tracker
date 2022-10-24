@@ -1,22 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface IAuth {
-  loggedIn: boolean;
+  cookieId: boolean;
 }
 
 const initialAuth: IAuth = {
-  loggedIn: false,
+  cookieId: false,
 };
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState: initialAuth,
   reducers: {
-    isAuth: (state, action) => {
-      if (action.payload === 'Success') {
-        console.log(action.payload);
-        state.loggedIn = true;
-      }
+    isAuth: (state) => {
+      state.cookieId = true;
     },
   },
 });
