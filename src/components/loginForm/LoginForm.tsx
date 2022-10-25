@@ -9,7 +9,7 @@ import {
 } from 'src/components/loginForm/componentsForLoginForm';
 import { isAuth } from 'src/redux/authSlice';
 import { hondaApi } from 'src/services/hondaApi';
-import { isErrorInFetchBaseQuery } from 'src/utils/isErrorInFetchBaseQuery';
+import { processingNetworkRequests } from 'src/utils/queryProcessing';
 
 import * as Yup from 'yup';
 import '../../App.css';
@@ -20,17 +20,14 @@ export const LoginForm = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('statusCode', result);
-
     if (result.isSuccess) {
       dispatch(isAuth());
-      localStorage.setItem('sessionID', 'true');
+      processingNetworkRequests.isAuth();
       setError('');
     } else if (result.error) {
-      localStorage.removeItem('sessionID');
-      setError(isErrorInFetchBaseQuery(result.error));
+      setError(processingNetworkRequests.errorStatus(result.error));
     }
-  }, [result.isSuccess, dispatch, result.error, result.currentData]);
+  }, [result.isSuccess, result.error, result.currentData, dispatch]);
 
   return (
     <div className="loginForm ">

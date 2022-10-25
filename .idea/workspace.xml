@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="19854902-28a3-42e5-99d6-ba9ad0aa01c8" name="Changes" comment="login request">
-      <change afterPath="$PROJECT_DIR$/src/utils/constants.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/localStorageData.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/loginForm/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/loginForm/LoginForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/authSlice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/authSlice.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/hondaApi.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/hondaApi.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/isErrorInFetchBaseQuery.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/queryProcessing.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/localStorageData.tsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +19,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2GIs5c7kzKhLfWQay8g3dz33bCr" />
   <component name="ProjectViewState">
@@ -37,7 +40,7 @@
     "node.js.selected.package.standard": "",
     "nodejs_package_manager_path": "npm",
     "prettierjs.PrettierConfiguration.Package": "/Users/Mary/Documents/Projects/honda-tracker/node_modules/prettier",
-    "settings.editor.selected.configurable": "preferences.sourceCode.TypeScript",
+    "settings.editor.selected.configurable": "settings.typescriptcompiler",
     "ts.external.directory.path": "/Users/Mary/Documents/Projects/honda-tracker/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
