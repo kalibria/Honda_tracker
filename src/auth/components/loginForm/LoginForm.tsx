@@ -6,28 +6,37 @@ import {
   AlertForm,
   MyCheckbox,
   MyTextInput,
-} from 'src/components/loginForm/componentsForLoginForm';
+} from 'src/auth/components/loginForm/componentsForLoginForm';
+import { unauthorized } from 'src/auth/constants';
 import { isAuth } from 'src/redux/authSlice';
-import { hondaApi } from 'src/services/hondaApi';
-import { processingNetworkRequests } from 'src/utils/queryProcessing';
+import { useLazyStatusLoginQuery } from 'src/services/hondaApi';
+import { processingNetworkRequests } from 'src/auth/authenticationManager';
 
 import * as Yup from 'yup';
-import '../../App.css';
+import 'src/App.css';
 
 export const LoginForm = () => {
-  const [trigger, result] = hondaApi.useLazyStatusLoginQuery();
+  const [trigger, result] = useLazyStatusLoginQuery();
   const [error, setError] = useState('');
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (result.isSuccess) {
+    processingNetworkRequests.isAuthenticated(result);
+
+    const { isSuccess, errorMsg, errorCode } =
+      processingNetworkRequests.handleQueryResult(result);
+
+    if (isSuccess) {
       dispatch(isAuth());
-      processingNetworkRequests.isAuth();
       setError('');
-    } else if (result.error) {
-      setError(processingNetworkRequests.errorStatus(result.error));
+    } else {
+      setError(errorMsg);
+
+      if (errorCode === unauthorized) {
+        // redirect to login page, but not needed on this page
+      }
     }
-  }, [result.isSuccess, result.error, result.currentData, dispatch]);
+  }, [dispatch, result]);
 
   return (
     <div className="loginForm ">
