@@ -13,7 +13,7 @@ class AuthenticationManager {
       'status' in error.data &&
       typeof error.data.status === 'string'
     ) {
-      this.setUnauthenticated('sessionID');
+      this.setUnauthenticated('isAuthenticated');
       return error.data.status || '';
     }
 
@@ -23,7 +23,7 @@ class AuthenticationManager {
   isAuthenticated(result: UseQueryStateResult<any, any>) {
     if (result.error) {
       if (result.error.status === unauthorized) {
-        this.setUnauthenticated('sessionID');
+        this.setUnauthenticated('isAuthenticated');
       }
     } else if (result.isSuccess) {
       this.setIsAuthenticated();
@@ -54,7 +54,7 @@ class AuthenticationManager {
   }
 
   private setIsAuthenticated() {
-    localStorage.setItem('sessionID', 'true');
+    localStorage.setItem('isAuthenticated', 'true');
   }
   private setUnauthenticated(key: string) {
     localStorage.removeItem(key);
