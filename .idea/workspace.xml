@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="19854902-28a3-42e5-99d6-ba9ad0aa01c8" name="Changes" comment="login request">
       <change beforePath="$PROJECT_DIR$/src/auth/authenticationManager.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/authenticationManager.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/hondaApi.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/hondaApi.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
