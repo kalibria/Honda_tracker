@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="23dd3188-ad99-4626-a6fc-8d6a150d9de3" name="Changes" comment="add routing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/auth.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/auth.types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/components/logOutFor/LogOutButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/components/logOutFor/LogOutButton.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/auth/components/loginForm/componentsForLoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/components/loginForm/componentsForLoginForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/hondaApi.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/hondaApi.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

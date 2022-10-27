@@ -59,7 +59,7 @@ export const AlertForm: React.FC<IAlertForm> = ({ message }: IAlertForm) => {
 export const ButtonEl: React.FC<IButtonEl> = ({ text, ...props }) => {
   return (
     <Button variant="contained" type="submit" {...props}>
-      {text}x
+      {text}
     </Button>
   );
 };
