@@ -3,6 +3,7 @@ import AlertTitle from '@mui/material/AlertTitle';
 import TextField from '@mui/material/TextField';
 import { FieldHookConfig, useField } from 'formik';
 import React from 'react';
+import Button from '@mui/material/Button';
 
 interface MyTextInputProps {
   label: string;
@@ -61,5 +62,18 @@ export const AlertForm: React.FC<IAlertForm> = ({ message }: IAlertForm) => {
       <AlertTitle>Error</AlertTitle>
       {message}
     </Alert>
+  );
+};
+
+interface IButtonEl {
+  text: string;
+  onClick?: () => void;
+}
+
+export const ButtonEl: React.FC<IButtonEl> = ({ text, ...props }) => {
+  return (
+    <Button variant="contained" type="submit" {...props}>
+      {text}x
+    </Button>
   );
 };
