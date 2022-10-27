@@ -1,13 +1,7 @@
 import React from 'react';
 import './App.css';
-import { LoginForm } from 'src/auth/components/loginForm/LoginForm';
+import { Route, Routes } from 'react-router-dom';
 
-function App() {
-  return (
-    <React.Fragment>
-      <LoginForm />
-    </React.Fragment>
-  );
-}
-
-export default App;
+const LoginForm = React.lazy(
+  () => import('./auth/components/loginForm/LoginForm'),
+);

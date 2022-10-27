@@ -11,10 +11,10 @@ class AuthenticationManager {
       typeof error.data === 'object' &&
       error.data !== null &&
       'status' in error.data &&
-      typeof error.data.status === 'string'
+      typeof (error.data as any).status === 'string'
     ) {
       this.setUnauthenticated('isAuthenticated');
-      return error.data.status || '';
+      return (error.data as any).status || '';
     }
 
     return '';
@@ -42,10 +42,18 @@ class AuthenticationManager {
       };
     }
 
+    if (result.isSuccess) {
+      return {
+        errorCode: 200,
+        errorMsg: '',
+        isSuccess: true,
+      };
+    }
+
     return {
       errorCode: 200,
       errorMsg: '',
-      isSuccess: true,
+      isSuccess: false,
     };
   }
 

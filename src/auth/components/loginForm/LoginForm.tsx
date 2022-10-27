@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Button from '@mui/material/Button';
 import { Formik, Form } from 'formik';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
   AlertForm,
+  ButtonEl,
   MyCheckbox,
   MyTextInput,
 } from 'src/auth/components/loginForm/componentsForLoginForm';
@@ -15,10 +16,11 @@ import { processingNetworkRequests } from 'src/auth/authenticationManager';
 import * as Yup from 'yup';
 import 'src/App.css';
 
-export const LoginForm = () => {
+const LoginForm = () => {
   const [trigger, result] = useLazyStatusLoginQuery();
   const [error, setError] = useState('');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     processingNetworkRequests.isAuthenticated(result);
@@ -29,6 +31,7 @@ export const LoginForm = () => {
     if (isSuccess) {
       dispatch(isAuth());
       setError('');
+      navigate('/logout');
     } else {
       setError(errorMsg);
 
@@ -36,7 +39,7 @@ export const LoginForm = () => {
         // redirect to login page, but not needed on this page
       }
     }
-  }, [dispatch, result]);
+  }, [dispatch, navigate, result]);
 
   return (
     <div className="loginForm ">
@@ -85,12 +88,12 @@ export const LoginForm = () => {
               name={'password'}
             />
             <MyCheckbox name={'rememberMe'}>Remember me</MyCheckbox>
-            <Button variant="contained" type="submit">
-              Sigh in
-            </Button>
+            <ButtonEl text={'Sign in'} />
           </Form>
         </Formik>
       </main>
     </div>
   );
 };
+
+export default LoginForm;
