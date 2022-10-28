@@ -3,7 +3,7 @@ import { BasicTextFields, SwitchesGroup } from 'src/settings/components';
 
 export const SettingsPage = () => {
   return (
-    <main>
+    <main className={'sm:w-60 flex flex-col'}>
       <SwitchesGroup
         note1={'booking is created'}
         note2={'booking is changed'}

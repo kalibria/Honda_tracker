@@ -4,9 +4,11 @@ import { SettingsPage } from 'src/settings/SettingsPage';
 
 export const CalendarPage = () => {
   return (
-    <React.Fragment>
-      <LogOutButton />
-      <SettingsPage />
-    </React.Fragment>
+    <main className={'mainContainer'}>
+      <div>
+        <LogOutButton />
+        <SettingsPage />
+      </div>
+    </main>
   );
 };

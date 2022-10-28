@@ -27,7 +27,10 @@ export const SwitchesGroup: React.FC<ISwitchesGroup> = ({
   };
 
   return (
-    <FormControl component="fieldset" variant="standard">
+    <FormControl
+      component="fieldset"
+      variant="standard"
+      className={'self-center'}>
       <FormLabel component="legend">{title}</FormLabel>
       <FormGroup>
         <FormControlLabel
@@ -64,7 +67,12 @@ export const BasicTextFields: React.FC<IBasicTextFields> = ({ label }) => {
       }}
       noValidate
       autoComplete="off">
-      <TextField id="standard-basic" label={label} variant="standard" />
+      <TextField
+        fullWidth
+        id="standard-basic"
+        label={label}
+        variant="standard"
+      />
     </Box>
   );
 };

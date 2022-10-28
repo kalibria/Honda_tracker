@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Simulate } from 'react-dom/test-utils';
 import { useNavigate } from 'react-router-dom';
 import { processingNetworkRequests } from 'src/auth/authenticationManager';
 import {
@@ -27,15 +26,14 @@ export const LogOutButton = () => {
       return;
     } else {
       setError(errorMsg);
-      console.error(errorMsg);
     }
   }, [error, navigate, result]);
 
   return (
-    <React.Fragment>
+    <div className={'absolute top-5 right-5'}>
       {error && <AlertForm message={error} />}
 
       <ButtonEl text={'log out'} onClick={handleClick} />
-    </React.Fragment>
+    </div>
   );
 };

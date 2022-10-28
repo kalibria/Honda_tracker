@@ -42,7 +42,7 @@ const LoginForm = () => {
   }, [dispatch, navigate, result]);
 
   return (
-    <div className="loginForm ">
+    <div className="mainContainer ">
       {error && <AlertForm message={error} />}
       <main className="flex flex-col justify-center items-center ">
         <div className="w-24 mb-4">
