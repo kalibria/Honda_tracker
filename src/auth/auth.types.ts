@@ -24,4 +24,5 @@ export interface IAlertForm {
 export interface IButtonEl {
   text: string;
   onClick?: () => void;
+  size?: string;
 }

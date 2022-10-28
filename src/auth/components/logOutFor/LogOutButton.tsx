@@ -33,7 +33,7 @@ export const LogOutButton = () => {
     <div className={'absolute top-5 right-5'}>
       {error && <AlertForm message={error} />}
 
-      <ButtonEl text={'log out'} onClick={handleClick} />
+      <ButtonEl text={'log out'} onClick={handleClick} size={'small'} />
     </div>
   );
 };
