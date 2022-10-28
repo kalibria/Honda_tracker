@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
+import { rtkQueryErrorLogger } from 'src/redux/rtkQueryErrorLogger';
 import { hondaApi } from 'src/services/hondaApi';
 import authReducer from './authSlice';
 
@@ -9,7 +10,9 @@ export const store = configureStore({
     auth: authReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(hondaApi.middleware),
+    getDefaultMiddleware()
+      .concat(hondaApi.middleware)
+      .concat(rtkQueryErrorLogger),
 });
 
 setupListeners(store.dispatch);

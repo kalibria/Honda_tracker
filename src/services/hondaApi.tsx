@@ -20,7 +20,7 @@ export const hondaApi = createApi({
       query: () => ({
         url: '/logout',
         method: 'POST',
-        // body: { sessionId },
+        body: {},
       }),
     }),
   }),

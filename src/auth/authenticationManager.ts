@@ -31,7 +31,7 @@ class AuthenticationManager {
   }
 
   handleQueryResult(result: UseQueryStateResult<any, any>): IHandleQueryResult {
-    if (result.error) {
+    if (result.isError) {
       const errorMsg = this.errorMessage(result.error);
       const errorCode = AuthenticationManager.getErrorCode(result.error);
 
