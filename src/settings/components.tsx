@@ -4,7 +4,9 @@ import FormControl from '@mui/material/FormControl';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import { ISwitchesGroup } from 'src/settings/types';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import { IBasicTextFields, ISwitchesGroup } from 'src/settings/types';
 
 export const SwitchesGroup: React.FC<ISwitchesGroup> = ({
   note1,
@@ -13,7 +15,7 @@ export const SwitchesGroup: React.FC<ISwitchesGroup> = ({
   ...props
 }) => {
   const [state, setState] = React.useState({
-    note1: true,
+    note1: false,
     note2: false,
   });
 
@@ -50,5 +52,19 @@ export const SwitchesGroup: React.FC<ISwitchesGroup> = ({
         />
       </FormGroup>
     </FormControl>
+  );
+};
+
+export const BasicTextFields: React.FC<IBasicTextFields> = ({ label }) => {
+  return (
+    <Box
+      component="form"
+      sx={{
+        '& > :not(style)': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off">
+      <TextField id="standard-basic" label={label} variant="standard" />
+    </Box>
   );
 };

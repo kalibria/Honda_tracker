@@ -3,3 +3,7 @@ export interface ISwitchesGroup {
   note2: string;
   title: string;
 }
+
+export interface IBasicTextFields {
+  label: string;
+}
