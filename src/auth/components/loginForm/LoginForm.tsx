@@ -31,7 +31,7 @@ const LoginForm = () => {
     if (isSuccess) {
       dispatch(isAuth());
       setError('');
-      navigate('/logout');
+      navigate('/calendar');
     } else {
       setError(errorMsg);
 
