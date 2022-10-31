@@ -3,6 +3,7 @@ import LoginForm from 'src/auth/components/loginForm/LoginForm';
 import { LogOutButton } from 'src/auth/components/logOutFor/LogOutButton';
 import { CalendarPage } from 'src/calendarPage/CalendarPage';
 import { SettingsPage } from 'src/settings/SettingsPage';
+import { WrapperForSettingPage } from 'src/settings/WrapperForSettingPage';
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/settings',
-    element: <SettingsPage />,
+    element: <WrapperForSettingPage />,
   },
   // {
   //   path: '/bookings',

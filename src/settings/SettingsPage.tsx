@@ -1,21 +1,12 @@
 import Button from '@mui/material/Button';
 import { Form, Formik } from 'formik';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useGetUserQuery } from 'src/services/hondaApi';
 import { myLocalStorage } from 'src/services/localStorage';
 import { BasicTextFields, SwitchesGroup } from 'src/settings/components';
+import { carProvider } from 'src/settings/constants';
 
 export const SettingsPage = () => {
-  const user = myLocalStorage.getItem('username');
-  const { data, error, isLoading } = useGetUserQuery(user);
-
-  useEffect(() => {
-    if (data) {
-      const userRole = data.user.roles;
-      myLocalStorage.setItem('userRole', userRole);
-    }
-  }, [data]);
-
   return (
     <main className={'sm:w-60 mainContainer'}>
       <Formik
