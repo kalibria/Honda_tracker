@@ -7,6 +7,8 @@ import { BasicTextFields, SwitchesGroup } from 'src/settings/components';
 import { carProvider } from 'src/settings/constants';
 
 export const SettingsPage = () => {
+  const userRole = myLocalStorage.getItem('userRole');
+
   return (
     <main className={'sm:w-60 mainContainer'}>
       <Formik
@@ -19,13 +21,15 @@ export const SettingsPage = () => {
           setSubmitting(false);
         }}>
         <Form className={'flex flex-col space-y-3.5'}>
-          <SwitchesGroup
-            note1={'booking is created'}
-            note2={'booking is changed'}
-            title={'Get notifications when ...'}
-            isCreatedFieldName={'isCreated'}
-            isChangedFieldName={'isChanged'}
-          />
+          {userRole === carProvider ? (
+            <SwitchesGroup
+              note1={'booking is created'}
+              note2={'booking is changed'}
+              title={'Get notifications when ...'}
+              isCreatedFieldName={'isCreated'}
+              isChangedFieldName={'isChanged'}
+            />
+          ) : null}
           <BasicTextFields
             label={'Where the car was left?'}
             name={'textField'}
