@@ -21,6 +21,7 @@ const LoginForm = () => {
   const [error, setError] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [username, setUsername] = useState('');
 
   useEffect(() => {
     processingNetworkRequests.isAuthenticated(result);
@@ -29,7 +30,8 @@ const LoginForm = () => {
       processingNetworkRequests.handleQueryResult(result);
 
     if (isSuccess) {
-      dispatch(isAuth());
+      console.log('username', username);
+      dispatch(isAuth(username));
       setError('');
       navigate('/calendar');
     } else {
@@ -39,7 +41,7 @@ const LoginForm = () => {
         // redirect to login page, but not needed on this page
       }
     }
-  }, [dispatch, navigate, result]);
+  }, [dispatch, navigate, result, username]);
 
   return (
     <div className="mainContainer ">
@@ -70,6 +72,7 @@ const LoginForm = () => {
             let password = values.password;
             let username = values.login;
             trigger({ password, username });
+            setUsername(username);
             setSubmitting(false);
           }}>
           <Form className="flex flex-col sm:w-96 space-y-3.5">

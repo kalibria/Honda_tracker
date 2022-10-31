@@ -1,11 +1,13 @@
 import Button from '@mui/material/Button';
 import { Form, Formik } from 'formik';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BasicTextFields, SwitchesGroup } from 'src/settings/components';
 
 export const SettingsPage = () => {
+  // const { data, error, isLoading } = useEffect(() => {});
+
   return (
-    <main className={'sm:w-60 flex flex-col'}>
+    <main className={'sm:w-60 mainContainer'}>
       <Formik
         initialValues={{
           isCreated: false,
@@ -13,7 +15,6 @@ export const SettingsPage = () => {
           textField: '',
         }}
         onSubmit={(values, { setSubmitting }) => {
-          console.log('submitting', values);
           setSubmitting(false);
         }}>
         <Form className={'flex flex-col space-y-3.5'}>
