@@ -55,11 +55,3 @@ export const AlertForm: React.FC<IAlertForm> = ({ message }: IAlertForm) => {
     </Alert>
   );
 };
-
-export const ButtonEl: React.FC<IButtonEl> = ({ text, ...props }) => {
-  return (
-    <Button variant="contained" type="submit" {...props}>
-      {text}
-    </Button>
-  );
-};

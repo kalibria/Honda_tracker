@@ -1,10 +1,10 @@
+import Button from '@mui/material/Button';
 import React, { useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
   AlertForm,
-  ButtonEl,
   MyCheckbox,
   MyTextInput,
 } from 'src/auth/components/loginForm/componentsForLoginForm';
@@ -88,7 +88,9 @@ const LoginForm = () => {
               name={'password'}
             />
             <MyCheckbox name={'rememberMe'}>Remember me</MyCheckbox>
-            <ButtonEl text={'Sign in'} />
+            <Button variant="contained" type="submit">
+              {'Sign in'}
+            </Button>
           </Form>
         </Formik>
       </main>

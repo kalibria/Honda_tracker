@@ -1,6 +1,6 @@
+import Button from '@mui/material/Button';
 import { Form, Formik } from 'formik';
 import React from 'react';
-import { ButtonEl } from 'src/auth/components/loginForm/componentsForLoginForm';
 import { BasicTextFields, SwitchesGroup } from 'src/settings/components';
 
 export const SettingsPage = () => {
@@ -16,7 +16,7 @@ export const SettingsPage = () => {
           console.log('submitting', values);
           setSubmitting(false);
         }}>
-        <Form className={'flex flex-col'}>
+        <Form className={'flex flex-col space-y-3.5'}>
           <SwitchesGroup
             note1={'booking is created'}
             note2={'booking is changed'}
@@ -28,7 +28,13 @@ export const SettingsPage = () => {
             label={'Where the car was left?'}
             name={'textField'}
           />
-          <ButtonEl text={'save'} />
+          <Button
+            className={'place-self-center'}
+            variant="contained"
+            type="submit"
+            size={'small'}>
+            {'save'}
+          </Button>
         </Form>
       </Formik>
     </main>

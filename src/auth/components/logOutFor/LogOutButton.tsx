@@ -1,10 +1,8 @@
+import Button from '@mui/material/Button';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { processingNetworkRequests } from 'src/auth/authenticationManager';
-import {
-  AlertForm,
-  ButtonEl,
-} from 'src/auth/components/loginForm/componentsForLoginForm';
+import { AlertForm } from 'src/auth/components/loginForm/componentsForLoginForm';
 
 import { useLazyLogOutQuery } from 'src/services/hondaApi';
 
@@ -33,7 +31,13 @@ export const LogOutButton = () => {
     <div className={'absolute top-5 right-5'}>
       {error && <AlertForm message={error} />}
 
-      <ButtonEl text={'log out'} onClick={handleClick} size={'small'} />
+      <Button
+        variant="contained"
+        type="submit"
+        onClick={handleClick}
+        size={'small'}>
+        {'log out'}
+      </Button>
     </div>
   );
 };
