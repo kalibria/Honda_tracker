@@ -12,6 +12,7 @@ import { unauthorized } from 'src/auth/constants';
 import { isAuth } from 'src/redux/authSlice';
 import { useLazyStatusLoginQuery } from 'src/services/hondaApi';
 import { processingNetworkRequests } from 'src/auth/authenticationManager';
+import { myLocalStorage } from 'src/services/localStorage';
 
 import * as Yup from 'yup';
 import 'src/App.css';
@@ -37,6 +38,7 @@ const LoginForm = () => {
 
     if (isSuccess) {
       dispatch(isAuth(username));
+      myLocalStorage.setItem('username', username);
       setError('');
       navigate('/calendar');
     } else {

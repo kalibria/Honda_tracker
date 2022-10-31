@@ -18,9 +18,13 @@ export const authSlice = createSlice({
       state.cookieId = true;
       state.username = action.payload;
     },
+    logOut: (state) => {
+      state.cookieId = false;
+      state.username = '';
+    },
   },
 });
 
-export const { isAuth } = authSlice.actions;
+export const { isAuth, logOut } = authSlice.actions;
 
 export default authSlice.reducer;

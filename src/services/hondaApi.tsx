@@ -23,7 +23,11 @@ export const hondaApi = createApi({
         body: {},
       }),
     }),
+    getUser: builder.query({
+      query: (username: string) => `/users/${username}`,
+    }),
   }),
 });
 
-export const { useLazyStatusLoginQuery, useLazyLogOutQuery } = hondaApi;
+export const { useLazyStatusLoginQuery, useLazyLogOutQuery, useGetUserQuery } =
+  hondaApi;
