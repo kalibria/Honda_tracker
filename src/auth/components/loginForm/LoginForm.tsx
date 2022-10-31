@@ -24,13 +24,18 @@ const LoginForm = () => {
   const [username, setUsername] = useState('');
 
   useEffect(() => {
+    if (localStorage.getItem('isAuthenticated') === 'true') {
+      navigate('/calendar');
+    }
+  }, []);
+
+  useEffect(() => {
     processingNetworkRequests.isAuthenticated(result);
 
     const { isSuccess, errorMsg, errorCode } =
       processingNetworkRequests.handleQueryResult(result);
 
     if (isSuccess) {
-      console.log('username', username);
       dispatch(isAuth(username));
       setError('');
       navigate('/calendar');
