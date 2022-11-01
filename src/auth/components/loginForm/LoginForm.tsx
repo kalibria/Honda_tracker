@@ -9,8 +9,9 @@ import {
   MyTextInput,
 } from 'src/auth/components/loginForm/componentsForLoginForm';
 import { Loading } from 'src/commonComponents/Loading';
-import { setCurrentUsername } from 'src/redux/authSlice';
+
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
+import { setCurrentUsername } from 'src/redux/userDataSlice';
 import { useLazyStatusLoginQuery } from 'src/services/hondaApi';
 import { authenticationManager } from 'src/auth/authenticationManager';
 

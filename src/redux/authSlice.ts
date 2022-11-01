@@ -2,12 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export interface IAuth {
   cookieId: boolean;
-  username: string;
 }
 
 const initialAuth: IAuth = {
   cookieId: false,
-  username: '',
 };
 
 export const authSlice = createSlice({
@@ -19,14 +17,10 @@ export const authSlice = createSlice({
     },
     logOut: (state) => {
       state.cookieId = false;
-      state.username = '';
-    },
-    setCurrentUsername: (state, action) => {
-      state.username = action.payload;
     },
   },
 });
 
-export const { isAuth, logOut, setCurrentUsername } = authSlice.actions;
+export const { isAuth: setIsAuthenticated, logOut } = authSlice.actions;
 
 export default authSlice.reducer;
