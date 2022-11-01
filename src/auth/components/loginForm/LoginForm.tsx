@@ -8,12 +8,10 @@ import {
   MyCheckbox,
   MyTextInput,
 } from 'src/auth/components/loginForm/componentsForLoginForm';
-import { unauthorized } from 'src/auth/constants';
-import { isAuth, setCurrentUsername } from 'src/redux/authSlice';
+import { setCurrentUsername } from 'src/redux/authSlice';
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 import { useLazyStatusLoginQuery } from 'src/services/hondaApi';
 import { authenticationManager } from 'src/auth/authenticationManager';
-import { myLocalStorage } from 'src/services/localStorage';
 
 import * as Yup from 'yup';
 import 'src/App.css';
