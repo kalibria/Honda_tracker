@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { Loading } from 'src/commonComponents/Loading';
 import { RootState } from 'src/redux/store';
 import { setUseRole } from 'src/redux/userDataSlice';
 import { useGetUserQuery } from 'src/services/hondaApi';
@@ -23,5 +24,5 @@ export const WrapperForSettingPage = () => {
     }
   }, [dispatch, navigate, result]);
 
-  return <div>{result.isLoading ? <h1>Loading...</h1> : <SettingsPage />}</div>;
+  return <div>{result.isLoading ? <Loading /> : <SettingsPage />}</div>;
 };
