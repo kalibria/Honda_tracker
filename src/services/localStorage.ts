@@ -13,7 +13,7 @@ class LocalStorage {
   }
 
   logOut() {
-    this.removeItem('isAuthenticated');
+    localStorage.clear();
   }
 }
 

@@ -25,9 +25,7 @@ export const LogOutButton = () => {
     if (isSuccess) {
       navigate('/');
       setError('');
-      dispatch(logOut());
-      myLocalStorage.removeItem('username');
-      myLocalStorage.removeItem('isAuthenticated');
+      processingNetworkRequests.globalLogout(dispatch);
 
       return;
     } else {
