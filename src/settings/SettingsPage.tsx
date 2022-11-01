@@ -18,6 +18,7 @@ export const SettingsPage = () => {
           textField: '',
         }}
         onSubmit={(values, { setSubmitting }) => {
+          alert(values.isChanged);
           setSubmitting(false);
         }}>
         <Form className={'flex flex-col space-y-3.5'}>

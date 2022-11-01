@@ -27,12 +27,13 @@ export const LogOutButton = () => {
       setError('');
       dispatch(logOut());
       myLocalStorage.removeItem('username');
+      myLocalStorage.removeItem('isAuthenticated');
 
       return;
     } else {
       setError(errorMsg);
     }
-  }, [error, navigate, result]);
+  }, [dispatch, error, navigate, result]);
 
   return (
     <div className={'absolute top-5 right-5'}>

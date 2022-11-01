@@ -1,8 +1,10 @@
-import { SerializedError } from '@reduxjs/toolkit';
+import { Dispatch, SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { IHandleQueryResult } from 'src/auth/auth.types';
 import { unauthorized } from 'src/auth/constants';
 import { UseQueryStateResult } from '@reduxjs/toolkit/dist/query/react/buildHooks';
+import { logOut } from 'src/redux/authSlice';
+import { myLocalStorage } from 'src/services/localStorage';
 
 class AuthenticationManager {
   errorMessage(error: FetchBaseQueryError | SerializedError) {
@@ -55,6 +57,11 @@ class AuthenticationManager {
       errorMsg: '',
       isSuccess: false,
     };
+  }
+
+  public globalLogout(dispatch: Dispatch) {
+    dispatch(logOut());
+    myLocalStorage.logOut();
   }
 
   private static getErrorCode(result: UseQueryStateResult<any, any>): number {

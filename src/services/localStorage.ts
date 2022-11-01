@@ -11,6 +11,10 @@ class LocalStorage {
   removeItem(key: string) {
     localStorage.removeItem(key);
   }
+
+  logOut() {
+    this.removeItem('isAuthenticated');
+  }
 }
 
 export const myLocalStorage = new LocalStorage();
