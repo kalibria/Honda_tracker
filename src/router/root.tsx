@@ -22,6 +22,10 @@ const router = createBrowserRouter([
     path: '/settings',
     element: <WrapperForSettingPage />,
   },
+  {
+    path: '/error',
+    element: <h1>Error...Please try reload</h1>,
+  },
   // {
   //   path: '/bookings',
   //   element: <BookingList />,

@@ -1,7 +1,8 @@
 import { MiddlewareAPI, isRejectedWithValue } from '@reduxjs/toolkit';
 import { Middleware } from '@reduxjs/toolkit';
-import { processingNetworkRequests } from 'src/auth/authenticationManager';
+import { authenticationManager } from 'src/auth/authenticationManager';
 import { badRequest, unauthorized } from 'src/auth/constants';
+import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 
 export const rtkQueryErrorLogger: Middleware =
   ({ dispatch, getState }: MiddlewareAPI) =>
@@ -9,15 +10,16 @@ export const rtkQueryErrorLogger: Middleware =
   (action) => {
     if (isRejectedWithValue(action)) {
       const { errorCode, errorMsg } =
-        processingNetworkRequests.handleQueryResult(action.payload);
+        myRtkQueryResultProcessor.parseQueryResult(action.payload);
 
       if (errorCode === unauthorized) {
-        processingNetworkRequests.globalLogout(dispatch);
-      }
-
-      if (errorCode === badRequest) {
+        authenticationManager.setUnauthenticated(dispatch);
+        console.warn(errorMsg);
+        return;
+      } else if (errorCode === badRequest) {
+        console.warn(errorMsg);
+        return;
       }
     }
-
     return next(action);
   };

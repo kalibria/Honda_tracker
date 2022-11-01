@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { processingNetworkRequests } from 'src/auth/authenticationManager';
+import { authenticationManager } from 'src/auth/authenticationManager';
 
 import { useLazyLogOutQuery } from 'src/services/hondaApi';
 

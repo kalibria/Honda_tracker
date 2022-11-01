@@ -9,9 +9,10 @@ import {
   MyTextInput,
 } from 'src/auth/components/loginForm/componentsForLoginForm';
 import { unauthorized } from 'src/auth/constants';
-import { isAuth } from 'src/redux/authSlice';
+import { isAuth, setCurrentUsername } from 'src/redux/authSlice';
+import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 import { useLazyStatusLoginQuery } from 'src/services/hondaApi';
-import { processingNetworkRequests } from 'src/auth/authenticationManager';
+import { authenticationManager } from 'src/auth/authenticationManager';
 import { myLocalStorage } from 'src/services/localStorage';
 
 import * as Yup from 'yup';
@@ -28,25 +29,21 @@ const LoginForm = () => {
     if (localStorage.getItem('isAuthenticated') === 'true') {
       navigate('/calendar');
     }
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
-    processingNetworkRequests.isAuthenticated(result);
-
-    const { isSuccess, errorMsg, errorCode } =
-      processingNetworkRequests.handleQueryResult(result);
+    const { isSuccess, errorMsg } =
+      myRtkQueryResultProcessor.parseQueryResult(result);
 
     if (isSuccess) {
-      dispatch(isAuth(username));
-      myLocalStorage.setItem('username', username);
+      authenticationManager.setAuthenticated(dispatch);
+      dispatch(setCurrentUsername(username));
       setError('');
       navigate('/calendar');
     } else {
       setError(errorMsg);
-
-      if (errorCode === unauthorized) {
-        // redirect to login page, but not needed on this page
-      }
+      myRtkQueryResultProcessor.handleErrorCode(result, dispatch);
+      navigate('/');
     }
   }, [dispatch, navigate, result, username]);
 

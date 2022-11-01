@@ -2,9 +2,10 @@ import Button from '@mui/material/Button';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { processingNetworkRequests } from 'src/auth/authenticationManager';
+import { authenticationManager } from 'src/auth/authenticationManager';
 import { AlertForm } from 'src/auth/components/loginForm/componentsForLoginForm';
 import { logOut } from 'src/redux/authSlice';
+import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 
 import { useLazyLogOutQuery } from 'src/services/hondaApi';
 import { myLocalStorage } from 'src/services/localStorage';
@@ -21,12 +22,11 @@ export const LogOutButton = () => {
 
   useEffect(() => {
     const { isSuccess, errorMsg, errorCode } =
-      processingNetworkRequests.handleQueryResult(result);
+      myRtkQueryResultProcessor.parseQueryResult(result);
     if (isSuccess) {
-      navigate('/');
+      authenticationManager.setUnauthenticated(dispatch);
       setError('');
-      processingNetworkRequests.globalLogout(dispatch);
-
+      navigate('/');
       return;
     } else {
       setError(errorMsg);

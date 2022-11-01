@@ -1,22 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useGetUserQuery } from 'src/services/hondaApi';
 import { myLocalStorage } from 'src/services/localStorage';
 import { SettingsPage } from 'src/settings/SettingsPage';
+import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 
 export const WrapperForSettingPage = () => {
-  const user = myLocalStorage.getItem('username');
-  const { data, error, isLoading } = useGetUserQuery(user);
+  // const result = useGetUserQuery(user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  // const [errorCode, setErrorCode] = useState(0);
 
   useEffect(() => {
-    if (data) {
-      const userRole = data.user.roles;
-      myLocalStorage.setItem('userRole', userRole);
-    } else if (error) {
-      navigate('/');
+    if (result.isSuccess) {
+      const userRole = result.data.user.roles;
+    } else {
+      myRtkQueryResultProcessor.handleErrorCode(result, dispatch);
+      // setErrorCode(myRtkQueryResultProcessor.getErrorCode(result));
     }
-  }, [data, error, navigate]);
+  }, [dispatch, navigate, result]);
 
-  return <div>{isLoading ? <h1>Loading...</h1> : <SettingsPage />}</div>;
+  return <div>{result.isLoading ? <h1>Loading...</h1> : <SettingsPage />}</div>;
 };
