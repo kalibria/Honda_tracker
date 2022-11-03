@@ -2,6 +2,7 @@ import { FieldHookConfig } from 'formik';
 
 export interface IHandleQueryResult {
   isSuccess: boolean;
+  isError: boolean;
   errorMsg: string;
   errorCode: number;
 }

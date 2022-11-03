@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { isAuth, logOut, setIsAuthenticated } from 'src/redux/authSlice';
+import { createSlice } from '@reduxjs/toolkit';
+import { logOut, setIsAuthenticated } from 'src/redux/authSlice';
 
 interface IInitState {
   username: string;

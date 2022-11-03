@@ -12,7 +12,7 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState: initialAuth,
   reducers: {
-    isAuth: (state) => {
+    isAuth: (state, action) => {
       state.cookieId = true;
     },
     logOut: (state) => {

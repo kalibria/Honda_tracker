@@ -1,6 +1,6 @@
 import { Dispatch } from '@reduxjs/toolkit';
 
-import { isAuth, logOut } from 'src/redux/authSlice';
+import { logOut, setIsAuthenticated } from 'src/redux/authSlice';
 import { myLocalStorage } from 'src/services/localStorage';
 
 class AuthenticationManager {
@@ -10,10 +10,10 @@ class AuthenticationManager {
     dispatch(logOut());
   }
 
-  setAuthenticated(dispatch: Dispatch) {
+  setAuthenticated(dispatch: Dispatch, username: string) {
     myLocalStorage.setItem('isAuthenticated', 'true');
 
-    dispatch(isAuth());
+    dispatch(setIsAuthenticated(username));
   }
 }
 

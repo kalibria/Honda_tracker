@@ -34,6 +34,7 @@ class RtkQueryResultProcessor {
         errorCode,
         errorMsg,
         isSuccess: false,
+        isError: true,
       };
     }
 
@@ -42,6 +43,7 @@ class RtkQueryResultProcessor {
         errorCode: 200,
         errorMsg: '',
         isSuccess: true,
+        isError: false,
       };
     }
 
@@ -49,6 +51,7 @@ class RtkQueryResultProcessor {
       errorCode: 200,
       errorMsg: '',
       isSuccess: false,
+      isError: false,
     };
   }
 

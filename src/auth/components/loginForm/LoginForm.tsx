@@ -27,20 +27,22 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (localStorage.getItem('isAuthenticated') === 'true') {
+      console.log('hey');
       navigate('/calendar');
     }
   }, [navigate]);
 
   useEffect(() => {
-    const { isSuccess, errorMsg } =
+    const { isSuccess, isError, errorMsg } =
       myRtkQueryResultProcessor.parseQueryResult(result);
 
     if (isSuccess) {
-      authenticationManager.setAuthenticated(dispatch);
+      authenticationManager.setAuthenticated(dispatch, username);
       dispatch(setCurrentUsername(username));
       setError('');
       navigate('/calendar');
-    } else {
+    }
+    if (isError) {
       setError(errorMsg);
       myRtkQueryResultProcessor.handleErrorCode(result, dispatch);
       navigate('/');
@@ -59,7 +61,7 @@ const LoginForm = () => {
               src="https://www.nicepng.com/png/detail/138-1388174_login-account-icon.png"
               alt="logIn"
             />
-            <h1 className="text-center">Sigh in</h1>
+            <h1 className="text-center">Sign in</h1>
           </div>
           <Formik
             initialValues={{
