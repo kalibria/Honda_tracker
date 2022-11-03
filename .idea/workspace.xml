@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="23dd3188-ad99-4626-a6fc-8d6a150d9de3" name="Changes" comment="Shared the logic.Selected rtkQueryResultProcessor folder.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/auth.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/auth.types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/authenticationManager.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/authenticationManager.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/components/loginForm/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/components/loginForm/LoginForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/authSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/authSlice.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/rtkQueryResultProcessor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/rtkQueryResultProcessor.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/userDataSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/userDataSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/settings/components.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/settings/components.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +74,7 @@
       <updated>1666087250089</updated>
       <workItem from="1666087251597" duration="428000" />
       <workItem from="1666087686872" duration="205000" />
-      <workItem from="1667460671767" duration="2178000" />
+      <workItem from="1667460671767" duration="4026000" />
     </task>
     <task id="LOCAL-00001" summary="add authSlice">
       <created>1666438336666</created>

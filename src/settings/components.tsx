@@ -1,4 +1,3 @@
-import Button from '@mui/material/Button';
 import { useField } from 'formik';
 import * as React from 'react';
 import FormLabel from '@mui/material/FormLabel';
@@ -7,7 +6,6 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import TextField from '@mui/material/TextField';
-import { placeWhereCar } from 'src/settings/constants';
 import { IBasicTextFields, ISwitchesGroup } from 'src/settings/types';
 
 export const SwitchesGroup: React.FC<ISwitchesGroup> = ({
