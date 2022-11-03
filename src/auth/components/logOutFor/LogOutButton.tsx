@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Simulate } from 'react-dom/test-utils';
 import { useNavigate } from 'react-router-dom';
 import { processingNetworkRequests } from 'src/auth/authenticationManager';
-import {
-  AlertForm,
-  ButtonEl,
-} from 'src/auth/components/loginForm/componentsForLoginForm';
+import { AlertForm, ButtonEl } from 'src/ui-kit/components';
 
 import { useLazyLogOutQuery } from 'src/services/hondaApi';
 

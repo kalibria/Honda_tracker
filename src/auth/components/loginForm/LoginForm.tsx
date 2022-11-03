@@ -7,7 +7,7 @@ import {
   ButtonEl,
   MyCheckbox,
   MyTextInput,
-} from 'src/auth/components/loginForm/componentsForLoginForm';
+} from 'src/ui-kit/components';
 import { unauthorized } from 'src/auth/constants';
 import { isAuth } from 'src/redux/authSlice';
 import { useLazyStatusLoginQuery } from 'src/services/hondaApi';

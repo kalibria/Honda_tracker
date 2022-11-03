@@ -1,11 +1,5 @@
 import { FieldHookConfig } from 'formik';
 
-export interface IHandleQueryResult {
-  isSuccess: boolean;
-  errorMsg: string;
-  errorCode: number;
-}
-
 export interface MyTextInputProps {
   label: string;
   name: string;

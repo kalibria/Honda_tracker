@@ -1,6 +1,6 @@
 import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { IHandleQueryResult } from 'src/auth/auth.types';
+import { IHandleQueryResult } from 'src/services/hondaApi.types';
 import { unauthorized } from 'src/auth/constants';
 import { UseQueryStateResult } from '@reduxjs/toolkit/dist/query/react/buildHooks';
 
@@ -14,7 +14,7 @@ class AuthenticationManager {
       typeof (error.data as any).status === 'string'
     ) {
       this.setUnauthenticated('isAuthenticated');
-      return (error.data as any).status || '';
+      return (error.data as any).status || ''; //todo remove when migrate to TS 4.9
     }
 
     return '';
