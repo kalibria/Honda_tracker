@@ -1,6 +1,6 @@
 import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { IHandleQueryResult } from 'src/auth/auth.types';
+import { IHandleQueryResult } from 'src/services/hondaApi.types';
 import { unauthorized } from 'src/auth/constants';
 import { UseQueryStateResult } from '@reduxjs/toolkit/dist/query/react/buildHooks';
 
@@ -11,10 +11,10 @@ class AuthenticationManager {
       typeof error.data === 'object' &&
       error.data !== null &&
       'status' in error.data &&
-      typeof error.data.status === 'string'
+      typeof (error.data as any).status === 'string'
     ) {
       this.setUnauthenticated('isAuthenticated');
-      return error.data.status || '';
+      return (error.data as any).status || ''; //todo remove when migrate to TS 4.9
     }
 
     return '';
@@ -31,7 +31,7 @@ class AuthenticationManager {
   }
 
   handleQueryResult(result: UseQueryStateResult<any, any>): IHandleQueryResult {
-    if (result.error) {
+    if (result.isError) {
       const errorMsg = this.errorMessage(result.error);
       const errorCode = AuthenticationManager.getErrorCode(result.error);
 
@@ -42,10 +42,18 @@ class AuthenticationManager {
       };
     }
 
+    if (result.isSuccess) {
+      return {
+        errorCode: 200,
+        errorMsg: '',
+        isSuccess: true,
+      };
+    }
+
     return {
       errorCode: 200,
       errorMsg: '',
-      isSuccess: true,
+      isSuccess: false,
     };
   }
 

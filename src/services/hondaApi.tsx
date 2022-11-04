@@ -16,7 +16,14 @@ export const hondaApi = createApi({
         body: { password, username },
       }),
     }),
+    logOut: builder.query({
+      query: () => ({
+        url: '/logout',
+        method: 'POST',
+        body: {},
+      }),
+    }),
   }),
 });
 
-export const { useStatusLoginQuery, useLazyStatusLoginQuery } = hondaApi;
+export const { useLazyStatusLoginQuery, useLazyLogOutQuery } = hondaApi;

@@ -1,14 +1,15 @@
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import TextField from '@mui/material/TextField';
-import { FieldHookConfig, useField } from 'formik';
+import { useField } from 'formik';
 import React from 'react';
-
-interface MyTextInputProps {
-  label: string;
-  name: string;
-  [key: string]: string | FieldHookConfig<any>;
-}
+import Button from '@mui/material/Button';
+import {
+  IAlertForm,
+  IButtonEl,
+  MyCheckboxProps,
+  MyTextInputProps,
+} from 'src/ui-kit/components.types';
 
 export const MyTextInput: React.FC<MyTextInputProps> = ({
   label,
@@ -25,11 +26,6 @@ export const MyTextInput: React.FC<MyTextInputProps> = ({
     </>
   );
 };
-
-interface MyCheckboxProps {
-  name: string;
-  [key: string]: string | FieldHookConfig<any>;
-}
 
 export const MyCheckbox: React.FC<MyCheckboxProps> = ({
   children,
@@ -51,15 +47,19 @@ export const MyCheckbox: React.FC<MyCheckboxProps> = ({
   );
 };
 
-interface IAlertForm {
-  message: string;
-}
-
 export const AlertForm: React.FC<IAlertForm> = ({ message }: IAlertForm) => {
   return (
     <Alert severity="error">
       <AlertTitle>Error</AlertTitle>
       {message}
     </Alert>
+  );
+};
+
+export const ButtonEl: React.FC<IButtonEl> = ({ text, ...props }) => {
+  return (
+    <Button variant="contained" type="submit" {...props}>
+      {text}
+    </Button>
   );
 };
