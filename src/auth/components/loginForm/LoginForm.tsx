@@ -13,7 +13,10 @@ import { Loading } from 'src/commonComponents/Loading';
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 import { setCurrentUsername } from 'src/redux/userDataSlice';
 import { useLazyStatusLoginQuery } from 'src/services/hondaApi';
-import { authenticationManager } from 'src/auth/authenticationManager';
+import {
+  authenticationManager,
+  useIsAuthorized,
+} from 'src/auth/authenticationManager';
 
 import * as Yup from 'yup';
 import 'src/App.css';
@@ -25,11 +28,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
 
-  // useEffect(() => {
-  //   if (localStorage.getItem('isAuthenticated') === 'true') {
-  //     navigate('/calendar');
-  //   }
-  // }, [navigate]);
+  useIsAuthorized();
 
   useEffect(() => {
     const { isSuccess, isError, errorMsg } =

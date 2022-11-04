@@ -1,16 +1,9 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import ButtonAppBar from 'src/appBar/ButtonAppBar';
+import { useIsAuthorized } from 'src/auth/authenticationManager';
 
 export const MainPage = () => {
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (localStorage.getItem('isAuthenticated') === 'true') {
-      navigate('/calendar');
-    } else {
-      navigate('/login');
-    }
-  }, [navigate]);
+  useIsAuthorized();
   return (
     <div>
       <ButtonAppBar />

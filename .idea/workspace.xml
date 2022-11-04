@@ -4,6 +4,7 @@
     <list default="true" id="23dd3188-ad99-4626-a6fc-8d6a150d9de3" name="Changes" comment="Shared the logic.Selected rtkQueryResultProcessor folder.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/authenticationManager.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/authenticationManager.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/auth/components/loginForm/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/components/loginForm/LoginForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/mainPage/MainPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/mainPage/MainPage.tsx" afterDir="false" />
     </list>

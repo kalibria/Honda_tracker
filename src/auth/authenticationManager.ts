@@ -1,5 +1,7 @@
 import { Dispatch } from '@reduxjs/toolkit';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { logOut, setIsAuthenticated } from 'src/redux/authSlice';
 import { RootState } from 'src/redux/store';
@@ -21,9 +23,13 @@ class AuthenticationManager {
 
 export const authenticationManager = new AuthenticationManager();
 
-// export const useAppContext = () => {
-//   const isAuth = useSelector((state: RootState) => {
-//     return state.auth.isAuth;
-//   });
-//   return isAuth;
-// };
+export const useIsAuthorized = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem('isAuthenticated') === 'true') {
+      navigate('/calendar');
+    } else {
+      navigate('/login');
+    }
+  }, [navigate]);
+};

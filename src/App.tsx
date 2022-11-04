@@ -1,16 +1,10 @@
-import React, { useEffect } from 'react';
-import { ScrollRestoration, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { ScrollRestoration } from 'react-router-dom';
+import { useIsAuthorized } from 'src/auth/authenticationManager';
 import LoginForm from 'src/auth/components/loginForm/LoginForm';
 
 export const App = () => {
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (localStorage.getItem('isAuthenticated') === 'true') {
-      navigate('/calendar');
-    } else {
-      navigate('/login');
-    }
-  }, [navigate]);
+  useIsAuthorized();
 
   return (
     <main className={'mainContainer'}>
