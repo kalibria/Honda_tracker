@@ -1,13 +1,18 @@
 import { createBrowserRouter } from 'react-router-dom';
 import LoginForm from 'src/auth/components/loginForm/LoginForm';
 import { LogOutButton } from 'src/auth/components/logOutFor/LogOutButton';
-import { CalendarPage } from 'src/calendarPage/CalendarPage';
+import { App } from 'src/App';
+import { MainPage } from 'src/mainPage/MainPage';
 import { SettingsPage } from 'src/settings/SettingsPage';
 import { WrapperForSettingPage } from 'src/settings/WrapperForSettingPage';
 
 const router = createBrowserRouter([
   {
     path: '/',
+    element: <App />,
+  },
+  {
+    path: '/login',
     element: <LoginForm />,
   },
   {
@@ -16,7 +21,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/calendar',
-    element: <CalendarPage />,
+    element: <MainPage />,
   },
   {
     path: '/settings',

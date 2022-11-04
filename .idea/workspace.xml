@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="23dd3188-ad99-4626-a6fc-8d6a150d9de3" name="Changes" comment="Shared the logic.Selected rtkQueryResultProcessor folder.">
-      <change beforePath="$PROJECT_DIR$/src/redux/authSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/authSlice.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/appBar/ButtonAppBar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/mainPage/MainPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/authenticationManager.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/authenticationManager.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/calendarPage/CalendarPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/root.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,11 +62,11 @@
       <recent name="$PROJECT_DIR$/public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/redux" />
       <recent name="$PROJECT_DIR$/src/generalComponents" />
       <recent name="$PROJECT_DIR$/src/auth/components" />
       <recent name="$PROJECT_DIR$/src/auth" />
-      <recent name="$PROJECT_DIR$/src/utils" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

@@ -1,7 +1,12 @@
 import React from 'react';
-import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import LoginForm from 'src/auth/components/loginForm/LoginForm';
+import { MainPage } from 'src/mainPage/MainPage';
 
-const LoginForm = React.lazy(
-  () => import('./auth/components/loginForm/LoginForm'),
-);
+export const App = () => {
+  return (
+    <main className={'mainContainer'}>
+      <LoginForm />
+      {/*<MainPage />*/}
+    </main>
+  );
+};
