@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface IAuth {
-  cookieId: boolean;
+  isAuth: boolean;
 }
 
 const initialAuth: IAuth = {
-  cookieId: false,
+  isAuth: false,
 };
 
 export const authSlice = createSlice({
@@ -13,10 +13,10 @@ export const authSlice = createSlice({
   initialState: initialAuth,
   reducers: {
     isAuth: (state, action) => {
-      state.cookieId = true;
+      state.isAuth = true;
     },
     logOut: (state) => {
-      state.cookieId = false;
+      state.isAuth = false;
     },
   },
 });
