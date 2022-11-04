@@ -29,7 +29,8 @@ export const SettingsButton = () => {
   // }, [error, navigate, result]);
 
   return (
-    <div className={'absolute top-5 left-5'}>
+    <div>
+      {/*className={'absolute top-5 left-5'}>*/}
       <Button
         variant="contained"
         type="submit"

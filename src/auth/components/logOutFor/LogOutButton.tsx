@@ -34,7 +34,8 @@ export const LogOutButton = () => {
   }, [dispatch, error, navigate, result]);
 
   return (
-    <div className={'absolute top-5 right-5'}>
+    <div>
+      {/*className={'absolute top-5 right-5'}>*/}
       {error && <AlertForm message={error} />}
 
       <Button

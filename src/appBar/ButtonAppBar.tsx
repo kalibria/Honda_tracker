@@ -4,9 +4,9 @@ import { SettingsButton } from 'src/settings/SettingsButton';
 
 export default function ButtonAppBar() {
   return (
-    <div className={'h-14 bg-sky-500'}>
-      <LogOutButton />
+    <div className={'buttonAppContainer'}>
       <SettingsButton />
+      <LogOutButton />
     </div>
   );
 }
