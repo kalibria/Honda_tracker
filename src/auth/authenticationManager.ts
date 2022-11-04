@@ -21,9 +21,9 @@ class AuthenticationManager {
 
 export const authenticationManager = new AuthenticationManager();
 
-export const useAppContext = () => {
-  const isAuth = useSelector((state: RootState) => {
-    return state.auth.isAuth;
-  });
-  return isAuth;
-};
+// export const useAppContext = () => {
+//   const isAuth = useSelector((state: RootState) => {
+//     return state.auth.isAuth;
+//   });
+//   return isAuth;
+// };

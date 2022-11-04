@@ -21,6 +21,7 @@ export const WrapperForSettingPage = () => {
       dispatch(setUserRole(userRole));
     } else {
       myRtkQueryResultProcessor.handleErrorCode(result, dispatch);
+      navigate('/');
     }
   }, [dispatch, navigate, result]);
 
