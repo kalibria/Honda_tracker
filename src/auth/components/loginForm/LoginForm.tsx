@@ -25,12 +25,11 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
 
-  useEffect(() => {
-    if (localStorage.getItem('isAuthenticated') === 'true') {
-      console.log('hey');
-      navigate('/calendar');
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   if (localStorage.getItem('isAuthenticated') === 'true') {
+  //     navigate('/calendar');
+  //   }
+  // }, [navigate]);
 
   useEffect(() => {
     const { isSuccess, isError, errorMsg } =
