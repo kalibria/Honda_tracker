@@ -12,6 +12,7 @@ import { Loading } from 'src/commonComponents/Loading';
 
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 import { setCurrentUsername } from 'src/redux/userDataSlice';
+import { calendarPath, initPath } from 'src/router/rootConstants';
 import { useLazyStatusLoginQuery } from 'src/services/hondaApi';
 import {
   authenticationManager,
@@ -28,8 +29,6 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
 
-  useIsAuthorized();
-
   useEffect(() => {
     const { isSuccess, isError, errorMsg } =
       myRtkQueryResultProcessor.parseQueryResult(result);
@@ -38,12 +37,12 @@ const LoginForm = () => {
       authenticationManager.setAuthenticated(dispatch, username);
       dispatch(setCurrentUsername(username));
       setError('');
-      navigate('/calendar');
+      navigate(calendarPath);
     }
     if (isError) {
       setError(errorMsg);
       myRtkQueryResultProcessor.handleErrorCode(result, dispatch);
-      navigate('/');
+      navigate(initPath);
     }
   }, [dispatch, navigate, result, username]);
 

@@ -3,32 +3,40 @@ import LoginForm from 'src/auth/components/loginForm/LoginForm';
 import { LogOutButton } from 'src/auth/components/logOutFor/LogOutButton';
 import { App } from 'src/App';
 import { MainPage } from 'src/mainPage/MainPage';
+import {
+  calendarPath,
+  errorPath,
+  initPath,
+  loginPath,
+  logOutPath,
+  settingsPath,
+} from 'src/router/rootConstants';
 import { SettingsPage } from 'src/settings/SettingsPage';
 import { WrapperForSettingPage } from 'src/settings/WrapperForSettingPage';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: initPath,
     element: <App />,
   },
   {
-    path: '/login',
+    path: loginPath,
     element: <LoginForm />,
   },
   {
-    path: '/logout',
+    path: logOutPath,
     element: <LogOutButton />,
   },
   {
-    path: '/calendar',
+    path: calendarPath,
     element: <MainPage />,
   },
   {
-    path: '/settings',
+    path: settingsPath,
     element: <WrapperForSettingPage />,
   },
   {
-    path: '/error',
+    path: errorPath,
     element: <h1>Error...Please try reload</h1>,
   },
   // {

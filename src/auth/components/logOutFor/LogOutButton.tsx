@@ -4,11 +4,10 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { authenticationManager } from 'src/auth/authenticationManager';
 import { AlertForm } from 'src/auth/components/loginForm/componentsForLoginForm';
-import { logOut } from 'src/redux/authSlice';
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
+import { initPath } from 'src/router/rootConstants';
 
 import { useLazyLogOutQuery } from 'src/services/hondaApi';
-import { myLocalStorage } from 'src/services/localStorage';
 
 export const LogOutButton = () => {
   const navigate = useNavigate();
@@ -26,7 +25,7 @@ export const LogOutButton = () => {
     if (isSuccess) {
       authenticationManager.setUnauthenticated(dispatch);
       setError('');
-      navigate('/');
+      navigate(initPath);
       return;
     } else {
       setError(errorMsg);
