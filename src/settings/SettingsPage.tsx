@@ -1,15 +1,13 @@
 import Button from '@mui/material/Button';
 import { Form, Formik } from 'formik';
-import React, { useEffect, useState } from 'react';
-import { useIsAuthorized } from 'src/auth/authenticationManager';
-import { useGetUserQuery } from 'src/services/hondaApi';
+import React from 'react';
 import { myLocalStorage } from 'src/services/localStorage';
 import { BasicTextFields, SwitchesGroup } from 'src/settings/components';
 import { carProvider } from 'src/settings/constants';
 
 export const SettingsPage = () => {
   const userRole = myLocalStorage.getItem('userRole');
-  useIsAuthorized('/settings');
+  // useIsAuthorized('/settings');
   return (
     <main className={'sm:w-60 mainContainer'}>
       <Formik

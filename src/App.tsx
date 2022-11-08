@@ -7,6 +7,7 @@ export const App = () => {
 
   return (
     <main className={'mainContainer'}>
+      {/*<p>Home page</p>*/}
       <LoginForm />
     </main>
   );

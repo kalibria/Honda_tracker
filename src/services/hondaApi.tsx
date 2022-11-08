@@ -35,6 +35,6 @@ export const hondaApi = createApi({
 export const {
   useLazyStatusLoginQuery,
   useLazyLogOutQuery,
-  useGetUserQuery,
+  useLazyGetUserQuery,
   useGetMeQuery,
 } = hondaApi;

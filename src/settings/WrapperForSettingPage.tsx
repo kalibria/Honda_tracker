@@ -1,29 +1,50 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { unauthorized } from 'src/auth/constants';
 import { Loading } from 'src/commonComponents/Loading';
-import { RootState } from 'src/redux/store';
 import { setUserRole } from 'src/redux/userDataSlice';
-import { useGetUserQuery } from 'src/services/hondaApi';
+import { initPath } from 'src/router/rootConstants';
+import { useGetMeQuery, useLazyGetUserQuery } from 'src/services/hondaApi';
 import { SettingsPage } from 'src/settings/SettingsPage';
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 
 export const WrapperForSettingPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const username = useSelector((state: RootState) => state.userData.username);
+  const [username, setUsername] = useState('');
 
-  const result = useGetUserQuery(username);
+  const { data, currentData, isSuccess } = useGetMeQuery({});
+
+  const [trigger, result] = useLazyGetUserQuery();
 
   useEffect(() => {
-    if (result.isSuccess) {
-      const userRole = result.data.user.roles;
-      dispatch(setUserRole(userRole));
-    } else {
-      myRtkQueryResultProcessor.handleErrorCode(result, dispatch);
-      navigate('/');
+    const fetchedUsername = currentData?.username;
+    console.log('data', fetchedUsername);
+
+    if (isSuccess && fetchedUsername) {
+      // setUsername(fetchedUsername);
+      trigger(fetchedUsername);
+    }
+  }, [currentData, data, dispatch, isSuccess, navigate, trigger, username]);
+
+  useEffect(() => {
+    if (result.isSuccess && result.currentData) {
+      const userRoles = result.currentData.user.roles;
+      dispatch(setUserRole(userRoles));
+    }
+    if (result.isError) {
+      const errorCode = myRtkQueryResultProcessor.handleErrorCode(
+        result,
+        dispatch,
+      );
+      if (errorCode === unauthorized) {
+        navigate(initPath);
+      }
     }
   }, [dispatch, navigate, result]);
+
+  useEffect(() => {});
 
   return <div>{result.isLoading ? <Loading /> : <SettingsPage />}</div>;
 };

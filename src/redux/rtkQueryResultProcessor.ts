@@ -1,7 +1,6 @@
 import { Dispatch, SerializedError } from '@reduxjs/toolkit';
 import { UseQueryStateResult } from '@reduxjs/toolkit/dist/query/react/buildHooks';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { useNavigate } from 'react-router-dom';
 import { IHandleQueryResult } from 'src/auth/auth.types';
 import { authenticationManager } from 'src/auth/authenticationManager';
 import { badRequest, unauthorized } from 'src/auth/constants';
@@ -64,6 +63,7 @@ class RtkQueryResultProcessor {
     } else if (errorCode === badRequest) {
       console.warn(this.getErrorMessage(result));
     }
+    return errorCode;
   }
 }
 

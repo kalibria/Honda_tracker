@@ -20,7 +20,7 @@ export const LogOutButton = () => {
   };
 
   useEffect(() => {
-    const { isSuccess, errorMsg, errorCode } =
+    const { isSuccess, errorMsg } =
       myRtkQueryResultProcessor.parseQueryResult(result);
     if (isSuccess) {
       authenticationManager.setUnauthenticated(dispatch);
