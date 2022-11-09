@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { LogOutButton } from 'src/auth/components/logOutFor/LogOutButton';
+import { LogInLogOutButton } from 'src/auth/components/LogInLogOutButton';
 import { SettingsButton } from 'src/settings/SettingsButton';
 
 export default function ButtonAppBar() {
   return (
     <div className={'buttonAppContainer'}>
       <SettingsButton />
-      <LogOutButton />
+      <LogInLogOutButton />
     </div>
   );
 }

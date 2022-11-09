@@ -1,5 +1,7 @@
 export const initPath = '/';
 
+export const welcomePath = '/welcome';
+
 export const loginPath = '/login';
 
 export const logOutPath = '/logout';

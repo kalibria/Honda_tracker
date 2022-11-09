@@ -1,16 +1,17 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import ButtonAppBar from 'src/appBar/ButtonAppBar';
 import { useIsAuthorized } from 'src/auth/authenticationManager';
-import LoginForm from 'src/auth/components/loginForm/LoginForm';
-import { calendarPath } from 'src/router/rootConstants';
+import { WelcomeToHondaTracker } from 'src/WelcomeToHondaTracker';
 
 export const App = () => {
+  const isAuth = useIsAuthorized();
+
   return (
     <React.Fragment>
       <ButtonAppBar />
-      {/*<main className={'mainContainer'}>*/}
-      {/*  <LoginForm />*/}
-      {/*</main>*/}
+      {!isAuth && <WelcomeToHondaTracker />}
+      <Outlet />
     </React.Fragment>
   );
 };
