@@ -2,7 +2,10 @@ import Button from '@mui/material/Button';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { authenticationManager } from 'src/auth/authenticationManager';
+import {
+  authenticationManager,
+  useIsAuthorized,
+} from 'src/auth/authenticationManager';
 import { AlertForm } from 'src/auth/components/loginForm/componentsForLoginForm';
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 import { initPath } from 'src/router/rootConstants';
@@ -14,6 +17,8 @@ export const LogOutButton = () => {
   const [trigger, result] = useLazyLogOutQuery();
   const [error, setError] = useState('');
   const dispatch = useDispatch();
+
+  const isAuth = useIsAuthorized();
 
   const handleClick = () => {
     trigger({});
@@ -34,7 +39,6 @@ export const LogOutButton = () => {
 
   return (
     <div>
-      {/*className={'absolute top-5 right-5'}>*/}
       {error && <AlertForm message={error} />}
 
       <Button
@@ -42,7 +46,7 @@ export const LogOutButton = () => {
         type="submit"
         onClick={handleClick}
         size={'small'}>
-        {'log out'}
+        {isAuth ? 'log out' : 'log in'}
       </Button>
     </div>
   );
