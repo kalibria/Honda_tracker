@@ -12,7 +12,6 @@ import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 export const WrapperForSettingPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [username, setUsername] = useState('');
 
   const { data, currentData, isSuccess } = useGetMeQuery({});
 
@@ -20,13 +19,11 @@ export const WrapperForSettingPage = () => {
 
   useEffect(() => {
     const fetchedUsername = currentData?.username;
-    console.log('data', fetchedUsername);
 
     if (isSuccess && fetchedUsername) {
-      // setUsername(fetchedUsername);
       trigger(fetchedUsername);
     }
-  }, [currentData, data, dispatch, isSuccess, navigate, trigger, username]);
+  }, [currentData, data, dispatch, isSuccess, navigate, trigger]);
 
   useEffect(() => {
     if (result.isSuccess && result.currentData) {
@@ -43,8 +40,6 @@ export const WrapperForSettingPage = () => {
       }
     }
   }, [dispatch, navigate, result]);
-
-  useEffect(() => {});
 
   return <div>{result.isLoading ? <Loading /> : <SettingsPage />}</div>;
 };

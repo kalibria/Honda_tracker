@@ -15,8 +15,7 @@
 
 .buttonAppContainer {
     display: flex;
-    justify-content: space-around;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    justify-content: space-between;
+    padding: 15px;
     background-color: #1976d2
 }
