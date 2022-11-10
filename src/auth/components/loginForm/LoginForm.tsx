@@ -34,12 +34,12 @@ const LoginForm = () => {
       authenticationManager.setAuthenticated(dispatch, username);
       dispatch(setCurrentUsername(username));
       setError('');
-      navigate(calendarPath);
+      // navigate(calendarPath);
     }
     if (isError) {
       setError(errorMsg);
       myRtkQueryResultProcessor.handleErrorCode(result, dispatch);
-      navigate(initPath);
+      // navigate(initPath);
     }
   }, [dispatch, navigate, result, username]);
 

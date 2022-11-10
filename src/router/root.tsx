@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import LoginForm from 'src/auth/components/loginForm/LoginForm';
 import { LogOutLogic } from 'src/auth/components/logOutForm/LogOutLogic';
 import { App } from 'src/App';
-import { MainPage } from 'src/mainPage/MainPage';
+import { Calendar } from 'src/calendar/Calendar';
 import {
   calendarPath,
   errorPath,
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
       },
       {
         path: calendarPath,
-        element: <MainPage />,
+        element: <Calendar />,
       },
       {
         path: settingsPath,

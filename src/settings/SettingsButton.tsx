@@ -7,12 +7,11 @@ export const SettingsButton = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(settingsPath);
+    // navigate(settingsPath);
   };
 
   return (
     <div>
-      {/*className={'absolute top-5 left-5'}>*/}
       <Button
         variant="contained"
         type="submit"

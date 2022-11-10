@@ -36,7 +36,7 @@ export const WrapperForSettingPage = () => {
         dispatch,
       );
       if (errorCode === unauthorized) {
-        navigate(initPath);
+        // navigate(initPath);
       }
     }
   }, [dispatch, navigate, result]);

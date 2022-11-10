@@ -25,7 +25,7 @@ export const LogOutLogic = () => {
     if (isSuccess) {
       authenticationManager.setUnauthenticated(dispatch);
       setError('');
-      navigate(initPath);
+      // navigate(initPath);
       return;
     } else {
       setError(errorMsg);

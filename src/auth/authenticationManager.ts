@@ -24,32 +24,32 @@ class AuthenticationManager {
 export const authenticationManager = new AuthenticationManager();
 
 export const useIsAuthorized = () => {
-  const { data } = useGetMeQuery({});
+  const { data, isSuccess, isError } = useGetMeQuery({});
   const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
-    if (data) {
+    if (isSuccess) {
       setIsAuth(true);
     } else {
       setIsAuth(false);
     }
-  }, [data, isAuth]);
+  }, [data, isAuth, isSuccess]);
   return isAuth;
 };
 
-// export const useGet = (path: string) => {
-//   const navigate = useNavigate();
-//   const { data } = useGetMeQuery({});
-//   const [username, setUserName] = useState('');
-//
-//   useEffect(() => {
-//     if (data) {
-//       setUserName(data.username);
-//       navigate(path);
-//     } else {
-//       navigate(loginPath);
-//     }
-//   }, [data, navigate, path]);
-//
-//   return username;
-// };
+export const useCheckMe = (path: string) => {
+  const navigate = useNavigate();
+  const { data, isSuccess, isError } = useGetMeQuery({});
+  const [username, setUserName] = useState('');
+
+  useEffect(() => {
+    if (isSuccess) {
+      setUserName(data.username);
+      navigate(path);
+    } else if (isError) {
+      navigate(loginPath);
+    }
+  }, [data, isError, isSuccess, navigate, path]);
+
+  return username;
+};
