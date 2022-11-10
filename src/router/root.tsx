@@ -21,6 +21,10 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
+        path: calendarPath,
+        element: <Calendar />,
+      },
+      {
         path: welcomePath,
         element: <WelcomeToHondaTracker />,
       },
@@ -28,26 +32,22 @@ const router = createBrowserRouter([
         path: logOutPath,
         element: <LogOutLogic />,
       },
-      {
-        path: calendarPath,
-        element: <Calendar />,
-      },
+
       {
         path: settingsPath,
         element: <WrapperForSettingPage />,
       },
     ],
   },
-
+  {
+    path: loginPath,
+    element: <LoginForm />,
+  },
   {
     path: errorPath,
     element: <h1>Error...Please try reload</h1>,
   },
 
-  {
-    path: loginPath,
-    element: <LoginForm />,
-  },
   // {
   //   path: '/bookings',
   //   element: <BookingList />,

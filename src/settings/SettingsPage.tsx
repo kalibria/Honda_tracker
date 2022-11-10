@@ -9,7 +9,7 @@ export const SettingsPage = () => {
   const userRole = myLocalStorage.getItem('userRole');
   // useIsAuthorized('/settings');
   return (
-    <main className={'sm:w-60 mainContainer'}>
+    <div className={'sm:w-60 mainContainer'}>
       <Formik
         initialValues={{
           isCreated: false,
@@ -43,6 +43,6 @@ export const SettingsPage = () => {
           </Button>
         </Form>
       </Formik>
-    </main>
+    </div>
   );
 };

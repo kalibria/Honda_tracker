@@ -17,7 +17,7 @@ import { useLazyStatusLoginQuery } from 'src/services/hondaApi';
 import { authenticationManager } from 'src/auth/authenticationManager';
 
 import * as Yup from 'yup';
-import 'src/App.css';
+import 'src/css/App.css';
 
 const LoginForm = () => {
   const [trigger, result] = useLazyStatusLoginQuery();
@@ -44,7 +44,7 @@ const LoginForm = () => {
   }, [dispatch, navigate, result, username]);
 
   return (
-    <div className="mainContainer ">
+    <div className="centerContainer ">
       {error && <AlertForm message={error} />}
       {result.isLoading ? (
         <Loading />

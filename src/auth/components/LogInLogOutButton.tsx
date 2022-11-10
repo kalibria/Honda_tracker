@@ -2,7 +2,7 @@ import Button from '@mui/material/Button';
 import { skipToken } from '@reduxjs/toolkit/query';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useIsAuthorized } from 'src/auth/authenticationManager';
 import { ButtonUI } from 'src/commonComponents/ButtonUI';
 import { loginPath } from 'src/router/rootConstants';
@@ -26,9 +26,11 @@ export const LogInLogOutButton = () => {
   };
 
   return (
-    <ButtonUI
-      onClick={isSuccess ? handleLogOutClick : handleLogInClick}
-      text={isSuccess ? 'log out' : 'log in'}
-    />
+    <Link to={loginPath}>Log in</Link>
+    // <ButtonUI
+    //   onClick={isSuccess ? handleLogOutClick : handleLogInClick}
+    //   text={isSuccess ? 'log out' : 'log in'}>
+    //
+    // </ButtonUI>
   );
 };

@@ -6,27 +6,29 @@ import { calendarPath, welcomePath } from 'src/router/rootConstants';
 import { useGetMeQuery } from 'src/services/hondaApi';
 
 export const App = () => {
-  const { isSuccess, isLoading, isError } = useGetMeQuery({});
+  // const { isSuccess, isLoading, isError } = useGetMeQuery({});
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isSuccess) {
-      navigate(calendarPath);
-    } else if (isError) {
-      navigate(welcomePath);
-    }
-  }, [isSuccess, isError, navigate]);
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     navigate(calendarPath);
+  //   }
+  //   if (isError) {
+  //     navigate(welcomePath);
+  //   }
+  // }, [isSuccess, isError, navigate]);
 
+  console.log('app');
   return (
     <React.Fragment>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <div>
-          <ButtonAppBar />
-          <Outlet />
-        </div>
-      )}
+      {/*{isLoading ? (*/}
+      {/*  <Loading />*/}
+      {/*) : (*/}
+      <div>
+        <ButtonAppBar />
+        <Outlet />
+      </div>
+      {/*)}*/}
     </React.Fragment>
   );
 };
