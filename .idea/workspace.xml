@@ -2,17 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="23dd3188-ad99-4626-a6fc-8d6a150d9de3" name="Changes" comment="press settings button make useGetMeQuery request, get username, make useLazyGetUserQuery and get user's role">
-      <change afterPath="$PROJECT_DIR$/src/css/varibles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WelcomeToHondaTracker.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/WelcomeToHondaTracker.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WelcomeToHondaTracker.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/welcom/WelcomeToHondaTracker.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/appBar/ButtonAppBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/appBar/ButtonAppBar.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/auth/components/LogInLogOutButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/components/LogInLogOutButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/components/loginForm/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/components/loginForm/LoginForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commonComponents/ButtonUI.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/commonComponents/ButtonUI.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commonComponents/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commonComponents/types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/root.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/rootConstants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/rootConstants.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/settings/SettingsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/settings/SettingsPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,11 +64,11 @@
       <recent name="$PROJECT_DIR$/public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/welcom" />
       <recent name="$PROJECT_DIR$/src/css" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/redux" />
       <recent name="$PROJECT_DIR$/src/generalComponents" />
-      <recent name="$PROJECT_DIR$/src/auth/components" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

@@ -5,17 +5,16 @@ import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useIsAuthorized } from 'src/auth/authenticationManager';
 import { ButtonUI } from 'src/commonComponents/ButtonUI';
-import { loginPath } from 'src/router/rootConstants';
+import { calendarPath, loginPath } from 'src/router/rootConstants';
 import { hondaApi } from 'src/services/hondaApi';
 
 export const LogInLogOutButton = () => {
-  const [usernameId, setUsernameId] = useState<typeof skipToken | object>({});
+  const [usernameId] = useState<typeof skipToken | object>({});
 
   const selectUsername = useMemo(
     () => hondaApi.endpoints.getMe.select(usernameId),
     [usernameId],
   );
-
   const { isSuccess } = useSelector(selectUsername);
 
   const handleLogOutClick = () => {
@@ -26,11 +25,10 @@ export const LogInLogOutButton = () => {
   };
 
   return (
-    <Link to={loginPath}>Log in</Link>
-    // <ButtonUI
-    //   onClick={isSuccess ? handleLogOutClick : handleLogInClick}
-    //   text={isSuccess ? 'log out' : 'log in'}>
-    //
-    // </ButtonUI>
+    <ButtonUI onClick={isSuccess ? handleLogOutClick : handleLogInClick}>
+      <Link to={isSuccess ? calendarPath : loginPath}>
+        {isSuccess ? 'log out' : 'log in'}
+      </Link>
+    </ButtonUI>
   );
 };

@@ -13,7 +13,7 @@ import {
   welcomePath,
 } from 'src/router/rootConstants';
 import { WrapperForSettingPage } from 'src/settings/WrapperForSettingPage';
-import { WelcomeToHondaTracker } from 'src/WelcomeToHondaTracker';
+import { WelcomeToHondaTracker } from 'src/welcom/WelcomeToHondaTracker';
 
 const router = createBrowserRouter([
   {

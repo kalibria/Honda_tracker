@@ -1,7 +1,8 @@
 import React from 'react';
 
 export interface IButtonEL {
-  text: string;
+  text?: string;
   onClick?: () => void;
   size?: string;
+  children?: React.ReactNode;
 }
