@@ -11,9 +11,12 @@ import {
 import { Loading } from 'src/commonComponents/Loading';
 
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
-import { setCurrentUsername } from 'src/redux/userDataSlice';
+import { setCurrentUsername, setUserRole } from 'src/redux/userDataSlice';
 import { calendarPath } from 'src/router/rootConstants';
-import { useLazyStatusLoginQuery } from 'src/services/hondaApi';
+import {
+  useLazyGetUserQuery,
+  useLazyStatusLoginQuery,
+} from 'src/services/hondaApi';
 import { authenticationManager } from 'src/auth/authenticationManager';
 import { myLocalStorage } from 'src/services/localStorage';
 
@@ -26,14 +29,15 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
+  const [triggerUser, resultUser] = useLazyGetUserQuery();
 
   const isAuth = myLocalStorage.isAuth();
 
   useEffect(() => {
-    if (isAuth) {
+    if (isAuth && resultUser.isSuccess) {
       navigate(calendarPath);
     }
-  }, [isAuth, navigate]);
+  }, [isAuth, navigate, resultUser.isSuccess]);
 
   useEffect(() => {
     const { isSuccess, isError, errorMsg } =
@@ -43,13 +47,20 @@ const LoginForm = () => {
       authenticationManager.setAuthenticated(dispatch, username);
       dispatch(setCurrentUsername(username));
       setError('');
-      navigate(calendarPath);
+      triggerUser(username);
     }
     if (isError) {
       setError(errorMsg);
       myRtkQueryResultProcessor.handleErrorCode(result, dispatch);
     }
-  }, [dispatch, navigate, result, username]);
+  }, [dispatch, navigate, result, triggerUser, username]);
+
+  useEffect(() => {
+    if (resultUser.isSuccess && resultUser.currentData) {
+      dispatch(setUserRole(resultUser.currentData.user.roles));
+      navigate(calendarPath);
+    }
+  }, [resultUser.isSuccess, resultUser.currentData, dispatch, navigate]);
 
   return (
     <div className="mainContainer ">

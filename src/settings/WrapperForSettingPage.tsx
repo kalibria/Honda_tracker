@@ -11,9 +11,8 @@ import { SettingsPage } from 'src/settings/SettingsPage';
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 
 export const WrapperForSettingPage = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [errorMsg, setErrorMsg] = useState('');
 
   const { data, currentData, isSuccess } = useGetMeQuery({});
 
@@ -25,13 +24,12 @@ export const WrapperForSettingPage = () => {
     if (isSuccess && fetchedUsername) {
       trigger(fetchedUsername);
     }
-  }, [currentData, data, dispatch, isSuccess, navigate, trigger]);
+  }, [currentData, data, dispatch, isSuccess, trigger]);
 
   useEffect(() => {
     if (result.isSuccess && result.currentData) {
       const userRoles = result.currentData.user.roles;
       dispatch(setUserRole(userRoles));
-      setErrorMsg('');
     }
     if (result.isError) {
       const errorCode = myRtkQueryResultProcessor.handleErrorCode(
@@ -39,17 +37,10 @@ export const WrapperForSettingPage = () => {
         dispatch,
       );
       if (errorCode === unauthorized) {
-        setErrorMsg('Please log in');
         // navigate(initPath);
       }
     }
-  }, [dispatch, navigate, result]);
-  console.log('errorMSG', errorMsg);
+  }, [dispatch, result]);
 
-  return (
-    <div>
-      {result.isLoading ? <Loading /> : <SettingsPage />}
-      <div>{errorMsg && <AlertForm message={errorMsg} />}</div>
-    </div>
-  );
+  return <div>{(result.isLoading && <Loading />) || <SettingsPage />}</div>;
 };
