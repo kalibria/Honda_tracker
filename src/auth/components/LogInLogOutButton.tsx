@@ -1,22 +1,17 @@
-import Button from '@mui/material/Button';
-import { skipToken } from '@reduxjs/toolkit/query';
-import React, { useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { authenticationManager } from 'src/auth/authenticationManager';
 import { AlertForm } from 'src/auth/components/loginForm/componentsForLoginForm';
 import { ButtonUI } from 'src/commonComponents/ButtonUI';
+import { Loading } from 'src/commonComponents/Loading';
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
-import { calendarPath, initPath, loginPath } from 'src/router/rootConstants';
-import { hondaApi, useLazyLogOutQuery } from 'src/services/hondaApi';
+import { initPath, loginPath } from 'src/router/rootConstants';
+import { useLazyLogOutQuery } from 'src/services/hondaApi';
+import { myLocalStorage } from 'src/services/localStorage';
 
 export const LogInLogOutButton = () => {
-  const [usernameId] = useState<typeof skipToken | object>({});
-  const selectUsername = useMemo(
-    () => hondaApi.endpoints.getMe.select(usernameId),
-    [usernameId],
-  );
-  const { isSuccess } = useSelector(selectUsername);
+  const isAuth = myLocalStorage.isAuth();
 
   const [trigger, result] = useLazyLogOutQuery();
   const [error, setError] = useState('');
@@ -34,7 +29,6 @@ export const LogInLogOutButton = () => {
     const { isSuccess, errorMsg } =
       myRtkQueryResultProcessor.parseQueryResult(result);
     if (isSuccess) {
-      console.log('isSuccess', isSuccess);
       authenticationManager.setUnauthenticated(dispatch);
       setError('');
       navigate(initPath);
@@ -45,23 +39,11 @@ export const LogInLogOutButton = () => {
 
   return (
     <div>
-      <ButtonUI onClick={isSuccess ? handleLogOutClick : handleLogInClick}>
-        {isSuccess ? 'Log out' : 'Log in'}
+      {result.isLoading && <Loading />}
+      <ButtonUI onClick={isAuth ? handleLogOutClick : handleLogInClick}>
+        {isAuth ? 'Log out' : 'Log in'}
       </ButtonUI>
-
-      {/*{isSuccess ? (*/}
-      {/*  <div>*/}
-      {/*    {error && <AlertForm message={error} />}*/}
-      {/*    <ButtonUI onClick={handleLogOutClick}>*/}
-      {/*      {'Log out'}*/}
-      {/*      /!*<Link to={initPath}>Log out</Link>*!/*/}
-      {/*    </ButtonUI>*/}
-      {/*  </div>*/}
-      {/*) : (*/}
-      {/*  <ButtonUI>*/}
-      {/*    <Link to={loginPath}>Log in</Link>*/}
-      {/*  </ButtonUI>*/}
-      {/*)}*/}
+      <div>{error && <AlertForm message={error} />}</div>
     </div>
   );
 };

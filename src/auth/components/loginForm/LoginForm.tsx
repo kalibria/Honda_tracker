@@ -2,7 +2,7 @@ import Button from '@mui/material/Button';
 import React, { useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   AlertForm,
   MyCheckbox,
@@ -15,6 +15,7 @@ import { setCurrentUsername } from 'src/redux/userDataSlice';
 import { calendarPath, initPath } from 'src/router/rootConstants';
 import { useLazyStatusLoginQuery } from 'src/services/hondaApi';
 import { authenticationManager } from 'src/auth/authenticationManager';
+import { myLocalStorage } from 'src/services/localStorage';
 
 import * as Yup from 'yup';
 import 'src/css/App.css';
@@ -25,6 +26,14 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
+
+  const isAuth = myLocalStorage.isAuth();
+
+  useEffect(() => {
+    if (isAuth) {
+      navigate(calendarPath);
+    }
+  }, [isAuth, navigate]);
 
   useEffect(() => {
     const { isSuccess, isError, errorMsg } =
