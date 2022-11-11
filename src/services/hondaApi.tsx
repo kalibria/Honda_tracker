@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { setUserRole } from 'src/redux/userDataSlice';
 
 export const hondaApi = createApi({
   reducerPath: 'hondaApi',
@@ -8,7 +7,7 @@ export const hondaApi = createApi({
     credentials: 'include',
   }),
 
-  tagTypes: ['Login'],
+  tagTypes: ['Login', 'Me'],
   endpoints: (builder) => ({
     statusLogin: builder.query({
       query: ({ password, username }) => ({
@@ -29,6 +28,7 @@ export const hondaApi = createApi({
     }),
     getMe: builder.query<{ username: string }, object>({
       query: () => '/me',
+      providesTags: ['Me'],
     }),
   }),
 });

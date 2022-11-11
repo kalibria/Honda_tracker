@@ -1,6 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
 import LoginForm from 'src/auth/components/loginForm/LoginForm';
-import { LogOutLogic } from 'src/auth/components/logOutForm/LogOutLogic';
 import { App } from 'src/App';
 import { Calendar } from 'src/calendar/Calendar';
 import {
@@ -28,10 +27,10 @@ const router = createBrowserRouter([
         path: welcomePath,
         element: <WelcomeToHondaTracker />,
       },
-      {
-        path: logOutPath,
-        element: <LogOutLogic />,
-      },
+      // {
+      //   path: logOutPath,
+      //   element: <UseLogOut />,
+      // },
 
       {
         path: settingsPath,

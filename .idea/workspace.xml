@@ -4,12 +4,13 @@
     <list default="true" id="23dd3188-ad99-4626-a6fc-8d6a150d9de3" name="Changes" comment="press settings button make useGetMeQuery request, get username, make useLazyGetUserQuery and get user's role">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WelcomeToHondaTracker.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/welcom/WelcomeToHondaTracker.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/appBar/ButtonAppBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/appBar/ButtonAppBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/authenticationManager.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/authenticationManager.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/auth/components/LogInLogOutButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/components/LogInLogOutButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commonComponents/ButtonUI.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/commonComponents/ButtonUI.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commonComponents/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commonComponents/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/components/logOutForm/LogOutLogic.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/components/loginForm/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/components/loginForm/LoginForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router/root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/root.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/hondaApi.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/hondaApi.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/localStorage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/localStorage.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

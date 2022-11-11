@@ -1,33 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import ButtonAppBar from 'src/appBar/ButtonAppBar';
-import { Loading } from 'src/commonComponents/Loading';
 import { calendarPath, welcomePath } from 'src/router/rootConstants';
-import { useGetMeQuery } from 'src/services/hondaApi';
+import { myLocalStorage } from 'src/services/localStorage';
 
 export const App = () => {
-  const { isSuccess, isLoading, isError } = useGetMeQuery({});
+  const isAuth = myLocalStorage.isAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isAuth) {
       navigate(calendarPath);
-    }
-    if (isError) {
+    } else {
       navigate(welcomePath);
     }
-  }, [isSuccess, isError, navigate]);
+  }, [isAuth, navigate]);
 
   return (
     <React.Fragment>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <div>
-          <ButtonAppBar />
-          <Outlet />
-        </div>
-      )}
+      <ButtonAppBar />
+      <Outlet />
     </React.Fragment>
   );
 };

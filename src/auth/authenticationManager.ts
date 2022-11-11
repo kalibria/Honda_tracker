@@ -24,7 +24,7 @@ class AuthenticationManager {
 export const authenticationManager = new AuthenticationManager();
 
 export const useIsAuthorized = () => {
-  const { data, isSuccess, isError } = useGetMeQuery({});
+  const { data, isSuccess } = useGetMeQuery({});
   const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {

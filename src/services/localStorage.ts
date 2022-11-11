@@ -15,6 +15,13 @@ class LocalStorage {
   logOut() {
     localStorage.clear();
   }
+
+  isAuth() {
+    const isAuth = this.getItem('isAuthenticated');
+    if (isAuth === 'true') {
+      return true;
+    } else return false;
+  }
 }
 
 export const myLocalStorage = new LocalStorage();

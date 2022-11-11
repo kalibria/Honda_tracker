@@ -2,7 +2,7 @@ import Button from '@mui/material/Button';
 import React, { useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   AlertForm,
   MyCheckbox,
@@ -34,17 +34,17 @@ const LoginForm = () => {
       authenticationManager.setAuthenticated(dispatch, username);
       dispatch(setCurrentUsername(username));
       setError('');
-      // navigate(calendarPath);
+      navigate(calendarPath);
     }
     if (isError) {
       setError(errorMsg);
       myRtkQueryResultProcessor.handleErrorCode(result, dispatch);
-      // navigate(initPath);
+      navigate(initPath);
     }
   }, [dispatch, navigate, result, username]);
 
   return (
-    <div className="centerContainer ">
+    <div className="mainContainer ">
       {error && <AlertForm message={error} />}
       {result.isLoading ? (
         <Loading />
