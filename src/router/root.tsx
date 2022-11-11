@@ -7,11 +7,10 @@ import {
   errorPath,
   initPath,
   loginPath,
-  logOutPath,
   settingsPath,
   welcomePath,
 } from 'src/router/rootConstants';
-import { WrapperForSettingPage } from 'src/settings/WrapperForSettingPage';
+import { SettingsPage } from 'src/settings/SettingsPage';
 import { WelcomeToHondaTracker } from 'src/welcom/WelcomeToHondaTracker';
 
 const router = createBrowserRouter([
@@ -27,14 +26,10 @@ const router = createBrowserRouter([
         path: welcomePath,
         element: <WelcomeToHondaTracker />,
       },
-      // {
-      //   path: logOutPath,
-      //   element: <UseLogOut />,
-      // },
 
       {
         path: settingsPath,
-        element: <WrapperForSettingPage />,
+        element: <SettingsPage />,
       },
     ],
   },

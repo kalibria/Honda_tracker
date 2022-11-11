@@ -1,8 +1,13 @@
 import React from 'react';
-import { useIsAuthorized } from 'src/auth/authenticationManager';
-import { calendarPath } from 'src/router/rootConstants';
+import { Loading } from 'src/commonComponents/Loading';
+import { useGetMeQuery } from 'src/services/hondaApi';
 
 export const Calendar = () => {
-  // useIsAuthorized(calendarPath);
-  return <div>Calendar</div>;
+  const { isLoading, isSuccess } = useGetMeQuery({});
+
+  return (
+    <div>
+      {(isLoading && <Loading />) || (isSuccess && <div>Calendar</div>)}
+    </div>
+  );
 };

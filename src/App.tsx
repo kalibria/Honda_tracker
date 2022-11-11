@@ -10,7 +10,7 @@ export const App = () => {
 
   useEffect(() => {
     if (isAuth) {
-      navigate(calendarPath);
+      // navigate(calendarPath);
     } else {
       navigate(welcomePath);
     }
