@@ -48,7 +48,6 @@ const LoginForm = () => {
     if (isError) {
       setError(errorMsg);
       myRtkQueryResultProcessor.handleErrorCode(result, dispatch);
-      navigate(initPath);
     }
   }, [dispatch, navigate, result, username]);
 
@@ -102,7 +101,7 @@ const LoginForm = () => {
                 autoComplete={'current-password'}
                 name={'password'}
               />
-              <MyCheckbox name={'rememberMe'}>Remember me</MyCheckbox>
+              {/*<MyCheckbox name={'rememberMe'}>Remember me</MyCheckbox>*/}
               <Button variant="contained" type="submit">
                 {'Sign in'}
               </Button>
