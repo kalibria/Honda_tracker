@@ -5,4 +5,5 @@ export interface IButtonEL {
   onClick?: () => void;
   size?: string;
   children?: React.ReactNode;
+  className?: string;
 }
