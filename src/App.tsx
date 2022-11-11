@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import ButtonAppBar from 'src/appBar/ButtonAppBar';
+import { Loading } from 'src/commonComponents/Loading';
 import { calendarPath, welcomePath } from 'src/router/rootConstants';
+import { useGetMeQuery } from 'src/services/hondaApi';
 import { myLocalStorage } from 'src/services/localStorage';
 
 export const App = () => {
@@ -18,8 +20,10 @@ export const App = () => {
 
   return (
     <React.Fragment>
-      <ButtonAppBar />
-      <Outlet />
+      <div>
+        <ButtonAppBar />
+        <Outlet />
+      </div>
     </React.Fragment>
   );
 };
