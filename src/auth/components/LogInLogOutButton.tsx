@@ -26,14 +26,15 @@ export const LogInLogOutButton = () => {
   };
 
   useEffect(() => {
-    const { isSuccess, errorMsg } =
+    const { isSuccess, errorMsg, isError } =
       myRtkQueryResultProcessor.parseQueryResult(result);
     if (isSuccess) {
       authenticationManager.setUnauthenticated(dispatch);
       setError('');
       navigate(initPath);
-    } else {
+    } else if (isError) {
       setError(errorMsg);
+      myLocalStorage.logOut();
     }
   }, [dispatch, error, navigate, result]);
 
