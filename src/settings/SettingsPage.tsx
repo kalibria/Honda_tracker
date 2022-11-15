@@ -2,9 +2,7 @@ import Button from '@mui/material/Button';
 import { Form, Formik } from 'formik';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Loading } from 'src/commonComponents/Loading';
 import { RootState } from 'src/redux/store';
-import { useGetMeQuery } from 'src/services/hondaApi';
 import { BasicTextFields, SwitchesGroup } from 'src/settings/components';
 import { carProvider } from 'src/settings/constants';
 
