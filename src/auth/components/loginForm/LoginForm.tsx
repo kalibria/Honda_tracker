@@ -29,8 +29,6 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [triggerUser, resultUser] = useLazyGetUserQuery();
-  // const { isLoading, isSuccess } = useGetMeQuery({});
-  // const isLoadingPage = isLoading || result.isLoading;
 
   useEffect(() => {
     if (resultUser.isSuccess) {
