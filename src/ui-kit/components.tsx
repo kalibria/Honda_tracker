@@ -9,7 +9,7 @@ import {
   IButtonEl,
   MyCheckboxProps,
   MyTextInputProps,
-} from 'src/auth/auth.types';
+} from 'src/ui-kit/components.types';
 
 export const MyTextInput: React.FC<MyTextInputProps> = ({
   label,

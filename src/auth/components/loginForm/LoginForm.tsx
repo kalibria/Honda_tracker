@@ -113,7 +113,6 @@ const LoginForm = () => {
             </Button>
           </Form>
         </Formik>
-        <div>{result.isLoading && <Loading />}</div>
       </main>
     </div>
   );
