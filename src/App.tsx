@@ -6,7 +6,7 @@ import { myLocalStorage } from 'src/services/localStorage';
 
 export const App = () => {
   const isAuth = myLocalStorage.isAuth();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {}, [location]);
@@ -16,6 +16,7 @@ export const App = () => {
       // navigate(calendarPath);
     } else {
       redirect(welcomePath);
+      // navigate(-1);
     }
   }, [isAuth]);
 

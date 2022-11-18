@@ -2,7 +2,7 @@ import Button from '@mui/material/Button';
 import React, { useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 import {
   AlertForm,
   MyCheckbox,
@@ -32,7 +32,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (resultUser.isSuccess) {
-      navigate(calendarPath);
+      redirect(calendarPath);
     }
   }, [navigate, resultUser.isSuccess]);
 
@@ -55,7 +55,7 @@ const LoginForm = () => {
   useEffect(() => {
     if (resultUser.isSuccess && resultUser.currentData) {
       dispatch(setUserRole(resultUser.currentData.user.roles));
-      navigate(calendarPath);
+      redirect(calendarPath);
     }
   }, [resultUser.isSuccess, resultUser.currentData, dispatch, navigate]);
 
