@@ -2,7 +2,7 @@ import Button from '@mui/material/Button';
 import React, { useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
 import { useDispatch } from 'react-redux';
-import { redirect, useNavigate } from 'react-router-dom';
+import { redirect, useLocation, useNavigate } from 'react-router-dom';
 import {
   AlertForm,
   MyCheckbox,
@@ -30,11 +30,13 @@ const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [triggerUser, resultUser] = useLazyGetUserQuery();
 
+  const location = useLocation();
+
   useEffect(() => {
     if (resultUser.isSuccess) {
-      redirect(calendarPath);
+      navigate(location.state || calendarPath);
     }
-  }, [navigate, resultUser.isSuccess]);
+  }, [location.state, navigate, resultUser.isSuccess]);
 
   useEffect(() => {
     const { isSuccess, isError, errorMsg } =

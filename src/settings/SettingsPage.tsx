@@ -2,7 +2,7 @@ import Button from '@mui/material/Button';
 import { Form, Formik } from 'formik';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { RootState } from 'src/redux/store';
 import { loginPath } from 'src/router/rootConstants';
 import { myLocalStorage } from 'src/services/localStorage';
@@ -15,10 +15,11 @@ export const SettingsPage = () => {
   const navigate = useNavigate();
 
   const isCarProvider = selectMyRole.includes(carProvider);
+  const { pathname } = useLocation();
 
   useEffect(() => {
     if (!isAuth) {
-      navigate(loginPath);
+      navigate(loginPath, { state: pathname });
     }
   });
 
