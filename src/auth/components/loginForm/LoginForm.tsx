@@ -3,12 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
 import { useDispatch } from 'react-redux';
 import { redirect, useLocation, useNavigate } from 'react-router-dom';
-import {
-  AlertForm,
-  ButtonEl,
-  MyCheckbox,
-  MyTextInput,
-} from 'src/auth/components/loginForm/componentsForLoginForm';
+
 import { Loading } from 'src/commonComponents/Loading';
 
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
@@ -19,6 +14,7 @@ import {
   useLazyStatusLoginQuery,
 } from 'src/services/hondaApi';
 import { authenticationManager } from 'src/auth/authenticationManager';
+import { AlertForm, MyTextInput } from 'src/ui-kit/components';
 
 import * as Yup from 'yup';
 import 'src/css/App.css';
@@ -110,7 +106,6 @@ const LoginForm = () => {
               autoComplete={'current-password'}
               name={'password'}
             />
-            {/*<MyCheckbox name={'rememberMe'}>Remember me</MyCheckbox>*/}
             <Button variant="contained" type="submit">
               {'Sign in'}
             </Button>

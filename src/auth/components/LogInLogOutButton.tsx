@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { authenticationManager } from 'src/auth/authenticationManager';
-import { AlertForm } from 'src/auth/components/loginForm/componentsForLoginForm';
+
 import { ButtonUI } from 'src/commonComponents/ButtonUI';
 import { Loading } from 'src/commonComponents/Loading';
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 import { initPath, loginPath } from 'src/router/rootConstants';
 import { useLazyLogOutQuery } from 'src/services/hondaApi';
 import { myLocalStorage } from 'src/services/localStorage';
+import { AlertForm } from 'src/ui-kit/components';
 
 export const LogInLogOutButton = () => {
   const isAuth = myLocalStorage.isAuth();

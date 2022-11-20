@@ -17,11 +17,11 @@ export const SettingsPage = () => {
   const isCarProvider = selectMyRole.includes(carProvider);
   const { pathname } = useLocation();
 
-  useEffect(() => {
-    if (!isAuth) {
-      navigate(loginPath, { state: pathname });
-    }
-  });
+  // useEffect(() => {
+  //   if (!isAuth) {
+  //     navigate(loginPath, { state: pathname });
+  //   }
+  // });
 
   return (
     <div className={'sm:w-60 mainContainer'}>
