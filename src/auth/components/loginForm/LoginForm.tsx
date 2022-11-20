@@ -1,56 +1,74 @@
+import Button from '@mui/material/Button';
 import React, { useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { redirect, useLocation, useNavigate } from 'react-router-dom';
+
+import { Loading } from 'src/commonComponents/Loading';
+
+import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
+import { setCurrentUsername, setUserRole } from 'src/redux/userDataSlice';
+import { calendarPath } from 'src/router/rootConstants';
 import {
-  AlertForm,
-  ButtonEl,
-  MyCheckbox,
-  MyTextInput,
-} from 'src/ui-kit/components';
-import { unauthorized } from 'src/auth/constants';
-import { isAuth } from 'src/redux/authSlice';
-import { useLazyStatusLoginQuery } from 'src/services/hondaApi';
-import { processingNetworkRequests } from 'src/auth/authenticationManager';
+  useLazyGetUserQuery,
+  useLazyStatusLoginQuery,
+} from 'src/services/hondaApi';
+import { authenticationManager } from 'src/auth/authenticationManager';
+import { AlertForm, MyTextInput } from 'src/ui-kit/components';
 
 import * as Yup from 'yup';
-import 'src/App.css';
+import 'src/css/App.css';
 
 const LoginForm = () => {
   const [trigger, result] = useLazyStatusLoginQuery();
   const [error, setError] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [username, setUsername] = useState('');
+  const [triggerUser, resultUser] = useLazyGetUserQuery();
+
+  const location = useLocation();
 
   useEffect(() => {
-    processingNetworkRequests.isAuthenticated(result);
+    if (resultUser.isSuccess) {
+      navigate(location.state || calendarPath);
+    }
+  }, [location.state, navigate, resultUser.isSuccess]);
 
-    const { isSuccess, errorMsg, errorCode } =
-      processingNetworkRequests.handleQueryResult(result);
+  useEffect(() => {
+    const { isSuccess, isError, errorMsg } =
+      myRtkQueryResultProcessor.parseQueryResult(result);
 
     if (isSuccess) {
-      dispatch(isAuth());
+      authenticationManager.setAuthenticated(dispatch, username);
+      dispatch(setCurrentUsername(username));
       setError('');
-      navigate('/logout');
-    } else {
-      setError(errorMsg);
-
-      if (errorCode === unauthorized) {
-        // redirect to login page, but not needed on this page
-      }
+      triggerUser(username);
     }
-  }, [dispatch, navigate, result]);
+    if (isError) {
+      setError(errorMsg);
+      myRtkQueryResultProcessor.handleErrorCode(result, dispatch);
+    }
+  }, [dispatch, navigate, result, triggerUser, username]);
+
+  useEffect(() => {
+    if (resultUser.isSuccess && resultUser.currentData) {
+      dispatch(setUserRole(resultUser.currentData.user.roles));
+      redirect(calendarPath);
+    }
+  }, [resultUser.isSuccess, resultUser.currentData, dispatch, navigate]);
 
   return (
-    <div className="loginForm ">
+    <div className="mainContainer ">
       {error && <AlertForm message={error} />}
+
       <main className="flex flex-col justify-center items-center ">
         <div className="w-24 mb-4">
           <img
             src="https://www.nicepng.com/png/detail/138-1388174_login-account-icon.png"
             alt="logIn"
           />
-          <h1 className="text-center">Sigh in</h1>
+          <h1 className="text-center">Sign in</h1>
         </div>
         <Formik
           initialValues={{
@@ -70,6 +88,7 @@ const LoginForm = () => {
             let password = values.password;
             let username = values.login;
             trigger({ password, username });
+            setUsername(username);
             setSubmitting(false);
           }}>
           <Form className="flex flex-col sm:w-96 space-y-3.5">
@@ -87,10 +106,12 @@ const LoginForm = () => {
               autoComplete={'current-password'}
               name={'password'}
             />
-            <MyCheckbox name={'rememberMe'}>Remember me</MyCheckbox>
-            <ButtonEl text={'Sign in'} />
+            <Button variant="contained" type="submit">
+              {'Sign in'}
+            </Button>
           </Form>
         </Formik>
+        <div>{result.isLoading && <Loading />}</div>
       </main>
     </div>
   );

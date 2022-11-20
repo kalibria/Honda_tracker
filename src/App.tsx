@@ -1,7 +1,27 @@
-import React from 'react';
-import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Outlet, redirect } from 'react-router-dom';
+import ButtonAppBar from 'src/appBar/ButtonAppBar';
+import { useCheckIsLoggedIn } from 'src/auth/authenticationManager';
+import { welcomePath } from 'src/router/rootConstants';
+import { myLocalStorage } from 'src/services/localStorage';
 
-const LoginForm = React.lazy(
-  () => import('./auth/components/loginForm/LoginForm'),
-);
+export const App = () => {
+  const isAuth = myLocalStorage.isAuth();
+  useCheckIsLoggedIn();
+
+  // useEffect(() => {
+  //   if (isAuth) {
+  //   } else {
+  //     redirect(welcomePath);
+  //   }
+  // }, [isAuth]);
+
+  return (
+    <React.Fragment>
+      <div>
+        <ButtonAppBar />
+        <Outlet />
+      </div>
+    </React.Fragment>
+  );
+};

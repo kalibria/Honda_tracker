@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+    <list default="true" id="23dd3188-ad99-4626-a6fc-8d6a150d9de3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/components/loginForm/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/components/loginForm/LoginForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/settings/SettingsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/settings/SettingsPage.tsx" afterDir="false" />
     <list default="true" id="23dd3188-ad99-4626-a6fc-8d6a150d9de3" name="Changes" comment="add routing">
       <change afterPath="$PROJECT_DIR$/src/services/hondaApi.types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
@@ -36,13 +40,28 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2GIs5c7kzKhLfWQay8g3dz33bCr" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/Mary/Documents/Projects/honda-tracker/src&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/Mary/Documents/Projects/honda-tracker/node_modules/prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.typescriptcompiler&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/Mary/Documents/Projects/honda-tracker/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
@@ -62,10 +81,16 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/settings" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/welcom" />
+      <recent name="$PROJECT_DIR$/src/css" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/redux" />
       <recent name="$PROJECT_DIR$/src/ui-kit" />
       <recent name="$PROJECT_DIR$/src/generalComponents" />
       <recent name="$PROJECT_DIR$/src/auth/components" />
@@ -76,13 +101,14 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="19854902-28a3-42e5-99d6-ba9ad0aa01c8" name="Changes" comment="" />
+      <changelist id="23dd3188-ad99-4626-a6fc-8d6a150d9de3" name="Changes" comment="Shared the logic.Selected rtkQueryResultProcessor folder." />
       <created>1666087250089</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1666087250089</updated>
       <workItem from="1666087251597" duration="428000" />
       <workItem from="1666087686872" duration="205000" />
+      <workItem from="1667460671767" duration="4026000" />
     </task>
     <task id="LOCAL-00001" summary="add authSlice">
       <created>1666438336666</created>
@@ -98,7 +124,56 @@
       <option name="project" value="LOCAL" />
       <updated>1666870111534</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add types to setting page components">
+      <created>1666951565324</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1666951565324</updated>
+    </task>
+    <task id="LOCAL-00004" summary="create setting page">
+      <created>1666951612418</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1666951612418</updated>
+    </task>
+    <task id="LOCAL-00005" summary="create calendar page">
+      <created>1666951633122</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1666951633122</updated>
+    </task>
+    <task id="LOCAL-00006" summary="persist login state">
+      <created>1667213285413</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1667213285413</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Shared the logic.Selected rtkQueryResultProcessor folder.">
+      <created>1667301027155</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1667301027155</updated>
+    </task>
+    <task id="LOCAL-00008" summary="return errorCode">
+      <created>1667913943072</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1667913943072</updated>
+    </task>
+    <task id="LOCAL-00009" summary="press settings button make useGetMeQuery request, get username, make useLazyGetUserQuery and get user's role">
+      <created>1667914095017</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1667914095017</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -120,7 +195,16 @@
     <MESSAGE value="login request" />
     <MESSAGE value="add Log out button" />
     <MESSAGE value="add routing" />
-    <option name="LAST_COMMIT_MESSAGE" value="add routing" />
+    <MESSAGE value="create settingPage" />
+    <MESSAGE value="add types to setting page components" />
+    <MESSAGE value="create setting page" />
+    <MESSAGE value="create calendar page" />
+    <MESSAGE value="persist login state" />
+    <MESSAGE value="request user details" />
+    <MESSAGE value="Shared the logic.Selected rtkQueryResultProcessor folder." />
+    <MESSAGE value="return errorCode" />
+    <MESSAGE value="press settings button make useGetMeQuery request, get username, make useLazyGetUserQuery and get user's role" />
+    <option name="LAST_COMMIT_MESSAGE" value="press settings button make useGetMeQuery request, get username, make useLazyGetUserQuery and get user's role" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

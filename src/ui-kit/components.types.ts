@@ -1,5 +1,12 @@
 import { FieldHookConfig } from 'formik';
 
+export interface IHandleQueryResult {
+  isSuccess: boolean;
+  isError: boolean;
+  errorMsg: string;
+  errorCode: number;
+}
+
 export interface MyTextInputProps {
   label: string;
   name: string;
@@ -18,4 +25,5 @@ export interface IAlertForm {
 export interface IButtonEl {
   text: string;
   onClick?: () => void;
+  size?: string;
 }

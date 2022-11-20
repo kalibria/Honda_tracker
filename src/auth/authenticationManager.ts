@@ -1,72 +1,53 @@
-import { SerializedError } from '@reduxjs/toolkit';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { IHandleQueryResult } from 'src/services/hondaApi.types';
-import { unauthorized } from 'src/auth/constants';
-import { UseQueryStateResult } from '@reduxjs/toolkit/dist/query/react/buildHooks';
+import { Dispatch } from '@reduxjs/toolkit';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+import { logOut, setIsAuthenticated } from 'src/redux/authSlice';
+import { loginPath } from 'src/router/rootConstants';
+import { useGetMeQuery } from 'src/services/hondaApi';
+import { myLocalStorage } from 'src/services/localStorage';
 
 class AuthenticationManager {
-  errorMessage(error: FetchBaseQueryError | SerializedError) {
-    if (
-      'data' in error &&
-      typeof error.data === 'object' &&
-      error.data !== null &&
-      'status' in error.data &&
-      typeof (error.data as any).status === 'string'
-    ) {
-      this.setUnauthenticated('isAuthenticated');
-      return (error.data as any).status || ''; //todo remove when migrate to TS 4.9
-    }
+  setUnauthenticated(dispatch: Dispatch) {
+    myLocalStorage.logOut();
 
-    return '';
+    dispatch(logOut());
   }
 
-  isAuthenticated(result: UseQueryStateResult<any, any>) {
-    if (result.error) {
-      if (result.error.status === unauthorized) {
-        this.setUnauthenticated('isAuthenticated');
-      }
-    } else if (result.isSuccess) {
-      this.setIsAuthenticated();
-    }
-  }
+  setAuthenticated(dispatch: Dispatch, username: string) {
+    myLocalStorage.setItem('isAuthenticated', 'true');
 
-  handleQueryResult(result: UseQueryStateResult<any, any>): IHandleQueryResult {
-    if (result.isError) {
-      const errorMsg = this.errorMessage(result.error);
-      const errorCode = AuthenticationManager.getErrorCode(result.error);
-
-      return {
-        errorCode,
-        errorMsg,
-        isSuccess: false,
-      };
-    }
-
-    if (result.isSuccess) {
-      return {
-        errorCode: 200,
-        errorMsg: '',
-        isSuccess: true,
-      };
-    }
-
-    return {
-      errorCode: 200,
-      errorMsg: '',
-      isSuccess: false,
-    };
-  }
-
-  private static getErrorCode(result: UseQueryStateResult<any, any>): number {
-    return result?.error?.status;
-  }
-
-  private setIsAuthenticated() {
-    localStorage.setItem('isAuthenticated', 'true');
-  }
-  private setUnauthenticated(key: string) {
-    localStorage.removeItem(key);
+    dispatch(setIsAuthenticated(username));
   }
 }
 
-export const processingNetworkRequests = new AuthenticationManager();
+export const authenticationManager = new AuthenticationManager();
+
+export const useCheckIsLoggedIn = () => {
+  const isAuth = myLocalStorage.isAuth();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isAuth) {
+      navigate(loginPath, { state: pathname });
+    }
+  }, [isAuth, navigate, pathname]);
+};
+
+export const useCheckMe = (path: string) => {
+  const navigate = useNavigate();
+  const { data, isSuccess, isError } = useGetMeQuery({});
+  const [username, setUserName] = useState('');
+
+  useEffect(() => {
+    if (isSuccess) {
+      setUserName(data.username);
+      navigate(path);
+    } else if (isError) {
+      navigate(loginPath);
+    }
+  }, [data, isError, isSuccess, navigate, path]);
+
+  return username;
+};

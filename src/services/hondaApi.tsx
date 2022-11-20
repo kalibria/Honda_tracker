@@ -7,7 +7,7 @@ export const hondaApi = createApi({
     credentials: 'include',
   }),
 
-  tagTypes: ['Login'],
+  tagTypes: ['Login', 'Me'],
   endpoints: (builder) => ({
     statusLogin: builder.query({
       query: ({ password, username }) => ({
@@ -23,7 +23,19 @@ export const hondaApi = createApi({
         body: {},
       }),
     }),
+    getUser: builder.query({
+      query: (username: string) => `/users/${username}`,
+    }),
+    getMe: builder.query<{ username: string }, object>({
+      query: () => '/me',
+      providesTags: ['Me'],
+    }),
   }),
 });
 
-export const { useLazyStatusLoginQuery, useLazyLogOutQuery } = hondaApi;
+export const {
+  useLazyStatusLoginQuery,
+  useLazyLogOutQuery,
+  useLazyGetUserQuery,
+  useGetMeQuery,
+} = hondaApi;

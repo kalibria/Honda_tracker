@@ -1,20 +1,46 @@
 import { createBrowserRouter } from 'react-router-dom';
 import LoginForm from 'src/auth/components/loginForm/LoginForm';
-import { LogOutButton } from 'src/auth/components/logOutFor/LogOutButton';
+import { App } from 'src/App';
+import { Calendar } from 'src/calendar/Calendar';
+import {
+  calendarPath,
+  errorPath,
+  initPath,
+  loginPath,
+  settingsPath,
+  welcomePath,
+} from 'src/router/rootConstants';
+import { SettingsPage } from 'src/settings/SettingsPage';
+import { WelcomeToHondaTracker } from 'src/welcom/WelcomeToHondaTracker';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: initPath,
+    element: <App />,
+    children: [
+      {
+        path: calendarPath,
+        element: <Calendar />,
+      },
+      {
+        path: welcomePath,
+        element: <WelcomeToHondaTracker />,
+      },
+
+      {
+        path: settingsPath,
+        element: <SettingsPage />,
+      },
+    ],
+  },
+  {
+    path: loginPath,
     element: <LoginForm />,
   },
   {
-    path: '/logout',
-    element: <LogOutButton />,
+    path: errorPath,
+    element: <h1>Error...Please try reload</h1>,
   },
-  // {
-  //   path: '/bookings',
-  //   element: <BookingList />,
-  // },
 ]);
 
 export default router;
