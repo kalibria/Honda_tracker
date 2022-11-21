@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="23dd3188-ad99-4626-a6fc-8d6a150d9de3" name="Changes" comment="press settings button make useGetMeQuery request, get username, make useLazyGetUserQuery and get user's role">
+      <change afterPath="$PROJECT_DIR$/src/booking-list/datesManager.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/booking-list/BookingList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/booking-list/BookingList.tsx" afterDir="false" />
     </list>
@@ -78,7 +79,7 @@
       <workItem from="1667460671767" duration="4026000" />
       <workItem from="1669025278717" duration="152000" />
       <workItem from="1669025477772" duration="4031000" />
-      <workItem from="1669033761265" duration="456000" />
+      <workItem from="1669033761265" duration="1612000" />
     </task>
     <task id="LOCAL-00001" summary="add authSlice">
       <created>1666438336666</created>
