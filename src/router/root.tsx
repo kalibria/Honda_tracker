@@ -41,11 +41,6 @@ const router = createBrowserRouter([
     path: errorPath,
     element: <h1>Error...Please try reload</h1>,
   },
-
-  // {
-  //   path: '/bookings',
-  //   element: <BookingList />,
-  // },
 ]);
 
 export default router;

@@ -3,13 +3,11 @@ import AlertTitle from '@mui/material/AlertTitle';
 import TextField from '@mui/material/TextField';
 import { useField } from 'formik';
 import React from 'react';
-import Button from '@mui/material/Button';
 import {
   IAlertForm,
-  IButtonEl,
   MyCheckboxProps,
   MyTextInputProps,
-} from 'src/auth/auth.types';
+} from 'src/ui-kit/components.types';
 
 export const MyTextInput: React.FC<MyTextInputProps> = ({
   label,
