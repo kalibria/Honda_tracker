@@ -13,3 +13,11 @@ export interface IBasicTextFields {
   name: string;
   [key: string]: string | FieldHookConfig<any>;
 }
+
+export interface ISettings {
+  rideCompletionText: string;
+  notifications: {
+    getNotifiedAboutBookingChanges: boolean;
+    getNotifiedAboutNewBookings: boolean;
+  };
+}
