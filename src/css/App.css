@@ -29,9 +29,9 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin: 15px;
-    border: 2px solid #ffa94d;
+    border: 2px solid #0380ab;
     border-radius: 5px;
-    background-color: #ffd8a8;
+    background-color: #dcebf4;
 }
 
 .bookingHeader {
@@ -45,9 +45,9 @@
 }
 
 .cellDecoration {
-    border: 2px solid #ffa94d;
+    border: 2px solid #0380ab;
     border-radius: 5px;
-    background-color: #ffd8a8;
+    background-color: #dcebf4;
     padding: 0.5em;
     /*color: #d9480f;*/
 }
