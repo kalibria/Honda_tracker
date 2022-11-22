@@ -6,7 +6,7 @@ import { authenticationManager } from 'src/auth/authenticationManager';
 import { ButtonUI } from 'src/commonComponents/ButtonUI';
 import { Loading } from 'src/commonComponents/Loading';
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
-import { initPath, loginPath } from 'src/router/rootConstants';
+import { loginPath } from 'src/router/rootConstants';
 import { useLazyLogOutQuery } from 'src/services/hondaApi';
 import { myLocalStorage } from 'src/services/localStorage';
 import { AlertForm } from 'src/ui-kit/components';
@@ -33,7 +33,7 @@ export const LogInLogOutButton = () => {
     if (isSuccess) {
       authenticationManager.setUnauthenticated(dispatch);
       setError('');
-      navigate(initPath);
+      navigate(loginPath);
     } else if (isError) {
       setError(errorMsg);
       myLocalStorage.logOut();

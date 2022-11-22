@@ -7,7 +7,11 @@ import { redirect, useLocation, useNavigate } from 'react-router-dom';
 import { Loading } from 'src/commonComponents/Loading';
 
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
-import { setCurrentUsername, setUserRole } from 'src/redux/userDataSlice';
+import {
+  setCarId,
+  setCurrentUsername,
+  setUserRole,
+} from 'src/redux/userDataSlice';
 import { bookingListPath } from 'src/router/rootConstants';
 import {
   useLazyGetUserQuery,
@@ -31,9 +35,16 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (resultUser.isSuccess) {
+      dispatch(setCarId(resultUser.data.user.availableCars));
       navigate(location.state || bookingListPath);
     }
-  }, [location.state, navigate, resultUser.isSuccess]);
+  }, [
+    dispatch,
+    location.state,
+    navigate,
+    resultUser.data.user.availableCars,
+    resultUser.isSuccess,
+  ]);
 
   useEffect(() => {
     const { isSuccess, isError, errorMsg } =

@@ -4,11 +4,13 @@ import { logOut, setIsAuthenticated } from 'src/redux/authSlice';
 interface IInitState {
   username: string;
   role: string;
+  carId: string[];
 }
 
 const initState = {
   username: '',
   role: '',
+  carId: [],
 };
 
 const userDataSlice = createSlice({
@@ -24,6 +26,9 @@ const userDataSlice = createSlice({
     setUserRole: (state, action) => {
       state.role = action.payload;
     },
+    setCarId: (state, action) => {
+      state.carId = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(logOut, (state, { payload }) => {
@@ -36,6 +41,6 @@ const userDataSlice = createSlice({
   },
 });
 
-export const { setUserRole, deleteUserName, setCurrentUsername } =
+export const { setUserRole, deleteUserName, setCurrentUsername, setCarId } =
   userDataSlice.actions;
 export default userDataSlice.reducer;
