@@ -38,13 +38,7 @@ const LoginForm = () => {
       dispatch(setCarId(resultUser.data.user.availableCars));
       navigate(location.state || bookingListPath);
     }
-  }, [
-    dispatch,
-    location.state,
-    navigate,
-    resultUser.data.user.availableCars,
-    resultUser.isSuccess,
-  ]);
+  }, [dispatch, location.state, navigate, resultUser, resultUser.isSuccess]);
 
   useEffect(() => {
     const { isSuccess, isError, errorMsg } =
