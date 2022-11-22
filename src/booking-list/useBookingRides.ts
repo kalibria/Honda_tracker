@@ -1,26 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { IBookingInfo, IRTKQueryBookingResponse } from 'src/booking-list/types';
 import { RootState } from 'src/redux/store';
 import { useLazyGetBookingsQuery } from 'src/services/hondaApi';
-import { IUser } from 'src/user/types';
 
-export interface IBookingInfo {
-  username: string;
-  startTime: string;
-  description: string;
-}
-
-export interface IRTKQueryBookingResponse {
-  bookingDescription: string;
-  bookingOwner: IUser;
-  bookingOwnerId: string;
-  bookingStartTime: string;
-  carNumber: string;
-}
-
-export const BookingInfoItems = () => {
-  const selectCarId = useSelector((state: RootState) => state.userData.carId); //assume user has only one car
-  const firstSelectedCar = selectCarId[0];
+export const useBookingRides = () => {
+  const selectCarId = useSelector((state: RootState) => state.userData.carId);
+  const firstSelectedCar = selectCarId[0]; //assume user has only one car
 
   const selectUsername = useSelector(
     (state: RootState) => state.userData.username,
@@ -40,7 +26,7 @@ export const BookingInfoItems = () => {
         (accum: IBookingInfo[], item: IRTKQueryBookingResponse) => {
           let tripInfo: IBookingInfo = {
             username: item.bookingOwner.firstName,
-            startTime: item.bookingStartTime,
+            startTime: Date.parse(item.bookingStartTime),
             description: item.bookingDescription,
           };
           accum.push(tripInfo);
@@ -55,5 +41,5 @@ export const BookingInfoItems = () => {
 
   console.log('allBookingInfo', allBookingInfo);
 
-  return <li>booking info</li>;
+  return allBookingInfo;
 };
