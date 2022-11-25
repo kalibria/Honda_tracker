@@ -14,7 +14,7 @@ export const useBookingRides = () => {
 
   const [trigger, data] = useLazyGetBookingsQuery();
 
-  const [allBookingInfo, setAllBookingInfo] = useState([]);
+  const [allBookingInfo, setAllBookingInfo] = useState<IBookingInfo[]>([]);
 
   useEffect(() => {
     trigger({ carId: firstSelectedCar, username: selectUsername });

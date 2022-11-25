@@ -13,3 +13,25 @@ export interface IRTKQueryBookingResponse {
   bookingStartTime: string;
   carNumber: string;
 }
+
+export interface IRideInfoWithFormattingDates {
+  username: string;
+  startDate: string;
+  startTime: number;
+  description: string;
+}
+
+export interface IConnectedDatesAndRides {
+  date: string;
+  rideInfo: IRideInfoWithFormattingDates | null;
+}
+
+export interface INewRide {
+  date: string;
+  info: IRideInfoWithFormattingDates;
+}
+
+export interface IRidesWithKeys {
+  date: string;
+  info: IRideInfoWithFormattingDates;
+}

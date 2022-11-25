@@ -22,13 +22,17 @@ class DatesManager {
     return arrDatesMs;
   }
 
-  getFormattingDates(dates: number[]) {
+  getFormattingAllDates(dates: number[]) {
     return dates.map((item) => {
       return this.formatter.format(item);
     });
   }
 
-  formatter = new Intl.DateTimeFormat('ru', {
+  getFormattingDate(date: number) {
+    return this.formatter.format(date);
+  }
+
+  private formatter = new Intl.DateTimeFormat('ru', {
     weekday: 'long',
     month: 'long',
     day: 'numeric',
