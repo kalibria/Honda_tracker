@@ -7,9 +7,18 @@ export const DateItems = () => {
   const arrFormattingDates = datesManager.getFormattingAllDates(
     datesManager.getDatesMS(),
   );
-  console.log('dates', arrFormattingDates);
-  const rides = useBookingRides();
-  console.log('bookingRides', rides);
+
+  const datesMS = datesManager.getDatesMS();
+  console.log('dates', datesMS);
+
+  const requestRides = useBookingRides();
+  console.log('requestRides', requestRides);
+
+  const rides = bookingItemsManager.highlightKeys(requestRides);
+  console.log('rides', rides);
+
+  const startEndDay = datesManager.getStartAndEndOfDays(datesMS);
+  console.log('startEnd', startEndDay);
 
   const dateItems = arrFormattingDates.map((date, index) => {
     return (
@@ -18,6 +27,11 @@ export const DateItems = () => {
       </li>
     );
   });
+
+  console.log(
+    'endres',
+    bookingItemsManager.makeOneArrayFromTwo(startEndDay, requestRides),
+  );
 
   return <ul>{dateItems}</ul>;
 };

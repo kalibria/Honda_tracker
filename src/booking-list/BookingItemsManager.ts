@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
+import isWithinInterval from 'date-fns/isWithinInterval';
 import loginForm from 'src/auth/components/loginForm/LoginForm';
 import { datesManager } from 'src/booking-list/datesManager';
 import {
   IBookingInfo,
   IConnectedDatesAndRides,
-  INewRide,
   IRideInfoWithFormattingDates,
   IRidesWithKeys,
+  ICalendarRide,
+  IStartEndDates,
 } from 'src/booking-list/types';
 import { useBookingRides } from 'src/booking-list/useBookingRides';
 
@@ -25,18 +27,44 @@ export class BookingItemsManager {
     }, []);
   }
 
-  highlightKeys(rideItems: IRideInfoWithFormattingDates[]) {
-    return rideItems.reduce(
-      (accum: Record<string, IRideInfoWithFormattingDates>, item) => {
-        accum[item.startTime] = item;
+  highlightKeys(rideItems: IBookingInfo[]) {
+    return rideItems.reduce((accum: Record<string, IBookingInfo>, item) => {
+      const key = item.startTime;
+      console.log('key', key);
+      accum[key] = item;
+
+      return accum;
+    }, {});
+  }
+
+  makeOneArrayFromTwo(
+    datesArr: IStartEndDates[],
+    ridesArr: IBookingInfo[],
+  ): ICalendarRide {
+    return datesArr.reduce(
+      (accum: ICalendarRide, dateWithInterval: IStartEndDates) => {
+        const ridesForCurrentDay = ridesArr.filter((ride) => {
+          return isWithinInterval(ride.startTime, {
+            start: dateWithInterval.start,
+            end: dateWithInterval.end,
+          });
+        });
+
+        if (ridesForCurrentDay.length > 0) {
+          if (Array.isArray(accum[dateWithInterval.date])) {
+            accum[dateWithInterval.date]?.push(...ridesForCurrentDay);
+          } else {
+            accum[dateWithInterval.date] = ridesForCurrentDay;
+          }
+        } else {
+          accum[dateWithInterval.date] = null;
+        }
 
         return accum;
       },
-      {},
+      [],
     );
   }
-
-  makeOneArrayFromTwo(datesArr: number[], ridesArr: IRidesWithKeys[]) {}
 }
 
 export const bookingItemsManager = new BookingItemsManager();

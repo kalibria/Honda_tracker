@@ -6,6 +6,12 @@ export interface IBookingInfo {
   description: string;
 }
 
+export interface IStartEndDates {
+  date: number;
+  start: number | Date;
+  end: number | Date;
+}
+
 export interface IRTKQueryBookingResponse {
   bookingDescription: string;
   bookingOwner: IUser;
@@ -26,12 +32,10 @@ export interface IConnectedDatesAndRides {
   rideInfo: IRideInfoWithFormattingDates | null;
 }
 
-export interface INewRide {
-  date: string;
-  info: IRideInfoWithFormattingDates;
+export interface ICalendarRide {
+  [date: number]: IBookingInfo[] | null;
 }
 
 export interface IRidesWithKeys {
-  date: string;
-  info: IRideInfoWithFormattingDates;
+  [key: string]: IRideInfoWithFormattingDates;
 }
