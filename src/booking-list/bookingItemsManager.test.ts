@@ -1,48 +1,90 @@
 import { bookingItemsManager } from 'src/booking-list/BookingItemsManager';
 
-// describe('test bookingItemsManager class', () => {
-//   test('make one obj from two', () => {
-//     const input1 = [1669367266978, 1669453666978, 1669540066978, 1669626466978];
-//     const input2 = {
-//       '1669375421000': {
-//         username: 'Мария',
-//         startDate: 'пятница, 25 ноября',
-//         startTime: 1669375421000,
-//         description: 'Masha - visit parents',
-//       },
-//       '1669634621000': {
-//         username: 'Мария',
-//         startDate: 'понедельник, 28 ноября',
-//         startTime: 1669634621000,
-//         description: 'Зоопарк!',
-//       },
-//     };
-//
-//     const output = [
-//       {
-//         date: 'пятница, 25 ноября',
-//         info: {
-//           username: 'Мария',
-//           startDate: 'пятница, 25 ноября',
-//           startTime: 1669375421000,
-//           description: 'Masha - visit parents',
-//         },
-//       },
-//       { date: 'суббота, 26 ноября', info: null },
-//       { date: 'воскресенье, 27 ноября', info: null },
-//       {
-//         date: 'понедельник, 28 ноября',
-//         info: {
-//           username: 'Мария',
-//           startDate: 'понедельник, 28 ноября',
-//           startTime: 1669634621000,
-//           description: 'Зоопарк!',
-//         },
-//       },
-//     ];
-//
-//     expect(bookingItemsManager.makeOneArrayFromTwo(input1, input2));
-//   });
-// });
+describe('test bookingItemsManager class', () => {
+  test('make one obj from two', () => {
+    const input1 = [
+      {
+        date: 1669622973010,
+        start: 1669582800000,
+        end: 1669669199999,
+      },
+      {
+        date: 1669709373010,
+        start: 1669669200000,
+        end: 1669755599999,
+      },
+      {
+        date: 1669795773010,
+        start: 1669755600000,
+        end: 1669841999999,
+      },
+      {
+        date: 1669882173010,
+        start: 1669842000000,
+        end: 1669928399999,
+      },
+      {
+        date: 1669968573010,
+        start: 1669928400000,
+        end: 1670014799999,
+      },
+    ];
+    const input2 = [
+      {
+        username: 'Мария',
+        startTime: 1669719320000,
+        description: 'Masha - buy presents for parents',
+      },
+      {
+        username: 'Мария',
+        startTime: 1669722920000,
+        description: 'Masha - visit parents',
+      },
+      {
+        username: 'Мария',
+        startTime: 1669978520000,
+        description: 'Зоопарк!',
+      },
+      {
+        username: 'Мария',
+        startTime: 1670410520000,
+        description: 'За шубой',
+      },
+      {
+        username: 'Мария',
+        startTime: 1670583320000,
+        description: 'К психологу в ЛОДЭ',
+      },
+    ];
+    const output = {
+      1669622973010: null,
+      1669709373010: [
+        {
+          username: 'Мария',
+          startTime: 1669719320000,
+          description: 'Masha - buy presents for parents',
+        },
+        {
+          username: 'Мария',
+          startTime: 1669722920000,
+          description: 'Masha - visit parents',
+        },
+      ],
+      1669795773010: null,
+      1669882173010: null,
+      1669968573010: [
+        {
+          username: 'Мария',
+          startTime: 1669978520000,
+          description: 'Зоопарк!',
+        },
+      ],
+    };
+
+    expect(bookingItemsManager.makeOneArrayFromTwo(input1, input2)).toEqual(
+      output,
+    );
+  });
+});
 
 export const one = 1;
