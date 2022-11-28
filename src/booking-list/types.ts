@@ -39,3 +39,13 @@ export interface ICalendarRide {
 export interface IRidesWithKeys {
   [key: string]: IRideInfoWithFormattingDates;
 }
+
+export interface IUIRideInfo {
+  username: string;
+  description: string;
+}
+
+export interface IUICalendar {
+  date: string;
+  info: IUIRideInfo;
+}

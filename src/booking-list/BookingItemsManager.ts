@@ -1,16 +1,12 @@
-import { useEffect } from 'react';
 import isWithinInterval from 'date-fns/isWithinInterval';
-import loginForm from 'src/auth/components/loginForm/LoginForm';
 import { datesManager } from 'src/booking-list/datesManager';
 import {
   IBookingInfo,
-  IConnectedDatesAndRides,
   IRideInfoWithFormattingDates,
-  IRidesWithKeys,
   ICalendarRide,
   IStartEndDates,
+  IUICalendar,
 } from 'src/booking-list/types';
-import { useBookingRides } from 'src/booking-list/useBookingRides';
 
 export class BookingItemsManager {
   formattingRideItems(rideItems: IBookingInfo[]) {
@@ -63,6 +59,32 @@ export class BookingItemsManager {
       },
       {},
     );
+  }
+
+  calendarItemMapToUI(calendarItems: ICalendarRide[]) {
+    return calendarItems.reduce((accum: IUICalendar[], item, index) => {
+      console.log('item', item[1]?.[0].username);
+
+      if (item[1] === null) {
+        accum.push({
+          date: datesManager.getFormattingDate(Number(item[0])),
+          info: {
+            username: '',
+            description: 'Свободно',
+          },
+        });
+      } else {
+        accum.push({
+          date: datesManager.getFormattingDate(Number(item[0])),
+          info: {
+            username: item[1]?.[0].username,
+            description: item[1][0].description,
+          },
+        });
+      }
+
+      return accum;
+    }, []);
   }
 }
 

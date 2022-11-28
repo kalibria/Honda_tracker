@@ -44,6 +44,11 @@
 
 }
 
+.calendar {
+    display: flex;
+
+}
+
 .cellDecoration {
     border: 2px solid #0380ab;
     border-radius: 5px;
