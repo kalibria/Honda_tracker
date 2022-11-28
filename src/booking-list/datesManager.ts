@@ -30,28 +30,8 @@ class DatesManager {
     }, []);
   }
 
-  getFormattingAllDates(dates: number[]) {
-    return dates.map((item) => {
-      return this.formatter.format(item);
-    });
-  }
-
   getFormattingDate(date: number) {
     return this.formatter.format(date);
-  }
-
-  getFormattingDateWithTime(date: number) {
-    const formatter = new Intl.DateTimeFormat('ru', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      second: 'numeric',
-    });
-
-    return formatter.format(date);
   }
 
   private formatter = new Intl.DateTimeFormat('ru', {

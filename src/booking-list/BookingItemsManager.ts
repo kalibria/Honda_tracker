@@ -2,36 +2,12 @@ import isWithinInterval from 'date-fns/isWithinInterval';
 import { datesManager } from 'src/booking-list/datesManager';
 import {
   IBookingInfo,
-  IRideInfoWithFormattingDates,
   ICalendarRide,
   IStartEndDates,
   IUICalendar,
 } from 'src/booking-list/types';
 
 export class BookingItemsManager {
-  formattingRideItems(rideItems: IBookingInfo[]) {
-    return rideItems.reduce((accum: IRideInfoWithFormattingDates[], item) => {
-      const formattingDate = datesManager.getFormattingDate(item.startTime);
-      const rideItem: IRideInfoWithFormattingDates = {
-        username: item.username,
-        startDate: formattingDate,
-        startTime: item.startTime,
-        description: item.description,
-      };
-      accum.push(rideItem);
-      return accum;
-    }, []);
-  }
-
-  highlightKeys(rideItems: IBookingInfo[]) {
-    return rideItems.reduce((accum: Record<string, IBookingInfo>, item) => {
-      const key = item.startTime;
-      accum[key] = item;
-
-      return accum;
-    }, {});
-  }
-
   makeOneArrayFromTwo(
     datesArr: IStartEndDates[],
     ridesArr: IBookingInfo[],

@@ -20,24 +20,8 @@ export interface IRTKQueryBookingResponse {
   carNumber: string;
 }
 
-export interface IRideInfoWithFormattingDates {
-  username: string;
-  startDate: string;
-  startTime: number;
-  description: string;
-}
-
-export interface IConnectedDatesAndRides {
-  date: string;
-  rideInfo: IRideInfoWithFormattingDates | null;
-}
-
 export interface ICalendarRide {
   [date: number]: IBookingInfo[] | null;
-}
-
-export interface IRidesWithKeys {
-  [key: string]: IRideInfoWithFormattingDates;
 }
 
 export interface IUIRideInfo {
@@ -48,4 +32,8 @@ export interface IUIRideInfo {
 export interface IUICalendar {
   date: string;
   info: IUIRideInfo;
+}
+
+export interface IUICalendarItems {
+  datesRidesForUI: IUICalendar[];
 }
