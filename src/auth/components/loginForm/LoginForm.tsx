@@ -8,7 +8,7 @@ import { Loading } from 'src/commonComponents/Loading';
 
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 import { setCurrentUsername, setUserRole } from 'src/redux/userDataSlice';
-import { calendarPath } from 'src/router/rootConstants';
+import { bookingListPath } from 'src/router/rootConstants';
 import {
   useLazyGetUserQuery,
   useLazyStatusLoginQuery,
@@ -31,7 +31,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (resultUser.isSuccess) {
-      navigate(location.state || calendarPath);
+      navigate(location.state || bookingListPath);
     }
   }, [location.state, navigate, resultUser.isSuccess]);
 
@@ -54,7 +54,7 @@ const LoginForm = () => {
   useEffect(() => {
     if (resultUser.isSuccess && resultUser.currentData) {
       dispatch(setUserRole(resultUser.currentData.user.roles));
-      redirect(calendarPath);
+      redirect(bookingListPath);
     }
   }, [resultUser.isSuccess, resultUser.currentData, dispatch, navigate]);
 

@@ -1,9 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
 import LoginForm from 'src/auth/components/loginForm/LoginForm';
 import { App } from 'src/App';
-import { Calendar } from 'src/calendar/Calendar';
+import { BookingList } from 'src/booking-list/BookingList';
 import {
-  calendarPath,
+  bookingListPath,
   errorPath,
   initPath,
   loginPath,
@@ -19,8 +19,8 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: calendarPath,
-        element: <Calendar />,
+        path: bookingListPath,
+        element: <BookingList />,
       },
       {
         path: welcomePath,

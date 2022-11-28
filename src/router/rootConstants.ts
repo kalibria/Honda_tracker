@@ -4,7 +4,7 @@ export const welcomePath = '/welcome';
 
 export const loginPath = '/login';
 
-export const calendarPath = '/calendar';
+export const bookingListPath = '/booking-list';
 
 export const settingsPath = '/settings';
 
