@@ -7,10 +7,17 @@ export const CalendarItems = ({ datesRidesForUI }: IUICalendarItems) => {
       <div className={'calendar'} key={index}>
         <li className={'cellDecoration'}>{item.date}</li>
         <li className={'cellDecoration'}>
-          <ul>
-            <li>{item.info.username}</li>
-            <li>{item.info.description}</li>
-          </ul>
+          {item.info.username ? (
+            <ul>
+              <li className={'fontBold'}>{item.info.username}</li>
+              <li className={'fontBold'}>{item.info.description}</li>
+            </ul>
+          ) : (
+            <ul>
+              <li>{item.info.username}</li>
+              <li>{item.info.description}</li>
+            </ul>
+          )}
         </li>
       </div>
     );
