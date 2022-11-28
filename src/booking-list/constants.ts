@@ -1,1 +1,1 @@
-export const amountOfDays = 14;
+export const AMOUNT_OF_DAYS = 14;
