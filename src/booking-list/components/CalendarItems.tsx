@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { IUICalendarItems } from 'src/booking-list/types';
+import { bookingDetailsPath } from 'src/router/rootConstants';
 
 export const CalendarItems = ({ datesRidesForUI }: IUICalendarItems) => {
   const items = datesRidesForUI.map((item, index) => {
@@ -10,7 +12,9 @@ export const CalendarItems = ({ datesRidesForUI }: IUICalendarItems) => {
           {item.info.username ? (
             <ul>
               <li className={'fontBold'}>{item.info.username}</li>
-              <li className={'fontBold'}>{item.info.description}</li>
+              <li className={'fontBold'}>
+                <Link to={bookingDetailsPath}>{item.info.description}</Link>
+              </li>
             </ul>
           ) : (
             <ul>

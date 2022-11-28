@@ -1,5 +1,5 @@
 import React from 'react';
-import { CalendarItemsWrapper } from 'src/booking-list/CalendarItemsWrapper';
+import { CalendarItemsWrapper } from 'src/booking-list/components/CalendarItemsWrapper';
 
 export const BookingList = () => {
   return (

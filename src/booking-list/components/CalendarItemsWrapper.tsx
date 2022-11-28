@@ -1,6 +1,6 @@
 import React from 'react';
 import { bookingItemsManager } from 'src/booking-list/BookingItemsManager';
-import { CalendarItems } from 'src/booking-list/CalendarItems';
+import { CalendarItems } from 'src/booking-list/components/CalendarItems';
 import { datesManager } from 'src/booking-list/datesManager';
 import { useBookingRides } from 'src/booking-list/useBookingRides';
 
