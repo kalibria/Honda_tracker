@@ -1,9 +1,10 @@
 import { Dispatch, SerializedError } from '@reduxjs/toolkit';
 import { UseQueryStateResult } from '@reduxjs/toolkit/dist/query/react/buildHooks';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { IHandleQueryResult } from 'src/auth/auth.types';
+
 import { authenticationManager } from 'src/auth/authenticationManager';
 import { badRequest, unauthorized } from 'src/auth/constants';
+import { IHandleQueryResult } from 'src/ui-kit/components.types';
 
 class RtkQueryResultProcessor {
   getErrorMessage(error: FetchBaseQueryError | SerializedError) {

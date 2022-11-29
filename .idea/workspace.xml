@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+    <list default="true" id="23dd3188-ad99-4626-a6fc-8d6a150d9de3" name="Changes" comment="press settings button make useGetMeQuery request, get username, make useLazyGetUserQuery and get user's role">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/components/loginForm/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/components/loginForm/LoginForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/settings/SettingsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/settings/SettingsPage.tsx" afterDir="false" />
     <list default="true" id="23dd3188-ad99-4626-a6fc-8d6a150d9de3" name="Changes" comment="add routing">
       <change afterPath="$PROJECT_DIR$/src/services/hondaApi.types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
@@ -17,6 +21,7 @@
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/auth/components/loginForm/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/components/loginForm/LoginForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router/rootConstants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/rootConstants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/css/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/App.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +57,11 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+<<<<<<<<< Temporary merge branch 1
     "last_opened_file_path": "/Users/Mary/Documents/Projects/honda-tracker",
+=========
+    "last_opened_file_path": "/Users/Mary/Documents/Projects/honda-tracker/src",
+>>>>>>>>> Temporary merge branch 2
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -69,14 +78,15 @@
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/settings" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/ui-kit" />
       <recent name="$PROJECT_DIR$/src/welcom" />
       <recent name="$PROJECT_DIR$/src/css" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/redux" />
+      <recent name="$PROJECT_DIR$/src/ui-kit" />
       <recent name="$PROJECT_DIR$/src/generalComponents" />
       <recent name="$PROJECT_DIR$/src/auth/components" />
       <recent name="$PROJECT_DIR$/src/auth" />
@@ -94,6 +104,9 @@
       <workItem from="1666087251597" duration="428000" />
       <workItem from="1666087686872" duration="205000" />
       <workItem from="1667460671767" duration="4026000" />
+      <workItem from="1669025278717" duration="152000" />
+      <workItem from="1669025477772" duration="4031000" />
+      <workItem from="1669033761265" duration="5297000" />
     </task>
     <task id="LOCAL-00001" summary="add authSlice">
       <created>1666438336666</created>

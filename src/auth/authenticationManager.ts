@@ -1,6 +1,6 @@
 import { Dispatch } from '@reduxjs/toolkit';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { logOut, setIsAuthenticated } from 'src/redux/authSlice';
 import { loginPath } from 'src/router/rootConstants';
@@ -23,18 +23,16 @@ class AuthenticationManager {
 
 export const authenticationManager = new AuthenticationManager();
 
-export const useIsAuthorized = () => {
-  const { data, isSuccess } = useGetMeQuery({});
-  const [isAuth, setIsAuth] = useState(false);
+export const useCheckIsLoggedIn = () => {
+  const isAuth = myLocalStorage.isAuth();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (isSuccess) {
-      setIsAuth(true);
-    } else {
-      setIsAuth(false);
+    if (!isAuth) {
+      navigate(loginPath, { state: pathname });
     }
-  }, [data, isAuth, isSuccess]);
-  return isAuth;
+  }, [isAuth, navigate, pathname]);
 };
 
 export const useCheckMe = (path: string) => {

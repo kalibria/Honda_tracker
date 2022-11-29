@@ -2,6 +2,8 @@ import Button from '@mui/material/Button';
 import React, { useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
 import { useDispatch } from 'react-redux';
+import { redirect, useLocation, useNavigate } from 'react-router-dom';
+
 import { useNavigate } from 'react-router-dom';
 import {
   AlertForm,
@@ -12,12 +14,13 @@ import { Loading } from 'src/commonComponents/Loading';
 
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 import { setCurrentUsername, setUserRole } from 'src/redux/userDataSlice';
-import { calendarPath } from 'src/router/rootConstants';
+import { bookingListPath } from 'src/router/rootConstants';
 import {
   useLazyGetUserQuery,
   useLazyStatusLoginQuery,
 } from 'src/services/hondaApi';
 import { authenticationManager } from 'src/auth/authenticationManager';
+import { AlertForm, MyTextInput } from 'src/ui-kit/components';
 
 import * as Yup from 'yup';
 import 'src/css/App.css';
@@ -30,11 +33,13 @@ const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [triggerUser, resultUser] = useLazyGetUserQuery();
 
+  const location = useLocation();
+
   useEffect(() => {
     if (resultUser.isSuccess) {
-      navigate(calendarPath);
+      navigate(location.state || bookingListPath);
     }
-  }, [navigate, resultUser.isSuccess]);
+  }, [location.state, navigate, resultUser.isSuccess]);
 
   useEffect(() => {
     const { isSuccess, isError, errorMsg } =
@@ -55,7 +60,7 @@ const LoginForm = () => {
   useEffect(() => {
     if (resultUser.isSuccess && resultUser.currentData) {
       dispatch(setUserRole(resultUser.currentData.user.roles));
-      navigate(calendarPath);
+      redirect(bookingListPath);
     }
   }, [resultUser.isSuccess, resultUser.currentData, dispatch, navigate]);
 
@@ -107,7 +112,6 @@ const LoginForm = () => {
               autoComplete={'current-password'}
               name={'password'}
             />
-            {/*<MyCheckbox name={'rememberMe'}>Remember me</MyCheckbox>*/}
             <Button variant="contained" type="submit">
               {'Sign in'}
             </Button>
