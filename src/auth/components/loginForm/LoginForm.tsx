@@ -4,6 +4,12 @@ import { Formik, Form } from 'formik';
 import { useDispatch } from 'react-redux';
 import { redirect, useLocation, useNavigate } from 'react-router-dom';
 
+import { useNavigate } from 'react-router-dom';
+import {
+  AlertForm,
+  MyCheckbox,
+  MyTextInput,
+} from 'src/auth/components/loginForm/componentsForLoginForm';
 import { Loading } from 'src/commonComponents/Loading';
 
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
@@ -111,7 +117,6 @@ const LoginForm = () => {
             </Button>
           </Form>
         </Formik>
-        <div>{result.isLoading && <Loading />}</div>
       </main>
     </div>
   );

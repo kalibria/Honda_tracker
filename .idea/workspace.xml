@@ -17,6 +17,10 @@
       <change beforePath="$PROJECT_DIR$/src/auth/components/logOutFor/LogOutButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/components/logOutFor/LogOutButton.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/auth/components/loginForm/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/components/loginForm/LoginForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/auth/components/loginForm/componentsForLoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui-kit/components.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/auth/components/loginForm/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/components/loginForm/LoginForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/rootConstants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/rootConstants.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/css/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/App.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,27 +52,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/Mary/Documents/Projects/honda-tracker/src&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/Mary/Documents/Projects/honda-tracker/node_modules/prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/Mary/Documents/Projects/honda-tracker/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+<<<<<<<<< Temporary merge branch 1
     "last_opened_file_path": "/Users/Mary/Documents/Projects/honda-tracker",
+=========
+    "last_opened_file_path": "/Users/Mary/Documents/Projects/honda-tracker/src",
+>>>>>>>>> Temporary merge branch 2
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -82,6 +75,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/settings" />
       <recent name="$PROJECT_DIR$" />
