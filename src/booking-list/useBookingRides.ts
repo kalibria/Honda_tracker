@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { IBookingInfo, IRTKQueryBookingResponse } from 'src/booking-list/types';
+import { setBookingsInfo } from 'src/redux/bookingSlice';
 import { RootState } from 'src/redux/store';
 import { useLazyGetBookingsQuery } from 'src/services/hondaApi';
 
@@ -14,6 +15,8 @@ export const useBookingRides = () => {
 
   const [trigger, data] = useLazyGetBookingsQuery();
 
+  const dispatch = useDispatch();
+
   const [allBookingInfo, setAllBookingInfo] = useState<IBookingInfo[]>([]);
 
   useEffect(() => {
@@ -22,6 +25,8 @@ export const useBookingRides = () => {
 
   useEffect(() => {
     if (data.isSuccess) {
+      dispatch(setBookingsInfo(data.currentData));
+
       const bookingRides = data.currentData.bookings.reduce(
         (accum: IBookingInfo[], item: IRTKQueryBookingResponse) => {
           let tripInfo: IBookingInfo = {

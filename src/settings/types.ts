@@ -15,8 +15,8 @@ export interface IBasicTextFields {
 }
 
 export interface ISettings {
-  rideCompletionText: string;
-  notifications: {
+  rideCompletionText?: string;
+  notifications?: {
     getNotifiedAboutBookingChanges: boolean;
     getNotifiedAboutNewBookings: boolean;
   };
