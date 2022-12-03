@@ -48,6 +48,7 @@ export class BookingItemsManager {
             username: '',
             description: 'Свободно',
           },
+          id: index,
         });
       } else {
         accum.push({
@@ -56,6 +57,7 @@ export class BookingItemsManager {
             username: item[1]?.[0].username,
             description: item[1][0].description,
           },
+          id: index,
         });
       }
 

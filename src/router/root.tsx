@@ -4,7 +4,7 @@ import { App } from 'src/App';
 import { BookingDetails } from 'src/booking-list/components/BookingDetails';
 import { BookingList } from 'src/booking-list/components/BookingList';
 import {
-  bookingDetailsPath,
+  // bookingDetailsPath,
   bookingListPath,
   errorPath,
   initPath,
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
         element: <BookingList />,
       },
       {
-        path: bookingDetailsPath,
+        path: '/booking-details/:bookingId',
         element: <BookingDetails />,
       },
       {
