@@ -34,26 +34,36 @@ describe('test bookingItemsManager class', () => {
         username: 'Мария',
         startTime: 1669719320000,
         description: 'Masha - buy presents for parents',
+        carId: 'ho-123456',
+        id: 1669719320000,
       },
       {
         username: 'Мария',
         startTime: 1669722920000,
         description: 'Masha - visit parents',
+        carId: 'ho-123456',
+        id: 1669722920000,
       },
       {
         username: 'Мария',
         startTime: 1669978520000,
         description: 'Зоопарк!',
+        carId: 'ho-123456',
+        id: 1669978520000,
       },
       {
         username: 'Мария',
         startTime: 1670410520000,
         description: 'За шубой',
+        carId: 'ho-123456',
+        id: 1670410520000,
       },
       {
         username: 'Мария',
         startTime: 1670583320000,
         description: 'К психологу в ЛОДЭ',
+        carId: 'ho-123456',
+        id: 1670583320000,
       },
     ];
     const output = {

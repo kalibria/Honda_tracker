@@ -4,6 +4,8 @@ export interface IBookingInfo {
   username: string;
   startTime: number;
   description: string;
+  carId: string;
+  id: number;
 }
 
 export interface IStartEndDates {

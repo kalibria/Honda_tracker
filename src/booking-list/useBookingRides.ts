@@ -25,14 +25,14 @@ export const useBookingRides = () => {
 
   useEffect(() => {
     if (data.isSuccess) {
-      dispatch(setBookingsInfo(data.currentData));
-
       const bookingRides = data.currentData.bookings.reduce(
         (accum: IBookingInfo[], item: IRTKQueryBookingResponse) => {
           let tripInfo: IBookingInfo = {
             username: item.bookingOwner.firstName,
             startTime: Date.parse(item.bookingStartTime),
             description: item.bookingDescription,
+            carId: item.carNumber,
+            id: Date.parse(item.bookingStartTime),
           };
           accum.push(tripInfo);
 
@@ -41,6 +41,7 @@ export const useBookingRides = () => {
         [],
       );
       setAllBookingInfo(bookingRides);
+      dispatch(setBookingsInfo(bookingRides));
     }
   }, [data.currentData, data.isSuccess]);
 

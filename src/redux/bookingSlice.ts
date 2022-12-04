@@ -1,21 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IRTKQueryBookingResponse } from 'src/booking-list/types';
+import { IBookingInfo } from 'src/booking-list/types';
 
-const initState: { bookingList: IRTKQueryBookingResponse[] } = {
+const initState: { bookingList: IBookingInfo[] } = {
   bookingList: [
     {
-      bookingDescription: '',
-      bookingOwner: {
-        username: '',
-        firstName: '',
-        roles: [],
-        availableCars: [],
-        providedCars: [],
-        settings: {},
-      },
-      bookingOwnerId: '',
-      bookingStartTime: '',
-      carNumber: '',
+      username: '',
+      startTime: 0,
+      description: '',
+      carId: '',
+      id: 0,
     },
   ],
 };
