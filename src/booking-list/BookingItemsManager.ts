@@ -39,8 +39,6 @@ export class BookingItemsManager {
 
   calendarItemMapToUI(calendarItems: ICalendarRide[]) {
     return calendarItems.reduce((accum: IUICalendar[], item, index) => {
-      console.log('item', item[1]?.[0].username);
-
       if (item[1] === null) {
         accum.push({
           date: datesManager.getFormattingDate(Number(item[0])),
@@ -48,7 +46,7 @@ export class BookingItemsManager {
             username: '',
             description: 'Свободно',
           },
-          id: index,
+          id: null,
         });
       } else {
         accum.push({
@@ -57,7 +55,7 @@ export class BookingItemsManager {
             username: item[1]?.[0].username,
             description: item[1][0].description,
           },
-          id: index,
+          id: item[1][0].id,
         });
       }
 

@@ -73,11 +73,15 @@ describe('test bookingItemsManager class', () => {
           username: 'Мария',
           startTime: 1669719320000,
           description: 'Masha - buy presents for parents',
+          carId: 'ho-123456',
+          id: 1669719320000,
         },
         {
           username: 'Мария',
           startTime: 1669722920000,
           description: 'Masha - visit parents',
+          carId: 'ho-123456',
+          id: 1669722920000,
         },
       ],
       1669795773010: null,
@@ -87,6 +91,8 @@ describe('test bookingItemsManager class', () => {
           username: 'Мария',
           startTime: 1669978520000,
           description: 'Зоопарк!',
+          carId: 'ho-123456',
+          id: 1669978520000,
         },
       ],
     };
@@ -96,5 +102,3 @@ describe('test bookingItemsManager class', () => {
     );
   });
 });
-
-export const one = 1;
