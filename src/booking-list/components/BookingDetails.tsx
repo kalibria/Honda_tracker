@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 
 export const BookingDetails = () => {
   const params = useParams();
-  console.log('params', params);
 
   return (
     <div>

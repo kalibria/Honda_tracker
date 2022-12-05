@@ -40,14 +40,16 @@ export class BookingItemsManager {
   calendarItemMapToUI(calendarItems: ICalendarRide[]) {
     return calendarItems.reduce((accum: IUICalendar[], item, index) => {
       if (item[1] === null) {
-        accum.push({
-          date: datesManager.getFormattingDate(Number(item[0])),
-          info: {
-            username: '',
-            description: 'Свободно',
-          },
-          id: null,
-        });
+        if (item[0] !== null) {
+          accum.push({
+            date: datesManager.getFormattingDate(Number(item[0])),
+            info: {
+              username: '',
+              description: 'Свободно',
+            },
+            id: +item[0] / 1000, //id in seconds
+          });
+        }
       } else {
         accum.push({
           date: datesManager.getFormattingDate(Number(item[0])),

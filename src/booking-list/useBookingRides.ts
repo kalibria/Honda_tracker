@@ -32,7 +32,7 @@ export const useBookingRides = () => {
             startTime: Date.parse(item.bookingStartTime),
             description: item.bookingDescription,
             carId: item.carNumber,
-            id: Date.parse(item.bookingStartTime),
+            id: Date.parse(item.bookingStartTime) / 1000, //id in seconds
           };
           accum.push(tripInfo);
 
@@ -44,8 +44,6 @@ export const useBookingRides = () => {
       dispatch(setBookingsInfo(bookingRides));
     }
   }, [data.currentData, data.isSuccess]);
-
-  console.log('allBookingInfo', allBookingInfo);
 
   return allBookingInfo;
 };

@@ -6,7 +6,7 @@ export const CalendarItems = ({ datesRidesForUI }: IUICalendarItems) => {
   console.log('calendarItem', datesRidesForUI);
   const items = datesRidesForUI.map((item, index) => {
     return (
-      <div className={'calendar'}>
+      <div className={'calendar'} key={index}>
         <li className={'cellDecoration'}>{item.date}</li>
         <li className={'cellDecoration'}>
           {item.info.username ? (
