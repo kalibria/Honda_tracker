@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { IUICalendarItems } from 'src/booking-list/types';
 
 export const CalendarItems = ({ datesRidesForUI }: IUICalendarItems) => {
-  console.log('calendarItem', datesRidesForUI);
   const items = datesRidesForUI.map((item, index) => {
     return (
       <div className={'calendar'} key={index}>

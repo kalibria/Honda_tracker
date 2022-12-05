@@ -34,6 +34,11 @@ export const hondaApi = createApi({
       query: ({ carId, username }) =>
         `/bookings?carId=${carId}&username=${username}`,
     }),
+    getBookingsId: builder.query({
+      query: ({ username, carId, startTime }) => {
+        return `/bookings/id?username=${username}&carId=${carId}&startTime=${startTime}`;
+      },
+    }),
   }),
 });
 
@@ -43,4 +48,5 @@ export const {
   useLazyGetUserQuery,
   useGetMeQuery,
   useLazyGetBookingsQuery,
+  useGetBookingsIdQuery,
 } = hondaApi;
