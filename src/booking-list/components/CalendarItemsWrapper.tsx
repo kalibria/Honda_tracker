@@ -20,5 +20,7 @@ export const CalendarItemsWrapper = () => {
     Object.entries(datesWithRides),
   );
 
+  console.log('datesRidesForUI', datesRidesForUI);
+
   return <CalendarItems datesRidesForUI={datesRidesForUI} />;
 };

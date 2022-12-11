@@ -47,7 +47,7 @@ export class BookingItemsManager {
               username: '',
               description: 'Свободно',
             },
-            id: +item[0] / 1000, //id in seconds
+            id: Math.round(+item[0] / 1000).toString(), //id in seconds
           });
         }
       } else {
@@ -57,7 +57,8 @@ export class BookingItemsManager {
             username: item[1]?.[0].username,
             description: item[1][0].description,
           },
-          id: item[1][0].id,
+          id:
+            item[1][0].username + '$' + item[1][0].carId + '$' + item[1][0].id,
         });
       }
 

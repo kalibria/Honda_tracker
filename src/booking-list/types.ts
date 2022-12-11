@@ -34,7 +34,7 @@ export interface IUIRideInfo {
 export interface IUICalendar {
   date: string;
   info: IUIRideInfo;
-  id: number;
+  id: string;
 }
 
 export interface IUICalendarItems {
