@@ -35,9 +35,9 @@ export const hondaApi = createApi({
         `/bookings?carId=${carId}&username=${username}`,
     }),
     getBookingsId: builder.query({
-      query: ({ username, carId, startTime }) => {
-        return `/bookings/id?username=${username}&carId=${carId}&startTime=${startTime}`;
-      },
+      query: ({ username, carId, startTime }) => ({
+        url: `/bookings/id?username=${username}&carId=${carId}&startTime=${startTime}`,
+      }),
     }),
   }),
 });

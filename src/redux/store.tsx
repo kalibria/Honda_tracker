@@ -11,7 +11,7 @@ export const store = configureStore({
     [hondaApi.reducerPath]: hondaApi.reducer,
     auth: authReducer,
     userData: userReducer,
-    bookingData: bookingReducer,
+    bookings: bookingReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(hondaApi.middleware, rtkQueryErrorLogger),
