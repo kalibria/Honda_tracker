@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { datesManager } from 'src/booking-list/datesManager';
 import { Loading } from 'src/commonComponents/Loading';
 import { useLazyGetBookingsIdQuery } from 'src/services/hondaApi';
 
@@ -10,6 +11,8 @@ export const BookingDetails = () => {
 
   const idParams = params.bookingId;
 
+  const [startTimeUi, setStartTimeUI] = useState('');
+
   useEffect(() => {
     if (idParams) {
       const parsedParams = idParams.split('$');
@@ -17,15 +20,9 @@ export const BookingDetails = () => {
       const carId = parsedParams[1];
       const timeSec = parsedParams[2];
 
-      console.log('time', timeSec);
-
-      trigger({ username, carId, timeSec });
-
-      if (result.isSuccess) {
-        console.log('result', result.currentData.booking);
-      }
+      trigger({ username, carId, startTime: timeSec });
     }
-  }, [idParams, trigger]);
+  }, [idParams, result.currentData, result.isSuccess, trigger]);
 
   return (
     <div>
@@ -49,7 +46,11 @@ export const BookingDetails = () => {
                 </tr>
                 <tr className={'cellDecoration'}>
                   <td>Время начала поездки</td>
-                  <td>{result.currentData.booking.bookingStartTime}</td>
+                  <td>
+                    {datesManager.getFormattingDateTime(
+                      +new Date(result.currentData.booking.bookingStartTime),
+                    )}
+                  </td>
                 </tr>
                 <tr className={'cellDecoration'}>
                   <td>Время завершения поездки</td>

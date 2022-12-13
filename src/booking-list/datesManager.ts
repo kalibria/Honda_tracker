@@ -34,10 +34,21 @@ class DatesManager {
     return this.formatter.format(date);
   }
 
+  getFormattingDateTime(date: number) {
+    return this.formatterDateTime.format(date);
+  }
+
   private formatter = new Intl.DateTimeFormat('ru', {
     weekday: 'long',
     month: 'long',
     day: 'numeric',
+  });
+
+  private formatterDateTime = new Intl.DateTimeFormat('ru', {
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
   });
 }
 
