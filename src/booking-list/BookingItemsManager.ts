@@ -58,7 +58,11 @@ export class BookingItemsManager {
             description: item[1][0].description,
           },
           id:
-            item[1][0].username + '$' + item[1][0].carId + '$' + item[1][0].id,
+            item[1][0].bookingOwner +
+            '$' +
+            item[1][0].carId +
+            '$' +
+            item[1][0].id,
         });
       }
 

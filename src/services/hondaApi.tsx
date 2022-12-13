@@ -48,5 +48,5 @@ export const {
   useLazyGetUserQuery,
   useGetMeQuery,
   useLazyGetBookingsQuery,
-  useGetBookingsIdQuery,
+  useLazyGetBookingsIdQuery,
 } = hondaApi;

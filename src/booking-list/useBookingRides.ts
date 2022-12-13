@@ -29,6 +29,7 @@ export const useBookingRides = () => {
         (accum: IBookingInfo[], item: IRTKQueryBookingResponse) => {
           let tripInfo: IBookingInfo = {
             username: item.bookingOwner.firstName,
+            bookingOwner: item.bookingOwnerId,
             startTime: Date.parse(item.bookingStartTime),
             description: item.bookingDescription,
             carId: item.carNumber,

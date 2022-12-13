@@ -2,6 +2,7 @@ import { IUser } from 'src/user/types';
 
 export interface IBookingInfo {
   username: string;
+  bookingOwner: string;
   startTime: number;
   description: string;
   carId: string;

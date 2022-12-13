@@ -32,6 +32,7 @@ describe('test bookingItemsManager class', () => {
     const input2 = [
       {
         username: 'Мария',
+        bookingOwner: 'miria_kalib',
         startTime: 1669719320000,
         description: 'Masha - buy presents for parents',
         carId: 'ho-123456',
@@ -39,6 +40,7 @@ describe('test bookingItemsManager class', () => {
       },
       {
         username: 'Мария',
+        bookingOwner: 'miria_kalib',
         startTime: 1669722920000,
         description: 'Masha - visit parents',
         carId: 'ho-123456',
@@ -46,6 +48,7 @@ describe('test bookingItemsManager class', () => {
       },
       {
         username: 'Мария',
+        bookingOwner: 'miria_kalib',
         startTime: 1669978520000,
         description: 'Зоопарк!',
         carId: 'ho-123456',
@@ -53,6 +56,7 @@ describe('test bookingItemsManager class', () => {
       },
       {
         username: 'Мария',
+        bookingOwner: 'miria_kalib',
         startTime: 1670410520000,
         description: 'За шубой',
         carId: 'ho-123456',
@@ -60,6 +64,7 @@ describe('test bookingItemsManager class', () => {
       },
       {
         username: 'Мария',
+        bookingOwner: 'miria_kalib',
         startTime: 1670583320000,
         description: 'К психологу в ЛОДЭ',
         carId: 'ho-123456',
@@ -71,6 +76,7 @@ describe('test bookingItemsManager class', () => {
       1669709373010: [
         {
           username: 'Мария',
+          bookingOwner: 'miria_kalib',
           startTime: 1669719320000,
           description: 'Masha - buy presents for parents',
           carId: 'ho-123456',
@@ -78,6 +84,7 @@ describe('test bookingItemsManager class', () => {
         },
         {
           username: 'Мария',
+          bookingOwner: 'miria_kalib',
           startTime: 1669722920000,
           description: 'Masha - visit parents',
           carId: 'ho-123456',
@@ -89,6 +96,7 @@ describe('test bookingItemsManager class', () => {
       1669968573010: [
         {
           username: 'Мария',
+          bookingOwner: 'miria_kalib',
           startTime: 1669978520000,
           description: 'Зоопарк!',
           carId: 'ho-123456',

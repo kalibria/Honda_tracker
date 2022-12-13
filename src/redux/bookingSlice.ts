@@ -5,6 +5,7 @@ const initState: { bookingList: IBookingInfo[] } = {
   bookingList: [
     {
       username: '',
+      bookingOwner: '',
       startTime: 0,
       description: '',
       carId: '',
