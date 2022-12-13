@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { datesManager } from 'src/booking-list/datesManager';
 import { Loading } from 'src/commonComponents/Loading';
@@ -10,8 +10,6 @@ export const BookingDetails = () => {
   const [trigger, result] = useLazyGetBookingsIdQuery();
 
   const idParams = params.bookingId;
-
-  const [startTimeUi, setStartTimeUI] = useState('');
 
   useEffect(() => {
     if (idParams) {
@@ -25,61 +23,69 @@ export const BookingDetails = () => {
   }, [idParams, result.currentData, result.isSuccess, trigger]);
 
   return (
-    <div>
+    <div className={'bookingPage'}>
       {result.isLoading ? (
         <Loading />
       ) : (
-        <>
+        <div className={'bookingWrapper'}>
           {result.isSuccess && (
             <table>
-              <caption>Booking details</caption>
+              <caption className={'bookingHeader cellDecoration'}>
+                Booking details
+              </caption>
               <tbody>
-                <tr className={'cellDecoration'}>
-                  <td>Инициатор поездки</td>
-                  <td>{result.currentData.booking.bookingOwner.firstName}</td>
+                <tr>
+                  <td className={'cellDecoration'}>Инициатор поездки</td>
+                  <td className={'cellDecoration'}>
+                    {result.currentData.booking.bookingOwner.firstName}
+                  </td>
                 </tr>
-                <tr className={'cellDecoration'}>
-                  <td>Автомобиль</td>
-                  <td>
+                <tr>
+                  <td className={'cellDecoration'}>Автомобиль</td>
+                  <td className={'cellDecoration'}>
                     {result.currentData.booking.bookingOwner.availableCars}
                   </td>
                 </tr>
-                <tr className={'cellDecoration'}>
-                  <td>Время начала поездки</td>
-                  <td>
+                <tr>
+                  <td className={'cellDecoration'}>Время начала поездки</td>
+                  <td className={'cellDecoration'}>
                     {datesManager.getFormattingDateTime(
                       +new Date(result.currentData.booking.bookingStartTime),
                     )}
                   </td>
                 </tr>
-                <tr className={'cellDecoration'}>
-                  <td>Время завершения поездки</td>
-                  <td></td>
+                <tr>
+                  <td className={'cellDecoration'}>Время завершения поездки</td>
+                  <td className={'cellDecoration'}></td>
                 </tr>
-                <tr className={'cellDecoration'}>
-                  <td>Описание поездки</td>
-                  <td>{result.currentData.booking.bookingDescription}</td>
+                <tr>
+                  <td className={'cellDecoration'}>Описание поездки</td>
+                  <td className={'cellDecoration'}>
+                    {result.currentData.booking.bookingDescription}
+                  </td>
                 </tr>
-                <tr className={'cellDecoration'}>
-                  <td>Поездка завершена?</td>
-                  <td></td>
+                <tr>
+                  <td className={'cellDecoration'}>Поездка завершена?</td>
+                  <td className={'cellDecoration'}></td>
                 </tr>
-                <tr className={'cellDecoration'}>
-                  <td>Местонахождение автомобиля по окончании поездки</td>
-                  <td></td>
+                <tr>
+                  <td className={'cellDecoration'}>
+                    Местонахождение автомобиля по окончании поездки
+                  </td>
+                  <td className={'cellDecoration'}></td>
                 </tr>
-                <tr className={'cellDecoration'}>
-                  <td>Широта</td>
-                  <td></td>
+                <tr>
+                  <td className={'cellDecoration'}>Широта</td>
+                  <td className={'cellDecoration'}></td>
                 </tr>
-                <tr className={'cellDecoration'}>
-                  <td>Долгота</td>
-                  <td></td>
+                <tr>
+                  <td className={'cellDecoration'}>Долгота</td>
+                  <td className={'cellDecoration'}></td>
                 </tr>
               </tbody>
             </table>
           )}
-        </>
+        </div>
       )}
     </div>
   );
