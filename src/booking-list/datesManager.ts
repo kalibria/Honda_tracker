@@ -1,4 +1,4 @@
-import { amountOfDays } from 'src/booking-list/constants';
+import { AMOUNT_OF_DAYS } from 'src/booking-list/constants';
 import { addDays, endOfDay, startOfDay } from 'date-fns';
 import { IStartEndDates } from 'src/booking-list/types';
 
