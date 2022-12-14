@@ -5,7 +5,7 @@ import { IStartEndDates } from 'src/booking-list/types';
 class DatesManager {
   getDatesMS() {
     let arrOfDays: number[] = [];
-    arrOfDays.length = amountOfDays - 1;
+    arrOfDays.length = AMOUNT_OF_DAYS - 1;
     arrOfDays.fill(0);
 
     const arrDatesMs = arrOfDays.reduce((acc: number[], item, index) => {
