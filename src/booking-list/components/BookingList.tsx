@@ -1,9 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { CalendarItemsWrapper } from 'src/booking-list/components/CalendarItemsWrapper';
 import { driverRole } from 'src/booking-list/constants';
 import { ButtonUI } from 'src/commonComponents/ButtonUI';
 import { RootState } from 'src/redux/store';
+import { creatingNewBooking } from 'src/router/rootConstants';
 
 export const BookingList = () => {
   const selectUserRole = useSelector((state: RootState) => state.userData.role);
@@ -15,7 +17,9 @@ export const BookingList = () => {
     <div className={'bookingPage'}>
       {isDriverRole && (
         <div className={'button'}>
-          <ButtonUI onClick={createNewRide}>{'Создать поездку'}</ButtonUI>
+          <Link to={creatingNewBooking}>
+            <ButtonUI onClick={createNewRide}>{'Создать поездку'}</ButtonUI>
+          </Link>
         </div>
       )}
       <div className={'bookingWrapper'}>
