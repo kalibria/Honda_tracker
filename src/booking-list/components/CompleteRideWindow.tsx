@@ -10,7 +10,7 @@ export const CompleteRideWindow = () => {
   });
 
   return (
-    <div className={'CompleteRideWindow'}>
+    <div className={'completeRideWindow'}>
       <form onSubmit={formik.handleSubmit}>
         <label htmlFor={'carLocation'}>Местонахождение машины</label>
         <input

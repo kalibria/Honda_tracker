@@ -4,6 +4,7 @@
     position: fixed;
     top: calc(100% - var(--navbar-height));
     left: 0;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,6 +12,13 @@
     justify-content: center;
     overflow: auto;
     background-color: pink;
+}
+
+.bookingButtonsWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+    row-gap: 1em;
 }
 
 
@@ -45,6 +53,21 @@
 
 
 }
+.completeRideWindow {
+    width: 70%;
+    height: 30%;
+    border: 2px solid #0380ab;
+    border-radius: 5px;
+
+    background-color: white;
+    z-index: 10;
+
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
 .calendar {
     display: grid;
@@ -61,6 +84,10 @@
     /*color: #d9480f;*/
 }
 
+.fontBold {
+    font-weight: bold;
+}
+
 @media (min-width: 700px) {
     .bookingWrapper {
         width: 750px;
@@ -70,13 +97,8 @@
     }
 }
 
-.fontBold {
-    font-weight: bold;
-}
 
-.bookingButtonsWrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 10px;
-    row-gap: 1em;
-}
+
+
+
+
