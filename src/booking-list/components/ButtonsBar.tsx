@@ -30,7 +30,10 @@ export const ButtonsBar = ({ rideCompletionText }: IButtonsBar) => {
         <ButtonUI onClick={deleteRide}>{'Удалить'}</ButtonUI>
       </div>
       {isOpenCompleteRideWindow && (
-        <CompleteRideWindow rideCompletionText={rideCompletionText} />
+        <CompleteRideWindow
+          rideCompletionText={rideCompletionText}
+          setIsOpenCompleteRideWindow={setIsOpenCompleteRideWindow}
+        />
       )}
     </>
   );
