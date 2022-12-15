@@ -1,5 +1,5 @@
-import { AMOUNT_OF_DAYS } from 'src/booking-list/constants';
 import { addDays, endOfDay, startOfDay } from 'date-fns';
+import { AMOUNT_OF_DAYS } from 'src/booking-list/constants';
 import { IStartEndDates } from 'src/booking-list/types';
 
 class DatesManager {

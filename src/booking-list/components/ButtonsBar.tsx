@@ -1,8 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ButtonUI } from 'src/commonComponents/ButtonUI';
 
 export const ButtonsBar = () => {
-  const goBack = () => {};
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1);
+  };
   const completeRide = () => {};
   const editRide = () => {};
   const deleteRide = () => {};
