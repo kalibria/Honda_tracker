@@ -8,7 +8,7 @@ export const ButtonsBar = () => {
   const deleteRide = () => {};
 
   return (
-    <div>
+    <div className={'bookingButtonsWrapper'}>
       <ButtonUI onClick={goBack}>{'Назад'}</ButtonUI>
       <ButtonUI onClick={completeRide}>{'Завершить поездку'}</ButtonUI>
       <ButtonUI onClick={editRide}>{'Редактировать'}</ButtonUI>

@@ -73,3 +73,10 @@
 .fontBold {
     font-weight: bold;
 }
+
+.bookingButtonsWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+    row-gap: 1em;
+}
