@@ -65,7 +65,7 @@ const LoginForm = () => {
     <div className="mainContainer ">
       {error && <AlertForm message={error} />}
 
-      <main className="flex flex-col justify-center items-center ">
+      <main className="flex flex-col justify-center items-center loginFormWrapper">
         <div className="w-24 mb-4">
           <img
             src="https://www.nicepng.com/png/detail/138-1388174_login-account-icon.png"
@@ -94,7 +94,7 @@ const LoginForm = () => {
             setUsername(username);
             setSubmitting(false);
           }}>
-          <Form className="flex flex-col sm:w-96 space-y-3.5">
+          <Form className="flex flex-col space-y-3.5 loginForm">
             <MyTextInput
               id={'outlined-login-input'}
               label={'Login'}
@@ -109,9 +109,11 @@ const LoginForm = () => {
               autoComplete={'current-password'}
               name={'password'}
             />
-            <Button variant="contained" type="submit">
-              {'Sign in'}
-            </Button>
+            <div className={'button'}>
+              <Button variant="contained" type="submit">
+                {'Sign in'}
+              </Button>
+            </div>
           </Form>
         </Formik>
       </main>

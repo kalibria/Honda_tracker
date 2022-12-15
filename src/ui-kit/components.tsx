@@ -16,7 +16,7 @@ export const MyTextInput: React.FC<MyTextInputProps> = ({
   const [field, meta] = useField(props);
   return (
     <>
-      <TextField label={label} {...field} {...props} />
+      <TextField fullWidth id="fullWidth" label={label} {...field} {...props} />
 
       {meta.touched && meta.error ? (
         <div className="text-red-600">{meta.error}</div>

@@ -11,18 +11,21 @@ export const CompleteRideWindow = () => {
           carLocation: '',
         }}
         onSubmit={(values, { setSubmitting }) => {}}>
-        <Form>
+        <Form className={'completeRideForm'}>
           <BasicTextFields
             label={'Где оставлен автомобиль?'}
             name={'carLocation'}
           />
-          <Button
-            className={'place-self-center'}
-            variant="contained"
-            type="submit"
-            size={'small'}>
-            {'Подтвердить'}
-          </Button>
+
+          <div className={'button'}>
+            <Button
+              className={'place-self-center '}
+              variant="contained"
+              type="submit"
+              size={'small'}>
+              {'Подтвердить'}
+            </Button>
+          </div>
         </Form>
       </Formik>
     </div>

@@ -36,7 +36,7 @@ export const SettingsPage = () => {
             alert(values.isChanged);
             setSubmitting(false);
           }}>
-          <Form className={'flex flex-col space-y-3.5'}>
+          <Form className={'flex flex-col space-y-3.5 w-4/5 md:w-4/12'}>
             {isCarProvider && (
               <SwitchesGroup
                 note1={'booking is created'}
