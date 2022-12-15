@@ -1,27 +1,30 @@
-import { useFormik } from 'formik';
+import Button from '@mui/material/Button';
+import { Form, Formik } from 'formik';
 import React from 'react';
+import { BasicTextFields } from 'src/settings/components';
 
 export const CompleteRideWindow = () => {
-  const formik = useFormik({
-    initialValues: {
-      carLocation: '',
-    },
-    onSubmit: (values) => {},
-  });
-
   return (
     <div className={'completeRideWindow'}>
-      <form onSubmit={formik.handleSubmit}>
-        <label htmlFor={'carLocation'}>Местонахождение машины</label>
-        <input
-          id="carLocation"
-          name="carLocation"
-          type="text"
-          onChange={formik.handleChange}
-          value={formik.values.carLocation}
-        />
-        <button type="submit">Подтвердить</button>
-      </form>
+      <Formik
+        initialValues={{
+          carLocation: '',
+        }}
+        onSubmit={(values, { setSubmitting }) => {}}>
+        <Form>
+          <BasicTextFields
+            label={'Где оставлен автомобиль?'}
+            name={'carLocation'}
+          />
+          <Button
+            className={'place-self-center'}
+            variant="contained"
+            type="submit"
+            size={'small'}>
+            {'Подтвердить'}
+          </Button>
+        </Form>
+      </Formik>
     </div>
   );
 };
