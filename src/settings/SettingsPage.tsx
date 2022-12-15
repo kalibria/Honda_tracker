@@ -47,7 +47,7 @@ export const SettingsPage = () => {
               />
             )}
             <BasicTextFields
-              label={'Where the car was left?'}
+              label={'Где оставлен автомобиль?'}
               name={'textField'}
             />
             <Button
@@ -55,7 +55,7 @@ export const SettingsPage = () => {
               variant="contained"
               type="submit"
               size={'small'}>
-              {'save'}
+              {'Сохранить'}
             </Button>
           </Form>
         </Formik>

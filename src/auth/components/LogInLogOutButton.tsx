@@ -45,7 +45,7 @@ export const LogInLogOutButton = () => {
     <div>
       {result.isLoading && <Loading />}
       <ButtonUI onClick={isAuth ? handleLogOutClick : handleLogInClick}>
-        {isAuth ? 'Log out' : 'Log in'}
+        {isAuth ? 'Выйти' : 'Войти'}
       </ButtonUI>
       <div>{error && <AlertForm message={error} />}</div>
     </div>

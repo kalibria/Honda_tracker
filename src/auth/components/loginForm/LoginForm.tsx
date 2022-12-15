@@ -111,7 +111,7 @@ const LoginForm = () => {
             />
             <div className={'button'}>
               <Button variant="contained" type="submit">
-                {'Sign in'}
+                {'Войти'}
               </Button>
             </div>
           </Form>
