@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { datesManager } from 'src/booking-list/datesManager';
 import { Loading } from 'src/commonComponents/Loading';
@@ -12,6 +12,8 @@ export const BookingDetails = () => {
 
   const idParams = params.bookingId;
 
+  const [rideCompletionText, setRideCompletionText] = useState('');
+
   useEffect(() => {
     if (idParams) {
       const parsedParams = idParams.split('$');
@@ -20,6 +22,12 @@ export const BookingDetails = () => {
       const timeSec = parsedParams[2];
 
       trigger({ username, carId, startTime: timeSec });
+
+      if (result.isSuccess) {
+        setRideCompletionText(
+          result.currentData.booking.bookingOwner.settings.rideCompletionText,
+        );
+      }
     }
   }, [idParams, result.currentData, result.isSuccess, trigger]);
 
