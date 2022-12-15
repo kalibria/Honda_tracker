@@ -3,7 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { CompleteRideWindow } from 'src/booking-list/components/CompleteRideWindow';
 import { ButtonUI } from 'src/commonComponents/ButtonUI';
 
-export const ButtonsBar = () => {
+export interface IButtonsBar {
+  rideCompletionText: string;
+}
+
+export const ButtonsBar = ({ rideCompletionText }: IButtonsBar) => {
   const navigate = useNavigate();
   const [isOpenCompleteRideWindow, setIsOpenCompleteRideWindow] =
     useState(false);
@@ -25,7 +29,9 @@ export const ButtonsBar = () => {
         <ButtonUI onClick={editRide}>{'Редактировать'}</ButtonUI>
         <ButtonUI onClick={deleteRide}>{'Удалить'}</ButtonUI>
       </div>
-      {isOpenCompleteRideWindow && <CompleteRideWindow />}
+      {isOpenCompleteRideWindow && (
+        <CompleteRideWindow rideCompletionText={rideCompletionText} />
+      )}
     </>
   );
 };

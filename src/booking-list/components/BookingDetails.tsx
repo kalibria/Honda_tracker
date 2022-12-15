@@ -98,7 +98,7 @@ export const BookingDetails = () => {
               </table>
             )}
           </div>
-          <ButtonsBar />
+          <ButtonsBar rideCompletionText={rideCompletionText} />
         </>
       )}
     </div>
