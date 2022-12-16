@@ -26,7 +26,7 @@ export const SettingsPage = () => {
             alert(values.isChanged);
             setSubmitting(false);
           }}>
-          <Form className={'flex flex-col space-y-3.5 w-4/5 md:w-4/12'}>
+          <Form className={'flex flex-col space-y-3.5 formWrapper'}>
             {isCarProvider && (
               <SwitchesGroup
                 note1={'booking is created'}
@@ -36,10 +36,12 @@ export const SettingsPage = () => {
                 isChangedFieldName={'isChanged'}
               />
             )}
-            <BasicTextFields
-              label={'Где оставлен автомобиль?'}
-              name={'textField'}
-            />
+            <div className={'widthFormItem'}>
+              <BasicTextFields
+                label={'Где оставлен автомобиль?'}
+                name={'textField'}
+              />
+            </div>
             <Button
               className={'place-self-center'}
               variant="contained"

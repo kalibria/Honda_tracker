@@ -65,7 +65,7 @@ const LoginForm = () => {
     <div className="mainContainer ">
       {error && <AlertForm message={error} />}
 
-      <main className="flex flex-col justify-center items-center loginFormWrapper">
+      <main className="flex flex-col justify-center items-center formWrapper">
         <div className="w-24 mb-4">
           <img
             src="https://www.nicepng.com/png/detail/138-1388174_login-account-icon.png"
@@ -94,7 +94,7 @@ const LoginForm = () => {
             setUsername(username);
             setSubmitting(false);
           }}>
-          <Form className="flex flex-col space-y-3.5 loginForm">
+          <Form className="flex flex-col space-y-3.5 widthFormItem">
             <MyTextInput
               id={'outlined-login-input'}
               label={'Login'}
