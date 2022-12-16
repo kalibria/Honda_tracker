@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { datesManager } from 'src/booking-list/datesManager';
-import { Loading } from 'src/commonComponents/Loading';
+import { Loading } from 'src/ui-kit/Loading';
 import { useLazyGetBookingsIdQuery } from 'src/services/hondaApi';
 import { ButtonsBar } from './ButtonsBar';
 
@@ -41,7 +41,7 @@ export const BookingDetails = () => {
             {result.isSuccess && (
               <table>
                 <caption className={'bookingHeader cellDecoration'}>
-                  Booking details
+                  Сведения о поездке
                 </caption>
                 <tbody>
                   <tr>

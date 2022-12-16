@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { authenticationManager } from 'src/auth/authenticationManager';
 
-import { ButtonUI } from 'src/commonComponents/ButtonUI';
-import { Loading } from 'src/commonComponents/Loading';
+import { ButtonUI } from 'src/ui-kit/ButtonUI';
+import { Loading } from 'src/ui-kit/Loading';
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 import { loginPath } from 'src/router/rootConstants';
 import { useLazyLogOutQuery } from 'src/services/hondaApi';

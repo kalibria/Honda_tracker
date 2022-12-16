@@ -18,6 +18,12 @@ export interface MyCheckboxProps {
   [key: string]: string | FieldHookConfig<any>;
 }
 
+export interface MySelectProps {
+  label: string;
+  name: string;
+  [key: string]: string | FieldHookConfig<any>;
+}
+
 export interface IAlertForm {
   message: string;
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CompleteRideWindow } from 'src/booking-list/components/CompleteRideWindow';
-import { ButtonUI } from 'src/commonComponents/ButtonUI';
+import { ButtonUI } from 'src/ui-kit/ButtonUI';
 
 export interface IButtonsBar {
   rideCompletionText: string;

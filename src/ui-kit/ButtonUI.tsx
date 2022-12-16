@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@mui/material/Button';
-import { IButtonEL } from 'src/commonComponents/types';
+import { IButtonEL } from 'src/ui-kit/types';
 
 export const ButtonUI: React.FC<IButtonEL> = ({ onClick, children }) => {
   return (

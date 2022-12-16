@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { CalendarItemsWrapper } from 'src/booking-list/components/CalendarItemsWrapper';
 import { driverRole } from 'src/booking-list/constants';
-import { ButtonUI } from 'src/commonComponents/ButtonUI';
+import { ButtonUI } from 'src/ui-kit/ButtonUI';
 import { RootState } from 'src/redux/store';
 import { creatingNewBooking } from 'src/router/rootConstants';
 
