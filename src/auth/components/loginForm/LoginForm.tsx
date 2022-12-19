@@ -16,6 +16,7 @@ import {
   useLazyStatusLoginQuery,
 } from 'src/services/hondaApi';
 import { authenticationManager } from 'src/auth/authenticationManager';
+import { myLocalStorage } from 'src/services/localStorage';
 import { AlertForm, MyTextInput } from 'src/ui-kit/components';
 
 import * as Yup from 'yup';
@@ -46,6 +47,10 @@ const LoginForm = () => {
       authenticationManager.setAuthenticated(dispatch, username);
       dispatch(setCurrentUsername(username));
       setError('');
+
+      myLocalStorage.setItem('RefreshToken', result.currentData.RefreshToken);
+
+      sessionStorage.setItem('AccessToken', result.currentData.AccessToken);
       triggerUser(username);
     }
     if (isError) {
@@ -81,7 +86,7 @@ const LoginForm = () => {
           }}
           validationSchema={Yup.object({
             login: Yup.string()
-              .max(15, 'Must be 15 characters or less')
+              // .max(15, 'Must be 15 characters or less')
               .required('Required'),
             password: Yup.string()
               .max(20, 'Must be 20 characters or less')

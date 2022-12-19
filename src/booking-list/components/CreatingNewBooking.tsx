@@ -1,5 +1,4 @@
 import Button from '@mui/material/Button';
-import FormGroup from '@mui/material/FormGroup';
 import { Form, Formik } from 'formik';
 import React from 'react';
 import { MySelect, MyTextInputWithBorder } from 'src/ui-kit/components';
