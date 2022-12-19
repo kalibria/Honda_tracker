@@ -3,7 +3,7 @@ import LoginForm from 'src/auth/components/loginForm/LoginForm';
 import { App } from 'src/App';
 import { BookingDetails } from 'src/booking-list/components/BookingDetails';
 import { BookingList } from 'src/booking-list/components/BookingList';
-import { CreatingNewBooking } from 'src/booking-list/components/CreatingNewBooking';
+import { CreatingNewBooking } from 'src/createNewBooking/components/CreatingNewBooking';
 import {
   // bookingDetailsPath,
   bookingListPath,

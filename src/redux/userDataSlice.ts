@@ -3,12 +3,14 @@ import { logOut, setIsAuthenticated } from 'src/redux/authSlice';
 
 interface IInitState {
   username: string;
+  firstName: string;
   role: string;
   carId: string[];
 }
 
 const initState = {
   username: '',
+  firstName: '',
   role: '',
   carId: [],
 };
@@ -22,6 +24,9 @@ const userDataSlice = createSlice({
     },
     deleteUserName: (state) => {
       state.username = '';
+    },
+    setFirstName: (state, action) => {
+      state.firstName = action.payload;
     },
     setUserRole: (state, action) => {
       state.role = action.payload;
@@ -41,6 +46,11 @@ const userDataSlice = createSlice({
   },
 });
 
-export const { setUserRole, deleteUserName, setCurrentUsername, setCarId } =
-  userDataSlice.actions;
+export const {
+  setUserRole,
+  deleteUserName,
+  setCurrentUsername,
+  setCarId,
+  setFirstName,
+} = userDataSlice.actions;
 export default userDataSlice.reducer;
