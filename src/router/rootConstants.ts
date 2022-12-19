@@ -9,3 +9,5 @@ export const bookingListPath = '/booking-list';
 export const settingsPath = '/settings';
 
 export const errorPath = 'error';
+
+export const bookingDetailsPath = '/booking-details/:bookingId';

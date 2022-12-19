@@ -1,8 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 import LoginForm from 'src/auth/components/loginForm/LoginForm';
 import { App } from 'src/App';
-import { BookingList } from 'src/booking-list/BookingList';
+import { BookingDetails } from 'src/booking-list/components/BookingDetails';
+import { BookingList } from 'src/booking-list/components/BookingList';
 import {
+  // bookingDetailsPath,
   bookingListPath,
   errorPath,
   initPath,
@@ -21,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: bookingListPath,
         element: <BookingList />,
+      },
+      {
+        path: '/booking-details/:bookingId',
+        element: <BookingDetails />,
       },
       {
         path: welcomePath,

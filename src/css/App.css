@@ -22,17 +22,19 @@
 }
 
 .bookingPage {
-
+   display: grid;
+    justify-items: center;
 }
 
 .bookingWrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     margin: 15px;
     border: 2px solid #0380ab;
     border-radius: 5px;
     background-color: #dcebf4;
 }
+
 
 .bookingHeader {
     grid-column-start: 1;
@@ -44,10 +46,30 @@
 
 }
 
+.calendar {
+    display: grid;
+    grid-template-columns: 140px 2fr;
+}
+
+
+
 .cellDecoration {
     border: 2px solid #0380ab;
     border-radius: 5px;
     background-color: #dcebf4;
     padding: 0.5em;
     /*color: #d9480f;*/
+}
+
+@media (min-width: 700px) {
+    .bookingWrapper {
+        width: 750px;
+    }
+    .calendar {
+        grid-template-columns: 250px 2fr;
+    }
+}
+
+.fontBold {
+    font-weight: bold;
 }

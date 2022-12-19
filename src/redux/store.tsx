@@ -4,12 +4,14 @@ import { rtkQueryErrorLogger } from 'src/redux/rtkQueryErrorLogger';
 import userReducer from 'src/redux/userDataSlice';
 import { hondaApi } from 'src/services/hondaApi';
 import authReducer from 'src/redux/authSlice';
+import bookingReducer from 'src/redux/bookingSlice';
 
 export const store = configureStore({
   reducer: {
     [hondaApi.reducerPath]: hondaApi.reducer,
     auth: authReducer,
     userData: userReducer,
+    bookings: bookingReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(hondaApi.middleware, rtkQueryErrorLogger),
