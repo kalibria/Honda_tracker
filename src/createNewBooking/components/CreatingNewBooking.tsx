@@ -1,16 +1,32 @@
 import Button from '@mui/material/Button';
 import { Form, Formik } from 'formik';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useGetMeQuery, useLazyGetUserQuery } from 'src/services/hondaApi';
 import { MySelect, MyTextInputWithBorder } from 'src/ui-kit/components';
 
 export const CreatingNewBooking = () => {
-  // const driver =
+  const { data, isSuccess, isError } = useGetMeQuery({});
+  const [trigger, result] = useLazyGetUserQuery();
+  const [firstName, setFirstName] = useState('');
+
+  useEffect(() => {
+    if (isSuccess) {
+      trigger(data.username);
+    }
+  }, [data, isSuccess, trigger]);
+
+  useEffect(() => {
+    if (result.isSuccess) {
+      setFirstName(result.currentData.user.firstName);
+      console.log('firstName', result.currentData.user.firstName);
+    }
+  }, [result]);
 
   return (
     <div>
       <Formik
         initialValues={{
-          driver: '',
+          driver: firstName,
           startDate: '',
           startMonth: '',
           startHour: '',
@@ -30,6 +46,8 @@ export const CreatingNewBooking = () => {
             <MyTextInputWithBorder
               label={'Инициатор поездки'}
               name={'driver'}
+              disabled={true}
+              value={firstName}
             />
           </div>
 

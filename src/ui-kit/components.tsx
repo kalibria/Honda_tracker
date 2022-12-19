@@ -34,6 +34,8 @@ export const MyTextInput: React.FC<MyTextInputProps> = ({
 
 export const MyTextInputWithBorder: React.FC<MyTextInputProps> = ({
   label,
+  value,
+  disabled,
   ...props
 }) => {
   const [field, meta] = useField(props);
@@ -43,10 +45,10 @@ export const MyTextInputWithBorder: React.FC<MyTextInputProps> = ({
         <InputLabel htmlFor="component-outlined">{label}</InputLabel>
         <OutlinedInput
           id="component-outlined"
-          defaultValue="Composed TextField"
+          // defaultValue={props.name}
           label={label}
-          {...props}
           {...field}
+          value={value}
         />
       </FormControl>
 

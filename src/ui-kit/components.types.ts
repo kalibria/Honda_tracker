@@ -1,4 +1,5 @@
 import { FieldHookConfig } from 'formik';
+import { bool } from 'yup';
 
 export interface IHandleQueryResult {
   isSuccess: boolean;
@@ -10,7 +11,7 @@ export interface IHandleQueryResult {
 export interface MyTextInputProps {
   label: string;
   name: string;
-  [key: string]: string | FieldHookConfig<any>;
+  [key: string]: string | boolean | FieldHookConfig<any>;
 }
 
 export interface MyCheckboxProps {
