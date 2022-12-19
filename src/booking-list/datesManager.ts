@@ -1,20 +1,26 @@
-import { amountOfDays } from 'src/booking-list/constants';
-import { addDays, endOfDay, startOfDay } from 'date-fns';
+import { AMOUNT_OF_DAYS } from 'src/booking-list/constants';
+import { endOfDay, startOfDay } from 'date-fns';
 import { IStartEndDates } from 'src/booking-list/types';
 
 class DatesManager {
   getDatesMS() {
     let arrOfDays: number[] = [];
-    arrOfDays.length = amountOfDays - 1;
+    arrOfDays.length = AMOUNT_OF_DAYS - 1;
     arrOfDays.fill(0);
 
-    const arrDatesMs = arrOfDays.reduce((acc: number[], item, index) => {
-      let currentDate = new Date();
-      let nextDateMS = +addDays(currentDate, index);
-      acc.push(nextDateMS);
+    const currentDate = new Date();
+    const currentDateMS = currentDate.getTime();
 
-      return acc;
-    }, []);
+    const arrDatesMs = arrOfDays.reduce(
+      (acc: number[], item, index) => {
+        const currentDate = new Date(acc[index]);
+        const nextDateMS = new Date().setDate(currentDate.getDate() + 1);
+        acc.push(nextDateMS);
+
+        return acc;
+      },
+      [currentDateMS],
+    );
     return arrDatesMs;
   }
 
