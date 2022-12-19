@@ -14,6 +14,8 @@ export const BookingDetails = () => {
 
   const [rideCompletionText, setRideCompletionText] = useState('');
 
+  const [isComplete, setIsComplete] = useState(false);
+
   useEffect(() => {
     if (idParams) {
       const parsedParams = idParams.split('$');
@@ -24,6 +26,7 @@ export const BookingDetails = () => {
       trigger({ username, carId, startTime: timeSec });
 
       if (result.isSuccess) {
+        console.log('result', result.currentData);
         setRideCompletionText(
           result.currentData.booking.bookingOwner.settings.rideCompletionText,
         );
@@ -53,7 +56,7 @@ export const BookingDetails = () => {
                   <tr>
                     <td className={'cellDecoration'}>Автомобиль</td>
                     <td className={'cellDecoration'}>
-                      {result.currentData.booking.bookingOwner.availableCars}
+                      {result.currentData.booking.carNumber}
                     </td>
                   </tr>
                   <tr>
@@ -78,22 +81,26 @@ export const BookingDetails = () => {
                   </tr>
                   <tr>
                     <td className={'cellDecoration'}>Поездка завершена?</td>
-                    <td className={'cellDecoration'}></td>
-                  </tr>
-                  <tr>
                     <td className={'cellDecoration'}>
-                      Местонахождение автомобиля по окончании поездки
+                      {isComplete ? 'Да' : 'Нет'}
                     </td>
-                    <td className={'cellDecoration'}></td>
                   </tr>
-                  <tr>
-                    <td className={'cellDecoration'}>Широта</td>
-                    <td className={'cellDecoration'}></td>
-                  </tr>
-                  <tr>
-                    <td className={'cellDecoration'}>Долгота</td>
-                    <td className={'cellDecoration'}></td>
-                  </tr>
+                  {isComplete && (
+                    <tr>
+                      <td className={'cellDecoration'}>
+                        Местонахождение автомобиля по окончании поездки
+                      </td>
+                      <td className={'cellDecoration'}></td>
+                    </tr>
+                  )}
+                  {/*<tr>*/}
+                  {/*  <td className={'cellDecoration'}>Широта</td>*/}
+                  {/*  <td className={'cellDecoration'}></td>*/}
+                  {/*</tr>*/}
+                  {/*<tr>*/}
+                  {/*  <td className={'cellDecoration'}>Долгота</td>*/}
+                  {/*  <td className={'cellDecoration'}></td>*/}
+                  {/*</tr>*/}
                 </tbody>
               </table>
             )}
