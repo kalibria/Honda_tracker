@@ -1,6 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { RootState } from 'src/redux/store';
-import { myLocalStorage } from 'src/services/localStorage';
 
 export const hondaApi = createApi({
   reducerPath: 'hondaApi',
