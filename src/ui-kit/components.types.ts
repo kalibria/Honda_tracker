@@ -14,6 +14,14 @@ export interface MyTextInputProps {
   [key: string]: string | boolean | FieldHookConfig<any>;
 }
 
+export interface MyTextInputWithBorderProps {
+  label: string;
+  name: string;
+  disabled?: boolean;
+  value?: string;
+  loading?: boolean;
+}
+
 export interface MyCheckboxProps {
   name: string;
   [key: string]: string | FieldHookConfig<any>;

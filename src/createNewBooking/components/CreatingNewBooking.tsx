@@ -4,6 +4,9 @@ import React, { useEffect, useState } from 'react';
 import { useGetMeQuery, useLazyGetUserQuery } from 'src/services/hondaApi';
 import { MySelect, MyTextInputWithBorder } from 'src/ui-kit/components';
 
+import InputAdornment from '@mui/material/InputAdornment';
+import { Loading } from 'src/ui-kit/Loading';
+
 export const CreatingNewBooking = () => {
   const { data, isSuccess, isError } = useGetMeQuery({});
   const [trigger, result] = useLazyGetUserQuery();
@@ -48,6 +51,7 @@ export const CreatingNewBooking = () => {
               name={'driver'}
               disabled={true}
               value={firstName}
+              loading={result.isLoading}
             />
           </div>
 
