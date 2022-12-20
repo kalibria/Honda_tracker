@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { datesManager } from 'src/booking-list/datesManager';
+import { datesManager } from 'src/dates/datesManager';
 import { Loading } from 'src/ui-kit/Loading';
 import { useLazyGetBookingsIdQuery } from 'src/services/hondaApi';
 import { ButtonsBar } from './ButtonsBar';

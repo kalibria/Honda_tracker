@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { CreatingNewBooking } from 'src/createNewBooking/components/CreatingNewBooking';
+import { datesManager } from 'src/dates/datesManager';
 import { useGetMeQuery, useLazyGetUserQuery } from 'src/services/hondaApi';
 
 export const WrapperForCreatingBooking = () => {
@@ -7,6 +8,7 @@ export const WrapperForCreatingBooking = () => {
   const [trigger, result] = useLazyGetUserQuery();
   const [firstName, setFirstName] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const currentMonth = new Date().toLocaleDateString('ru', { month: 'long' });
 
   useEffect(() => {
     if (isSuccess) {
@@ -24,6 +26,7 @@ export const WrapperForCreatingBooking = () => {
   return (
     <CreatingNewBooking
       firstName={firstName}
-      isLoading={isLoading}></CreatingNewBooking>
+      isLoading={isLoading}
+      currentMonth={currentMonth}></CreatingNewBooking>
   );
 };

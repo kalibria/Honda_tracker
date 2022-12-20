@@ -4,6 +4,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import { useField } from 'formik';
 import React from 'react';
+import { datesManager } from 'src/dates/datesManager';
 import {
   IAlertForm,
   MyCheckboxProps,
@@ -37,9 +38,6 @@ export const MyTextInput: React.FC<MyTextInputProps> = ({
 
 export const MyTextInputWithBorder: React.FC<MyTextInputWithBorderProps> = ({
   label,
-  value,
-  disabled,
-  loading,
   ...props
 }) => {
   const [field, meta] = useField(props);
@@ -48,13 +46,12 @@ export const MyTextInputWithBorder: React.FC<MyTextInputWithBorderProps> = ({
       <FormControl>
         <InputLabel htmlFor="component-outlined">{label}</InputLabel>
         <OutlinedInput
-          id="component-outlined"
-          // defaultValue={props.name}
-          label={label}
           {...field}
-          value={value}
+          {...props}
+          id="component-outlined"
+          label={label}
           startAdornment={
-            loading && (
+            props.loading && (
               <InputAdornment position="start">
                 <Loading />
               </InputAdornment>
@@ -70,13 +67,25 @@ export const MyTextInputWithBorder: React.FC<MyTextInputWithBorderProps> = ({
   );
 };
 
-export const MySelect: React.FC<MySelectProps> = ({ label, ...props }) => {
+export const MySelect: React.FC<MySelectProps> = ({
+  label,
+  dates,
+  ...props
+}) => {
   const [field, meta] = useField(props);
 
-  const [age, setAge] = React.useState('');
+  const menuItems = dates?.map((item, index) => {
+    return (
+      <MenuItem key={index} value={item}>
+        {item}
+      </MenuItem>
+    );
+  });
+
+  const [data, setData] = React.useState(props.name);
 
   const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value);
+    setData(event.target.value);
   };
   return (
     <>
@@ -85,15 +94,9 @@ export const MySelect: React.FC<MySelectProps> = ({ label, ...props }) => {
         <Select
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
-          value={age}
           label={label}
-          onChange={handleChange}>
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          {...field}>
+          {menuItems}
         </Select>
       </FormControl>
     </>

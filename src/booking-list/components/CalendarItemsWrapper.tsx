@@ -1,12 +1,12 @@
 import React from 'react';
 import { bookingItemsManager } from 'src/booking-list/BookingItemsManager';
 import { CalendarItems } from 'src/booking-list/components/CalendarItems';
-import { datesManager } from 'src/booking-list/datesManager';
+import { datesManager } from 'src/dates/datesManager';
 import { useBookingRides } from 'src/booking-list/useBookingRides';
 
 export const CalendarItemsWrapper = () => {
   const requestRides = useBookingRides();
-  const datesMS = datesManager.getDatesMS();
+  const datesMS = datesManager.getDatesForCalendarMS();
 
   const startEndDay = datesManager.getStartAndEndOfDays(datesMS);
 

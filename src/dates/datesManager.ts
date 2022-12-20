@@ -1,9 +1,10 @@
 import { addDays, endOfDay, startOfDay } from 'date-fns';
 import { AMOUNT_OF_DAYS } from 'src/booking-list/constants';
 import { IStartEndDates } from 'src/booking-list/types';
+import { IMonths } from 'src/dates/types';
 
 class DatesManager {
-  getDatesMS() {
+  getDatesForCalendarMS() {
     let arrOfDays: number[] = [];
     arrOfDays.length = AMOUNT_OF_DAYS - 1;
     arrOfDays.fill(0);
@@ -30,6 +31,29 @@ class DatesManager {
     }, []);
   }
 
+  getAllMonths() {
+    const months = Array.from({ length: 12 }, (_, monthNumber) => {
+      const date = new Date(0, monthNumber);
+      return date.toLocaleDateString('ru', { month: 'long' });
+    });
+
+    return months;
+  }
+
+  getAllDaysForMonth(month: number, year: number) {
+    let date = new Date(year, month, 1);
+    let days = [];
+    while (date.getMonth() === month) {
+      days.push(new Date(date));
+      date.setDate(date.getDate() + 1);
+    }
+    return days;
+  }
+
+  getFormattingMonthDay(date: number) {
+    return this.formatterMonthDay.format(date);
+  }
+
   getFormattingDate(date: number) {
     return this.formatter.format(date);
   }
@@ -37,6 +61,11 @@ class DatesManager {
   getFormattingDateTime(date: number) {
     return this.formatterDateTime.format(date);
   }
+
+  private formatterMonthDay = new Intl.DateTimeFormat('ru', {
+    month: 'long',
+    day: 'numeric',
+  });
 
   private formatter = new Intl.DateTimeFormat('ru', {
     weekday: 'long',
