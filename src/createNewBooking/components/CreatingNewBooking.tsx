@@ -1,30 +1,17 @@
 import Button from '@mui/material/Button';
 import { Form, Formik } from 'formik';
-import React, { useEffect, useState } from 'react';
-import { useGetMeQuery, useLazyGetUserQuery } from 'src/services/hondaApi';
+import React from 'react';
 import { MySelect, MyTextInputWithBorder } from 'src/ui-kit/components';
 
-import InputAdornment from '@mui/material/InputAdornment';
-import { Loading } from 'src/ui-kit/Loading';
+export interface ICreatingNewBooking {
+  firstName: string;
+  isLoading: boolean;
+}
 
-export const CreatingNewBooking = () => {
-  const { data, isSuccess, isError } = useGetMeQuery({});
-  const [trigger, result] = useLazyGetUserQuery();
-  const [firstName, setFirstName] = useState('');
-
-  useEffect(() => {
-    if (isSuccess) {
-      trigger(data.username);
-    }
-  }, [data, isSuccess, trigger]);
-
-  useEffect(() => {
-    if (result.isSuccess) {
-      setFirstName(result.currentData.user.firstName);
-      console.log('firstName', result.currentData.user.firstName);
-    }
-  }, [result]);
-
+export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
+  firstName,
+  isLoading,
+}) => {
   return (
     <div>
       <Formik
@@ -51,7 +38,7 @@ export const CreatingNewBooking = () => {
               name={'driver'}
               disabled={true}
               value={firstName}
-              loading={result.isLoading}
+              loading={isLoading}
             />
           </div>
 

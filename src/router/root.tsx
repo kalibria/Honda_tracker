@@ -4,6 +4,7 @@ import { App } from 'src/App';
 import { BookingDetails } from 'src/booking-list/components/BookingDetails';
 import { BookingList } from 'src/booking-list/components/BookingList';
 import { CreatingNewBooking } from 'src/createNewBooking/components/CreatingNewBooking';
+import { WrapperForCreatingBooking } from 'src/createNewBooking/components/WrapperForCreatingBooking';
 import {
   // bookingDetailsPath,
   bookingListPath,
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: creatingNewBooking,
-        element: <CreatingNewBooking />,
+        element: <WrapperForCreatingBooking />,
       },
       {
         path: welcomePath,
