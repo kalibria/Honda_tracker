@@ -54,34 +54,26 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
                 onChange={props.handleChange}
               />
             </div>
-            <MUComponentsForCreatingBooking name={'startDate'} />
-            <ResponsiveTimePickers name={'startTime'} />
-            <div className={'formGroup box3'}>
-              {/*<MySelect label={'Час'} name={'startHour'} id={'startHour'} />*/}
-              {/*<MySelect*/}
-              {/*  label={'Минуты'}*/}
-              {/*  name={'startMinutes'}*/}
-              {/*  id={'startMinutes'}*/}
-              {/*/>*/}
-              <p className={'label'}>Время поездки</p>
+            <div className={'box2 box'}>
+              <MUComponentsForCreatingBooking
+                name={'startDate'}
+                label={'Дата поездки'}
+              />
+              <ResponsiveTimePickers
+                name={'startTime'}
+                label={'Время поездки'}
+              />
             </div>
-
-            <div className={'formGroup box4'}>
-              {/*<MySelect label={'Дата'} name={'endDate'} id={'endDate'} />*/}
-              {/*<MySelect label={'Месяц'} name={'endMonth'} id={'endMonth'} />*/}
-              <p className={'label'}>Дата завершения поездки</p>
+            <div className={'box3 box'}>
+              <MUComponentsForCreatingBooking
+                name={'endDate'}
+                label={'Дата завершения поездки'}
+              />
+              <ResponsiveTimePickers
+                name={'startTime'}
+                label={'Время завершения поездки'}
+              />
             </div>
-
-            <div className={'formGroup box5'}>
-              {/*<MySelect label={'Час'} name={'endHour'} id={'endHour'} />*/}
-              {/*<MySelect*/}
-              {/*  label={'Минуты'}*/}
-              {/*  name={'endMinutes'}*/}
-              {/*  id={'endMinutes'}*/}
-              {/*/>*/}
-              <p className={'label'}>Время завершения поездки</p>
-            </div>
-
             <div className={'box6'}>
               <MySelect label={'Автомобиль'} name={'car'} id={'car'} />
             </div>

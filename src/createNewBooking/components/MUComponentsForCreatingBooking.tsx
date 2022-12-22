@@ -8,13 +8,17 @@ import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { datesManager } from 'src/dates/datesManager';
 import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
 
+interface IMUComponentsForCreatingBooking {
+  name: string;
+  label: string;
+}
+
 const locales = ['en', 'fr', 'de', 'ru', 'ar-sa'] as const;
 
 export default function MUComponentsForCreatingBooking({
   name,
-}: {
-  name: string;
-}) {
+  label,
+}: IMUComponentsForCreatingBooking) {
   const currentDate = datesManager.getCurrentDate();
 
   const [locale, setLocale] = React.useState<typeof locales[number]>('ru');
@@ -27,7 +31,7 @@ export default function MUComponentsForCreatingBooking({
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={locale}>
       <Stack spacing={3}>
         <MobileDatePicker
-          label="Дата поездки"
+          label={label}
           value={datePickerValue}
           onChange={(newValue) => setDatePickerValue(newValue)}
           renderInput={(params) => <TextField {...params} />}
@@ -47,7 +51,12 @@ export default function MUComponentsForCreatingBooking({
   );
 }
 
-export function ResponsiveTimePickers({ name }: { name: string }) {
+interface IResponsiveTimePickers {
+  name: string;
+  label: string;
+}
+
+export function ResponsiveTimePickers({ name, label }: IResponsiveTimePickers) {
   const currentDate = datesManager.getCurrentDateTime();
   const [locale, setLocale] = React.useState<typeof locales[number]>('ru');
 
@@ -59,7 +68,7 @@ export function ResponsiveTimePickers({ name }: { name: string }) {
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={locale}>
       <Stack spacing={3}>
         <MobileTimePicker
-          label="Время поездки"
+          label={label}
           value={timePickerValue}
           onChange={(newValue) => setTimePickerValue(newValue)}
           renderInput={(params) => <TextField {...params} />}
