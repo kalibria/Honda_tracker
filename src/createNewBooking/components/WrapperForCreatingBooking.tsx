@@ -8,10 +8,7 @@ export const WrapperForCreatingBooking = () => {
   const [trigger, result] = useLazyGetUserQuery();
   const [firstName, setFirstName] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const currentMonth = new Date().toLocaleDateString('ru', { month: 'long' });
-  const currentYear = new Date().getFullYear();
-
-  // const dateListInCurrentMonth = datesManager.getAllDaysForMonth(,currentYear)
+  const currentDate = datesManager.getCurrentDate();
 
   useEffect(() => {
     if (isSuccess) {
@@ -29,7 +26,6 @@ export const WrapperForCreatingBooking = () => {
     <CreatingNewBooking
       firstName={firstName}
       isLoading={isLoading}
-      currentMonth={currentMonth}
-      currentYear={currentYear}></CreatingNewBooking>
+      currentDate={currentDate}></CreatingNewBooking>
   );
 };

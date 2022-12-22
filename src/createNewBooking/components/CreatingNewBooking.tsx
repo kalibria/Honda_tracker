@@ -5,6 +5,7 @@ import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { Formik, useFormik } from 'formik';
 import React, { useEffect } from 'react';
+import ResponsiveDatePickers from 'src/createNewBooking/components/ResponsiveDatePickers';
 import { datesManager } from 'src/dates/datesManager';
 import { MySelect, MyTextInputWithBorder } from 'src/ui-kit/components';
 import { Loading } from 'src/ui-kit/Loading';
@@ -12,18 +13,15 @@ import { Loading } from 'src/ui-kit/Loading';
 export interface ICreatingNewBooking {
   firstName: string;
   isLoading: boolean;
-  currentMonth: string;
-  currentYear: number;
+  currentDate: string;
 }
 
 export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
   firstName,
   isLoading,
-  currentMonth,
-  currentYear,
+  currentDate,
 }) => {
-  console.log('isLoading', isLoading);
-  const allMonths = datesManager.getAllMonths();
+  console.log('currentDate', currentDate);
 
   return (
     <div className={'creationRidePage'}>
@@ -31,14 +29,10 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
         enableReinitialize={true}
         initialValues={{
           driver: firstName,
-          startDate: '',
-          startMonth: currentMonth,
-          startHour: '',
-          startMinutes: '',
+          startDate: currentDate,
+          startTime: '',
           endDate: '',
-          endMonth: '',
-          endHour: '',
-          endMinutes: '',
+          endTime: '',
           car: '',
           description: '',
         }}
@@ -58,42 +52,31 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
                 onChange={props.handleChange}
               />
             </div>
-
-            <div className={'formGroup box2'}>
-              <MySelect
-                label={'Месяц'}
-                name={'startMonth'}
-                id={'startMonth'}
-                dates={allMonths}
-                value={props.values.startMonth}
-              />
-              <MySelect label={'Дата'} name={'startDate'} id={'startDate'} />
-              <p className={'label'}>Дата поездки</p>
-            </div>
+            <ResponsiveDatePickers name={'startDate'} />
 
             <div className={'formGroup box3'}>
-              <MySelect label={'Час'} name={'startHour'} id={'startHour'} />
-              <MySelect
-                label={'Минуты'}
-                name={'startMinutes'}
-                id={'startMinutes'}
-              />
+              {/*<MySelect label={'Час'} name={'startHour'} id={'startHour'} />*/}
+              {/*<MySelect*/}
+              {/*  label={'Минуты'}*/}
+              {/*  name={'startMinutes'}*/}
+              {/*  id={'startMinutes'}*/}
+              {/*/>*/}
               <p className={'label'}>Время поездки</p>
             </div>
 
             <div className={'formGroup box4'}>
-              <MySelect label={'Дата'} name={'endDate'} id={'endDate'} />
-              <MySelect label={'Месяц'} name={'endMonth'} id={'endMonth'} />
+              {/*<MySelect label={'Дата'} name={'endDate'} id={'endDate'} />*/}
+              {/*<MySelect label={'Месяц'} name={'endMonth'} id={'endMonth'} />*/}
               <p className={'label'}>Дата завершения поездки</p>
             </div>
 
             <div className={'formGroup box5'}>
-              <MySelect label={'Час'} name={'endHour'} id={'endHour'} />
-              <MySelect
-                label={'Минуты'}
-                name={'endMinutes'}
-                id={'endMinutes'}
-              />
+              {/*<MySelect label={'Час'} name={'endHour'} id={'endHour'} />*/}
+              {/*<MySelect*/}
+              {/*  label={'Минуты'}*/}
+              {/*  name={'endMinutes'}*/}
+              {/*  id={'endMinutes'}*/}
+              {/*/>*/}
               <p className={'label'}>Время завершения поездки</p>
             </div>
 

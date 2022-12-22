@@ -4,7 +4,6 @@ import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import { useField } from 'formik';
 import React from 'react';
-import { datesManager } from 'src/dates/datesManager';
 import {
   IAlertForm,
   MyCheckboxProps,
@@ -17,7 +16,6 @@ import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import FormHelperText from '@mui/material/FormHelperText';
 import { Loading } from 'src/ui-kit/Loading';
 
 export const MyTextInput: React.FC<MyTextInputProps> = ({
@@ -41,7 +39,6 @@ export const MyTextInputWithBorder: React.FC<MyTextInputWithBorderProps> = ({
   ...props
 }) => {
   const [field, meta] = useField(props);
-  console.log('props', props);
   return (
     <>
       <FormControl>

@@ -62,6 +62,14 @@ class DatesManager {
     return this.formatterDateTime.format(date);
   }
 
+  getCurrentDate() {
+    return new Date().toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+    });
+  }
+
   private formatterMonthDay = new Intl.DateTimeFormat('ru', {
     month: 'long',
     day: 'numeric',
