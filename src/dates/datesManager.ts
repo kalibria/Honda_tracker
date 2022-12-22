@@ -31,29 +31,6 @@ class DatesManager {
     }, []);
   }
 
-  getAllMonths() {
-    const months = Array.from({ length: 12 }, (_, monthNumber) => {
-      const date = new Date(0, monthNumber);
-      return date.toLocaleDateString('ru', { month: 'long' });
-    });
-
-    return months;
-  }
-
-  getAllDaysForMonth(month: number, year: number) {
-    let date = new Date(year, month, 1);
-    let days = [];
-    while (date.getMonth() === month) {
-      days.push(new Date(date));
-      date.setDate(date.getDate() + 1);
-    }
-    return days;
-  }
-
-  getFormattingMonthDay(date: number) {
-    return this.formatterMonthDay.format(date);
-  }
-
   getFormattingDate(date: number) {
     return this.formatter.format(date);
   }
@@ -67,6 +44,23 @@ class DatesManager {
       year: 'numeric',
       month: 'numeric',
       day: 'numeric',
+    });
+  }
+
+  getCurrentTime() {
+    return new Date().toLocaleTimeString('ru', {
+      hour: 'numeric',
+      minute: 'numeric',
+    });
+  }
+
+  getCurrentDateTime() {
+    return new Date().toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
     });
   }
 

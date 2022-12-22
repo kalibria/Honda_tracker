@@ -5,7 +5,9 @@ import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { Formik, useFormik } from 'formik';
 import React, { useEffect } from 'react';
-import ResponsiveDatePickers from 'src/createNewBooking/components/ResponsiveDatePickers';
+import MUComponentsForCreatingBooking, {
+  ResponsiveTimePickers,
+} from 'src/createNewBooking/components/MUComponentsForCreatingBooking';
 import { datesManager } from 'src/dates/datesManager';
 import { MySelect, MyTextInputWithBorder } from 'src/ui-kit/components';
 import { Loading } from 'src/ui-kit/Loading';
@@ -14,15 +16,15 @@ export interface ICreatingNewBooking {
   firstName: string;
   isLoading: boolean;
   currentDate: string;
+  currentTime: string;
 }
 
 export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
   firstName,
   isLoading,
   currentDate,
+  currentTime,
 }) => {
-  console.log('currentDate', currentDate);
-
   return (
     <div className={'creationRidePage'}>
       <Formik
@@ -30,7 +32,7 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
         initialValues={{
           driver: firstName,
           startDate: currentDate,
-          startTime: '',
+          startTime: currentTime,
           endDate: '',
           endTime: '',
           car: '',
@@ -52,8 +54,8 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
                 onChange={props.handleChange}
               />
             </div>
-            <ResponsiveDatePickers name={'startDate'} />
-
+            <MUComponentsForCreatingBooking name={'startDate'} />
+            <ResponsiveTimePickers name={'startTime'} />
             <div className={'formGroup box3'}>
               {/*<MySelect label={'Час'} name={'startHour'} id={'startHour'} />*/}
               {/*<MySelect*/}
