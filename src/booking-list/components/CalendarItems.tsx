@@ -5,7 +5,7 @@ import { IUICalendarItems } from 'src/booking-list/types';
 export const CalendarItems = ({ datesRidesForUI }: IUICalendarItems) => {
   const items = datesRidesForUI.map((item, index) => {
     return (
-      <div className={'calendar'} key={index}>
+      <div className={'calendar'} key={item.id}>
         <li className={'cellDecoration'}>{item.date}</li>
         <li className={'cellDecoration'}>
           {item.info.username ? (

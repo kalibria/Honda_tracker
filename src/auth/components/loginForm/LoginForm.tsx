@@ -4,14 +4,6 @@ import { Formik, Form } from 'formik';
 import { useDispatch } from 'react-redux';
 import { redirect, useLocation, useNavigate } from 'react-router-dom';
 
-import { useNavigate } from 'react-router-dom';
-import {
-  AlertForm,
-  MyCheckbox,
-  MyTextInput,
-} from 'src/auth/components/loginForm/componentsForLoginForm';
-import { Loading } from 'src/commonComponents/Loading';
-
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 import {
   setCarId,
@@ -24,6 +16,7 @@ import {
   useLazyStatusLoginQuery,
 } from 'src/services/hondaApi';
 import { authenticationManager } from 'src/auth/authenticationManager';
+import { myLocalStorage } from 'src/services/localStorage';
 import { AlertForm, MyTextInput } from 'src/ui-kit/components';
 
 import * as Yup from 'yup';
@@ -54,6 +47,10 @@ const LoginForm = () => {
       authenticationManager.setAuthenticated(dispatch, username);
       dispatch(setCurrentUsername(username));
       setError('');
+
+      myLocalStorage.setItem('RefreshToken', result.currentData.RefreshToken);
+
+      sessionStorage.setItem('AccessToken', result.currentData.AccessToken);
       triggerUser(username);
     }
     if (isError) {
@@ -73,7 +70,7 @@ const LoginForm = () => {
     <div className="mainContainer ">
       {error && <AlertForm message={error} />}
 
-      <main className="flex flex-col justify-center items-center ">
+      <main className="flex flex-col justify-center items-center formWrapper">
         <div className="w-24 mb-4">
           <img
             src="https://www.nicepng.com/png/detail/138-1388174_login-account-icon.png"
@@ -89,7 +86,7 @@ const LoginForm = () => {
           }}
           validationSchema={Yup.object({
             login: Yup.string()
-              .max(15, 'Must be 15 characters or less')
+              // .max(15, 'Must be 15 characters or less')
               .required('Required'),
             password: Yup.string()
               .max(20, 'Must be 20 characters or less')
@@ -102,7 +99,7 @@ const LoginForm = () => {
             setUsername(username);
             setSubmitting(false);
           }}>
-          <Form className="flex flex-col sm:w-96 space-y-3.5">
+          <Form className="flex flex-col space-y-3.5 widthFormItem">
             <MyTextInput
               id={'outlined-login-input'}
               label={'Login'}
@@ -117,9 +114,11 @@ const LoginForm = () => {
               autoComplete={'current-password'}
               name={'password'}
             />
-            <Button variant="contained" type="submit">
-              {'Sign in'}
-            </Button>
+            <div className={'button'}>
+              <Button variant="contained" type="submit">
+                {'Войти'}
+              </Button>
+            </div>
           </Form>
         </Formik>
       </main>

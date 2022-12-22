@@ -66,7 +66,8 @@ export const BasicTextFields: React.FC<IBasicTextFields> = ({
   const [field] = useField(props);
   return (
     <TextField
-      id="standard-basic"
+      fullWidth
+      id="fullWidth"
       label={label}
       variant="standard"
       {...field}

@@ -7,7 +7,7 @@ export const SettingsButton = () => {
   return (
     <div>
       <Button variant="contained" type="submit" size={'small'}>
-        <Link to={settingsPath}>Settings</Link>
+        <Link to={settingsPath}>Настройки</Link>
       </Button>
     </div>
   );
