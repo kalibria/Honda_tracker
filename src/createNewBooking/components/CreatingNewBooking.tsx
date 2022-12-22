@@ -4,7 +4,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { Formik, useFormik } from 'formik';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { datesManager } from 'src/dates/datesManager';
 import { MySelect, MyTextInputWithBorder } from 'src/ui-kit/components';
 import { Loading } from 'src/ui-kit/Loading';
@@ -13,18 +13,22 @@ export interface ICreatingNewBooking {
   firstName: string;
   isLoading: boolean;
   currentMonth: string;
+  currentYear: number;
 }
 
 export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
   firstName,
   isLoading,
   currentMonth,
+  currentYear,
 }) => {
+  console.log('isLoading', isLoading);
   const allMonths = datesManager.getAllMonths();
 
   return (
     <div className={'creationRidePage'}>
       <Formik
+        enableReinitialize={true}
         initialValues={{
           driver: firstName,
           startDate: '',
@@ -99,6 +103,7 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
 
             <div className={'box7'}>
               <MyTextInputWithBorder
+                loading={false}
                 label={'Описание поездки'}
                 name={'description'}
                 id={'description'}

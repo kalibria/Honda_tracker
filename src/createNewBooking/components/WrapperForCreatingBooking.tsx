@@ -9,6 +9,9 @@ export const WrapperForCreatingBooking = () => {
   const [firstName, setFirstName] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const currentMonth = new Date().toLocaleDateString('ru', { month: 'long' });
+  const currentYear = new Date().getFullYear();
+
+  // const dateListInCurrentMonth = datesManager.getAllDaysForMonth(,currentYear)
 
   useEffect(() => {
     if (isSuccess) {
@@ -20,13 +23,13 @@ export const WrapperForCreatingBooking = () => {
     if (result.isSuccess) {
       setFirstName(result.currentData.user.firstName);
       setIsLoading(false);
-      console.log('firstName', result.currentData.user.firstName);
     }
   }, [result]);
   return (
     <CreatingNewBooking
       firstName={firstName}
       isLoading={isLoading}
-      currentMonth={currentMonth}></CreatingNewBooking>
+      currentMonth={currentMonth}
+      currentYear={currentYear}></CreatingNewBooking>
   );
 };

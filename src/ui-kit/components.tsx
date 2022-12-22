@@ -41,13 +41,13 @@ export const MyTextInputWithBorder: React.FC<MyTextInputWithBorderProps> = ({
   ...props
 }) => {
   const [field, meta] = useField(props);
+  console.log('props', props);
   return (
     <>
       <FormControl>
         <InputLabel htmlFor="component-outlined">{label}</InputLabel>
         <OutlinedInput
           {...field}
-          {...props}
           id="component-outlined"
           label={label}
           startAdornment={

@@ -21,7 +21,7 @@ export interface MyTextInputWithBorderProps {
   id: string;
   disabled?: boolean;
   value?: string;
-  loading?: boolean;
+  loading: boolean;
   onChange?: (e: React.ChangeEvent<any>) => void;
 }
 
