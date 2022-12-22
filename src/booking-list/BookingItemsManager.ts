@@ -1,5 +1,5 @@
 import isWithinInterval from 'date-fns/isWithinInterval';
-import { datesManager } from 'src/dates/datesManager';
+import { datesManager } from 'src/dates/datesTimeManager';
 import {
   IBookingInfo,
   ICalendarRide,

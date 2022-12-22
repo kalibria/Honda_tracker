@@ -3,7 +3,7 @@ import { AMOUNT_OF_DAYS } from 'src/booking-list/constants';
 import { IStartEndDates } from 'src/booking-list/types';
 import { IMonths } from 'src/dates/types';
 
-class DatesManager {
+class DatesTimeManager {
   getDatesForCalendarMS() {
     let arrOfDays: number[] = [];
     arrOfDays.length = AMOUNT_OF_DAYS - 1;
@@ -64,6 +64,8 @@ class DatesManager {
     });
   }
 
+  getInitEndTimeForCreatingBooking(startTime: string) {}
+
   private formatterMonthDay = new Intl.DateTimeFormat('ru', {
     month: 'long',
     day: 'numeric',
@@ -83,4 +85,4 @@ class DatesManager {
   });
 }
 
-export const datesManager = new DatesManager();
+export const datesManager = new DatesTimeManager();

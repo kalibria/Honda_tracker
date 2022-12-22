@@ -5,7 +5,7 @@ import Stack from '@mui/material/Stack';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
-import { datesManager } from 'src/dates/datesManager';
+import { datesManager } from 'src/dates/datesTimeManager';
 import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
 
 interface IMUComponentsForCreatingBooking {

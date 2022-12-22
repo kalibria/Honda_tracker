@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { CreatingNewBooking } from 'src/createNewBooking/components/CreatingNewBooking';
-import { datesManager } from 'src/dates/datesManager';
+import { datesManager } from 'src/dates/datesTimeManager';
 import { useGetMeQuery, useLazyGetUserQuery } from 'src/services/hondaApi';
 
 export const WrapperForCreatingBooking = () => {
@@ -10,6 +10,7 @@ export const WrapperForCreatingBooking = () => {
   const [isLoading, setIsLoading] = useState(true);
   const currentDate = datesManager.getCurrentDate();
   const currentTime = datesManager.getCurrentTime();
+  const [startTime, setStartTime] = useState(currentTime);
 
   useEffect(() => {
     if (isSuccess) {
@@ -28,6 +29,7 @@ export const WrapperForCreatingBooking = () => {
       firstName={firstName}
       isLoading={isLoading}
       currentDate={currentDate}
-      currentTime={currentTime}></CreatingNewBooking>
+      currentTime={currentTime}
+      setStartTime={setStartTime}></CreatingNewBooking>
   );
 };
