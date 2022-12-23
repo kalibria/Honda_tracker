@@ -1,4 +1,5 @@
 import { addDays, endOfDay, startOfDay } from 'date-fns';
+import dayjs, { Dayjs } from 'dayjs';
 import { AMOUNT_OF_DAYS } from 'src/booking-list/constants';
 import { IStartEndDates } from 'src/booking-list/types';
 import { IMonths } from 'src/dates/types';
@@ -48,10 +49,7 @@ class DatesTimeManager {
   }
 
   getCurrentTime() {
-    return new Date().toLocaleTimeString('ru', {
-      hour: 'numeric',
-      minute: 'numeric',
-    });
+    return dayjs();
   }
 
   getCurrentDateTime() {
@@ -62,6 +60,15 @@ class DatesTimeManager {
       hour: 'numeric',
       minute: 'numeric',
     });
+  }
+
+  increaseTime(time: string) {
+    const increaseTimeInTwoHour = dayjs(time).add(2, 'hour');
+    return dayjs(increaseTimeInTwoHour).format('L, LT');
+  }
+
+  addHours(originalTime: Dayjs, hours: number) {
+    return originalTime.add(hours, 'hour');
   }
 
   getInitEndTimeForCreatingBooking(startTime: string) {}

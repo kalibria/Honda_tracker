@@ -1,24 +1,29 @@
 import Button from '@mui/material/Button';
-import FormControl from '@mui/material/FormControl';
-import InputAdornment from '@mui/material/InputAdornment';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import { Formik, useFormik } from 'formik';
-import React, { FormEvent, useEffect } from 'react';
+import dayjs, { Dayjs } from 'dayjs';
+import { Formik } from 'formik';
+import React, { useState } from 'react';
 import { FormObserver } from 'src/createNewBooking/components/FormObserver';
 import MUComponentsForCreatingBooking, {
   ResponsiveTimePickers,
+  ResponsiveTimePickersEndTime,
 } from 'src/createNewBooking/components/MUComponentsForCreatingBooking';
 import { datesManager } from 'src/dates/datesTimeManager';
 import { MySelect, MyTextInputWithBorder } from 'src/ui-kit/components';
-import { Loading } from 'src/ui-kit/Loading';
 
+export interface InitialValues {
+  driver: string;
+  startDate: string;
+  startTime: Dayjs;
+  endDate: string;
+  endTime?: Dayjs;
+  car: string;
+  description: string;
+}
 export interface ICreatingNewBooking {
   firstName: string;
   isLoading: boolean;
   currentDate: string;
-  currentTime: string;
-  setStartTime: React.Dispatch<React.SetStateAction<string>>;
+  currentTime: Dayjs;
 }
 
 export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
@@ -26,21 +31,25 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
   isLoading,
   currentDate,
   currentTime,
-  setStartTime,
 }) => {
+  const curDate = datesManager.getCurrentDateTime();
+  const [newTime, setNewTime] = useState(datesManager.increaseTime(curDate));
+
+  const initialValues: InitialValues = {
+    driver: firstName,
+    startDate: currentDate,
+    startTime: currentTime,
+    endDate: '',
+    endTime: undefined,
+    car: '',
+    description: '',
+  };
+
   return (
     <div className={'creationRidePage'}>
       <Formik
         enableReinitialize={true}
-        initialValues={{
-          driver: firstName,
-          startDate: currentDate,
-          startTime: currentTime,
-          endDate: '',
-          endTime: '',
-          car: '',
-          description: '',
-        }}
+        initialValues={initialValues}
         onSubmit={(values) => {
           alert(JSON.stringify(values, null, 2));
         }}>
@@ -62,20 +71,25 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
                 <MUComponentsForCreatingBooking
                   name={'startDate'}
                   label={'Дата поездки'}
+                  onChange={props.handleChange}
                 />
                 <ResponsiveTimePickers
                   name={'startTime'}
                   label={'Время поездки'}
+                  {...props}
                 />
               </div>
               <div className={'box3 box'}>
                 <MUComponentsForCreatingBooking
                   name={'endDate'}
                   label={'Дата завершения поездки'}
+                  onChange={props.handleChange}
                 />
-                <ResponsiveTimePickers
-                  name={'startTime'}
+                <ResponsiveTimePickersEndTime
+                  name={'endTime'}
                   label={'Время завершения поездки'}
+                  newTime={newTime}
+                  {...props}
                 />
               </div>
               <div className={'box6'}>
@@ -91,7 +105,7 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
                   onChange={props.handleChange}
                 />
               </div>
-              <FormObserver />
+              {/*<FormObserver setNewTime={setNewTime} />*/}
 
               <div className={'button box8'}>
                 <Button variant="contained" type="submit">

@@ -26,7 +26,6 @@ export const BookingDetails = () => {
       trigger({ username, carId, startTime: timeSec });
 
       if (result.isSuccess) {
-        console.log('result', result.currentData);
         setRideCompletionText(
           result.currentData.booking.bookingOwner.settings.rideCompletionText,
         );

@@ -10,7 +10,6 @@ export const WrapperForCreatingBooking = () => {
   const [isLoading, setIsLoading] = useState(true);
   const currentDate = datesManager.getCurrentDate();
   const currentTime = datesManager.getCurrentTime();
-  const [startTime, setStartTime] = useState(currentTime);
 
   useEffect(() => {
     if (isSuccess) {
@@ -29,7 +28,6 @@ export const WrapperForCreatingBooking = () => {
       firstName={firstName}
       isLoading={isLoading}
       currentDate={currentDate}
-      currentTime={currentTime}
-      setStartTime={setStartTime}></CreatingNewBooking>
+      currentTime={currentTime}></CreatingNewBooking>
   );
 };
