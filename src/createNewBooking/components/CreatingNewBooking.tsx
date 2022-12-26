@@ -33,7 +33,7 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
   currentTime,
 }) => {
   const curDate = datesManager.getCurrentDateTime();
-  const [newTime, setNewTime] = useState(datesManager.increaseTime(curDate));
+  // const [newTime, setNewTime] = useState(datesManager.increaseTime(curDate));
 
   const initialValues: InitialValues = {
     driver: firstName,
@@ -88,7 +88,7 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
                 <ResponsiveTimePickersEndTime
                   name={'endTime'}
                   label={'Время завершения поездки'}
-                  newTime={newTime}
+                  newTime={curDate}
                   {...props}
                 />
               </div>

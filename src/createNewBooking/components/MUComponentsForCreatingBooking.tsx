@@ -117,17 +117,21 @@ export function ResponsiveTimePickersEndTime({
 
   const endTime = datesManager.addHours(props.values.startTime, 2);
 
-  // const [timePickerValue, setTimePickerValue] = React.useState<Dayjs | null>(
-  //   dayjs(newTime),
-  // );
+  const [timePickerValue, setTimePickerValue] = React.useState<Dayjs | null>(
+    null,
+    // dayjs(newTime)
+  );
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={locale}>
       <Stack spacing={3}>
         <MobileTimePicker
           label={label}
-          value={endTime}
-          onChange={(newTime) => props.setFieldValue('endTime', newTime)}
+          value={timePickerValue || endTime}
+          onChange={(newTime) => {
+            props.setFieldValue('endTime', newTime);
+            setTimePickerValue(newTime);
+          }}
           renderInput={(params) => <TextField {...params} />}
         />
         {/*<DesktopTimePicker*/}
