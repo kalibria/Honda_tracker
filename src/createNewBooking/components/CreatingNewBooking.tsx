@@ -1,8 +1,7 @@
 import Button from '@mui/material/Button';
-import dayjs, { Dayjs } from 'dayjs';
+import { Dayjs } from 'dayjs';
 import { Formik } from 'formik';
-import React, { useState } from 'react';
-import { FormObserver } from 'src/createNewBooking/components/FormObserver';
+import React from 'react';
 import MUComponentsForCreatingBooking, {
   ResponsiveTimePickers,
   ResponsiveTimePickersEndTime,
@@ -16,7 +15,7 @@ export interface InitialValues {
   startTime: Dayjs;
   endDate: string;
   endTime?: Dayjs;
-  car: string;
+  car: string[];
   description: string;
 }
 export interface ICreatingNewBooking {
@@ -24,6 +23,7 @@ export interface ICreatingNewBooking {
   isLoading: boolean;
   currentDate: string;
   currentTime: Dayjs;
+  availableCars: string[];
 }
 
 export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
@@ -31,9 +31,9 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
   isLoading,
   currentDate,
   currentTime,
+  availableCars,
 }) => {
   const curDate = datesManager.getCurrentDateTime();
-  // const [newTime, setNewTime] = useState(datesManager.increaseTime(curDate));
 
   const initialValues: InitialValues = {
     driver: firstName,
@@ -41,7 +41,7 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
     startTime: currentTime,
     endDate: '',
     endTime: undefined,
-    car: '',
+    car: availableCars,
     description: '',
   };
 
@@ -54,6 +54,8 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
           alert(JSON.stringify(values, null, 2));
         }}>
         {(props) => {
+          console.log('props.errors.startTime', props.errors.startTime);
+          console.log('props.errors.endTime', props.errors.endTime);
           return (
             <form onSubmit={props.handleSubmit} className={'creationRidePage'}>
               <div className={'box1'}>
@@ -93,7 +95,12 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
                 />
               </div>
               <div className={'box6'}>
-                <MySelect label={'Автомобиль'} name={'car'} id={'car'} />
+                <MySelect
+                  label={'Автомобиль'}
+                  name={'car'}
+                  id={'car'}
+                  dates={availableCars}
+                />
               </div>
 
               <div className={'box7'}>
@@ -105,7 +112,6 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
                   onChange={props.handleChange}
                 />
               </div>
-              {/*<FormObserver setNewTime={setNewTime} />*/}
 
               <div className={'button box8'}>
                 <Button variant="contained" type="submit">

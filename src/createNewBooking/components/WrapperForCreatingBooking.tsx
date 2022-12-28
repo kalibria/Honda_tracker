@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { CreatingNewBooking } from 'src/createNewBooking/components/CreatingNewBooking';
+import { defaultCar } from 'src/createNewBooking/constantCreateNewBooking';
 import { datesManager } from 'src/dates/datesTimeManager';
 import { useGetMeQuery, useLazyGetUserQuery } from 'src/services/hondaApi';
 
 export const WrapperForCreatingBooking = () => {
-  const { data, isSuccess, isError } = useGetMeQuery({});
+  const { data, isSuccess } = useGetMeQuery({});
   const [trigger, result] = useLazyGetUserQuery();
   const [firstName, setFirstName] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const currentDate = datesManager.getCurrentDate();
   const currentTime = datesManager.getCurrentTime();
+  const [availableCars, setAvailableCars] = useState<string[]>([defaultCar]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -21,6 +23,11 @@ export const WrapperForCreatingBooking = () => {
     if (result.isSuccess) {
       setFirstName(result.currentData.user.firstName);
       setIsLoading(false);
+      setAvailableCars(
+        result.currentData.user.availableCars.sort((a: string, b: string) =>
+          a.localeCompare(b),
+        ),
+      );
     }
   }, [result]);
   return (
@@ -28,6 +35,7 @@ export const WrapperForCreatingBooking = () => {
       firstName={firstName}
       isLoading={isLoading}
       currentDate={currentDate}
-      currentTime={currentTime}></CreatingNewBooking>
+      currentTime={currentTime}
+      availableCars={availableCars}></CreatingNewBooking>
   );
 };
