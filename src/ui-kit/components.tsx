@@ -66,12 +66,11 @@ export const MyTextInputWithBorder: React.FC<MyTextInputWithBorderProps> = ({
 
 export const MySelect: React.FC<MySelectProps> = ({
   label,
-  dates,
+  data,
   ...props
 }) => {
   const [field, meta] = useField(props);
-
-  const menuItems = dates?.map((item, index) => {
+  const menuItems = data?.map((item, index) => {
     return (
       <MenuItem key={index} value={item}>
         {item}
@@ -79,10 +78,10 @@ export const MySelect: React.FC<MySelectProps> = ({
     );
   });
 
-  const [data, setData] = React.useState(props.name);
+  const [currentValue, setCurrentValue] = React.useState(props.name);
 
   const handleChange = (event: SelectChangeEvent) => {
-    setData(event.target.value);
+    setCurrentValue(event.target.value);
   };
   return (
     <>
@@ -92,7 +91,8 @@ export const MySelect: React.FC<MySelectProps> = ({
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
           label={label}
-          {...field}>
+          {...field}
+          value={field.value[0]}>
           {menuItems}
         </Select>
       </FormControl>

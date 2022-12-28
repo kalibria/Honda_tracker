@@ -34,7 +34,7 @@ export interface MySelectProps {
   label: string;
   name: string;
   id: string;
-  dates?: string[];
+  data?: string[];
   value?: string;
   // [key: string]: string | FieldHookConfig<any>;
 }

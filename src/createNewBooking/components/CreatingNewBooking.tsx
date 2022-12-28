@@ -99,7 +99,7 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
                   label={'Автомобиль'}
                   name={'car'}
                   id={'car'}
-                  dates={availableCars}
+                  data={availableCars}
                 />
               </div>
 
