@@ -22,9 +22,10 @@ export const WrapperForCreatingBooking = () => {
     if (result.isSuccess) {
       setFirstName(result.currentData.user.firstName);
       setIsLoading(false);
+      console.log('avCars', result.currentData.user.availableCars);
       setAvailableCars(
-        result.currentData.user.availableCars.sort((a: string, b: string) =>
-          a.localeCompare(b),
+        [...result.currentData.user.availableCars].sort(
+          (a: string, b: string) => a.localeCompare(b),
         ),
       );
     }

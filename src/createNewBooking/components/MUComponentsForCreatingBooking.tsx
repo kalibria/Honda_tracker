@@ -48,15 +48,6 @@ export default function MUComponentsForCreatingBooking({
           renderInput={(params) => <TextField {...params} />}
           inputFormat={'DD/MM/YYYY'}
         />
-        {/*<DesktopDatePicker*/}
-        {/*  label="Дата поездки"*/}
-        {/*  value={value}*/}
-        {/*  minDate={dayjs('2017-01-01')}*/}
-        {/*  onChange={(newValue) => {*/}
-        {/*    setValue(newValue);*/}
-        {/*  }}*/}
-        {/*  renderInput={(params) => <TextField {...params} />}*/}
-        {/*/>*/}
       </Stack>
     </LocalizationProvider>
   );
@@ -93,14 +84,6 @@ export function ResponsiveTimePickers({
           }}
           renderInput={(params) => <TextField {...params} />}
         />
-        {/*<DesktopTimePicker*/}
-        {/*  label="For desktop"*/}
-        {/*  value={value}*/}
-        {/*  onChange={(newValue) => {*/}
-        {/*    setValue(newValue);*/}
-        {/*  }}*/}
-        {/*  renderInput={(params) => <TextField {...params} />}*/}
-        {/*/>*/}
       </Stack>
     </LocalizationProvider>
   );
@@ -133,14 +116,6 @@ export function ResponsiveTimePickersEndTime({
           }}
           renderInput={(params) => <TextField {...params} />}
         />
-        {/*<DesktopTimePicker*/}
-        {/*  label="For desktop"*/}
-        {/*  value={value}*/}
-        {/*  onChange={(newValue) => {*/}
-        {/*    setValue(newValue);*/}
-        {/*  }}*/}
-        {/*  renderInput={(params) => <TextField {...params} />}*/}
-        {/*/>*/}
       </Stack>
     </LocalizationProvider>
   );

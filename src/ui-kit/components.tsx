@@ -92,7 +92,7 @@ export const MySelect: React.FC<MySelectProps> = ({
           id="demo-simple-select-helper"
           label={label}
           {...field}
-          value={field.value[0]}>
+          value={Array.isArray(field.value) ? field.value?.[0] : field.value}>
           {menuItems}
         </Select>
       </FormControl>

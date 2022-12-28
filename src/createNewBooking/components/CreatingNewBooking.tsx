@@ -54,8 +54,8 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
           alert(JSON.stringify(values, null, 2));
         }}>
         {(props) => {
-          console.log('props.errors.startTime', props.errors.startTime);
-          console.log('props.errors.endTime', props.errors.endTime);
+          // console.log('props.errors.startTime', props.errors.startTime);
+          // console.log('props.errors.endTime', props.errors.endTime);
           return (
             <form onSubmit={props.handleSubmit} className={'creationRidePage'}>
               <div className={'box1'}>
