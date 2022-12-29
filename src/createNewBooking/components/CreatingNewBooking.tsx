@@ -8,12 +8,13 @@ import MUComponentsForCreatingBooking, {
 } from 'src/createNewBooking/components/MUComponentsForCreatingBooking';
 import { datesManager } from 'src/dates/datesTimeManager';
 import { MySelect, MyTextInputWithBorder } from 'src/ui-kit/components';
+import * as Yup from 'yup';
 
 export interface InitialValues {
   driver: string;
-  startDate: string;
+  startDate: Dayjs;
   startTime: Dayjs;
-  endDate: string;
+  endDate: Dayjs | string;
   endTime?: Dayjs;
   car: string[];
   description: string;
@@ -21,7 +22,7 @@ export interface InitialValues {
 export interface ICreatingNewBooking {
   firstName: string;
   isLoading: boolean;
-  currentDate: string;
+  currentDate: Dayjs;
   currentTime: Dayjs;
   availableCars: string[];
 }
@@ -45,11 +46,48 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
     description: '',
   };
 
+  // const SignupSchema = Yup.object().shape({
+  //   startDate: Yup.date()
+  //     .typeError('Заполните поле')
+  //     .required('Заполните поле'),
+  //   endDate: Yup.date()
+  //     .typeError('Заполните поле')
+  //     .required('Заполните поле')
+  //     .when('startDate', (startDate) => {
+  //       if (startDate) {
+  //         return Yup.date()
+  //           .min(
+  //             startDate,
+  //             'Дата завершения поездки должна быть больше даты начала поездки',
+  //           )
+  //           .typeError('Заполните поле');
+  //       }
+  //     }),
+  //
+  //   startTime: Yup.date()
+  //     .typeError('Заполните поле')
+  //     .required('Заполните поле'),
+  //   endTime: Yup.date()
+  //     .typeError('Заполните поле')
+  //     .required('Заполните поле')
+  //     .when('startTime', (startTime) => {
+  //       if (startTime) {
+  //         return Yup.date()
+  //           .min(
+  //             startTime,
+  //             'Время завершения поездки должна быть больше времени начала поездки',
+  //           )
+  //           .typeError('Заполните поле');
+  //       }
+  //     }),
+  // });
+
   return (
     <div className={'creationRidePage'}>
       <Formik
         enableReinitialize={true}
         initialValues={initialValues}
+        // validationSchema={SignupSchema}
         onSubmit={(values) => {
           alert(JSON.stringify(values, null, 2));
         }}>

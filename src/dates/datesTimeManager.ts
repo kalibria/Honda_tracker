@@ -48,7 +48,7 @@ class DatesTimeManager {
     });
   }
 
-  getCurrentTime() {
+  getCurrentDateTimeDayJs() {
     return dayjs();
   }
 
@@ -70,13 +70,6 @@ class DatesTimeManager {
   addHours(originalTime: Dayjs, hours: number) {
     return originalTime.add(hours, 'hour');
   }
-
-  getInitEndTimeForCreatingBooking(startTime: string) {}
-
-  private formatterMonthDay = new Intl.DateTimeFormat('ru', {
-    month: 'long',
-    day: 'numeric',
-  });
 
   private formatter = new Intl.DateTimeFormat('ru', {
     weekday: 'long',

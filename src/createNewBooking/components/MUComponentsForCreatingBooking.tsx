@@ -101,7 +101,6 @@ export function ResponsiveTimePickersEndTime({
 
   const [timePickerValue, setTimePickerValue] = React.useState<Dayjs | null>(
     null,
-    // dayjs(newTime)
   );
 
   return (
