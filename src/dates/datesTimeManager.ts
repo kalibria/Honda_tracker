@@ -62,13 +62,16 @@ class DatesTimeManager {
     });
   }
 
-  increaseTime(time: string) {
-    const increaseTimeInTwoHour = dayjs(time).add(2, 'hour');
-    return dayjs(increaseTimeInTwoHour).format('L, LT');
-  }
-
   addHours(originalTime: Dayjs, hours: number) {
     return originalTime.add(hours, 'hour');
+  }
+
+  getDateTimeSec(date: Dayjs | undefined, time: Dayjs | undefined) {
+    const startHour = dayjs(time).hour();
+    const startMin = dayjs(time).minute();
+    const startDateTime = dayjs(date).hour(startHour).minute(startMin);
+
+    return dayjs(startDateTime).toDate().getTime() / 1000;
   }
 
   private formatter = new Intl.DateTimeFormat('ru', {

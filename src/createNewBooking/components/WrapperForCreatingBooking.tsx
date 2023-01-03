@@ -7,6 +7,7 @@ export const WrapperForCreatingBooking = () => {
   const { data, isSuccess } = useGetMeQuery({});
   const [trigger, result] = useLazyGetUserQuery();
   const [firstName, setFirstName] = useState('');
+  const [username, setUserName] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   // const currentDate = datesManager.getCurrentDate();
   const currentDate = datesManager.getCurrentDateTimeDayJs();
@@ -22,6 +23,7 @@ export const WrapperForCreatingBooking = () => {
   useEffect(() => {
     if (result.isSuccess) {
       setFirstName(result.currentData.user.firstName);
+      setUserName(result.currentData.user.username);
       setIsLoading(false);
       setAvailableCars(
         [...result.currentData.user.availableCars].sort(
@@ -36,6 +38,7 @@ export const WrapperForCreatingBooking = () => {
       isLoading={isLoading}
       currentDate={currentDate}
       currentTime={currentTime}
-      availableCars={availableCars}></CreatingNewBooking>
+      availableCars={availableCars}
+      nickname={username}></CreatingNewBooking>
   );
 };

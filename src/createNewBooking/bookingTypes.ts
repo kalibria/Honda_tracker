@@ -16,6 +16,7 @@ export interface ICreatingNewBooking {
   currentDate: Dayjs;
   currentTime: Dayjs;
   availableCars: string[];
+  nickname: string;
 }
 
 export interface IDatePicker extends FormikProps<InitialValues> {
@@ -32,7 +33,7 @@ export interface IResponsiveTimePickers extends FormikProps<InitialValues> {
 
 export interface IBookingRequest {
   username: string;
-  carId: string;
+  carId: string[];
   startDateTime: number;
   endDateTime: number;
   description: string;

@@ -1,8 +1,9 @@
 import Button from '@mui/material/Button';
 import dayjs, { Dayjs } from 'dayjs';
 import { Formik } from 'formik';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
+  IBookingRequest,
   ICreatingNewBooking,
   InitialValues,
 } from 'src/createNewBooking/bookingTypes';
@@ -27,8 +28,19 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
   currentDate,
   currentTime,
   availableCars,
+  nickname,
 }) => {
   const curDate = datesManager.getCurrentDateTime();
+  const initDataForBookingRequest: IBookingRequest = {
+    username: '',
+    carId: [''],
+    startDateTime: 0,
+    endDateTime: 0,
+    description: '',
+  };
+  const [dataForBookingRequest, setDataForBookingRequest] = useState(
+    initDataForBookingRequest,
+  );
 
   const initialValues: InitialValues = {
     driver: firstName,
@@ -88,10 +100,43 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
         initialValues={initialValues}
         validationSchema={SignupSchema}
         onSubmit={(values) => {
-          alert(JSON.stringify(values, null, 2));
+          // const startDateTimeSec = datesManager.getDateTimeSec(
+          //   values.startDate,
+          //   values.startTime,
+          // );
+          // const endDateTimeSec = datesManager.getDateTimeSec(
+          //   values.endDate,
+          //   values.endTime,
+          // );
+          //
+          // setDataForBookingRequest({
+          //   username: nickname,
+          //   carId: values.car,
+          //   startDateTime: startDateTimeSec,
+          //   endDateTime: endDateTimeSec,
+          //   description: values.description,
+          // });
+
+          console.log('bookingRequest', dataForBookingRequest);
         }}>
         {(props) => {
           console.log('props', props);
+          const startDateTimeSec = datesManager.getDateTimeSec(
+            props.values.startDate,
+            props.values.startTime,
+          );
+          const endDateTimeSec = datesManager.getDateTimeSec(
+            props.values.endDate,
+            props.values.endTime,
+          );
+
+          setDataForBookingRequest({
+            username: nickname,
+            carId: props.values.car,
+            startDateTime: startDateTimeSec,
+            endDateTime: endDateTimeSec,
+            description: props.values.description,
+          });
           return (
             <form onSubmit={props.handleSubmit} className={'creationRidePage'}>
               <div className={'box1'}>
@@ -156,9 +201,7 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
                   onChange={props.handleChange}
                 />
               </div>
-              {props.errors.description && props.touched.description ? (
-                <AlertForm message={props.errors.description} />
-              ) : null}
+
               <div className={'button box8'}>
                 <Button variant="contained" type="submit">
                   {'Сохранить'}
