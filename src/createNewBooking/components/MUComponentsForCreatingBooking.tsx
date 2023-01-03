@@ -10,26 +10,19 @@ import { InitialValues } from 'src/createNewBooking/components/CreatingNewBookin
 import { datesManager } from 'src/dates/datesTimeManager';
 import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
 
-interface IMUComponentsForCreatingBooking {
+interface IDatePicker extends FormikProps<InitialValues> {
   name: string;
   label: string;
-  onChange: {
-    (e: React.ChangeEvent<any>): void;
-    <T = string | React.ChangeEvent<any>>(
-      field: T,
-    ): T extends React.ChangeEvent<any>
-      ? void
-      : (e: string | React.ChangeEvent<any>) => void;
-  };
+  newDate?: Dayjs;
 }
 
 const locales = ['en', 'fr', 'de', 'ru', 'ar-sa'] as const;
 
-export default function MUComponentsForCreatingBooking({
+export function ResponsiveStartDatePicker({
   name,
   label,
-  onChange,
-}: IMUComponentsForCreatingBooking) {
+  ...props
+}: IDatePicker) {
   const currentDate = datesManager.getCurrentDate();
 
   const [locale, setLocale] = React.useState<typeof locales[number]>('ru');
@@ -44,7 +37,44 @@ export default function MUComponentsForCreatingBooking({
         <MobileDatePicker
           label={label}
           value={datePickerValue}
-          onChange={(newValue) => setDatePickerValue(newValue)}
+          onChange={(newValue) => {
+            props.setFieldValue('startDate', newValue);
+            setDatePickerValue(newValue);
+          }}
+          renderInput={(params) => <TextField {...params} />}
+          inputFormat={'DD/MM/YYYY'}
+        />
+      </Stack>
+    </LocalizationProvider>
+  );
+}
+
+export function ResponsiveEndDatePicker({
+  name,
+  label,
+  // newDate,
+  ...props
+}: IDatePicker) {
+  // const currentDate = datesManager.getCurrentDate();
+  const newEndDate = props.values.startDate;
+  console.log('newEndDay', newEndDate);
+
+  const [locale, setLocale] = React.useState<typeof locales[number]>('ru');
+
+  const [datePickerValue, setDatePickerValue] = React.useState<Dayjs | null>(
+    dayjs(newEndDate),
+  );
+
+  return (
+    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={locale}>
+      <Stack spacing={3}>
+        <MobileDatePicker
+          label={label}
+          value={datePickerValue || newEndDate}
+          onChange={(newDate) => {
+            props.setFieldValue('endDate', newDate);
+            setDatePickerValue(newDate);
+          }}
           renderInput={(params) => <TextField {...params} />}
           inputFormat={'DD/MM/YYYY'}
         />

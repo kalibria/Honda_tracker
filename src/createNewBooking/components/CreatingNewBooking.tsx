@@ -1,20 +1,27 @@
 import Button from '@mui/material/Button';
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { Formik } from 'formik';
 import React from 'react';
-import MUComponentsForCreatingBooking, {
+import {
+  ResponsiveEndDatePicker,
+  ResponsiveStartDatePicker,
   ResponsiveTimePickers,
   ResponsiveTimePickersEndTime,
 } from 'src/createNewBooking/components/MUComponentsForCreatingBooking';
+
 import { datesManager } from 'src/dates/datesTimeManager';
-import { MySelect, MyTextInputWithBorder } from 'src/ui-kit/components';
+import {
+  AlertForm,
+  MySelect,
+  MyTextInputWithBorder,
+} from 'src/ui-kit/components';
 import * as Yup from 'yup';
 
 export interface InitialValues {
   driver: string;
   startDate: Dayjs;
   startTime: Dayjs;
-  endDate: Dayjs | string;
+  endDate?: Dayjs;
   endTime?: Dayjs;
   car: string[];
   description: string;
@@ -40,59 +47,62 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
     driver: firstName,
     startDate: currentDate,
     startTime: currentTime,
-    endDate: '',
+    endDate: undefined,
     endTime: undefined,
     car: availableCars,
     description: '',
   };
 
-  // const SignupSchema = Yup.object().shape({
-  //   startDate: Yup.date()
-  //     .typeError('Заполните поле')
-  //     .required('Заполните поле'),
-  //   endDate: Yup.date()
-  //     .typeError('Заполните поле')
-  //     .required('Заполните поле')
-  //     .when('startDate', (startDate) => {
-  //       if (startDate) {
-  //         return Yup.date()
-  //           .min(
-  //             startDate,
-  //             'Дата завершения поездки должна быть больше даты начала поездки',
-  //           )
-  //           .typeError('Заполните поле');
-  //       }
-  //     }),
-  //
-  //   startTime: Yup.date()
-  //     .typeError('Заполните поле')
-  //     .required('Заполните поле'),
-  //   endTime: Yup.date()
-  //     .typeError('Заполните поле')
-  //     .required('Заполните поле')
-  //     .when('startTime', (startTime) => {
-  //       if (startTime) {
-  //         return Yup.date()
-  //           .min(
-  //             startTime,
-  //             'Время завершения поездки должна быть больше времени начала поездки',
-  //           )
-  //           .typeError('Заполните поле');
-  //       }
-  //     }),
-  // });
+  const SignupSchema = Yup.object().shape({
+    startDate: Yup.date()
+      .typeError('Заполните поле')
+      .required('Заполните поле'),
+    endDate: Yup.date()
+      .typeError('Заполните поле')
+      .required('Заполните поле')
+      .when('startDate', (startDate) => {
+        return Yup.date()
+          .test(
+            'is after',
+            'Дата завершения поездки должна быть больше даты начала поездки',
+            (val: Date | undefined) => {
+              if (val) {
+                return dayjs(val).isAfter(dayjs(startDate));
+              } else {
+                return true;
+              }
+            },
+          )
+          .typeError('Заполните поле');
+      }),
+
+    startTime: Yup.date()
+      .typeError('Заполните поле')
+      .required('Заполните поле'),
+    endTime: Yup.date()
+      .typeError('Заполните поле')
+      .required('Заполните поле')
+      .when('startTime', (startTime: Dayjs) => {
+        return Yup.date()
+          .min(
+            startTime,
+            'Время завершения поездки должна быть больше времени начала поездки',
+          )
+          .typeError('Заполните поле');
+      }),
+  });
 
   return (
     <div className={'creationRidePage'}>
       <Formik
         enableReinitialize={true}
         initialValues={initialValues}
-        // validationSchema={SignupSchema}
+        validationSchema={SignupSchema}
         onSubmit={(values) => {
           alert(JSON.stringify(values, null, 2));
         }}>
         {(props) => {
-          // console.log('props.errors.startTime', props.errors.startTime);
+          console.log('props', props);
           // console.log('props.errors.endTime', props.errors.endTime);
           return (
             <form onSubmit={props.handleSubmit} className={'creationRidePage'}>
@@ -108,10 +118,10 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
                 />
               </div>
               <div className={'box2 box'}>
-                <MUComponentsForCreatingBooking
+                <ResponsiveStartDatePicker
                   name={'startDate'}
                   label={'Дата поездки'}
-                  onChange={props.handleChange}
+                  {...props}
                 />
                 <ResponsiveTimePickers
                   name={'startTime'}
@@ -120,11 +130,13 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
                 />
               </div>
               <div className={'box3 box'}>
-                <MUComponentsForCreatingBooking
+                <ResponsiveEndDatePicker
                   name={'endDate'}
                   label={'Дата завершения поездки'}
-                  onChange={props.handleChange}
+                  newDate={props.values.startDate}
+                  {...props}
                 />
+
                 <ResponsiveTimePickersEndTime
                   name={'endTime'}
                   label={'Время завершения поездки'}
@@ -132,6 +144,12 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
                   {...props}
                 />
               </div>
+              {props.errors.endDate ? (
+                <AlertForm message={props.errors.endDate} />
+              ) : null}
+              {props.errors.endTime ? (
+                <AlertForm message={props.errors.endTime} />
+              ) : null}
               <div className={'box6'}>
                 <MySelect
                   label={'Автомобиль'}
