@@ -3,6 +3,10 @@ import dayjs, { Dayjs } from 'dayjs';
 import { Formik } from 'formik';
 import React from 'react';
 import {
+  ICreatingNewBooking,
+  InitialValues,
+} from 'src/createNewBooking/bookingTypes';
+import {
   ResponsiveEndDatePicker,
   ResponsiveStartDatePicker,
   ResponsiveTimePickers,
@@ -16,23 +20,6 @@ import {
   MyTextInputWithBorder,
 } from 'src/ui-kit/components';
 import * as Yup from 'yup';
-
-export interface InitialValues {
-  driver: string;
-  startDate: Dayjs;
-  startTime: Dayjs;
-  endDate?: Dayjs;
-  endTime?: Dayjs;
-  car: string[];
-  description: string;
-}
-export interface ICreatingNewBooking {
-  firstName: string;
-  isLoading: boolean;
-  currentDate: Dayjs;
-  currentTime: Dayjs;
-  availableCars: string[];
-}
 
 export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
   firstName,
@@ -90,6 +77,8 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
           )
           .typeError('Заполните поле');
       }),
+
+    description: Yup.string().required('Заполните описание поездки'),
   });
 
   return (
@@ -103,7 +92,6 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
         }}>
         {(props) => {
           console.log('props', props);
-          // console.log('props.errors.endTime', props.errors.endTime);
           return (
             <form onSubmit={props.handleSubmit} className={'creationRidePage'}>
               <div className={'box1'}>
@@ -168,7 +156,9 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
                   onChange={props.handleChange}
                 />
               </div>
-
+              {props.errors.description && props.touched.description ? (
+                <AlertForm message={props.errors.description} />
+              ) : null}
               <div className={'button box8'}>
                 <Button variant="contained" type="submit">
                   {'Сохранить'}

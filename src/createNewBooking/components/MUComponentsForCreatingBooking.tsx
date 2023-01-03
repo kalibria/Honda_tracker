@@ -1,4 +1,3 @@
-import { FormikProps } from 'formik';
 import * as React from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import TextField from '@mui/material/TextField';
@@ -6,15 +5,12 @@ import Stack from '@mui/material/Stack';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
-import { InitialValues } from 'src/createNewBooking/components/CreatingNewBooking';
+import {
+  IDatePicker,
+  IResponsiveTimePickers,
+} from 'src/createNewBooking/bookingTypes';
 import { datesManager } from 'src/dates/datesTimeManager';
 import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
-
-interface IDatePicker extends FormikProps<InitialValues> {
-  name: string;
-  label: string;
-  newDate?: Dayjs;
-}
 
 const locales = ['en', 'fr', 'de', 'ru', 'ar-sa'] as const;
 
@@ -52,17 +48,14 @@ export function ResponsiveStartDatePicker({
 export function ResponsiveEndDatePicker({
   name,
   label,
-  // newDate,
   ...props
 }: IDatePicker) {
-  // const currentDate = datesManager.getCurrentDate();
   const newEndDate = props.values.startDate;
-  console.log('newEndDay', newEndDate);
 
   const [locale, setLocale] = React.useState<typeof locales[number]>('ru');
 
   const [datePickerValue, setDatePickerValue] = React.useState<Dayjs | null>(
-    dayjs(newEndDate),
+    null,
   );
 
   return (
@@ -81,12 +74,6 @@ export function ResponsiveEndDatePicker({
       </Stack>
     </LocalizationProvider>
   );
-}
-
-interface IResponsiveTimePickers extends FormikProps<InitialValues> {
-  name: string;
-  label: string;
-  newTime?: string;
 }
 
 export function ResponsiveTimePickers({
@@ -139,9 +126,9 @@ export function ResponsiveTimePickersEndTime({
         <MobileTimePicker
           label={label}
           value={timePickerValue || endTime}
-          onChange={(newTime) => {
-            props.setFieldValue('endTime', newTime);
-            setTimePickerValue(newTime);
+          onChange={(newValue) => {
+            props.setFieldValue('endTime', newValue);
+            setTimePickerValue(newValue);
           }}
           renderInput={(params) => <TextField {...params} />}
         />
