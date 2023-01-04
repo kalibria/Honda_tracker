@@ -2,6 +2,7 @@ import Button from '@mui/material/Button';
 import dayjs, { Dayjs } from 'dayjs';
 import { Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
+import { redirect, useNavigate } from 'react-router-dom';
 import {
   IBookingRequest,
   ICreatingNewBooking,
@@ -15,6 +16,7 @@ import {
 } from 'src/createNewBooking/components/MUComponentsForCreatingBooking';
 
 import { datesManager } from 'src/dates/datesTimeManager';
+import { bookingListPath } from 'src/router/rootConstants';
 import { useLazyBookingsQuery } from 'src/services/hondaApi';
 import {
   AlertForm,
@@ -33,6 +35,7 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
 }) => {
   const [trigger, result] = useLazyBookingsQuery();
   const curDate = datesManager.getCurrentDateTime();
+  const navigate = useNavigate();
 
   const initialValues: InitialValues = {
     driver: firstName,
@@ -91,7 +94,7 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
         enableReinitialize={true}
         initialValues={initialValues}
         validationSchema={SignupSchema}
-        onSubmit={(values) => {
+        onSubmit={(values, { setSubmitting }) => {
           const startDateTimeSec = datesManager.getDateTimeSec(
             values.startDate,
             values.startTime,
@@ -110,6 +113,8 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
           };
 
           trigger(dataForBookingRequest);
+          navigate(bookingListPath);
+          setSubmitting(false);
         }}>
         {(props) => {
           return (
