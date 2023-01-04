@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { IBookingRequest } from 'src/createNewBooking/bookingTypes';
 
 export const hondaApi = createApi({
   reducerPath: 'hondaApi',
@@ -49,11 +50,13 @@ export const hondaApi = createApi({
         url: `/bookings/id?username=${username}&carId=${carId}&startTime=${startTime}`,
       }),
     }),
-    // bookings:builder.query(({
-    //   // query:({})=>{
-    //
-    //   }
-    // }))
+    bookings: builder.query({
+      query: (bookingRequest: IBookingRequest) => ({
+        url: '/bookings',
+        method: 'POST',
+        body: bookingRequest,
+      }),
+    }),
   }),
 });
 
@@ -64,4 +67,5 @@ export const {
   useGetMeQuery,
   useLazyGetBookingsQuery,
   useLazyGetBookingsIdQuery,
+  useLazyBookingsQuery,
 } = hondaApi;

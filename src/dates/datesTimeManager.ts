@@ -71,7 +71,11 @@ class DatesTimeManager {
     const startMin = dayjs(time).minute();
     const startDateTime = dayjs(date).hour(startHour).minute(startMin);
 
-    return dayjs(startDateTime).toDate().getTime() / 1000;
+    return this.getSecFromDate(startDateTime);
+  }
+
+  getSecFromDate(date: string | Dayjs) {
+    return Math.round(dayjs(date).toDate().getTime() / 1000);
   }
 
   private formatter = new Intl.DateTimeFormat('ru', {

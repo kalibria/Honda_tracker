@@ -15,6 +15,7 @@ import {
 } from 'src/createNewBooking/components/MUComponentsForCreatingBooking';
 
 import { datesManager } from 'src/dates/datesTimeManager';
+import { useLazyBookingsQuery } from 'src/services/hondaApi';
 import {
   AlertForm,
   MySelect,
@@ -30,17 +31,8 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
   availableCars,
   nickname,
 }) => {
+  const [trigger, result] = useLazyBookingsQuery();
   const curDate = datesManager.getCurrentDateTime();
-  const initDataForBookingRequest: IBookingRequest = {
-    username: '',
-    carId: [''],
-    startDateTime: 0,
-    endDateTime: 0,
-    description: '',
-  };
-  const [dataForBookingRequest, setDataForBookingRequest] = useState(
-    initDataForBookingRequest,
-  );
 
   const initialValues: InitialValues = {
     driver: firstName,
@@ -48,7 +40,7 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
     startTime: currentTime,
     endDate: undefined,
     endTime: undefined,
-    car: availableCars,
+    car: availableCars[0],
     description: '',
   };
 
@@ -100,43 +92,26 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
         initialValues={initialValues}
         validationSchema={SignupSchema}
         onSubmit={(values) => {
-          // const startDateTimeSec = datesManager.getDateTimeSec(
-          //   values.startDate,
-          //   values.startTime,
-          // );
-          // const endDateTimeSec = datesManager.getDateTimeSec(
-          //   values.endDate,
-          //   values.endTime,
-          // );
-          //
-          // setDataForBookingRequest({
-          //   username: nickname,
-          //   carId: values.car,
-          //   startDateTime: startDateTimeSec,
-          //   endDateTime: endDateTimeSec,
-          //   description: values.description,
-          // });
-
-          console.log('bookingRequest', dataForBookingRequest);
-        }}>
-        {(props) => {
-          console.log('props', props);
           const startDateTimeSec = datesManager.getDateTimeSec(
-            props.values.startDate,
-            props.values.startTime,
+            values.startDate,
+            values.startTime,
           );
           const endDateTimeSec = datesManager.getDateTimeSec(
-            props.values.endDate,
-            props.values.endTime,
+            values.endDate,
+            values.endTime,
           );
 
-          setDataForBookingRequest({
+          const dataForBookingRequest: IBookingRequest = {
             username: nickname,
-            carId: props.values.car,
+            carId: values.car,
             startDateTime: startDateTimeSec,
             endDateTime: endDateTimeSec,
-            description: props.values.description,
-          });
+            description: values.description,
+          };
+
+          trigger(dataForBookingRequest);
+        }}>
+        {(props) => {
           return (
             <form onSubmit={props.handleSubmit} className={'creationRidePage'}>
               <div className={'box1'}>
