@@ -3,7 +3,12 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { logOut, setIsAuthenticated } from 'src/redux/authSlice';
-import { loginPath, signUpForm } from 'src/router/rootConstants';
+import {
+  bookingListPath,
+  loginPath,
+  signUpForm,
+  welcomePath,
+} from 'src/router/rootConstants';
 import { useGetMeQuery } from 'src/services/hondaApi';
 import { myLocalStorage } from 'src/services/localStorage';
 
@@ -28,14 +33,13 @@ export const useCheckIsLoggedIn = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
-  const isRefreshToken = myLocalStorage.getItem('RefreshToken');
-  const isAccessToken = sessionStorage.getItem('AccessToken');
+  const isRefreshAccessTokens = myLocalStorage.getRefreshAccessTokens();
 
   useEffect(() => {
-    if (isRefreshToken && isAccessToken) {
-      navigate(loginPath, { state: pathname });
-    } else navigate(signUpForm, { state: pathname });
-  }, [isRefreshToken, isAccessToken, navigate, pathname]);
+    if (isRefreshAccessTokens) {
+      navigate(bookingListPath, { state: pathname });
+    } else navigate(welcomePath, { state: pathname });
+  }, [isRefreshAccessTokens, navigate, pathname]);
 };
 
 export const useCheckMe = (path: string) => {

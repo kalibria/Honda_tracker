@@ -14,8 +14,10 @@ import {
   loginPath,
   settingsPath,
   signUpForm,
+  welcomePath,
 } from 'src/router/rootConstants';
 import { SettingsPage } from 'src/settings/SettingsPage';
+import { WelcomeToHondaTracker } from 'src/welcom/WelcomeToHondaTracker';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: settingsPath,
         element: <SettingsPage />,
+      },
+      {
+        path: welcomePath,
+        element: <WelcomeToHondaTracker />,
       },
     ],
   },

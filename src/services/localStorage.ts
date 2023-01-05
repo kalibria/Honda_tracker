@@ -22,6 +22,15 @@ class LocalStorage {
       return true;
     } else return false;
   }
+
+  getRefreshAccessTokens() {
+    const isRefreshToken = this.getItem('RefreshToken');
+    const isAccessToken = sessionStorage.getItem('AccessToken');
+
+    if (isRefreshToken && isAccessToken) {
+      return true;
+    } else return false;
+  }
 }
 
 export const myLocalStorage = new LocalStorage();

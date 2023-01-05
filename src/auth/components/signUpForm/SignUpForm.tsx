@@ -1,11 +1,20 @@
 import Button from '@mui/material/Button';
 import { Form, Formik } from 'formik';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLazySignUpQuery } from 'src/services/hondaApi';
+import { myLocalStorage } from 'src/services/localStorage';
 import { MyTextInput } from 'src/ui-kit/components';
 
 export const SignUpForm = () => {
   const [trigger, result] = useLazySignUpQuery();
+
+  useEffect(() => {
+    if (result.isSuccess) {
+      myLocalStorage.setItem('RefreshToken', result.currentData.RefreshToken);
+      sessionStorage.setItem('AccessToken', result.currentData.AccessToken);
+    }
+  }, [result]);
+
   return (
     <div className="mainContainer">
       <div className="flex flex-col justify-center items-center formWrapper">
@@ -31,6 +40,7 @@ export const SignUpForm = () => {
               providedCarIds: [],
               availableCarIds: ['ho-12345'],
             });
+
             setSubmitting(false);
           }}>
           <Form className="flex flex-col space-y-3.5 widthFormItem">
