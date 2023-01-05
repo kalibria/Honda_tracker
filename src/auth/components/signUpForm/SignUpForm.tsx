@@ -5,12 +5,14 @@ import { MyTextInput } from 'src/ui-kit/components';
 
 export const SignUpForm = () => {
   return (
-    <div>
-      <div>
-        <img
-          src="https://www.nicepng.com/png/detail/138-1388174_login-account-icon.png"
-          alt="Sign-up"
-        />
+    <div className="mainContainer ">
+      <div className="flex flex-col justify-center items-center formWrapper">
+        <div className="w-24 mb-4">
+          <img
+            src="https://www.nicepng.com/png/detail/138-1388174_login-account-icon.png"
+            alt="Sign-up"
+          />
+        </div>
         <h1 className="text-center">Sign-up</h1>
       </div>
       <Formik
@@ -19,7 +21,7 @@ export const SignUpForm = () => {
           password: '',
         }}
         onSubmit={(values, { setSubmitting }) => {}}>
-        <Form>
+        <Form className="flex flex-col space-y-3.5 widthFormItem">
           <MyTextInput
             id={'outlined-login-input'}
             label={'email'}
@@ -37,7 +39,7 @@ export const SignUpForm = () => {
 
           <div className={'button'}>
             <Button variant="contained" type="submit">
-              {'Войти'}
+              {'Зарегистрироваться'}
             </Button>
           </div>
         </Form>
