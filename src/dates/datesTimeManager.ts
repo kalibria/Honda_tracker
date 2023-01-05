@@ -1,8 +1,7 @@
-import { addDays, endOfDay, startOfDay } from 'date-fns';
+import dayjs, { Dayjs } from 'dayjs';
 import { AMOUNT_OF_DAYS } from 'src/booking-list/constants';
 import { endOfDay, startOfDay } from 'date-fns';
 import { IStartEndDates } from 'src/booking-list/types';
-import { IMonths } from 'src/dates/types';
 
 class DatesTimeManager {
   getDatesForCalendarMS() {

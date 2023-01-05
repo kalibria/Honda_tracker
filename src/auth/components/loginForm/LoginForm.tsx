@@ -36,10 +36,8 @@ const LoginForm = () => {
   useEffect(() => {
     if (resultUser.isSuccess) {
       batch(() => {
-        batch(() => {
-          dispatch(setCarId(resultUser.data.user.availableCars));
-          dispatch(setFirstName(resultUser.data.user.firstName));
-        });
+        dispatch(setCarId(resultUser.data.user.availableCars));
+        dispatch(setFirstName(resultUser.data.user.firstName));
       });
 
       navigate(location.state || bookingListPath);

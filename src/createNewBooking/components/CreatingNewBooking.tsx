@@ -80,7 +80,7 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
         return Yup.date()
           .min(
             startTime,
-            'Время завершения поездки должна быть больше времени начала поездки',
+            'Время завершения поездки должно быть больше времени начала поездки',
           )
           .typeError('Заполните поле');
       }),
