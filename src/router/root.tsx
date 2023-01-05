@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import LoginForm from 'src/auth/components/loginForm/LoginForm';
 import { App } from 'src/App';
+import { SignUpForm } from 'src/auth/components/signUpForm/SignUpForm';
 import { BookingDetails } from 'src/booking-list/components/BookingDetails';
 import { BookingList } from 'src/booking-list/components/BookingList';
 import { CreatingNewBooking } from 'src/createNewBooking/components/CreatingNewBooking';
@@ -13,6 +14,7 @@ import {
   initPath,
   loginPath,
   settingsPath,
+  signUpForm,
   welcomePath,
 } from 'src/router/rootConstants';
 import { SettingsPage } from 'src/settings/SettingsPage';
@@ -35,10 +37,6 @@ const router = createBrowserRouter([
         path: creatingNewBooking,
         element: <WrapperForCreatingBooking />,
       },
-      {
-        path: welcomePath,
-        element: <WelcomeToHondaTracker />,
-      },
 
       {
         path: settingsPath,
@@ -47,8 +45,16 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: welcomePath,
+    element: <WelcomeToHondaTracker />,
+  },
+  {
     path: loginPath,
     element: <LoginForm />,
+  },
+  {
+    path: signUpForm,
+    element: <SignUpForm />,
   },
   {
     path: errorPath,

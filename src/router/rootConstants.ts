@@ -11,3 +11,5 @@ export const settingsPath = '/settings';
 export const errorPath = 'error';
 
 export const creatingNewBooking = '/creatingBooking';
+
+export const signUpForm = '/signUp';
