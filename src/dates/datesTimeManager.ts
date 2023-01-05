@@ -1,9 +1,10 @@
+import dayjs, { Dayjs } from 'dayjs';
 import { AMOUNT_OF_DAYS } from 'src/booking-list/constants';
 import { endOfDay, startOfDay } from 'date-fns';
 import { IStartEndDates } from 'src/booking-list/types';
 
-class DatesManager {
-  getDatesMS() {
+class DatesTimeManager {
+  getDatesForCalendarMS() {
     let arrOfDays: number[] = [];
     arrOfDays.length = AMOUNT_OF_DAYS - 1;
     arrOfDays.fill(0);
@@ -44,6 +45,44 @@ class DatesManager {
     return this.formatterDateTime.format(date);
   }
 
+  getCurrentDate() {
+    return new Date().toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+    });
+  }
+
+  getCurrentDateTimeDayJs() {
+    return dayjs();
+  }
+
+  getCurrentDateTime() {
+    return new Date().toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+    });
+  }
+
+  addHours(originalTime: Dayjs, hours: number) {
+    return originalTime.add(hours, 'hour');
+  }
+
+  getDateTimeSec(date: Dayjs | undefined, time: Dayjs | undefined) {
+    const startHour = dayjs(time).hour();
+    const startMin = dayjs(time).minute();
+    const startDateTime = dayjs(date).hour(startHour).minute(startMin);
+
+    return this.getSecFromDate(startDateTime);
+  }
+
+  getSecFromDate(date: string | Dayjs) {
+    return Math.round(dayjs(date).toDate().getTime() / 1000);
+  }
+
   private formatter = new Intl.DateTimeFormat('ru', {
     weekday: 'long',
     month: 'long',
@@ -58,4 +97,4 @@ class DatesManager {
   });
 }
 
-export const datesManager = new DatesManager();
+export const datesManager = new DatesTimeManager();

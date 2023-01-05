@@ -1,4 +1,6 @@
 import { FieldHookConfig } from 'formik';
+import React from 'react';
+import { bool } from 'yup';
 
 export interface IHandleQueryResult {
   isSuccess: boolean;
@@ -10,7 +12,17 @@ export interface IHandleQueryResult {
 export interface MyTextInputProps {
   label: string;
   name: string;
-  [key: string]: string | FieldHookConfig<any>;
+  [key: string]: string | boolean | FieldHookConfig<any>;
+}
+
+export interface MyTextInputWithBorderProps {
+  label: string;
+  name: string;
+  id: string;
+  disabled?: boolean;
+  value?: string;
+  loading: boolean;
+  onChange?: (e: React.ChangeEvent<any>) => void;
 }
 
 export interface MyCheckboxProps {
@@ -21,7 +33,10 @@ export interface MyCheckboxProps {
 export interface MySelectProps {
   label: string;
   name: string;
-  [key: string]: string | FieldHookConfig<any>;
+  id: string;
+  data?: string[];
+  value?: string;
+  // [key: string]: string | FieldHookConfig<any>;
 }
 
 export interface IAlertForm {

@@ -21,6 +21,16 @@
     row-gap: 0.5em;
 }
 
+.box {
+    display: grid;
+    row-gap: 0.5em;
+
+    border: 2px solid #0380ab;
+    border-radius: 5px;
+
+    padding: 2em;
+}
+
 
 .buttonAppContainer {
     display: flex;

@@ -1,5 +1,6 @@
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
+import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import { useField } from 'formik';
 import React from 'react';
@@ -8,13 +9,14 @@ import {
   MyCheckboxProps,
   MySelectProps,
   MyTextInputProps,
+  MyTextInputWithBorderProps,
 } from 'src/ui-kit/components.types';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import FormHelperText from '@mui/material/FormHelperText';
+import { Loading } from 'src/ui-kit/Loading';
 
 export const MyTextInput: React.FC<MyTextInputProps> = ({
   label,
@@ -32,7 +34,7 @@ export const MyTextInput: React.FC<MyTextInputProps> = ({
   );
 };
 
-export const MyTextInputWithBorder: React.FC<MyTextInputProps> = ({
+export const MyTextInputWithBorder: React.FC<MyTextInputWithBorderProps> = ({
   label,
   ...props
 }) => {
@@ -42,11 +44,16 @@ export const MyTextInputWithBorder: React.FC<MyTextInputProps> = ({
       <FormControl>
         <InputLabel htmlFor="component-outlined">{label}</InputLabel>
         <OutlinedInput
-          id="component-outlined"
-          defaultValue="Composed TextField"
-          label={label}
-          {...props}
           {...field}
+          id="component-outlined"
+          label={label}
+          startAdornment={
+            props.loading && (
+              <InputAdornment position="start">
+                <Loading />
+              </InputAdornment>
+            )
+          }
         />
       </FormControl>
 
@@ -57,13 +64,24 @@ export const MyTextInputWithBorder: React.FC<MyTextInputProps> = ({
   );
 };
 
-export const MySelect: React.FC<MySelectProps> = ({ label, ...props }) => {
+export const MySelect: React.FC<MySelectProps> = ({
+  label,
+  data,
+  ...props
+}) => {
   const [field, meta] = useField(props);
+  const menuItems = data?.map((item, index) => {
+    return (
+      <MenuItem key={index} value={item}>
+        {item}
+      </MenuItem>
+    );
+  });
 
-  const [age, setAge] = React.useState('');
+  const [currentValue, setCurrentValue] = React.useState(props.name);
 
   const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value);
+    setCurrentValue(event.target.value);
   };
   return (
     <>
@@ -72,15 +90,11 @@ export const MySelect: React.FC<MySelectProps> = ({ label, ...props }) => {
         <Select
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
-          value={age}
           label={label}
-          onChange={handleChange}>
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          {...field}
+          // value={Array.isArray(field.value) ? field.value?.[0] : field.value}>
+          value={field.value}>
+          {menuItems}
         </Select>
       </FormControl>
     </>

@@ -1,13 +1,14 @@
 import Button from '@mui/material/Button';
 import React, { useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
-import { useDispatch } from 'react-redux';
+import { batch, useDispatch } from 'react-redux';
 import { redirect, useLocation, useNavigate } from 'react-router-dom';
 
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 import {
   setCarId,
   setCurrentUsername,
+  setFirstName,
   setUserRole,
 } from 'src/redux/userDataSlice';
 import { bookingListPath } from 'src/router/rootConstants';
@@ -34,7 +35,11 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (resultUser.isSuccess) {
-      dispatch(setCarId(resultUser.data.user.availableCars));
+      batch(() => {
+        dispatch(setCarId(resultUser.data.user.availableCars));
+        dispatch(setFirstName(resultUser.data.user.firstName));
+      });
+
       navigate(location.state || bookingListPath);
     }
   }, [dispatch, location.state, navigate, resultUser, resultUser.isSuccess]);
