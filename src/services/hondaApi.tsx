@@ -20,6 +20,25 @@ export const hondaApi = createApi({
 
   tagTypes: ['Login', 'Me'],
   endpoints: (builder) => ({
+    signUp: builder.query({
+      query: ({
+        firstName,
+        username,
+        password,
+        providedCarIds,
+        availableCarIds,
+      }) => ({
+        url: '/signup',
+        method: 'POST',
+        body: {
+          firstName,
+          username,
+          password,
+          providedCarIds,
+          availableCarIds,
+        },
+      }),
+    }),
     statusLogin: builder.query({
       query: ({ password, username }) => ({
         url: '/login',
@@ -68,4 +87,5 @@ export const {
   useLazyGetBookingsQuery,
   useLazyGetBookingsIdQuery,
   useLazyBookingsQuery,
+  useLazySignUpQuery,
 } = hondaApi;
