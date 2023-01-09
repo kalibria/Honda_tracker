@@ -1,17 +1,26 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IBookingRequest } from 'src/createNewBooking/bookingTypes';
+import { myLocalStorage } from 'src/services/localStorage';
 
 export const hondaApi = createApi({
   reducerPath: 'hondaApi',
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_BASE_URL,
     // credentials: 'include',
-    prepareHeaders: (headers, { getState }) => {
-      // const refreshToken = myLocalStorage.getItem('RefreshToken');
+    prepareHeaders: (headers, { getState, endpoint }) => {
+      const refreshToken = myLocalStorage.getItem('RefreshToken');
       const accessToken = sessionStorage.getItem('AccessToken');
+      // const idToken = sessionStorage.getItem('IdToken');
 
-      if (accessToken) {
-        headers.set('authorization', `Bearer ${accessToken}`);
+      if (refreshToken && endpoint === 'getIdAccessToken') {
+        headers.set('x-refresh-token', refreshToken);
+        headers.set('origin', window.origin);
+        headers.set('content-type', 'application/json');
+      } else {
+        if (accessToken) {
+          headers.set('Authorization', `Bearer ${accessToken}`);
+          // headers.set('x-id-token', accessToken);
+        }
       }
 
       return headers;
@@ -37,6 +46,12 @@ export const hondaApi = createApi({
           providedCarIds,
           availableCarIds,
         },
+      }),
+    }),
+    getIdAccessToken: builder.query({
+      query: () => ({
+        url: '/token/refresh',
+        method: 'POST',
       }),
     }),
     statusLogin: builder.query({
@@ -88,4 +103,5 @@ export const {
   useLazyGetBookingsIdQuery,
   useLazyBookingsQuery,
   useLazySignUpQuery,
+  useLazyGetIdAccessTokenQuery,
 } = hondaApi;

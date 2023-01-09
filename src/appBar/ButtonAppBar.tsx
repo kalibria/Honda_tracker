@@ -6,7 +6,7 @@ import { SettingsButton } from 'src/settings/SettingsButton';
 
 export default function ButtonAppBar() {
   // const isAuth = myLocalStorage.isAuth();
-  const isRefreshAccessTokens = myLocalStorage.getRefreshAccessTokens();
+  const isRefreshAccessTokens = myLocalStorage.isRefreshToken();
   return (
     <div>
       {isRefreshAccessTokens ? (

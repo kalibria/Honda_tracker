@@ -18,6 +18,7 @@ export const SignUpForm = () => {
     if (result.isSuccess) {
       myLocalStorage.setItem('RefreshToken', result.currentData.RefreshToken);
       sessionStorage.setItem('AccessToken', result.currentData.AccessToken);
+      sessionStorage.setItem('IdToken', result.currentData.IdToken);
       navigate(bookingListPath);
     } else if (result.isError) {
       setErrorMsg(myRtkQueryResultProcessor.getErrorMessage(result.error));

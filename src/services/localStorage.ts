@@ -23,14 +23,19 @@ class LocalStorage {
     } else return false;
   }
 
-  getRefreshAccessTokens() {
+  isRefreshToken() {
     const isRefreshToken = this.getItem('RefreshToken');
-    const isAccessToken = sessionStorage.getItem('AccessToken');
 
-    if (isRefreshToken && isAccessToken) {
-      return true;
-    } else return false;
+    return !!isRefreshToken;
   }
+  // getRefreshAccessTokens() {
+  //   const isRefreshToken = this.getItem('RefreshToken');
+  //   const isAccessToken = sessionStorage.getItem('AccessToken');
+  //
+  //   if (isRefreshToken && isAccessToken) {
+  //     return true;
+  //   } else return false;
+  // }
 }
 
 export const myLocalStorage = new LocalStorage();

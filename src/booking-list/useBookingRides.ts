@@ -9,6 +9,7 @@ export const useBookingRides = () => {
   const selectCarId = useSelector((state: RootState) => state.userData.carId);
   const firstSelectedCar = selectCarId[0]; //assume user has only one car
 
+  console.log('selectCarId', selectCarId);
   const selectUsername = useSelector(
     (state: RootState) => state.userData.username,
   );

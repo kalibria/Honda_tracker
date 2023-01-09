@@ -6,10 +6,12 @@ import { logOut, setIsAuthenticated } from 'src/redux/authSlice';
 import {
   bookingListPath,
   loginPath,
-  signUpForm,
   welcomePath,
 } from 'src/router/rootConstants';
-import { useGetMeQuery } from 'src/services/hondaApi';
+import {
+  useGetMeQuery,
+  useLazyGetIdAccessTokenQuery,
+} from 'src/services/hondaApi';
 import { myLocalStorage } from 'src/services/localStorage';
 
 class AuthenticationManager {
@@ -28,20 +30,6 @@ class AuthenticationManager {
 
 export const authenticationManager = new AuthenticationManager();
 
-export const useCheckIsLoggedIn = () => {
-  // const isAuth = myLocalStorage.isAuth();
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
-
-  const isRefreshAccessTokens = myLocalStorage.getRefreshAccessTokens();
-
-  useEffect(() => {
-    if (isRefreshAccessTokens) {
-      navigate(bookingListPath, { state: pathname });
-    } else navigate(welcomePath, { state: pathname });
-  }, [isRefreshAccessTokens, navigate, pathname]);
-};
-
 export const useCheckMe = (path: string) => {
   const navigate = useNavigate();
   const { data, isSuccess, isError } = useGetMeQuery({});
@@ -57,4 +45,24 @@ export const useCheckMe = (path: string) => {
   }, [data, isError, isSuccess, navigate, path]);
 
   return username;
+};
+
+export const useCheckIsLoggedIn = () => {
+  const isRefreshToken = myLocalStorage.isRefreshToken();
+  const [trigger, result] = useLazyGetIdAccessTokenQuery();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (isRefreshToken) {
+      trigger({});
+      if (result.isSuccess) {
+        sessionStorage.setItem('idToken', result.currentData.IdToken);
+        sessionStorage.setItem('AccessToken', result.currentData.AccessToken);
+        navigate(bookingListPath, { state: pathname });
+      }
+    } else {
+      navigate(welcomePath, { state: pathname });
+    }
+  }, []);
 };
