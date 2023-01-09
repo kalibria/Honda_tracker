@@ -149,6 +149,11 @@
     margin-right: auto;
 }
 
+.welcomeText {
+    font-size: 1.5em;
+    text-align: center;
+}
+
 @media (min-width: 700px) {
     .bookingWrapper {
         width: 750px;
