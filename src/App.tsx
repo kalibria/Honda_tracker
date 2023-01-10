@@ -4,11 +4,13 @@ import { Outlet } from 'react-router-dom';
 import ButtonAppBar from 'src/appBar/ButtonAppBar';
 import { useCheckIsLoggedIn } from 'src/auth/authenticationManager';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { Loading } from 'src/ui-kit/Loading';
 
 export const App = () => {
-  useCheckIsLoggedIn();
-
-  return (
+  const { isLoading, isSuccess } = useCheckIsLoggedIn();
+  return isLoading ? (
+    <Loading />
+  ) : (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <div>
         <ButtonAppBar />

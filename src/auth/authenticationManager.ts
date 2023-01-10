@@ -52,17 +52,34 @@ export const useCheckIsLoggedIn = () => {
   const [trigger, result] = useLazyGetIdAccessTokenQuery();
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     if (isRefreshToken) {
+      setIsLoading(true);
       trigger({});
       if (result.isSuccess) {
+        setIsLoading(false);
+        setIsSuccess(true);
         sessionStorage.setItem('idToken', result.currentData.IdToken);
         sessionStorage.setItem('AccessToken', result.currentData.AccessToken);
         navigate(bookingListPath, { state: pathname });
+      } else if (result.isError) {
+        setIsLoading(false);
+        setIsSuccess(false);
       }
     } else {
       navigate(welcomePath, { state: pathname });
     }
-  }, []);
+  }, [
+    isRefreshToken,
+    navigate,
+    pathname,
+    result.isError,
+    result.isSuccess,
+    trigger,
+  ]);
+
+  return { isLoading, isSuccess };
 };

@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { IBookingInfo, IRTKQueryBookingResponse } from 'src/booking-list/types';
 import { setBookingsInfo } from 'src/redux/bookingSlice';
-import { RootState } from 'src/redux/store';
-import { useLazyGetBookingsQuery } from 'src/services/hondaApi';
+import {
+  useGetMeQuery,
+  useLazyGetBookingsQuery,
+  useLazyGetUserQuery,
+} from 'src/services/hondaApi';
 
 export const useBookingRides = () => {
-  const selectCarId = useSelector((state: RootState) => state.userData.carId);
-  const firstSelectedCar = selectCarId[0]; //assume user has only one car
-
-  console.log('selectCarId', selectCarId);
-  const selectUsername = useSelector(
-    (state: RootState) => state.userData.username,
-  );
+  const { data: meData, isSuccess } = useGetMeQuery({});
+  const [triggerUserInfo, resultUserInfo] = useLazyGetUserQuery();
 
   const [trigger, data] = useLazyGetBookingsQuery();
 
@@ -21,8 +19,19 @@ export const useBookingRides = () => {
   const [allBookingInfo, setAllBookingInfo] = useState<IBookingInfo[]>([]);
 
   useEffect(() => {
-    trigger({ carId: firstSelectedCar, username: selectUsername });
-  }, [firstSelectedCar, selectUsername, trigger]);
+    if (isSuccess) {
+      triggerUserInfo(meData.username);
+    }
+  }, [isSuccess, meData, triggerUserInfo]);
+
+  useEffect(() => {
+    if (resultUserInfo.isSuccess) {
+      trigger({
+        carId: resultUserInfo.currentData.user.availableCars[0],
+        username: resultUserInfo.currentData.user.username,
+      });
+    }
+  }, [resultUserInfo.currentData, resultUserInfo.isSuccess, trigger]);
 
   useEffect(() => {
     if (data.isSuccess) {
@@ -45,7 +54,7 @@ export const useBookingRides = () => {
       setAllBookingInfo(bookingRides);
       dispatch(setBookingsInfo(bookingRides));
     }
-  }, [data.currentData, data.isSuccess]);
+  }, [data.currentData, data.isSuccess, dispatch]);
 
   return allBookingInfo;
 };
