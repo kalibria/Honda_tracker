@@ -1,8 +1,8 @@
 import Button from '@mui/material/Button';
 import dayjs, { Dayjs } from 'dayjs';
 import { Formik } from 'formik';
-import React, { useEffect, useState } from 'react';
-import { redirect, useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   IBookingRequest,
   ICreatingNewBooking,
@@ -36,6 +36,12 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
   const [trigger, result] = useLazyBookingsQuery();
   const curDate = datesManager.getCurrentDateTime();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (result.isSuccess) {
+      navigate(bookingListPath);
+    }
+  }, [result.isSuccess, navigate]);
 
   const initialValues: InitialValues = {
     driver: firstName,
@@ -113,7 +119,8 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
           };
 
           trigger(dataForBookingRequest);
-          navigate(bookingListPath);
+
+          // navigate(bookingListPath);
           setSubmitting(false);
         }}>
         {(props) => {
