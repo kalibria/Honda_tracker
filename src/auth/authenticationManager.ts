@@ -3,11 +3,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { logOut, setIsAuthenticated } from 'src/redux/authSlice';
-import {
-  bookingListPath,
-  loginPath,
-  welcomePath,
-} from 'src/router/rootConstants';
+import { loginPath, welcomePath } from 'src/router/rootConstants';
 import {
   useGetMeQuery,
   useLazyGetIdAccessTokenQuery,
@@ -64,7 +60,6 @@ export const useCheckIsLoggedIn = () => {
         setIsSuccess(true);
         sessionStorage.setItem('idToken', result.currentData.IdToken);
         sessionStorage.setItem('AccessToken', result.currentData.AccessToken);
-        navigate(bookingListPath, { state: pathname });
       } else if (result.isError) {
         setIsLoading(false);
         setIsSuccess(false);

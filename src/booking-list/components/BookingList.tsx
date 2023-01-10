@@ -1,24 +1,23 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { CalendarItemsWrapper } from 'src/booking-list/components/CalendarItemsWrapper';
-import { driverRole } from 'src/booking-list/constants';
-import { ButtonUI } from 'src/ui-kit/ButtonUI';
-import { RootState } from 'src/redux/store';
 import { creatingNewBooking } from 'src/router/rootConstants';
+import { useQueryUserInfo } from 'src/services/useQueryUserInfo';
+import { ButtonUI } from 'src/ui-kit/ButtonUI';
+import { Roles } from 'src/user/types';
 
 export const BookingList = () => {
-  const selectUserRole = useSelector((state: RootState) => state.userData.role);
+  const { resultUserInfo } = useQueryUserInfo();
+  const userRoles = resultUserInfo.roles;
 
-  const isDriverRole = selectUserRole.includes(driverRole);
-  const createNewRide = () => {};
+  const isDriverRole = userRoles.includes(Roles.DRIVER);
 
   return (
     <div className={'bookingPage'}>
       {isDriverRole && (
         <div className={'button'}>
           <Link to={creatingNewBooking}>
-            <ButtonUI onClick={createNewRide}>{'Создать поездку'}</ButtonUI>
+            <ButtonUI>{'Создать поездку'}</ButtonUI>
           </Link>
         </div>
       )}
