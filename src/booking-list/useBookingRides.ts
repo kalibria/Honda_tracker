@@ -2,16 +2,11 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { IBookingInfo, IRTKQueryBookingResponse } from 'src/booking-list/types';
 import { setBookingsInfo } from 'src/redux/bookingSlice';
-import {
-  useGetMeQuery,
-  useLazyGetBookingsQuery,
-  useLazyGetUserQuery,
-} from 'src/services/hondaApi';
+import { useLazyGetBookingsQuery } from 'src/services/hondaApi';
+import { useQueryUserInfo } from 'src/services/useQueryUserInfo';
 
 export const useBookingRides = () => {
-  const { data: meData, isSuccess } = useGetMeQuery({});
-  const [triggerUserInfo, resultUserInfo] = useLazyGetUserQuery();
-
+  const { resultUserInfoIsSuccess, resultUserInfo } = useQueryUserInfo();
   const [trigger, data] = useLazyGetBookingsQuery();
 
   const dispatch = useDispatch();
@@ -19,19 +14,13 @@ export const useBookingRides = () => {
   const [allBookingInfo, setAllBookingInfo] = useState<IBookingInfo[]>([]);
 
   useEffect(() => {
-    if (isSuccess) {
-      triggerUserInfo(meData.username);
-    }
-  }, [isSuccess, meData, triggerUserInfo]);
-
-  useEffect(() => {
-    if (resultUserInfo.isSuccess) {
+    if (resultUserInfoIsSuccess) {
       trigger({
-        carId: resultUserInfo.currentData.user.availableCars[0],
-        username: resultUserInfo.currentData.user.username,
+        carId: resultUserInfo.availableCars[0],
+        username: resultUserInfo.username,
       });
     }
-  }, [resultUserInfo.currentData, resultUserInfo.isSuccess, trigger]);
+  }, [resultUserInfoIsSuccess, resultUserInfo, trigger]);
 
   useEffect(() => {
     if (data.isSuccess) {
