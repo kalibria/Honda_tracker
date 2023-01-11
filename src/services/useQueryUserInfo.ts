@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useGetMeQuery, useLazyGetUserQuery } from 'src/services/hondaApi';
 import { ISettings } from 'src/settings/types';
-import { IUser, Roles } from 'src/user/types';
+import { IUser } from 'src/user/types';
 
 export const useQueryUserInfo = () => {
   const { data: meData, isSuccess } = useGetMeQuery({});
@@ -27,7 +27,7 @@ export const useQueryUserInfo = () => {
       setResultUserInfoIsSuccess(true);
       setResultUserInfo(result.currentData.user);
     }
-  });
+  }, [result.isSuccess, result.currentData]);
 
   return { resultUserInfoIsSuccess, resultUserInfo };
 };

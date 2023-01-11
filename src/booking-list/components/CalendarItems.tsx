@@ -4,28 +4,29 @@ import { IUICalendarItems } from 'src/booking-list/types';
 
 export const CalendarItems = ({ datesRidesForUI }: IUICalendarItems) => {
   const items = datesRidesForUI.map((item, index) => {
-    return (
-      <div className={'calendar'} key={item.id}>
-        <li className={'cellDecoration'}>{item.date}</li>
-        <li className={'cellDecoration'}>
-          {item.info.username ? (
-            <ul>
-              <li className={'fontBold'}>{item.info.username}</li>
-              <li className={'fontBold'} key={item.id}>
-                <Link to={`/booking-details/${item.id}`}>
-                  {item.info.description}
-                </Link>
-              </li>
-            </ul>
-          ) : (
-            <ul>
-              <li>{item.info.username}</li>
-              <li>{item.info.description}</li>
-            </ul>
-          )}
-        </li>
-      </div>
-    );
+    const prevItems = item.info.map((el, indexEl) => {
+      return (
+        <div className={'calendar'} key={el.id}>
+          <li className={'cellDecoration'}>{item.date}</li>
+          <li className={'cellDecoration'}>
+            {el.username ? (
+              <ul>
+                <li className={'fontBold'}>{el.username}</li>
+                <li className={'fontBold'} key={el.id}>
+                  <Link to={`/booking-details/${el.id}`}>{el.description}</Link>
+                </li>
+              </ul>
+            ) : (
+              <ul>
+                <li>{el.username}</li>
+                <li>{el.description}</li>
+              </ul>
+            )}
+          </li>
+        </div>
+      );
+    });
+    return prevItems;
   });
 
   return <ul>{items}</ul>;

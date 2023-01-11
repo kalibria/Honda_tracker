@@ -7,7 +7,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { Loading } from 'src/ui-kit/Loading';
 
 export const App = () => {
-  const { isLoading, isSuccess } = useCheckIsLoggedIn();
+  const { isLoading } = useCheckIsLoggedIn();
   return isLoading ? (
     <Loading />
   ) : (

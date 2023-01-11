@@ -5,6 +5,7 @@ import {
   ICalendarRide,
   IStartEndDates,
   IUICalendar,
+  IUIRideInfo,
 } from 'src/booking-list/types';
 
 export class BookingItemsManager {
@@ -38,31 +39,35 @@ export class BookingItemsManager {
   }
 
   calendarItemMapToUI(calendarItems: ICalendarRide[]) {
+    console.log('calendarItems', calendarItems);
     return calendarItems.reduce((accum: IUICalendar[], item, index) => {
       if (item[1] === null) {
         if (item[0] !== null) {
           accum.push({
             date: datesManager.getFormattingDate(Number(item[0])),
-            info: {
-              username: '',
-              description: 'Свободно',
-            },
-            id: Math.round(+item[0] / 1000).toString(), //id in seconds
+            info: [
+              {
+                username: '',
+                description: 'Свободно',
+                id: Math.round(+item[0] / 1000).toString(), //id in seconds
+              },
+            ],
           });
         }
       } else {
+        console.log('item[1', item[1]);
+        const itemsInfo = item[1].reduce((accumInfo: IUIRideInfo[], item) => {
+          accumInfo.push({
+            username: item.username,
+            description: item.description,
+            id: item.bookingOwner + '$' + item.carId + '$' + item.id,
+          });
+
+          return accumInfo;
+        }, []);
         accum.push({
           date: datesManager.getFormattingDate(Number(item[0])),
-          info: {
-            username: item[1]?.[0].username,
-            description: item[1][0].description,
-          },
-          id:
-            item[1][0].bookingOwner +
-            '$' +
-            item[1][0].carId +
-            '$' +
-            item[1][0].id,
+          info: itemsInfo,
         });
       }
 
