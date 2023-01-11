@@ -53,12 +53,7 @@
 }
 
 .bookingWrapper {
-    display: grid;
-    grid-template-columns: 1fr;
     margin: 15px;
-    border: 2px solid #0380ab;
-    border-radius: 5px;
-    background-color: #dcebf4;
     width: 90%;
 }
 
@@ -102,55 +97,54 @@
 
 .calendar {
     display: grid;
-    grid-template-columns: 2fr 2fr;
+    margin-top: 2em;
 }
 
 
 
 .cellDecoration {
-    border: 1px solid #ccd4d9;
     background-color: #719ab226;
-    padding: 1rem 0.5em;
+    padding: 0.5em;
 
 }
 
 .creationRidePage {
-display: grid;
-justify-items: center;
-row-gap: 1em;
+    display: grid;
+    justify-items: center;
+    row-gap: 1em;
 
-margin: 1em 0;
+    margin: 1em 0;
 }
 
 
 
 .formGroup {
-border: 2px solid #0380ab;
-border-radius: 5px;
+    border: 2px solid #0380ab;
+    border-radius: 5px;
 }
 
 .formWrapper {
-width: 100%;
+    width: 100%;
 }
 
 .fontBold {
-font-weight: bold;
+    font-weight: bold;
 }
 
 .label{
-text-align: center;
-color: black;
+    text-align: center;
+    color: black;
 }
 
 .widthFormItem {
-width: 80%;
-margin-left: auto;
-margin-right: auto;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .welcomeText {
-font-size: 1.5em;
-text-align: center;
+    font-size: 1.5em;
+    text-align: center;
 }
 
 @media (min-width: 700px) {
