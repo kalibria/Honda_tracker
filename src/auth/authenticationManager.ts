@@ -73,7 +73,6 @@ export const useCheckIsLoggedIn = () => {
     pathname,
     result.isError,
     result.isSuccess,
-    result.currentData,
     trigger,
   ]);
 

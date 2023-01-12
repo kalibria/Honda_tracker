@@ -15,6 +15,7 @@ export const useQueryUserInfo = () => {
     providedCars: [''],
     settings: <ISettings>{},
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (isSuccess) {
@@ -23,11 +24,18 @@ export const useQueryUserInfo = () => {
   }, [isSuccess, meData, trigger]);
 
   useEffect(() => {
+    if (result.isLoading) {
+      setIsLoading(true);
+    }
+  }, [result.isLoading]);
+
+  useEffect(() => {
     if (result.isSuccess) {
       setResultUserInfoIsSuccess(true);
       setResultUserInfo(result.currentData.user);
+      setIsLoading(false);
     }
   }, [result.isSuccess, result.currentData]);
 
-  return { resultUserInfoIsSuccess, resultUserInfo };
+  return { resultUserInfoIsSuccess, resultUserInfo, isLoading };
 };

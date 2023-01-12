@@ -6,9 +6,6 @@ export const CalendarItems = ({ datesRidesForUI }: IUICalendarItems) => {
   const items = datesRidesForUI.map((item, index) => {
     return (
       <ul className={'calendar'} key={item.date}>
-        {/*<ul className={'cellDecoration'}>*/}
-        {/*  {item.date}*/}
-        {/*</ul>*/}
         <li className={'cellDecoration'}>{item.date}</li>
         <ul>
           {item.info.map((el, indexEl) => {
@@ -22,6 +19,7 @@ export const CalendarItems = ({ datesRidesForUI }: IUICalendarItems) => {
                         {el.description}
                       </Link>
                     </li>
+                    {/*<li>{}</li>*/}
                   </ul>
                 ) : (
                   <ul>
