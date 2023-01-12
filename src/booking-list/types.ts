@@ -30,6 +30,7 @@ export interface ICalendarRide {
 export interface IUIRideInfo {
   username: string;
   description: string;
+  time: string;
   id: string;
 }
 

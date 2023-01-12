@@ -45,6 +45,10 @@ class DatesTimeManager {
     return this.formatterDateTime.format(date);
   }
 
+  getFormattingTime(date: number) {
+    return this.formatterTime.format(date);
+  }
+
   getCurrentDate() {
     return new Date().toLocaleDateString('en-US', {
       year: 'numeric',
@@ -92,6 +96,11 @@ class DatesTimeManager {
   private formatterDateTime = new Intl.DateTimeFormat('ru', {
     month: 'long',
     day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+  });
+
+  private formatterTime = new Intl.DateTimeFormat('ru', {
     hour: 'numeric',
     minute: 'numeric',
   });

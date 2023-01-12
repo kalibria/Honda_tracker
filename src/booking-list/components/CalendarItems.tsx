@@ -14,12 +14,13 @@ export const CalendarItems = ({ datesRidesForUI }: IUICalendarItems) => {
                 {el.username ? (
                   <ul>
                     <li className={'fontBold'}>{el.username}</li>
+
                     <li className={'fontBold'} key={el.id}>
                       <Link to={`/booking-details/${el.id}`}>
                         {el.description}
                       </Link>
                     </li>
-                    {/*<li>{}</li>*/}
+                    <li>{el.time}</li>
                   </ul>
                 ) : (
                   <ul>

@@ -49,17 +49,18 @@ export class BookingItemsManager {
               {
                 username: '',
                 description: 'Свободно',
+                time: '',
                 id: Math.round(+item[0] / 1000).toString(), //id in seconds
               },
             ],
           });
         }
       } else {
-        console.log('item[1', item[1]);
         const itemsInfo = item[1].reduce((accumInfo: IUIRideInfo[], item) => {
           accumInfo.push({
             username: item.username,
             description: item.description,
+            time: datesManager.getFormattingTime(+new Date(item.startTime)),
             id: item.bookingOwner + '$' + item.carId + '$' + item.id,
           });
 
