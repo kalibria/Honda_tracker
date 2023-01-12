@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { authenticationManager } from 'src/auth/authenticationManager';
+import {
+  authenticationManager,
+  useCheckIsLoggedIn,
+} from 'src/auth/authenticationManager';
 
 import { ButtonUI } from 'src/ui-kit/ButtonUI';
 import { Loading } from 'src/ui-kit/Loading';
@@ -12,7 +15,7 @@ import { myLocalStorage } from 'src/services/localStorage';
 import { AlertForm } from 'src/ui-kit/components';
 
 export const LogInLogOutButton = () => {
-  const isAuth = myLocalStorage.isAuth();
+  const { isSuccess } = useCheckIsLoggedIn();
 
   const [trigger, result] = useLazyLogOutQuery();
   const [error, setError] = useState('');
@@ -44,8 +47,8 @@ export const LogInLogOutButton = () => {
   return (
     <div>
       {result.isLoading && <Loading />}
-      <ButtonUI onClick={isAuth ? handleLogOutClick : handleLogInClick}>
-        {isAuth ? 'Выйти' : 'Войти'}
+      <ButtonUI onClick={isSuccess ? handleLogOutClick : handleLogInClick}>
+        {isSuccess ? 'Выйти' : 'Войти'}
       </ButtonUI>
       <div>{error && <AlertForm message={error} />}</div>
     </div>
