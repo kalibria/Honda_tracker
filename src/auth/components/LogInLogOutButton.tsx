@@ -15,7 +15,6 @@ import { myLocalStorage } from 'src/services/localStorage';
 
 export const LogInLogOutButton = () => {
   const { isSuccess } = useCheckIsLoggedIn();
-  console.log('isSuccess', isSuccess);
   const [trigger, result] = useLazyLogOutQuery();
   const [error, setError] = useState('');
   const dispatch = useDispatch();

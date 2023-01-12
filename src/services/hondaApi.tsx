@@ -67,7 +67,7 @@ export const hondaApi = createApi({
       query: (accessToken) => ({
         url: '/logout',
         method: 'POST',
-        body: { accessToken },
+        body: accessToken,
       }),
     }),
     getUser: builder.query({
