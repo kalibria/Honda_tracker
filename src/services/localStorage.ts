@@ -13,14 +13,9 @@ class LocalStorage {
   }
 
   logOut() {
+    // this.removeItem('isAuthenticated');
     localStorage.clear();
-  }
-
-  isAuth() {
-    const isAuth = this.getItem('isAuthenticated');
-    if (isAuth === 'true') {
-      return true;
-    } else return false;
+    sessionStorage.clear();
   }
 
   isRefreshToken() {
@@ -28,14 +23,6 @@ class LocalStorage {
 
     return !!isRefreshToken;
   }
-  // getRefreshAccessTokens() {
-  //   const isRefreshToken = this.getItem('RefreshToken');
-  //   const isAccessToken = sessionStorage.getItem('AccessToken');
-  //
-  //   if (isRefreshToken && isAccessToken) {
-  //     return true;
-  //   } else return false;
-  // }
 }
 
 export const myLocalStorage = new LocalStorage();

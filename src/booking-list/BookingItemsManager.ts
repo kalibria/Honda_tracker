@@ -39,7 +39,6 @@ export class BookingItemsManager {
   }
 
   calendarItemMapToUI(calendarItems: ICalendarRide[]) {
-    console.log('calendarItems', calendarItems);
     return calendarItems.reduce((accum: IUICalendar[], item, index) => {
       if (item[1] === null) {
         if (item[0] !== null) {

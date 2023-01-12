@@ -18,6 +18,5 @@ export const CalendarItemsWrapper = () => {
   const datesRidesForUI = bookingItemsManager.calendarItemMapToUI(
     Object.entries(datesWithRides),
   );
-  console.log('datesRidesForUI', datesRidesForUI);
   return <CalendarItems datesRidesForUI={datesRidesForUI} />;
 };

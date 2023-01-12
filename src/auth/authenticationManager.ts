@@ -7,6 +7,7 @@ import { loginPath, welcomePath } from 'src/router/rootConstants';
 import {
   useGetMeQuery,
   useLazyGetIdAccessTokenQuery,
+  useLazyLogOutQuery,
 } from 'src/services/hondaApi';
 import { myLocalStorage } from 'src/services/localStorage';
 
@@ -46,6 +47,7 @@ export const useCheckMe = (path: string) => {
 export const useCheckIsLoggedIn = () => {
   const isRefreshToken = myLocalStorage.isRefreshToken();
   const [trigger, result] = useLazyGetIdAccessTokenQuery();
+  const [triggerLogOut, resultLogOut] = useLazyLogOutQuery();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [isLoading, setIsLoading] = useState(false);
@@ -58,13 +60,22 @@ export const useCheckIsLoggedIn = () => {
       if (result.isSuccess) {
         setIsLoading(false);
         setIsSuccess(true);
-        sessionStorage.setItem('idToken', result.currentData.IdToken);
-        sessionStorage.setItem('AccessToken', result.currentData.AccessToken);
+        const idToken = sessionStorage.getItem('IdToken');
+        const accessToken = sessionStorage.getItem('AccessToken');
+        if (!idToken) {
+          sessionStorage.setItem('idToken', result.currentData.IdToken);
+        }
+        if (!accessToken) {
+          sessionStorage.setItem('AccessToken', result.currentData.AccessToken);
+        }
       } else if (result.isError) {
         setIsLoading(false);
         setIsSuccess(false);
       }
     } else {
+      setIsLoading(false);
+      setIsSuccess(false);
+
       navigate(welcomePath, { state: pathname });
     }
   }, [
@@ -75,6 +86,16 @@ export const useCheckIsLoggedIn = () => {
     result.isSuccess,
     trigger,
   ]);
+
+  useEffect(() => {
+    const accessToken = sessionStorage.getItem('AccessToken');
+    if (!isRefreshToken && accessToken) {
+      setIsLoading(false);
+      setIsSuccess(false);
+
+      triggerLogOut({ accessToken: accessToken });
+    }
+  }, [isRefreshToken, triggerLogOut]);
 
   return { isLoading, isSuccess };
 };

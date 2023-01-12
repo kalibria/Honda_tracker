@@ -7,7 +7,7 @@ import { ButtonUI } from 'src/ui-kit/ButtonUI';
 import { Roles } from 'src/user/types';
 
 export const BookingList = () => {
-  const { resultUserInfo, isLoading } = useQueryUserInfo();
+  const { resultUserInfo } = useQueryUserInfo();
   const userRoles = resultUserInfo.roles;
 
   const isDriverRole = userRoles.includes(Roles.DRIVER);

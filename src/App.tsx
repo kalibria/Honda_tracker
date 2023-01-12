@@ -7,13 +7,13 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { Loading } from 'src/ui-kit/Loading';
 
 export const App = () => {
-  const { isLoading } = useCheckIsLoggedIn();
+  const { isLoading, isSuccess } = useCheckIsLoggedIn();
   return isLoading ? (
     <Loading />
   ) : (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <div>
-        <ButtonAppBar />
+        <ButtonAppBar isSuccess={isSuccess} />
         <Outlet />
       </div>
     </LocalizationProvider>

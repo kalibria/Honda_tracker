@@ -16,6 +16,8 @@ export const hondaApi = createApi({
         headers.set('x-refresh-token', refreshToken);
         headers.set('origin', window.origin);
         headers.set('content-type', 'application/json');
+      } else if (endpoint === 'logOut') {
+        headers.delete('accessToken');
       } else {
         if (accessToken) {
           headers.set('Authorization', `Bearer ${accessToken}`);
@@ -62,10 +64,10 @@ export const hondaApi = createApi({
       }),
     }),
     logOut: builder.query({
-      query: () => ({
+      query: (accessToken) => ({
         url: '/logout',
         method: 'POST',
-        body: {},
+        body: { accessToken },
       }),
     }),
     getUser: builder.query({

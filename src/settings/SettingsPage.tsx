@@ -2,20 +2,20 @@ import Button from '@mui/material/Button';
 import { Form, Formik } from 'formik';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useCheckIsLoggedIn } from 'src/auth/authenticationManager';
 import { RootState } from 'src/redux/store';
-import { myLocalStorage } from 'src/services/localStorage';
 import { BasicTextFields, SwitchesGroup } from 'src/settings/components';
 import { carProvider } from 'src/settings/constants';
 
 export const SettingsPage = () => {
-  const isAuth = myLocalStorage.isAuth();
+  const { isSuccess } = useCheckIsLoggedIn();
   const selectMyRole = useSelector((state: RootState) => state.userData.role);
 
   const isCarProvider = selectMyRole.includes(carProvider);
 
   return (
     <div className={'sm:w-60 mainContainer'}>
-      {isAuth && (
+      {isSuccess && (
         <Formik
           initialValues={{
             isCreated: false,
