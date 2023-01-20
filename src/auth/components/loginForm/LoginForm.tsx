@@ -18,6 +18,7 @@ import {
 } from 'src/services/hondaApi';
 import { authenticationManager } from 'src/auth/authenticationManager';
 import { myLocalStorage } from 'src/services/localStorage';
+
 import { AlertForm, MyTextInput } from 'src/ui-kit/components';
 
 import * as Yup from 'yup';
@@ -56,6 +57,9 @@ const LoginForm = () => {
       myLocalStorage.setItem('RefreshToken', result.currentData.RefreshToken);
 
       sessionStorage.setItem('AccessToken', result.currentData.AccessToken);
+
+      sessionStorage.setItem('IdToken', result.currentData.IdToken);
+
       triggerUser(username);
     }
     if (isError) {

@@ -1,37 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { CreatingNewBooking } from 'src/createNewBooking/components/CreatingNewBooking';
 import { datesManager } from 'src/dates/datesTimeManager';
-import { useGetMeQuery, useLazyGetUserQuery } from 'src/services/hondaApi';
+import { useQueryUserInfo } from 'src/services/useQueryUserInfo';
 
 export const WrapperForCreatingBooking = () => {
-  const { data, isSuccess } = useGetMeQuery({});
-  const [trigger, result] = useLazyGetUserQuery();
+  const { resultUserInfoIsSuccess, resultUserInfo } = useQueryUserInfo();
+
   const [firstName, setFirstName] = useState('');
   const [username, setUserName] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  // const currentDate = datesManager.getCurrentDate();
   const currentDate = datesManager.getCurrentDateTimeDayJs();
   const currentTime = datesManager.getCurrentDateTimeDayJs();
   const [availableCars, setAvailableCars] = useState<string[]>(['']);
 
   useEffect(() => {
-    if (isSuccess) {
-      trigger(data.username);
-    }
-  }, [data, isSuccess, trigger]);
-
-  useEffect(() => {
-    if (result.isSuccess) {
-      setFirstName(result.currentData.user.firstName);
-      setUserName(result.currentData.user.username);
+    if (resultUserInfoIsSuccess) {
+      setFirstName(resultUserInfo.firstName);
+      setUserName(resultUserInfo.username);
       setIsLoading(false);
       setAvailableCars(
-        [...result.currentData.user.availableCars].sort(
-          (a: string, b: string) => a.localeCompare(b),
+        [...resultUserInfo.availableCars].sort((a: string, b: string) =>
+          a.localeCompare(b),
         ),
       );
     }
-  }, [result]);
+  }, [resultUserInfoIsSuccess, resultUserInfo]);
   return (
     <CreatingNewBooking
       firstName={firstName}

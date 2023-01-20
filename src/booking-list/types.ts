@@ -30,12 +30,13 @@ export interface ICalendarRide {
 export interface IUIRideInfo {
   username: string;
   description: string;
+  time: string;
+  id: string;
 }
 
 export interface IUICalendar {
   date: string;
-  info: IUIRideInfo;
-  id: string;
+  info: IUIRideInfo[];
 }
 
 export interface IUICalendarItems {

@@ -1,17 +1,28 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IBookingRequest } from 'src/createNewBooking/bookingTypes';
+import { myLocalStorage } from 'src/services/localStorage';
 
 export const hondaApi = createApi({
   reducerPath: 'hondaApi',
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_BASE_URL,
     // credentials: 'include',
-    prepareHeaders: (headers, { getState }) => {
-      // const refreshToken = myLocalStorage.getItem('RefreshToken');
+    prepareHeaders: (headers, { getState, endpoint }) => {
+      const refreshToken = myLocalStorage.getItem('RefreshToken');
       const accessToken = sessionStorage.getItem('AccessToken');
+      // const idToken = sessionStorage.getItem('IdToken');
 
-      if (accessToken) {
-        headers.set('authorization', `Bearer ${accessToken}`);
+      if (refreshToken && endpoint === 'getIdAccessToken') {
+        headers.set('x-refresh-token', refreshToken);
+        headers.set('origin', window.origin);
+        headers.set('content-type', 'application/json');
+      } else if (endpoint === 'logOut') {
+        headers.delete('accessToken');
+      } else {
+        if (accessToken) {
+          headers.set('Authorization', `Bearer ${accessToken}`);
+          // headers.set('x-id-token', accessToken);
+        }
       }
 
       return headers;
@@ -20,6 +31,31 @@ export const hondaApi = createApi({
 
   tagTypes: ['Login', 'Me'],
   endpoints: (builder) => ({
+    signUp: builder.query({
+      query: ({
+        firstName,
+        username,
+        password,
+        providedCarIds,
+        availableCarIds,
+      }) => ({
+        url: '/signup',
+        method: 'POST',
+        body: {
+          firstName,
+          username,
+          password,
+          providedCarIds,
+          availableCarIds,
+        },
+      }),
+    }),
+    getIdAccessToken: builder.query({
+      query: () => ({
+        url: '/token/refresh',
+        method: 'POST',
+      }),
+    }),
     statusLogin: builder.query({
       query: ({ password, username }) => ({
         url: '/login',
@@ -28,10 +64,10 @@ export const hondaApi = createApi({
       }),
     }),
     logOut: builder.query({
-      query: () => ({
+      query: (accessToken) => ({
         url: '/logout',
         method: 'POST',
-        body: {},
+        body: { accessToken },
       }),
     }),
     getUser: builder.query({
@@ -68,4 +104,6 @@ export const {
   useLazyGetBookingsQuery,
   useLazyGetBookingsIdQuery,
   useLazyBookingsQuery,
+  useLazySignUpQuery,
+  useLazyGetIdAccessTokenQuery,
 } = hondaApi;

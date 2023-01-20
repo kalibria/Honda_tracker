@@ -1,14 +1,19 @@
 import * as React from 'react';
 import { LogInLogOutButton } from 'src/auth/components/LogInLogOutButton';
-import { myLocalStorage } from 'src/services/localStorage';
+import { SignUpButton } from 'src/auth/components/signUpForm/SignUpButton';
 import { SettingsButton } from 'src/settings/SettingsButton';
 
-export default function ButtonAppBar() {
-  const isAuth = myLocalStorage.isAuth();
+interface IButtonAppBar {
+  isSuccess: boolean;
+}
+
+export default function ButtonAppBar({ isSuccess }: IButtonAppBar) {
   return (
-    <div className={'buttonAppContainer'}>
-      {isAuth && <SettingsButton />}
-      <LogInLogOutButton />
+    <div>
+      <div className={'buttonAppContainer'}>
+        {isSuccess ? <SettingsButton /> : <SignUpButton />}
+        <LogInLogOutButton />
+      </div>
     </div>
   );
 }

@@ -13,14 +13,15 @@ class LocalStorage {
   }
 
   logOut() {
+    // this.removeItem('isAuthenticated');
     localStorage.clear();
+    sessionStorage.clear();
   }
 
-  isAuth() {
-    const isAuth = this.getItem('isAuthenticated');
-    if (isAuth === 'true') {
-      return true;
-    } else return false;
+  isRefreshToken() {
+    const isRefreshToken = this.getItem('RefreshToken');
+
+    return !!isRefreshToken;
   }
 }
 

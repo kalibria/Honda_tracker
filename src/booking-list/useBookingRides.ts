@@ -1,18 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { IBookingInfo, IRTKQueryBookingResponse } from 'src/booking-list/types';
 import { setBookingsInfo } from 'src/redux/bookingSlice';
-import { RootState } from 'src/redux/store';
 import { useLazyGetBookingsQuery } from 'src/services/hondaApi';
+import { useQueryUserInfo } from 'src/services/useQueryUserInfo';
 
 export const useBookingRides = () => {
-  const selectCarId = useSelector((state: RootState) => state.userData.carId);
-  const firstSelectedCar = selectCarId[0]; //assume user has only one car
-
-  const selectUsername = useSelector(
-    (state: RootState) => state.userData.username,
-  );
-
+  const { resultUserInfoIsSuccess, resultUserInfo } = useQueryUserInfo();
   const [trigger, data] = useLazyGetBookingsQuery();
 
   const dispatch = useDispatch();
@@ -20,8 +14,13 @@ export const useBookingRides = () => {
   const [allBookingInfo, setAllBookingInfo] = useState<IBookingInfo[]>([]);
 
   useEffect(() => {
-    trigger({ carId: firstSelectedCar, username: selectUsername });
-  }, [firstSelectedCar, selectUsername, trigger]);
+    if (resultUserInfoIsSuccess) {
+      trigger({
+        carId: resultUserInfo.availableCars[0],
+        username: resultUserInfo.username,
+      });
+    }
+  }, [resultUserInfoIsSuccess, resultUserInfo, trigger]);
 
   useEffect(() => {
     if (data.isSuccess) {
@@ -44,7 +43,7 @@ export const useBookingRides = () => {
       setAllBookingInfo(bookingRides);
       dispatch(setBookingsInfo(bookingRides));
     }
-  }, [data.currentData, data.isSuccess]);
+  }, [data.currentData, data.isSuccess, dispatch]);
 
   return allBookingInfo;
 };
