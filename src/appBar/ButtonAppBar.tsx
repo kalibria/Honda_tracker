@@ -10,17 +10,10 @@ interface IButtonAppBar {
 export default function ButtonAppBar({ isSuccess }: IButtonAppBar) {
   return (
     <div>
-      {isSuccess ? (
-        <div className={'buttonAppContainer'}>
-          <SettingsButton />
-          <LogInLogOutButton />
-        </div>
-      ) : (
-        <div className={'buttonAppContainer'}>
-          <SignUpButton />
-          <LogInLogOutButton />
-        </div>
-      )}
+      <div className={'buttonAppContainer'}>
+        {isSuccess ? <SettingsButton /> : <SignUpButton />}
+        <LogInLogOutButton />
+      </div>
     </div>
   );
 }

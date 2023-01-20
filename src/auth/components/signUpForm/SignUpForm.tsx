@@ -55,7 +55,7 @@ export const SignUpForm = () => {
               username: values.email,
               password: values.password,
               providedCarIds: [],
-              availableCarIds: ['ho-12345'],
+              availableCarIds: ['ho-123456'],
             });
 
             setSubmitting(false);

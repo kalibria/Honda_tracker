@@ -46,8 +46,9 @@ export const useCheckMe = (path: string) => {
 
 export const useCheckIsLoggedIn = () => {
   const isRefreshToken = myLocalStorage.isRefreshToken();
-  const [trigger, result] = useLazyGetIdAccessTokenQuery();
-  const [triggerLogOut, resultLogOut] = useLazyLogOutQuery();
+  const [refreshTokenTrigger, refreshTokenTriggerResult] =
+    useLazyGetIdAccessTokenQuery();
+  const [triggerLogOut, logoutResult] = useLazyLogOutQuery();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [isLoading, setIsLoading] = useState(false);
@@ -56,19 +57,19 @@ export const useCheckIsLoggedIn = () => {
   useEffect(() => {
     if (isRefreshToken) {
       setIsLoading(true);
-      trigger({});
-      if (result.isSuccess) {
+      refreshTokenTrigger({});
+      if (refreshTokenTriggerResult.isSuccess) {
         setIsLoading(false);
         setIsSuccess(true);
-        const idToken = sessionStorage.getItem('IdToken');
-        const accessToken = sessionStorage.getItem('AccessToken');
-        if (!idToken) {
-          sessionStorage.setItem('idToken', result.currentData.IdToken);
-        }
-        if (!accessToken) {
-          sessionStorage.setItem('AccessToken', result.currentData.AccessToken);
-        }
-      } else if (result.isError) {
+        sessionStorage.setItem(
+          'idToken',
+          refreshTokenTriggerResult.currentData.IdToken,
+        );
+        sessionStorage.setItem(
+          'AccessToken',
+          refreshTokenTriggerResult.currentData.AccessToken,
+        );
+      } else if (refreshTokenTriggerResult.isError) {
         setIsLoading(false);
         setIsSuccess(false);
       }
@@ -82,9 +83,9 @@ export const useCheckIsLoggedIn = () => {
     isRefreshToken,
     navigate,
     pathname,
-    result.isError,
-    result.isSuccess,
-    trigger,
+    refreshTokenTriggerResult.isError,
+    refreshTokenTriggerResult.isSuccess,
+    refreshTokenTrigger,
   ]);
 
   useEffect(() => {
