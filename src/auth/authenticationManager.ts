@@ -121,7 +121,7 @@ export function decodeToken(token: string) {
 export const isTokenExpired = (decodeToken: number) => {
   const timeMsUntilTokenExpires = 5 * 60 * 1000;
   const isTimeUp = decodeToken * 1000 - timeMsUntilTokenExpires;
-  const expired = Date.now() >= decodeToken * 1000 || Date.now() === isTimeUp;
+  const expired = Date.now() >= decodeToken * 1000 || Date.now() >= isTimeUp;
 
   return expired;
 };
