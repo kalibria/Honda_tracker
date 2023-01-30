@@ -101,7 +101,7 @@ export const useCheckIsLoggedIn = () => {
   return { isLoading, isSuccess };
 };
 
-export function isTokenExpired(token: string) {
+export function decodeToken(token: string) {
   const base64Url = token.split('.')[1];
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
   const jsonPayload = decodeURIComponent(
@@ -114,17 +114,17 @@ export function isTokenExpired(token: string) {
   );
 
   const { exp } = JSON.parse(jsonPayload);
-
-  console.log('exp', exp * 1000);
-  console.log('datenow', Date.now());
-
-  const timeMsUntilTokenExpires = 5 * 60 * 1000;
-  const isTimeUp = exp * 1000 - timeMsUntilTokenExpires;
-  const expired = Date.now() >= exp * 1000 || Date.now() == isTimeUp;
-  console.log('expired', expired);
-  console.log('isTimeUp', isTimeUp);
-  return expired;
+  console.log('exp', exp);
+  return exp;
 }
+
+export const isTokenExpired = (decodeToken: number) => {
+  const timeMsUntilTokenExpires = 5 * 60 * 1000;
+  const isTimeUp = decodeToken * 1000 - timeMsUntilTokenExpires;
+  const expired = Date.now() >= decodeToken * 1000 || Date.now() === isTimeUp;
+
+  return expired;
+};
 
 export function useIsIdTokenExpired() {
   let currentIdToken = sessionStorage.getItem('idToken');
@@ -133,7 +133,7 @@ export function useIsIdTokenExpired() {
 
   useEffect(() => {
     if (currentIdToken) {
-      let isIdTokenExpired = isTokenExpired(currentIdToken);
+      let isIdTokenExpired = isTokenExpired(decodeToken(currentIdToken));
 
       if (isIdTokenExpired) {
         refreshTokenTrigger({});
@@ -149,5 +149,9 @@ export function useIsIdTokenExpired() {
         }
       }
     }
-  });
+  }, [
+    currentIdToken,
+    refreshTokenTriggerResult.currentData,
+    refreshTokenTriggerResult.isSuccess,
+  ]);
 }
