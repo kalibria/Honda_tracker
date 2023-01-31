@@ -12,8 +12,6 @@ export const BookingDetails = () => {
 
   const idParams = params.bookingId;
 
-  const [rideCompletionText, setRideCompletionText] = useState('');
-
   const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
@@ -24,12 +22,6 @@ export const BookingDetails = () => {
       const timeSec = parsedParams[2];
 
       trigger({ username, carId, startTime: timeSec });
-
-      if (result.isSuccess) {
-        setRideCompletionText(
-          result.currentData.booking.bookingOwner.settings.rideCompletionText,
-        );
-      }
     }
   }, [idParams, result.currentData, result.isSuccess, trigger]);
 
@@ -104,7 +96,7 @@ export const BookingDetails = () => {
               </table>
             )}
           </div>
-          <ButtonsBar rideCompletionText={rideCompletionText} />
+          <ButtonsBar />
         </>
       )}
     </div>

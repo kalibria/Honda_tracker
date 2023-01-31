@@ -62,7 +62,7 @@ export const useCheckIsLoggedIn = () => {
         setIsLoading(false);
         setIsSuccess(true);
         sessionStorage.setItem(
-          'idToken',
+          'IdToken',
           refreshTokenTriggerResult.currentData.IdToken,
         );
         sessionStorage.setItem(
