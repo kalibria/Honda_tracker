@@ -1,7 +1,4 @@
-const {
-  isTokenExpired,
-  useIsIdTokenExpired,
-} = require('./authenticationManager');
+const { isTokenExpired } = require('./authenticationManager');
 
 describe('testing isTokenExpired function', () => {
   beforeEach(() => {
@@ -45,12 +42,5 @@ describe('testing isTokenExpired function', () => {
     const decodeToken = 1675076400; //30.01.23 14:00
 
     expect(isTokenExpired(decodeToken)).toBe(true);
-  });
-});
-
-describe('testing useIsIdTokenExpired function', () => {
-  test('', () => {
-    const currentIdToken =
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE2NzUwODM2MDAsImV4cCI6MTY3NTA4NzIwMH0.r2A8Oe0_noxv5sL--qHM5UG2wbFBOvQ1bDN4iAn5B6A'; //expire in 17:00
   });
 });
