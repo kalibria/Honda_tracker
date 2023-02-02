@@ -14,12 +14,15 @@ export const BookingDetails = () => {
 
   const [isComplete, setIsComplete] = useState(false);
 
+  const [startTimeSec, setStartTimeSec] = useState('');
+
   useEffect(() => {
     if (idParams) {
       const parsedParams = idParams.split('$');
       const username = parsedParams[0];
       const carId = parsedParams[1];
       const timeSec = parsedParams[2];
+      setStartTimeSec(timeSec);
 
       trigger({ username, carId, startTime: timeSec });
     }
@@ -96,7 +99,7 @@ export const BookingDetails = () => {
               </table>
             )}
           </div>
-          <ButtonsBar />
+          <ButtonsBar startTimeSec={startTimeSec} />
         </>
       )}
     </div>

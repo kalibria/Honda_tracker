@@ -3,7 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { CompleteRideWindow } from 'src/booking-list/components/CompleteRideWindow';
 import { ButtonUI } from 'src/ui-kit/ButtonUI';
 
-export const ButtonsBar = () => {
+export interface IButtonsBar {
+  startTimeSec: string;
+}
+
+export const ButtonsBar = ({ startTimeSec }: IButtonsBar) => {
   const navigate = useNavigate();
   const [isOpenCompleteRideWindow, setIsOpenCompleteRideWindow] =
     useState(false);
@@ -27,6 +31,7 @@ export const ButtonsBar = () => {
       </div>
       {isOpenCompleteRideWindow && (
         <CompleteRideWindow
+          startTimeSec={startTimeSec}
           setIsOpenCompleteRideWindow={setIsOpenCompleteRideWindow}
         />
       )}

@@ -93,6 +93,12 @@ export const hondaApi = createApi({
         body: bookingRequest,
       }),
     }),
+    finishRide: builder.query({
+      query: ({ username, carId, startTimeSec }) => ({
+        url: `/bookings/finish/id?username=${username}&carId=${carId}&startTime=${startTimeSec}`,
+        method: 'POST',
+      }),
+    }),
   }),
 });
 
@@ -106,4 +112,5 @@ export const {
   useLazyBookingsQuery,
   useLazySignUpQuery,
   useLazyGetIdAccessTokenQuery,
+  useLazyFinishRideQuery,
 } = hondaApi;

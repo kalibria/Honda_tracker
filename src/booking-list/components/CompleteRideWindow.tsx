@@ -3,33 +3,62 @@ import { Form, Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { bookingListPath } from 'src/router/rootConstants';
-import { useGetMeQuery, useLazyGetUserQuery } from 'src/services/hondaApi';
+import {
+  useGetMeQuery,
+  useLazyFinishRideQuery,
+  useLazyGetUserQuery,
+} from 'src/services/hondaApi';
 import { BasicTextFields } from 'src/settings/components';
 import * as Yup from 'yup';
 
 export interface ICompleteRideWindow {
+  startTimeSec: string;
   setIsOpenCompleteRideWindow: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+export interface IFinishRide {
+  username: string;
+  carId: string;
+  startTimeSec: string;
+}
+
 export const CompleteRideWindow = ({
+  startTimeSec,
   setIsOpenCompleteRideWindow,
 }: ICompleteRideWindow) => {
   const navigate = useNavigate();
   const { data, isSuccess } = useGetMeQuery({});
-  const [trigger, result] = useLazyGetUserQuery();
+  const [triggerUser, resultUser] = useLazyGetUserQuery();
   const [carLocationResult, setCarLocationResult] = useState('');
+  const [triggerFinish, resultFinish] = useLazyFinishRideQuery();
+
+  const initParamsForFinish = {
+    username: '',
+    carId: '',
+    startTimeSec: startTimeSec,
+  };
+  const [queryParams, setQueryParams] =
+    useState<IFinishRide>(initParamsForFinish);
 
   useEffect(() => {
     if (isSuccess) {
-      trigger(data.username);
+      triggerUser(data.username);
     }
-  }, [data, isSuccess, trigger]);
+  }, [data, isSuccess, triggerUser]);
 
   useEffect(() => {
-    if (result.isSuccess) {
-      setCarLocationResult(result.currentData.user.settings.rideCompletionText);
+    if (resultUser.isSuccess) {
+      console.log('resultUser', resultUser);
+      setCarLocationResult(
+        resultUser.currentData.user.settings.rideCompletionText,
+      );
+      setQueryParams({
+        ...initParamsForFinish,
+        username: resultUser.currentData.user.username,
+        carId: resultUser.currentData.user.availableCars[0],
+      });
     }
-  }, [result.currentData, result.isSuccess]);
+  }, [resultUser.currentData, resultUser.isSuccess]);
 
   return (
     <div className={'completeRideWindow'}>
@@ -41,6 +70,8 @@ export const CompleteRideWindow = ({
           carLocation: Yup.string().required('Required'),
         })}
         onSubmit={(values, { setSubmitting }) => {
+          console.log('queryParams', queryParams);
+          triggerFinish(queryParams);
           setIsOpenCompleteRideWindow(false);
           navigate(bookingListPath);
         }}
