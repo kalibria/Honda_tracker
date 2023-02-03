@@ -99,7 +99,10 @@ export const BookingDetails = () => {
               </table>
             )}
           </div>
-          <ButtonsBar startTimeSec={startTimeSec} />
+          <ButtonsBar
+            startTimeSec={startTimeSec}
+            setIsComplete={setIsComplete}
+          />
         </>
       )}
     </div>

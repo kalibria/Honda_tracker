@@ -5,9 +5,10 @@ import { ButtonUI } from 'src/ui-kit/ButtonUI';
 
 export interface IButtonsBar {
   startTimeSec: string;
+  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const ButtonsBar = ({ startTimeSec }: IButtonsBar) => {
+export const ButtonsBar = ({ startTimeSec, setIsComplete }: IButtonsBar) => {
   const navigate = useNavigate();
   const [isOpenCompleteRideWindow, setIsOpenCompleteRideWindow] =
     useState(false);
@@ -33,6 +34,7 @@ export const ButtonsBar = ({ startTimeSec }: IButtonsBar) => {
         <CompleteRideWindow
           startTimeSec={startTimeSec}
           setIsOpenCompleteRideWindow={setIsOpenCompleteRideWindow}
+          setIsComplete={setIsComplete}
         />
       )}
     </>

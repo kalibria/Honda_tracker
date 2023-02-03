@@ -14,6 +14,7 @@ import * as Yup from 'yup';
 export interface ICompleteRideWindow {
   startTimeSec: string;
   setIsOpenCompleteRideWindow: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface IFinishRide {
@@ -25,6 +26,7 @@ export interface IFinishRide {
 export const CompleteRideWindow = ({
   startTimeSec,
   setIsOpenCompleteRideWindow,
+  setIsComplete,
 }: ICompleteRideWindow) => {
   const navigate = useNavigate();
   const { data, isSuccess } = useGetMeQuery({});
@@ -48,7 +50,6 @@ export const CompleteRideWindow = ({
 
   useEffect(() => {
     if (resultUser.isSuccess) {
-      console.log('resultUser', resultUser);
       setCarLocationResult(
         resultUser.currentData.user.settings.rideCompletionText,
       );
@@ -58,7 +59,12 @@ export const CompleteRideWindow = ({
         carId: resultUser.currentData.user.availableCars[0],
       });
     }
-  }, [resultUser.currentData, resultUser.isSuccess]);
+  }, [initParamsForFinish, resultUser.currentData, resultUser.isSuccess]);
+
+  useEffect(() => {
+    if (resultFinish.isSuccess) {
+    }
+  });
 
   return (
     <div className={'completeRideWindow'}>
@@ -70,7 +76,6 @@ export const CompleteRideWindow = ({
           carLocation: Yup.string().required('Required'),
         })}
         onSubmit={(values, { setSubmitting }) => {
-          console.log('queryParams', queryParams);
           triggerFinish(queryParams);
           setIsOpenCompleteRideWindow(false);
           navigate(bookingListPath);
