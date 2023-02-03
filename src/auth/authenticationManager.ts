@@ -121,16 +121,17 @@ export function decodeToken(token: string) {
   return exp;
 }
 
-export const isTokenExpired = (decodeToken: number) => {
+export const isTokenExpired = (tokenExpirationTimestamp: number) => {
   const timeMsUntilTokenExpires = 5 * 60 * 1000;
-  const isTimeUp = decodeToken * 1000 - timeMsUntilTokenExpires;
-  const expired = Date.now() >= decodeToken * 1000 || Date.now() >= isTimeUp;
+  const isTimeUp = tokenExpirationTimestamp * 1000 - timeMsUntilTokenExpires;
+  const expired =
+    Date.now() >= tokenExpirationTimestamp * 1000 || Date.now() >= isTimeUp;
 
   return expired;
 };
 
 export function useIsIdTokenExpired() {
-  let currentIdToken = sessionStorage.getItem('IdToken');
+  const currentIdToken = sessionStorage.getItem('IdToken');
   const [refreshTokenTrigger, refreshTokenTriggerResult] =
     useLazyGetIdAccessTokenQuery();
   const { pathname } = useLocation();

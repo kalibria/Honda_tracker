@@ -1,6 +1,6 @@
 const { isTokenExpired } = require('./authenticationManager');
 
-describe('testing isTokenExpired function', () => {
+describe('isTokenExpired', () => {
   beforeEach(() => {
     jest.useFakeTimers();
   });
