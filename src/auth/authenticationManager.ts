@@ -81,15 +81,13 @@ export const useCheckIsLoggedIn = () => {
       setIsLoading(false);
       setIsSuccess(false);
 
-      navigate(welcomePath, { state: pathname });
+      // navigate(welcomePath, { state: pathname });
     }
   }, [
     isRefreshToken,
-    navigate,
     pathname,
     refreshTokenTriggerResult.isError,
     refreshTokenTriggerResult.isSuccess,
-    refreshTokenTrigger,
   ]);
 
   useEffect(() => {
@@ -153,13 +151,15 @@ export function useIsIdTokenExpired() {
             refreshTokenTriggerResult.currentData.AccessToken,
           );
 
-          navigate(bookingListPath, { state: pathname });
+          // navigate(bookingListPath, { state: pathname });
         }
       }
     }
   }, [
     currentIdToken,
-    refreshTokenTriggerResult.currentData,
+    pathname,
+    refreshTokenTriggerResult.currentData?.IdToken,
+    refreshTokenTriggerResult.currentData?.AccessToken,
     refreshTokenTriggerResult.isSuccess,
   ]);
 }

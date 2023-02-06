@@ -1,17 +1,37 @@
 import Button from '@mui/material/Button';
 import { Form, Formik } from 'formik';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import { useCheckIsLoggedIn } from 'src/auth/authenticationManager';
-import { RootState } from 'src/redux/store';
+import { useGetMeQuery, useLazyGetUserQuery } from 'src/services/hondaApi';
 import { BasicTextFields, SwitchesGroup } from 'src/settings/components';
 import { carProvider } from 'src/settings/constants';
 
 export const SettingsPage = () => {
-  const { isSuccess } = useCheckIsLoggedIn();
-  const selectMyRole = useSelector((state: RootState) => state.userData.role);
+  const { isSuccess: meSuccess, currentData: meCurrentData } = useGetMeQuery(
+    {},
+  );
+  const [getUserTrigger, userResult] = useLazyGetUserQuery();
+  const [myRoles, setMyRoles] = useState<string[]>([]);
+  const [rideCompletionText, setRideCompletionText] = useState('');
 
-  const isCarProvider = selectMyRole.includes(carProvider);
+  const { isSuccess } = useCheckIsLoggedIn();
+
+  const isCarProvider = myRoles.includes(carProvider);
+
+  useEffect(() => {
+    if (meSuccess && meCurrentData) {
+      getUserTrigger(meCurrentData.username);
+    }
+  }, [meSuccess, meCurrentData, getUserTrigger]);
+
+  useEffect(() => {
+    if (userResult.isSuccess && userResult.currentData) {
+      setMyRoles(userResult.currentData.user.roles);
+      setRideCompletionText(
+        userResult.currentData.user.settings.rideCompletionText,
+      );
+    }
+  }, [userResult.isSuccess, userResult.currentData]);
 
   return (
     <div className={'sm:w-60 mainContainer'}>
@@ -20,12 +40,13 @@ export const SettingsPage = () => {
           initialValues={{
             isCreated: false,
             isChanged: false,
-            textField: '',
+            textField: rideCompletionText,
           }}
           onSubmit={(values, { setSubmitting }) => {
             alert(values.isChanged);
             setSubmitting(false);
-          }}>
+          }}
+          enableReinitialize={true}>
           <Form className={'flex flex-col space-y-3.5 formWrapper'}>
             {isCarProvider && (
               <SwitchesGroup
