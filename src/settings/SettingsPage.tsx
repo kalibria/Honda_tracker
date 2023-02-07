@@ -5,6 +5,7 @@ import { useCheckIsLoggedIn } from 'src/auth/authenticationManager';
 import { useGetMeQuery, useLazyGetUserQuery } from 'src/services/hondaApi';
 import { BasicTextFields, SwitchesGroup } from 'src/settings/components';
 import { carProvider } from 'src/settings/constants';
+import { debounce } from 'lodash';
 
 export const SettingsPage = () => {
   const { isSuccess: meSuccess, currentData: meCurrentData } = useGetMeQuery(
@@ -32,6 +33,16 @@ export const SettingsPage = () => {
       );
     }
   }, [userResult.isSuccess, userResult.currentData]);
+
+  const [characters, setCharacters] = React.useState<string[]>([]);
+
+  const debounceSave = debounce(async (rideCompletionText) => {
+    setCharacters(await rideCompletionText);
+  });
+
+  const handleChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+    debounce();
+  };
 
   return (
     <div className={'sm:w-60 mainContainer'}>
@@ -61,15 +72,16 @@ export const SettingsPage = () => {
               <BasicTextFields
                 label={'Где оставлен автомобиль?'}
                 name={'textField'}
+                onChange={handleChanged}
               />
             </div>
-            <Button
-              className={'place-self-center'}
-              variant="contained"
-              type="submit"
-              size={'small'}>
-              {'Сохранить'}
-            </Button>
+            {/*<Button*/}
+            {/*  className={'place-self-center'}*/}
+            {/*  variant="contained"*/}
+            {/*  type="submit"*/}
+            {/*  size={'small'}>*/}
+            {/*  {'Сохранить'}*/}
+            {/*</Button>*/}
           </Form>
         </Formik>
       )}
