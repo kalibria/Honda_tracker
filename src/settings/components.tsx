@@ -72,7 +72,6 @@ export const BasicTextFields: React.FC<IBasicTextFields> = ({
       variant="standard"
       {...field}
       {...props}
-      // value={placeWhereCar}
     />
   );
 };

@@ -1,8 +1,16 @@
 import Button from '@mui/material/Button';
 import { Form, Formik } from 'formik';
-import React, { useEffect, useState } from 'react';
+import React, { FormEvent, FormEventHandler, useEffect, useState } from 'react';
 import { useCheckIsLoggedIn } from 'src/auth/authenticationManager';
-import { useGetMeQuery, useLazyGetUserQuery } from 'src/services/hondaApi';
+import {
+  INotifications,
+  IUsersSettings,
+} from 'src/createNewBooking/bookingTypes';
+import {
+  useGetMeQuery,
+  useLazyGetUserQuery,
+  useLazyUpdateUserDataQuery,
+} from 'src/services/hondaApi';
 import { BasicTextFields, SwitchesGroup } from 'src/settings/components';
 import { carProvider } from 'src/settings/constants';
 import { debounce } from 'lodash';
@@ -34,15 +42,29 @@ export const SettingsPage = () => {
     }
   }, [userResult.isSuccess, userResult.currentData]);
 
-  const [characters, setCharacters] = React.useState<string[]>([]);
+  const [triggerUpdate, resultAfterUpdate] = useLazyUpdateUserDataQuery();
 
-  const debounceSave = debounce(async (rideCompletionText) => {
-    setCharacters(await rideCompletionText);
-  });
+  const debounceUpdate = debounce(async (rideCompletionText) => {
+    const settings: IUsersSettings = {
+      ...userResult.currentData.user.settings,
+      rideCompletionText: rideCompletionText,
+    };
 
-  const handleChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-    debounce();
+    triggerUpdate({ username: meCurrentData?.username, settings });
+    console.log('debounce');
+  }, 1000);
+
+  const handleOnChange = (event: React.ChangeEvent<HTMLFormElement>) => {
+    debounceUpdate(event.target.value);
   };
+
+  useEffect(() => {
+    if (resultAfterUpdate.isSuccess) {
+      console.log('resultUpdate', resultAfterUpdate.currentData);
+    } else {
+      console.log('resultError', resultAfterUpdate);
+    }
+  }, [resultAfterUpdate.isSuccess]);
 
   return (
     <div className={'sm:w-60 mainContainer'}>
@@ -58,7 +80,9 @@ export const SettingsPage = () => {
             setSubmitting(false);
           }}
           enableReinitialize={true}>
-          <Form className={'flex flex-col space-y-3.5 formWrapper'}>
+          <Form
+            className={'flex flex-col space-y-3.5 formWrapper'}
+            onChange={handleOnChange}>
             {isCarProvider && (
               <SwitchesGroup
                 note1={'booking is created'}
@@ -72,7 +96,6 @@ export const SettingsPage = () => {
               <BasicTextFields
                 label={'Где оставлен автомобиль?'}
                 name={'textField'}
-                onChange={handleChanged}
               />
             </div>
             {/*<Button*/}
