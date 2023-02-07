@@ -1,11 +1,7 @@
-import Button from '@mui/material/Button';
 import { Form, Formik } from 'formik';
-import React, { FormEvent, FormEventHandler, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCheckIsLoggedIn } from 'src/auth/authenticationManager';
-import {
-  INotifications,
-  IUsersSettings,
-} from 'src/createNewBooking/bookingTypes';
+import { IUsersSettings } from 'src/createNewBooking/bookingTypes';
 import {
   useGetMeQuery,
   useLazyGetUserQuery,
@@ -51,20 +47,11 @@ export const SettingsPage = () => {
     };
 
     triggerUpdate({ username: meCurrentData?.username, settings });
-    console.log('debounce');
   }, 1000);
 
   const handleOnChange = (event: React.ChangeEvent<HTMLFormElement>) => {
     debounceUpdate(event.target.value);
   };
-
-  useEffect(() => {
-    if (resultAfterUpdate.isSuccess) {
-      console.log('resultUpdate', resultAfterUpdate.currentData);
-    } else {
-      console.log('resultError', resultAfterUpdate);
-    }
-  }, [resultAfterUpdate.isSuccess]);
 
   return (
     <div className={'sm:w-60 mainContainer'}>
@@ -98,13 +85,6 @@ export const SettingsPage = () => {
                 name={'textField'}
               />
             </div>
-            {/*<Button*/}
-            {/*  className={'place-self-center'}*/}
-            {/*  variant="contained"*/}
-            {/*  type="submit"*/}
-            {/*  size={'small'}>*/}
-            {/*  {'Сохранить'}*/}
-            {/*</Button>*/}
           </Form>
         </Formik>
       )}
