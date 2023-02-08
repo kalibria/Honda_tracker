@@ -17,6 +17,8 @@ export const CompleteRideWindow = ({
 }: ICompleteRideWindow) => {
   const navigate = useNavigate();
 
+  console.log('rideCompletionText', rideCompletionText);
+
   return (
     <div className={'completeRideWindow'}>
       <Formik
@@ -29,26 +31,32 @@ export const CompleteRideWindow = ({
         onSubmit={(values, { setSubmitting }) => {
           setIsOpenCompleteRideWindow(false);
           navigate(bookingListPath);
-        }}>
-        <Form className={'completeRideForm'}>
-          <TextField
-            fullWidth
-            id="fullWidth"
-            label={'Где оставлен автомобиль?'}
-            variant="standard"
-            name={'carLocation'}
-          />
+        }}
+        enableReinitialize={true}>
+        {(props) => {
+          return (
+            <Form className={'completeRideForm'} onChange={props.handleChange}>
+              <TextField
+                fullWidth
+                id="fullWidth"
+                label={'Где оставлен автомобиль?'}
+                variant="standard"
+                name={'carLocation'}
+                value={props.values.carLocation}
+              />
 
-          <div className={'button'}>
-            <Button
-              className={'place-self-center '}
-              variant="contained"
-              type="submit"
-              size={'small'}>
-              {'Подтвердить'}
-            </Button>
-          </div>
-        </Form>
+              <div className={'button'}>
+                <Button
+                  className={'place-self-center '}
+                  variant="contained"
+                  type="submit"
+                  size={'small'}>
+                  {'Подтвердить'}
+                </Button>
+              </div>
+            </Form>
+          );
+        }}
       </Formik>
     </div>
   );
