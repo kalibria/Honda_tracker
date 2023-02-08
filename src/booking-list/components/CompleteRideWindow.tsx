@@ -26,7 +26,6 @@ export interface IFinishRide {
 export const CompleteRideWindow = ({
   startTimeSec,
   setIsOpenCompleteRideWindow,
-  setIsComplete,
 }: ICompleteRideWindow) => {
   const navigate = useNavigate();
   const { data, isSuccess } = useGetMeQuery({});
@@ -46,7 +45,7 @@ export const CompleteRideWindow = ({
     if (isSuccess) {
       triggerUser(data.username);
     }
-  }, [data, isSuccess, triggerUser]);
+  }, [isSuccess, triggerUser]);
 
   useEffect(() => {
     if (resultUser.isSuccess) {
@@ -59,12 +58,7 @@ export const CompleteRideWindow = ({
         carId: resultUser.currentData.user.availableCars[0],
       });
     }
-  }, [initParamsForFinish, resultUser.currentData, resultUser.isSuccess]);
-
-  useEffect(() => {
-    if (resultFinish.isSuccess) {
-    }
-  });
+  }, [resultUser.isSuccess, resultUser.currentData]);
 
   return (
     <div className={'completeRideWindow'}>

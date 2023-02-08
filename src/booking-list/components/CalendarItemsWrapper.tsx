@@ -6,7 +6,6 @@ import { useBookingRides } from 'src/booking-list/useBookingRides';
 
 export const CalendarItemsWrapper = () => {
   const requestRides = useBookingRides();
-  console.log('bookingsRide', requestRides);
   const datesMS = datesManager.getDatesForCalendarMS();
 
   const startEndDay = datesManager.getStartAndEndOfDays(datesMS);
