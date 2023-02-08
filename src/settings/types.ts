@@ -2,6 +2,8 @@ import { FieldHookConfig } from 'formik';
 
 export interface ISwitchesGroup {
   note1: string;
+  // valueIsChanged: boolean;
+  // valueIsCreated: boolean;
   note2: string;
   title: string;
   isCreatedFieldName: string;
@@ -15,8 +17,8 @@ export interface IBasicTextFields {
 }
 
 export interface ISettings {
-  rideCompletionText?: string;
-  notifications?: {
+  rideCompletionText: string;
+  notifications: {
     getNotifiedAboutBookingChanges: boolean;
     getNotifiedAboutNewBookings: boolean;
   };

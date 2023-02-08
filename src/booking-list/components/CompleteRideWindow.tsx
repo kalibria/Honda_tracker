@@ -1,10 +1,10 @@
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import { Form, Formik } from 'formik';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IButtonsBar } from 'src/booking-list/components/ButtonsBar';
 import { bookingListPath } from 'src/router/rootConstants';
-import { BasicTextFields } from 'src/settings/components';
 import * as Yup from 'yup';
 
 export interface ICompleteRideWindow extends IButtonsBar {
@@ -31,8 +31,11 @@ export const CompleteRideWindow = ({
           navigate(bookingListPath);
         }}>
         <Form className={'completeRideForm'}>
-          <BasicTextFields
+          <TextField
+            fullWidth
+            id="fullWidth"
             label={'Где оставлен автомобиль?'}
+            variant="standard"
             name={'carLocation'}
           />
 
