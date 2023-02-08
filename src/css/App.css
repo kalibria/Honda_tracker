@@ -131,6 +131,10 @@
     font-weight: bold;
 }
 
+.finishedRide {
+    text-decoration-line: line-through;
+}
+
 .label{
     text-align: center;
     color: black;
