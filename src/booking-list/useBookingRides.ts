@@ -33,6 +33,7 @@ export const useBookingRides = () => {
             description: item.bookingDescription,
             carId: item.carNumber,
             id: Date.parse(item.bookingStartTime) / 1000, //id in seconds
+            isFinished: item.isFinished,
           };
           accum.push(tripInfo);
 

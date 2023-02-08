@@ -7,6 +7,7 @@ export interface IBookingInfo {
   description: string;
   carId: string;
   id: number;
+  isFinished: boolean;
 }
 
 export interface IStartEndDates {
@@ -21,6 +22,7 @@ export interface IRTKQueryBookingResponse {
   bookingOwnerId: string;
   bookingStartTime: string;
   carNumber: string;
+  isFinished: boolean;
 }
 
 export interface ICalendarRide {
@@ -32,6 +34,7 @@ export interface IUIRideInfo {
   description: string;
   time: string;
   id: string;
+  isFinished: boolean;
 }
 
 export interface IUICalendar {

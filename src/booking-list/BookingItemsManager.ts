@@ -50,6 +50,7 @@ export class BookingItemsManager {
                 description: 'Свободно',
                 time: '',
                 id: Math.round(+item[0] / 1000).toString(), //id in seconds
+                isFinished: false,
               },
             ],
           });
@@ -61,6 +62,7 @@ export class BookingItemsManager {
             description: item.description,
             time: datesManager.getFormattingTime(+new Date(item.startTime)),
             id: item.bookingOwner + '$' + item.carId + '$' + item.id,
+            isFinished: item.isFinished,
           });
 
           return accumInfo;
