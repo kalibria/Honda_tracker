@@ -7,9 +7,18 @@ import { DeleteButton } from '../../redux/deleteButton';
 export interface IButtonsBar {
   startTimeSec: string;
   isComplete: boolean;
+  requestData: {
+    username: string;
+    carId: string;
+    startTimeSec: string;
+  };
 }
 
-export const ButtonsBar = ({ startTimeSec, isComplete }: IButtonsBar) => {
+export const ButtonsBar = ({
+  startTimeSec,
+  isComplete,
+  requestData,
+}: IButtonsBar) => {
   const navigate = useNavigate();
   const [isOpenCompleteRideWindow, setIsOpenCompleteRideWindow] =
     useState(false);
@@ -32,7 +41,7 @@ export const ButtonsBar = ({ startTimeSec, isComplete }: IButtonsBar) => {
         <ButtonUI onClick={editRide} disabled={isComplete ? true : false}>
           {'Редактировать'}
         </ButtonUI>
-        <DeleteButton />
+        <DeleteButton requestData={requestData} />
       </div>
       {isOpenCompleteRideWindow && (
         <CompleteRideWindow

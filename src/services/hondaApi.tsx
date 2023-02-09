@@ -123,4 +123,5 @@ export const {
   useLazySignUpQuery,
   useLazyGetIdAccessTokenQuery,
   useLazyFinishRideQuery,
+  useDeleteBookingMutation,
 } = hondaApi;

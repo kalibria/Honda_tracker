@@ -15,6 +15,11 @@ export const BookingDetails = () => {
   const [isComplete, setIsComplete] = useState(false);
 
   const [startTimeSec, setStartTimeSec] = useState('');
+  const [requestData, setRequestData] = useState({
+    username: '',
+    carId: '',
+    startTimeSec: '',
+  });
 
   const [carLocation, setCarLocation] = useState('');
 
@@ -22,9 +27,16 @@ export const BookingDetails = () => {
     if (idParams) {
       const parsedParams = idParams.split('$');
       const username = parsedParams[0];
+
       const carId = parsedParams[1];
       const timeSec = parsedParams[2];
       setStartTimeSec(timeSec);
+
+      setRequestData({
+        username: username,
+        carId: carId,
+        startTimeSec: timeSec,
+      });
 
       trigger({ username, carId, startTime: timeSec });
 
@@ -111,7 +123,11 @@ export const BookingDetails = () => {
               </table>
             )}
           </div>
-          <ButtonsBar startTimeSec={startTimeSec} isComplete={isComplete} />
+          <ButtonsBar
+            startTimeSec={startTimeSec}
+            isComplete={isComplete}
+            requestData={requestData}
+          />
         </>
       )}
     </div>
