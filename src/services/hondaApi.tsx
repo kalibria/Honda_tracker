@@ -29,7 +29,7 @@ export const hondaApi = createApi({
     },
   }),
 
-  tagTypes: ['Login', 'Me'],
+  tagTypes: ['Login', 'Me', 'Bookings'],
   endpoints: (builder) => ({
     signUp: builder.query({
       query: ({
@@ -80,6 +80,7 @@ export const hondaApi = createApi({
     getBookings: builder.query({
       query: ({ carId, username }) =>
         `/bookings?carId=${carId}&username=${username}`,
+      providesTags: ['Bookings'],
     }),
     getBookingsId: builder.query({
       query: ({ username, carId, startTime }) => ({
@@ -97,6 +98,7 @@ export const hondaApi = createApi({
       query: ({ username, carId, startTimeSec }) => ({
         url: `/bookings/finish/id?username=${username}&carId=${carId}&startTime=${startTimeSec}`,
         method: 'POST',
+        invalidatesTags: ['Bookings'],
       }),
     }),
   }),
