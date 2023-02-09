@@ -25,6 +25,10 @@ export const BookingDetails = () => {
       setStartTimeSec(timeSec);
 
       trigger({ username, carId, startTime: timeSec });
+
+      if (result.isSuccess) {
+        setIsComplete(result.currentData.booking.isFinished);
+      }
     }
   }, [idParams, result.currentData, result.isSuccess, trigger]);
 
