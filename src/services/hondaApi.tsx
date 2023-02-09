@@ -101,6 +101,14 @@ export const hondaApi = createApi({
         invalidatesTags: ['Bookings'],
       }),
     }),
+    deleteBooking: builder.mutation({
+      query: ({ username, carId, startTimeSec }) => ({
+        url: `/bookings/id?username=${username}&carId=${carId}&startTime=${startTimeSec}`,
+        method: 'DELETE',
+      }),
+
+      invalidatesTags: ['Bookings'],
+    }),
   }),
 });
 

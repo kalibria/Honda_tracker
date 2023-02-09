@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CompleteRideWindow } from 'src/booking-list/components/CompleteRideWindow';
 import { ButtonUI } from 'src/ui-kit/ButtonUI';
+import { DeleteButton } from '../../redux/deleteButton';
 
 export interface IButtonsBar {
   startTimeSec: string;
@@ -20,7 +21,6 @@ export const ButtonsBar = ({ startTimeSec, isComplete }: IButtonsBar) => {
     setIsOpenCompleteRideWindow(true);
   };
   const editRide = () => {};
-  const deleteRide = () => {};
 
   return (
     <>
@@ -32,7 +32,7 @@ export const ButtonsBar = ({ startTimeSec, isComplete }: IButtonsBar) => {
         <ButtonUI onClick={editRide} disabled={isComplete ? true : false}>
           {'Редактировать'}
         </ButtonUI>
-        <ButtonUI onClick={deleteRide}>{'Удалить'}</ButtonUI>
+        <DeleteButton />
       </div>
       {isOpenCompleteRideWindow && (
         <CompleteRideWindow
