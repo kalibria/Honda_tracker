@@ -87,16 +87,16 @@ export const CompleteRideWindow = ({
             name={'carLocation'}
           />
 
+          <div className={'completedTime'}>
+            <label htmlFor={'completeTime'}>Время завершения</label>
+            <input
+              name={'completeTime'}
+              id={'completeTime'}
+              type={'datetime-local'}
+              defaultValue={currentTime}
+            />
+          </div>
           <div className={'button'}>
-            <div>
-              <label htmlFor={'completeTime'}>Время завершения</label>
-              <input
-                name={'completeTime'}
-                id={'completeTime'}
-                type={'datetime-local'}
-                defaultValue={currentTime}
-              />
-            </div>
             <Button
               className={'place-self-center '}
               variant="contained"
