@@ -10,6 +10,8 @@ import {
 } from 'src/services/hondaApi';
 import { BasicTextFields } from 'src/settings/components';
 import * as Yup from 'yup';
+import { datesManager } from '../../dates/datesTimeManager';
+import dayjs from 'dayjs';
 
 export interface ICompleteRideWindow {
   startTimeSec: string;
@@ -31,6 +33,10 @@ export const CompleteRideWindow = ({
   const [triggerUser, resultUser] = useLazyGetUserQuery();
   const [carLocationResult, setCarLocationResult] = useState('');
   const [triggerFinish, resultFinish] = useLazyFinishRideQuery();
+
+  const currentTime = dayjs(new Date().toString()).format('YYYY-MM-DDTHH:MM');
+
+  console.log('completeT2', currentTime);
 
   const initParamsForFinish = {
     username: '',
@@ -64,6 +70,7 @@ export const CompleteRideWindow = ({
       <Formik
         initialValues={{
           carLocation: carLocationResult,
+          completeTime: currentTime,
         }}
         validationSchema={Yup.object({
           carLocation: Yup.string().required('Required'),
@@ -81,6 +88,15 @@ export const CompleteRideWindow = ({
           />
 
           <div className={'button'}>
+            <div>
+              <label htmlFor={'completeTime'}>Время завершения</label>
+              <input
+                name={'completeTime'}
+                id={'completeTime'}
+                type={'datetime-local'}
+                defaultValue={currentTime}
+              />
+            </div>
             <Button
               className={'place-self-center '}
               variant="contained"
