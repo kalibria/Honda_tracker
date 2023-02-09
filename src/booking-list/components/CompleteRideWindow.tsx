@@ -36,8 +36,6 @@ export const CompleteRideWindow = ({
 
   const currentTime = dayjs(new Date().toString()).format('YYYY-MM-DDTHH:MM');
 
-  console.log('completeT2', currentTime);
-
   const initParamsForFinish = {
     username: '',
     carId: '',
@@ -76,6 +74,9 @@ export const CompleteRideWindow = ({
           carLocation: Yup.string().required('Required'),
         })}
         onSubmit={(values, { setSubmitting }) => {
+          const fromISOtoDate = new Date(currentTime);
+          const dateInSec = fromISOtoDate.getTime() / 1000;
+
           triggerFinish(queryParams);
           setIsOpenCompleteRideWindow(false);
           navigate(bookingListPath);
