@@ -16,6 +16,8 @@ export const BookingDetails = () => {
 
   const [startTimeSec, setStartTimeSec] = useState('');
 
+  const [carLocation, setCarLocation] = useState('');
+
   useEffect(() => {
     if (idParams) {
       const parsedParams = idParams.split('$');
@@ -28,6 +30,12 @@ export const BookingDetails = () => {
 
       if (result.isSuccess) {
         setIsComplete(result.currentData.booking.isFinished);
+
+        if (isComplete) {
+          setCarLocation(
+            result.currentData.booking.bookingOwner.settings.rideCompletionText,
+          );
+        }
       }
     }
   }, [idParams, result.currentData, result.isSuccess, trigger]);
@@ -88,7 +96,7 @@ export const BookingDetails = () => {
                       <td className={'cellDecoration'}>
                         Местонахождение автомобиля по окончании поездки
                       </td>
-                      <td className={'cellDecoration'}></td>
+                      <td className={'cellDecoration'}>{carLocation}</td>
                     </tr>
                   )}
                   {/*<tr>*/}
@@ -103,10 +111,7 @@ export const BookingDetails = () => {
               </table>
             )}
           </div>
-          <ButtonsBar
-            startTimeSec={startTimeSec}
-            setIsComplete={setIsComplete}
-          />
+          <ButtonsBar startTimeSec={startTimeSec} isComplete={isComplete} />
         </>
       )}
     </div>

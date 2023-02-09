@@ -5,10 +5,10 @@ import { ButtonUI } from 'src/ui-kit/ButtonUI';
 
 export interface IButtonsBar {
   startTimeSec: string;
-  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  isComplete: boolean;
 }
 
-export const ButtonsBar = ({ startTimeSec, setIsComplete }: IButtonsBar) => {
+export const ButtonsBar = ({ startTimeSec, isComplete }: IButtonsBar) => {
   const navigate = useNavigate();
   const [isOpenCompleteRideWindow, setIsOpenCompleteRideWindow] =
     useState(false);
@@ -26,15 +26,18 @@ export const ButtonsBar = ({ startTimeSec, setIsComplete }: IButtonsBar) => {
     <>
       <div className={'bookingButtonsWrapper'}>
         <ButtonUI onClick={goBack}>{'Назад'}</ButtonUI>
-        <ButtonUI onClick={completeRide}>{'Завершить поездку'}</ButtonUI>
-        <ButtonUI onClick={editRide}>{'Редактировать'}</ButtonUI>
+        <ButtonUI onClick={completeRide} disabled={isComplete ? true : false}>
+          {'Завершить поездку'}
+        </ButtonUI>
+        <ButtonUI onClick={editRide} disabled={isComplete ? true : false}>
+          {'Редактировать'}
+        </ButtonUI>
         <ButtonUI onClick={deleteRide}>{'Удалить'}</ButtonUI>
       </div>
       {isOpenCompleteRideWindow && (
         <CompleteRideWindow
           startTimeSec={startTimeSec}
           setIsOpenCompleteRideWindow={setIsOpenCompleteRideWindow}
-          setIsComplete={setIsComplete}
         />
       )}
     </>

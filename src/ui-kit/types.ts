@@ -6,4 +6,5 @@ export interface IButtonEL {
   size?: string;
   children?: React.ReactNode;
   className?: string;
+  disabled?: boolean;
 }

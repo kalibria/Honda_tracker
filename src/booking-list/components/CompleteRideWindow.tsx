@@ -14,7 +14,6 @@ import * as Yup from 'yup';
 export interface ICompleteRideWindow {
   startTimeSec: string;
   setIsOpenCompleteRideWindow: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsComplete: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface IFinishRide {
