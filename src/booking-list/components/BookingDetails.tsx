@@ -12,9 +12,12 @@ export const BookingDetails = () => {
 
   const idParams = params.bookingId;
 
+  console.log('idParams', idParams);
+
   const [isComplete, setIsComplete] = useState(false);
 
   const [startTimeSec, setStartTimeSec] = useState('');
+  const [endTime, setEndTime] = useState('');
   const [requestData, setRequestData] = useState({
     username: '',
     carId: '',
@@ -42,6 +45,14 @@ export const BookingDetails = () => {
 
       if (result.isSuccess) {
         setIsComplete(result.currentData.booking.isFinished);
+        setCarLocation(result.currentData.booking.carLocationAfterRideText);
+
+        const newDate = datesManager.getFormattingDateTime(
+          +new Date(result.currentData.booking.bookingEndTime),
+        );
+        setEndTime(newDate);
+
+        console.log('endTime', endTime);
 
         if (isComplete) {
           setCarLocation(
@@ -89,7 +100,7 @@ export const BookingDetails = () => {
                     <td className={'cellDecoration'}>
                       Время завершения поездки
                     </td>
-                    <td className={'cellDecoration'}></td>
+                    <td className={'cellDecoration'}>{endTime}</td>
                   </tr>
                   <tr>
                     <td className={'cellDecoration'}>Описание поездки</td>
