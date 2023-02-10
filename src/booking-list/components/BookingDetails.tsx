@@ -12,8 +12,6 @@ export const BookingDetails = () => {
 
   const idParams = params.bookingId;
 
-  console.log('idParams', idParams);
-
   const [isComplete, setIsComplete] = useState(false);
 
   const [startTimeSec, setStartTimeSec] = useState('');
@@ -51,8 +49,6 @@ export const BookingDetails = () => {
           +new Date(result.currentData.booking.bookingEndTime),
         );
         setEndTime(newDate);
-
-        console.log('endTime', endTime);
 
         if (isComplete) {
           setCarLocation(

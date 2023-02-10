@@ -34,7 +34,7 @@ export const CompleteRideWindow = ({
 
   const [triggerFinish, resultFinish] = useLazyFinishRideQuery();
 
-  const currentTime = dayjs(new Date().toString()).format('YYYY-MM-DDTHH:MM');
+  const currentTime = dayjs(new Date().toString()).format('YYYY-MM-DDTHH:mm');
 
   const initParamsForFinish = {
     username: '',
