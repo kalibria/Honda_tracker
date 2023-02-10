@@ -95,9 +95,16 @@ export const hondaApi = createApi({
       }),
     }),
     finishRide: builder.query({
-      query: ({ username, carId, startTimeSec }) => ({
+      query: ({
+        username,
+        carId,
+        startTimeSec,
+        rideCompletionText,
+        endDateTime,
+      }) => ({
         url: `/bookings/finish/id?username=${username}&carId=${carId}&startTime=${startTimeSec}`,
         method: 'POST',
+        body: { rideCompletionText, endDateTime },
         invalidatesTags: ['Bookings'],
       }),
     }),

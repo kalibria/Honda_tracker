@@ -10,7 +10,6 @@ import {
 } from 'src/services/hondaApi';
 import { BasicTextFields } from 'src/settings/components';
 import * as Yup from 'yup';
-import { datesManager } from '../../dates/datesTimeManager';
 import dayjs from 'dayjs';
 
 export interface ICompleteRideWindow {
@@ -32,6 +31,7 @@ export const CompleteRideWindow = ({
   const { data, isSuccess } = useGetMeQuery({});
   const [triggerUser, resultUser] = useLazyGetUserQuery();
   const [carLocationResult, setCarLocationResult] = useState('');
+
   const [triggerFinish, resultFinish] = useLazyFinishRideQuery();
 
   const currentTime = dayjs(new Date().toString()).format('YYYY-MM-DDTHH:MM');
@@ -40,7 +40,10 @@ export const CompleteRideWindow = ({
     username: '',
     carId: '',
     startTimeSec: startTimeSec,
+    rideCompletionText: '',
+    endDateTime: 0,
   };
+
   const [queryParams, setQueryParams] =
     useState<IFinishRide>(initParamsForFinish);
 
@@ -77,7 +80,13 @@ export const CompleteRideWindow = ({
           const fromISOtoDate = new Date(currentTime);
           const dateInSec = fromISOtoDate.getTime() / 1000;
 
-          triggerFinish(queryParams);
+          const updateRideCompletionText = values.carLocation;
+
+          triggerFinish({
+            ...queryParams,
+            rideCompletionText: updateRideCompletionText,
+            endDateTime: dateInSec,
+          });
           setIsOpenCompleteRideWindow(false);
           navigate(bookingListPath);
         }}
