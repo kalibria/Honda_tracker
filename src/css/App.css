@@ -66,6 +66,9 @@
     font-weight: bold;
     font-style: italic;
 
+    background-color: #719ab226;
+    padding: 0.5em;
+
 
 }
 .completeRideWindow {
@@ -108,8 +111,11 @@
 
 
 .cellDecoration {
+    display: grid;
     background-color: #719ab226;
     padding: 0.5em;
+
+
 
 }
 

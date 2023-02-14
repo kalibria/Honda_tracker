@@ -17,6 +17,7 @@ export const BookingDetails = () => {
   const [isComplete, setIsComplete] = useState(false);
 
   const [startTimeSec, setStartTimeSec] = useState('');
+  const [initStartTimeForFormik, setInitStartTimeForFormik] = useState('');
   const [endTime, setEndTime] = useState('');
   const [requestData, setRequestData] = useState({
     username: '',
@@ -47,16 +48,12 @@ export const BookingDetails = () => {
         setIsComplete(result.currentData.booking.isFinished);
         setCarLocation(result.currentData.booking.carLocationAfterRideText);
 
-        console.log(
-          'startTime',
+        setInitStartTimeForFormik(
           dayjs(result.currentData.booking.bookingStartTime).format(
             'YYYY-MM-DDTHH:mm',
           ),
         );
 
-        const newDate = datesManager.getFormattingDateTime(
-          +new Date(result.currentData.booking.bookingEndTime),
-        );
         setEndTime(
           dayjs(result.currentData.booking.bookingEndTime).format(
             'YYYY-MM-DDTHH:mm',
@@ -79,17 +76,13 @@ export const BookingDetails = () => {
       ) : (
         <>
           <div className={'bookingWrapper'}>
-            <div className={'bookingHeader cellDecoration'}>
-              Сведения о поездке
-            </div>
+            <div className={'bookingHeader '}>Сведения о поездке</div>
             {result.isSuccess && (
               <Formik
                 initialValues={{
                   firstname: result.currentData.booking.bookingOwner.firstName,
                   carId: result.currentData.booking.carNumber,
-                  startTime: dayjs(
-                    result.currentData.booking.bookingStartTime,
-                  ).format('YYYY-MM-DDTHH:mm'),
+                  startTime: initStartTimeForFormik,
                   endTime: endTime,
                   description: result.currentData.booking.bookingDescription,
                   isCompleted: isComplete ? 'Да' : 'Нет',
@@ -100,7 +93,7 @@ export const BookingDetails = () => {
                 {(props) => {
                   return (
                     <form onSubmit={props.handleSubmit}>
-                      <div>
+                      <div className={'cellDecoration'}>
                         <label htmlFor={'firstname'}>Инициатор поездки</label>
                         <input
                           id={'firstname'}
@@ -111,7 +104,7 @@ export const BookingDetails = () => {
                         />
                       </div>
 
-                      <div>
+                      <div className={'cellDecoration'}>
                         <label htmlFor={'carId'}>Автомобиль</label>
                         <input
                           id={'carId'}
@@ -122,7 +115,7 @@ export const BookingDetails = () => {
                         />
                       </div>
 
-                      <div>
+                      <div className={'cellDecoration'}>
                         <label htmlFor={'startTime'}>
                           Время начала поездки
                         </label>
@@ -134,7 +127,7 @@ export const BookingDetails = () => {
                         />
                       </div>
 
-                      <div>
+                      <div className={'cellDecoration'}>
                         <label htmlFor={'endTime'}>
                           Время завершения поездки
                         </label>
@@ -146,7 +139,7 @@ export const BookingDetails = () => {
                         />
                       </div>
 
-                      <div>
+                      <div className={'cellDecoration'}>
                         <label htmlFor={'description'}>Описание поездки</label>
                         <input
                           id={'description'}
@@ -156,7 +149,7 @@ export const BookingDetails = () => {
                         />
                       </div>
 
-                      <div>
+                      <div className={'cellDecoration'}>
                         <label htmlFor={'isCompleted'}>
                           Поездка завершена?
                         </label>
@@ -168,7 +161,7 @@ export const BookingDetails = () => {
                         />
                       </div>
 
-                      <div>
+                      <div className={'cellDecoration'}>
                         <label htmlFor={'carLocation'}>
                           Местонахождение автомобиля по окончании поездки
                         </label>
