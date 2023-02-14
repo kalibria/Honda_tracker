@@ -32,7 +32,7 @@ export const CompleteRideWindow = ({
   const [triggerUser, resultUser] = useLazyGetUserQuery();
   const [carLocationResult, setCarLocationResult] = useState('');
 
-  const [triggerFinish] = useLazyFinishRideQuery();
+  const [triggerFinish, finishResult] = useLazyFinishRideQuery();
 
   const currentTime = dayjs(new Date().toString()).format('YYYY-MM-DDTHH:mm');
 
@@ -64,7 +64,14 @@ export const CompleteRideWindow = ({
         carId: resultUser.currentData.user.availableCars[0],
       });
     }
-  }, [resultUser.isSuccess, resultUser.currentData, initParamsForFinish]);
+  }, [resultUser.isSuccess, resultUser.currentData]);
+
+  useEffect(() => {
+    if (finishResult.isSuccess) {
+      setIsOpenCompleteRideWindow(false);
+      navigate(bookingListPath);
+    }
+  }, [finishResult.isSuccess, navigate, setIsOpenCompleteRideWindow]);
 
   return (
     <div className={'completeRideWindow'}>
@@ -87,8 +94,8 @@ export const CompleteRideWindow = ({
             rideCompletionText: updateRideCompletionText,
             endDateTime: dateInSec,
           });
-          setIsOpenCompleteRideWindow(false);
-          navigate(bookingListPath);
+
+          // navigate(bookingListPath);
 
           setSubmitting(false);
         }}
