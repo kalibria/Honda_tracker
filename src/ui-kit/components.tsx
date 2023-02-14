@@ -6,7 +6,6 @@ import { useField } from 'formik';
 import React from 'react';
 import {
   IAlertForm,
-  MyCheckboxProps,
   MySelectProps,
   MyTextInputProps,
   MyTextInputWithBorderProps,
@@ -14,7 +13,7 @@ import {
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { Loading } from 'src/ui-kit/Loading';
 
@@ -69,7 +68,7 @@ export const MySelect: React.FC<MySelectProps> = ({
   data,
   ...props
 }) => {
-  const [field, meta] = useField(props);
+  const [field] = useField(props);
   const menuItems = data?.map((item, index) => {
     return (
       <MenuItem key={index} value={item}>
@@ -78,11 +77,6 @@ export const MySelect: React.FC<MySelectProps> = ({
     );
   });
 
-  const [currentValue, setCurrentValue] = React.useState(props.name);
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setCurrentValue(event.target.value);
-  };
   return (
     <>
       <FormControl sx={{ m: 1, minWidth: 120 }}>
@@ -97,26 +91,6 @@ export const MySelect: React.FC<MySelectProps> = ({
           {menuItems}
         </Select>
       </FormControl>
-    </>
-  );
-};
-
-export const MyCheckbox: React.FC<MyCheckboxProps> = ({
-  children,
-  ...props
-}) => {
-  const [field, meta] = useField({ ...props, type: 'checkbox' });
-  return (
-    <>
-      <label>
-        <>
-          <input type="checkbox" {...field} {...props} className="mr-1.5" />
-          {children}
-        </>
-      </label>
-      {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
-      ) : null}
     </>
   );
 };

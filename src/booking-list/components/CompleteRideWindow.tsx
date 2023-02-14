@@ -32,7 +32,7 @@ export const CompleteRideWindow = ({
   const [triggerUser, resultUser] = useLazyGetUserQuery();
   const [carLocationResult, setCarLocationResult] = useState('');
 
-  const [triggerFinish, resultFinish] = useLazyFinishRideQuery();
+  const [triggerFinish] = useLazyFinishRideQuery();
 
   const currentTime = dayjs(new Date().toString()).format('YYYY-MM-DDTHH:mm');
 
@@ -64,7 +64,7 @@ export const CompleteRideWindow = ({
         carId: resultUser.currentData.user.availableCars[0],
       });
     }
-  }, [resultUser.isSuccess, resultUser.currentData]);
+  }, [resultUser.isSuccess, resultUser.currentData, initParamsForFinish]);
 
   return (
     <div className={'completeRideWindow'}>
@@ -89,6 +89,8 @@ export const CompleteRideWindow = ({
           });
           setIsOpenCompleteRideWindow(false);
           navigate(bookingListPath);
+
+          setSubmitting(false);
         }}
         enableReinitialize={true}>
         <Form className={'completeRideForm'}>

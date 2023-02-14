@@ -3,7 +3,6 @@ import { bookingItemsManager } from 'src/booking-list/BookingItemsManager';
 import { CalendarItems } from 'src/booking-list/components/CalendarItems';
 import { datesManager } from 'src/dates/datesTimeManager';
 import { useBookingRides } from 'src/booking-list/useBookingRides';
-import { useLazyGetBookingsQuery } from '../../services/hondaApi';
 
 export const CalendarItemsWrapper = () => {
   const requestRides = useBookingRides();
