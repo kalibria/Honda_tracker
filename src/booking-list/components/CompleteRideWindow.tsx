@@ -95,8 +95,6 @@ export const CompleteRideWindow = ({
             endDateTime: dateInSec,
           });
 
-          // navigate(bookingListPath);
-
           setSubmitting(false);
         }}
         enableReinitialize={true}>
