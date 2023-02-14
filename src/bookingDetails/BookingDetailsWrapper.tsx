@@ -54,20 +54,16 @@ export const BookingDetailsWrapper = () => {
       });
 
       bookingsIdTrigger({ username, carId, startTime: timeSec });
-      console.log('resultTrigger', bookingsIdResult);
     }
   }, [bookingsIdTrigger, idParams]);
 
   useEffect(() => {
-    console.log('result', bookingsIdResult);
-
     if (bookingsIdResult.isSuccess) {
       setIsComplete(bookingsIdResult.currentData.booking.isFinished);
       setCarLocation(
         bookingsIdResult.currentData.booking.carLocationAfterRideText,
       );
 
-      console.log('BEFORE WE SET!!!');
       setDataFromResponse({
         firstname: bookingsIdResult.currentData.booking.bookingOwner.firstName,
         carId: bookingsIdResult.currentData.booking.carNumber,

@@ -11,7 +11,14 @@ export const BookingDetailsCard = ({
   dataForCard,
   isComplete,
 }: IBookingDetailsCard) => {
-  console.log('data', dataForCard);
+  const startTimeUi = datesManager.getFormattingDateTime(
+    +new Date(dataForCard.startTime),
+  );
+  const endTimeUI = datesManager.getFormattingDateTime(
+    +new Date(dataForCard.endTime),
+  );
+
+  console.log('startTimeUi', startTimeUi);
 
   return (
     <table>
@@ -27,20 +34,14 @@ export const BookingDetailsCard = ({
           <td className={'cellDecoration'}>Автомобиль</td>
           <td className={'cellDecoration'}>{dataForCard.carId}</td>
         </tr>
-        {/*<tr>*/}
-        {/*  <td className={'cellDecoration'}>Время начала поездки</td>*/}
-        {/*  <td className={'cellDecoration'}>*/}
-        {/*    {datesManager.getFormattingDateTime(*/}
-        {/*      +new Date(dataForCard.startTime),*/}
-        {/*    )}*/}
-        {/*  </td>*/}
-        {/*</tr>*/}
-        {/*<tr>*/}
-        {/*  <td className={'cellDecoration'}>Время завершения поездки</td>*/}
-        {/*  <td className={'cellDecoration'}>*/}
-        {/*    {datesManager.getFormattingDateTime(+new Date(dataForCard.endTime))}*/}
-        {/*  </td>*/}
-        {/*</tr>*/}
+        <tr>
+          <td className={'cellDecoration'}>Время начала поездки</td>
+          <td className={'cellDecoration'}>{startTimeUi}</td>
+        </tr>
+        <tr>
+          <td className={'cellDecoration'}>Время завершения поездки</td>
+          <td className={'cellDecoration'}>{endTimeUI}</td>
+        </tr>
         <tr>
           <td className={'cellDecoration'}>Описание поездки</td>
           <td className={'cellDecoration'}>{dataForCard.description}</td>
