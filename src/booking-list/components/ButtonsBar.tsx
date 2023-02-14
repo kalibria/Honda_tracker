@@ -7,6 +7,8 @@ import { DeleteButton } from '../../redux/deleteButton';
 export interface IButtonsBar {
   startTimeSec: string;
   isComplete: boolean;
+  isEdit: boolean;
+  setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
   requestData: {
     username: string;
     carId: string;
@@ -18,6 +20,8 @@ export const ButtonsBar = ({
   startTimeSec,
   isComplete,
   requestData,
+  isEdit,
+  setIsEdit,
 }: IButtonsBar) => {
   const navigate = useNavigate();
   const [isOpenCompleteRideWindow, setIsOpenCompleteRideWindow] =
@@ -29,7 +33,9 @@ export const ButtonsBar = ({
   const completeRide = () => {
     setIsOpenCompleteRideWindow(true);
   };
-  const editRide = () => {};
+  const editRide = () => {
+    setIsEdit(true);
+  };
 
   return (
     <>

@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
-import { Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { datesManager } from 'src/dates/datesTimeManager';
+import { EditBookingPage } from 'src/editBooking/editBookingPage';
 import { Loading } from 'src/ui-kit/Loading';
 import { useLazyGetBookingsIdQuery } from 'src/services/hondaApi';
 import { ButtonsBar } from './ButtonsBar';
@@ -10,15 +10,26 @@ import { ButtonsBar } from './ButtonsBar';
 export const BookingDetails = () => {
   const params = useParams();
 
-  const [trigger, result] = useLazyGetBookingsIdQuery();
+  const [bookingsIdTrigger, bookingsIdResult] = useLazyGetBookingsIdQuery();
 
   const idParams = params.bookingId;
 
   const [isComplete, setIsComplete] = useState(false);
 
+  const [isEdit, setIsEdit] = useState(false);
+
   const [startTimeSec, setStartTimeSec] = useState('');
-  const [initStartTimeForFormik, setInitStartTimeForFormik] = useState('');
-  const [endTime, setEndTime] = useState('');
+
+  const [dataForFormik, setDataForFormik] = useState({
+    firstname: '',
+    carId: '',
+    startTime: '',
+    endTime: '',
+    description: '',
+    isCompleted: '',
+    carLocation: '',
+  });
+
   const [requestData, setRequestData] = useState({
     username: '',
     carId: '',
@@ -42,211 +53,129 @@ export const BookingDetails = () => {
         startTimeSec: timeSec,
       });
 
-      trigger({ username, carId, startTime: timeSec });
+      bookingsIdTrigger({ username, carId, startTime: timeSec });
 
-      if (result.isSuccess) {
-        setIsComplete(result.currentData.booking.isFinished);
-        setCarLocation(result.currentData.booking.carLocationAfterRideText);
-
-        setInitStartTimeForFormik(
-          dayjs(result.currentData.booking.bookingStartTime).format(
-            'YYYY-MM-DDTHH:mm',
-          ),
+      if (bookingsIdResult.isSuccess) {
+        setIsComplete(bookingsIdResult.currentData.booking.isFinished);
+        setCarLocation(
+          bookingsIdResult.currentData.booking.carLocationAfterRideText,
         );
 
-        setEndTime(
-          dayjs(result.currentData.booking.bookingEndTime).format(
-            'YYYY-MM-DDTHH:mm',
-          ),
-        );
+        setDataForFormik({
+          firstname:
+            bookingsIdResult.currentData.booking.bookingOwner.firstName,
+          carId: bookingsIdResult.currentData.booking.carNumber,
+          startTime: dayjs(
+            bookingsIdResult.currentData.booking.bookingStartTime,
+          ).format('YYYY-MM-DDTHH:mm'),
+          endTime: dayjs(
+            bookingsIdResult.currentData.booking.bookingEndTime,
+          ).format('YYYY-MM-DDTHH:mm'),
+          description: bookingsIdResult.currentData.booking.bookingDescription,
+          isCompleted: isComplete ? 'Да' : 'Нет',
+          carLocation: carLocation,
+        });
 
         if (isComplete) {
           setCarLocation(
-            result.currentData.booking.bookingOwner.settings.rideCompletionText,
+            bookingsIdResult.currentData.booking.bookingOwner.settings
+              .rideCompletionText,
           );
         }
       }
     }
-  }, [idParams, result.currentData, result.isSuccess, trigger]);
+  }, [
+    idParams,
+    bookingsIdResult.currentData,
+    bookingsIdResult.isSuccess,
+    bookingsIdTrigger,
+  ]);
 
   return (
     <div className={'bookingPage'}>
-      {result.isLoading ? (
+      {bookingsIdResult.isLoading ? (
         <Loading />
       ) : (
         <>
           <div className={'bookingWrapper'}>
-            <div className={'bookingHeader '}>Сведения о поездке</div>
-            {result.isSuccess && (
-              <Formik
-                initialValues={{
-                  firstname: result.currentData.booking.bookingOwner.firstName,
-                  carId: result.currentData.booking.carNumber,
-                  startTime: initStartTimeForFormik,
-                  endTime: endTime,
-                  description: result.currentData.booking.bookingDescription,
-                  isCompleted: isComplete ? 'Да' : 'Нет',
-                  carLocation: carLocation,
-                }}
-                onSubmit={(values, formikHelpers) => {}}
-                enableReinitialize={true}>
-                {(props) => {
-                  return (
-                    <form onSubmit={props.handleSubmit}>
-                      <div className={'cellDecoration'}>
-                        <label htmlFor={'firstname'}>Инициатор поездки</label>
-                        <input
-                          id={'firstname'}
-                          name={'firstname'}
-                          type="text"
-                          defaultValue={props.values.firstname}
-                          readOnly={true}
-                        />
-                      </div>
-
-                      <div className={'cellDecoration'}>
-                        <label htmlFor={'carId'}>Автомобиль</label>
-                        <input
-                          id={'carId'}
-                          name={'carId'}
-                          type="text"
-                          defaultValue={props.values.carId}
-                          readOnly={true}
-                        />
-                      </div>
-
-                      <div className={'cellDecoration'}>
-                        <label htmlFor={'startTime'}>
-                          Время начала поездки
-                        </label>
-                        <input
-                          id={'startTime'}
-                          name={'startTime'}
-                          type={'datetime-local'}
-                          defaultValue={props.values.startTime}
-                        />
-                      </div>
-
-                      <div className={'cellDecoration'}>
-                        <label htmlFor={'endTime'}>
-                          Время завершения поездки
-                        </label>
-                        <input
-                          id={'endTime'}
-                          name={'endTime'}
-                          type={'datetime-local'}
-                          defaultValue={props.values.endTime}
-                        />
-                      </div>
-
-                      <div className={'cellDecoration'}>
-                        <label htmlFor={'description'}>Описание поездки</label>
-                        <input
-                          id={'description'}
-                          name={'description'}
-                          type={'text'}
-                          defaultValue={props.values.description}
-                        />
-                      </div>
-
-                      <div className={'cellDecoration'}>
-                        <label htmlFor={'isCompleted'}>
-                          Поездка завершена?
-                        </label>
-                        <input
-                          id={'isCompleted'}
-                          name={'isCompleted'}
-                          type={'text'}
-                          defaultValue={props.values.isCompleted}
-                        />
-                      </div>
-
-                      <div className={'cellDecoration'}>
-                        <label htmlFor={'carLocation'}>
-                          Местонахождение автомобиля по окончании поездки
-                        </label>
-                        <input
-                          id={'carLocation'}
-                          name={'carLocation'}
-                          type={'text'}
-                          defaultValue={props.values.carLocation}
-                        />
-                      </div>
-                    </form>
-                  );
-                }}
-                {/*<table>*/}
-                {/*  <caption className={'bookingHeader cellDecoration'}>*/}
-                {/*    Сведения о поездке*/}
-                {/*  </caption>*/}
-                {/*  <tbody>*/}
-                {/*    <tr>*/}
-                {/*      <td className={'cellDecoration'}>Инициатор поездки</td>*/}
-                {/*      <td className={'cellDecoration'}>*/}
-                {/*        {result.currentData.booking.bookingOwner.firstName}*/}
-                {/*      </td>*/}
-                {/*    </tr>*/}
-                {/*    <tr>*/}
-                {/*      <td className={'cellDecoration'}>Автомобиль</td>*/}
-                {/*      <td className={'cellDecoration'}>*/}
-                {/*        {result.currentData.booking.carNumber}*/}
-                {/*      </td>*/}
-                {/*    </tr>*/}
-                {/*    <tr>*/}
-                {/*      <td className={'cellDecoration'}>Время начала поездки</td>*/}
-                {/*      <td className={'cellDecoration'}>*/}
-                {/*        {datesManager.getFormattingDateTime(*/}
-                {/*          +new Date(*/}
-                {/*            result.currentData.booking.bookingStartTime,*/}
-                {/*          ),*/}
-                {/*        )}*/}
-                {/*      </td>*/}
-                {/*    </tr>*/}
-                {/*    <tr>*/}
-                {/*      <td className={'cellDecoration'}>*/}
-                {/*        Время завершения поездки*/}
-                {/*      </td>*/}
-                {/*      <td className={'cellDecoration'}>{endTime}</td>*/}
-                {/*    </tr>*/}
-                {/*    <tr>*/}
-                {/*      <td className={'cellDecoration'}>Описание поездки</td>*/}
-                {/*      <td className={'cellDecoration'}>*/}
-                {/*        {result.currentData.booking.bookingDescription}*/}
-                {/*      </td>*/}
-                {/*    </tr>*/}
-                {/*    <tr>*/}
-                {/*      <td className={'cellDecoration'}>Поездка завершена?</td>*/}
-                {/*      <td className={'cellDecoration'}>*/}
-                {/*        {isComplete ? 'Да' : 'Нет'}*/}
-                {/*      </td>*/}
-                {/*    </tr>*/}
-                {/*    {isComplete && (*/}
-                {/*      <tr>*/}
-                {/*        <td className={'cellDecoration'}>*/}
-                {/*          Местонахождение автомобиля по окончании поездки*/}
-                {/*        </td>*/}
-                {/*        <td className={'cellDecoration'}>{carLocation}</td>*/}
-                {/*      </tr>*/}
-                {/*    )}*/}
-                {/*    /!*<tr>*!/*/}
-                {/*    /!*  <td className={'cellDecoration'}>Широта</td>*!/*/}
-                {/*    /!*  <td className={'cellDecoration'}></td>*!/*/}
-                {/*    /!*</tr>*!/*/}
-                {/*    /!*<tr>*!/*/}
-                {/*    /!*  <td className={'cellDecoration'}>Долгота</td>*!/*/}
-                {/*    /!*  <td className={'cellDecoration'}></td>*!/*/}
-                {/*    /!*</tr>*!/*/}
-                {/*  </tbody>*/}
-                {/*</table>*/}
-              </Formik>
+            {bookingsIdResult.isSuccess && !isEdit && (
+              <table>
+                <caption className={'bookingHeader cellDecoration'}>
+                  Сведения о поездке
+                </caption>
+                <tbody>
+                  <tr>
+                    <td className={'cellDecoration'}>Инициатор поездки</td>
+                    <td className={'cellDecoration'}>
+                      {
+                        bookingsIdResult.currentData.booking.bookingOwner
+                          .firstName
+                      }
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className={'cellDecoration'}>Автомобиль</td>
+                    <td className={'cellDecoration'}>
+                      {bookingsIdResult.currentData.booking.carNumber}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className={'cellDecoration'}>Время начала поездки</td>
+                    <td className={'cellDecoration'}>
+                      {datesManager.getFormattingDateTime(
+                        +new Date(
+                          bookingsIdResult.currentData.booking.bookingStartTime,
+                        ),
+                      )}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className={'cellDecoration'}>
+                      Время завершения поездки
+                    </td>
+                    <td className={'cellDecoration'}>
+                      {datesManager.getFormattingDateTime(
+                        +new Date(
+                          bookingsIdResult.currentData.booking.bookingEndTime,
+                        ),
+                      )}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className={'cellDecoration'}>Описание поездки</td>
+                    <td className={'cellDecoration'}>
+                      {bookingsIdResult.currentData.booking.bookingDescription}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className={'cellDecoration'}>Поездка завершена?</td>
+                    <td className={'cellDecoration'}>
+                      {isComplete ? 'Да' : 'Нет'}
+                    </td>
+                  </tr>
+                  {isComplete && (
+                    <tr>
+                      <td className={'cellDecoration'}>
+                        Местонахождение автомобиля по окончании поездки
+                      </td>
+                      <td className={'cellDecoration'}>{carLocation}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
             )}
           </div>
           <ButtonsBar
             startTimeSec={startTimeSec}
             isComplete={isComplete}
             requestData={requestData}
+            isEdit={isEdit}
+            setIsEdit={setIsEdit}
           />
         </>
+      )}
+      {bookingsIdResult.isSuccess && isEdit && (
+        <EditBookingPage setIsEdit={setIsEdit} dataForFormik={dataForFormik} />
       )}
     </div>
   );
