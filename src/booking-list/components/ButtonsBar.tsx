@@ -38,9 +38,7 @@ export const ButtonsBar = ({
         <ButtonUI onClick={completeRide} disabled={isComplete ? true : false}>
           {'Завершить поездку'}
         </ButtonUI>
-        <ButtonUI onClick={editRide} disabled={isComplete ? true : false}>
-          {'Редактировать'}
-        </ButtonUI>
+        <ButtonUI onClick={editRide}>{'Редактировать'}</ButtonUI>
         <DeleteButton requestData={requestData} />
       </div>
       {isOpenCompleteRideWindow && (
