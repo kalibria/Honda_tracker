@@ -1,19 +1,12 @@
+import dayjs from 'dayjs';
 import { Formik } from 'formik';
 import React from 'react';
-import { IRTKQueryBookingResponse } from 'src/booking-list/types';
+import { IDataForBookingDetailPage } from 'src/bookingDetails/types';
 import { ButtonUI } from 'src/ui-kit/ButtonUI';
 
 interface IEditBookingPage {
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
-  dataForFormik: {
-    firstname: string;
-    carId: string;
-    startTime: string;
-    endTime: string;
-    description: string;
-    isCompleted: string;
-    carLocation: string;
-  };
+  dataForFormik: IDataForBookingDetailPage;
 }
 
 export const EditBookingPage = ({
@@ -28,8 +21,8 @@ export const EditBookingPage = ({
         initialValues={{
           firstname: dataForFormik.firstname,
           carId: dataForFormik.carId,
-          startTime: dataForFormik.startTime,
-          endTime: dataForFormik.endTime,
+          startTime: dayjs(dataForFormik.startTime).format('YYYY-MM-DDTHH:mm'),
+          endTime: dayjs(dataForFormik.endTime).format('YYYY-MM-DDTHH:mm'),
           description: dataForFormik.description,
           isCompleted: dataForFormik.isCompleted,
           carLocation: dataForFormik.carLocation,
