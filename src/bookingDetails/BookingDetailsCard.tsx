@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { IDataForBookingDetailPage } from 'src/bookingDetails/types';
 import { datesManager } from 'src/dates/datesTimeManager';
 
@@ -11,14 +11,20 @@ export const BookingDetailsCard = ({
   dataForCard,
   isComplete,
 }: IBookingDetailsCard) => {
-  const startTimeUi = datesManager.getFormattingDateTime(
-    +new Date(dataForCard.startTime),
-  );
-  const endTimeUI = datesManager.getFormattingDateTime(
-    +new Date(dataForCard.endTime),
-  );
+  const [startTimeUi, setStartTimeUi] = useState('');
+  const [endTimeUI, setEndTimeUI] = useState('');
 
-  console.log('startTimeUi', startTimeUi);
+  useEffect(() => {
+    if (dataForCard.startTime && dataForCard.endTime) {
+      setStartTimeUi(
+        datesManager.getFormattingDateTime(+new Date(dataForCard.startTime)),
+      );
+
+      setEndTimeUI(
+        datesManager.getFormattingDateTime(+new Date(dataForCard.endTime)),
+      );
+    }
+  }, [dataForCard.startTime, dataForCard.endTime]);
 
   return (
     <table>
