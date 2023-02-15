@@ -19,6 +19,8 @@
     grid-template-columns: 1fr 1fr;
     column-gap: 10px;
     row-gap: 0.5em;
+    grid-template-rows: repeat(2,1fr);
+
 }
 
 .box {
@@ -53,8 +55,10 @@
 }
 
 .bookingWrapper {
+    display: grid;
     margin: 15px;
     width: 90%;
+    grid-row-gap: 15px;
 }
 
 .bookingWrapper input {
@@ -115,12 +119,13 @@
 
 
 .cellDecoration {
-    display: grid;
+    /*display: grid;*/
     background-color: #719ab226;
     padding: 0.5em;
+}
 
-
-
+.cellsWithData {
+    background-color: #6490aa26;
 }
 
 .creationRidePage {
