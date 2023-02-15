@@ -20,8 +20,12 @@
     column-gap: 10px;
     row-gap: 0.5em;
     grid-template-rows: repeat(2,1fr);
-
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
 }
+
+
 
 .box {
     display: grid;
@@ -47,6 +51,10 @@
     margin-right: auto;
 }
 
+.bookingEditWrapper {
+    width: 90%;
+}
+
 .bookingPage {
     display: grid;
     justify-items: center;
@@ -55,9 +63,12 @@
 }
 
 .bookingWrapper {
-    display: grid;
     margin: 15px;
     width: 90%;
+}
+
+.bookingDetailCardWrapper {
+    display: grid;
     grid-row-gap: 15px;
 }
 
@@ -115,11 +126,11 @@
 .calendar {
     display: grid;
     margin-top: 2em;
+
 }
 
 
 .cellDecoration {
-    /*display: grid;*/
     background-color: #719ab226;
     padding: 0.5em;
 }
@@ -136,11 +147,32 @@
     margin: 1em 0;
 }
 
+.editButtonsWrapper {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+    background-color: #1976d2
+}
+
 
 
 .formGroup {
     border: 2px solid #0380ab;
     border-radius: 5px;
+}
+
+.formInputs {
+    margin-bottom: 30px;
+}
+
+.formCellDecoration {
+    display: grid;
+    background-color: #719ab226;
+    padding: 0.5em;
+}
+
+.formCellDecoration input {
+    background-color: #719ab226;
 }
 
 .formWrapper {
@@ -154,6 +186,7 @@
 .finishedRide {
     text-decoration-line: line-through;
 }
+
 
 .label{
     text-align: center;

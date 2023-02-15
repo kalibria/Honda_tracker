@@ -5,15 +5,15 @@ import { SignUpForm } from 'src/auth/components/signUpForm/SignUpForm';
 import { BookingDetailsWrapper } from 'src/bookingDetails/BookingDetailsWrapper';
 import { BookingList } from 'src/booking-list/components/BookingList';
 import { WrapperForCreatingBooking } from 'src/createNewBooking/components/WrapperForCreatingBooking';
+
 import {
-  // bookingDetailsPath,
   bookingListPath,
-  creatingNewBooking,
+  creatingNewBookingPath,
   errorPath,
   initPath,
   loginPath,
   settingsPath,
-  signUpForm,
+  signUpFormPath,
   welcomePath,
 } from 'src/router/rootConstants';
 import { SettingsPage } from 'src/settings/SettingsPage';
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
         element: <BookingDetailsWrapper />,
       },
       {
-        path: creatingNewBooking,
+        path: creatingNewBookingPath,
         element: <WrapperForCreatingBooking />,
       },
 
@@ -53,7 +53,7 @@ const router = createBrowserRouter([
     element: <LoginForm />,
   },
   {
-    path: signUpForm,
+    path: signUpFormPath,
     element: <SignUpForm />,
   },
   {

@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { BookingDetailsCard } from 'src/bookingDetails/BookingDetailsCard';
-import { EditBookingPage } from 'src/editBooking/editBookingPage';
+import { EditBookingPage } from 'src/editBooking/EditBookingPage';
 import { Loading } from 'src/ui-kit/Loading';
 import { useLazyGetBookingsIdQuery } from 'src/services/hondaApi';
 import { ButtonsBar } from 'src/bookingDetails/ButtonsBar';
@@ -100,17 +100,19 @@ export const BookingDetailsWrapper = () => {
           <div className={'bookingWrapper'}>
             {bookingsIdResult.isSuccess && !isEdit && (
               <>
-                <BookingDetailsCard
-                  dataForCard={dataFromResponse}
-                  isComplete={isComplete}
-                />
-                <ButtonsBar
-                  startTimeSec={startTimeSec}
-                  isComplete={isComplete}
-                  requestData={requestData}
-                  isEdit={isEdit}
-                  setIsEdit={setIsEdit}
-                />
+                <div className={'bookingDetailCardWrapper'}>
+                  <BookingDetailsCard
+                    dataForCard={dataFromResponse}
+                    isComplete={isComplete}
+                  />
+                  <ButtonsBar
+                    startTimeSec={startTimeSec}
+                    isComplete={isComplete}
+                    requestData={requestData}
+                    isEdit={isEdit}
+                    setIsEdit={setIsEdit}
+                  />
+                </div>
               </>
             )}
           </div>

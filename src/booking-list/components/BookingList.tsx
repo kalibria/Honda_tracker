@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CalendarItemsWrapper } from 'src/booking-list/components/CalendarItemsWrapper';
-import { creatingNewBooking } from 'src/router/rootConstants';
+import { creatingNewBookingPath } from 'src/router/rootConstants';
 import { useQueryUserInfo } from 'src/services/useQueryUserInfo';
 import { ButtonUI } from 'src/ui-kit/ButtonUI';
 import { Roles } from 'src/user/types';
@@ -16,7 +16,7 @@ export const BookingList = () => {
     <div className={'bookingPage'}>
       {isDriverRole && (
         <div className={'button'}>
-          <Link to={creatingNewBooking}>
+          <Link to={creatingNewBookingPath}>
             <ButtonUI>{'Создать поездку'}</ButtonUI>
           </Link>
         </div>
