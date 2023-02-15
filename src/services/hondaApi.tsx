@@ -116,6 +116,22 @@ export const hondaApi = createApi({
 
       invalidatesTags: ['Bookings'],
     }),
+    editBooking: builder.mutation({
+      query: ({
+        username,
+        carId,
+        startTimeSec,
+        startDateTime,
+        endDateTime,
+        description,
+      }) => ({
+        url: `/bookings?username=${username}&carId=${carId}&startTime=${startTimeSec}`,
+        method: 'PATCH',
+        body: { startDateTime, endDateTime, description },
+      }),
+
+      invalidatesTags: ['Bookings'],
+    }),
   }),
 });
 
@@ -131,4 +147,5 @@ export const {
   useLazyGetIdAccessTokenQuery,
   useLazyFinishRideQuery,
   useDeleteBookingMutation,
+  useEditBookingMutation,
 } = hondaApi;
