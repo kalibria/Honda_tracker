@@ -20,9 +20,7 @@
     column-gap: 10px;
     row-gap: 0.5em;
     grid-template-rows: repeat(2,1fr);
-    width: 60%;
-    margin-right: auto;
-    margin-left: auto;
+
 }
 
 
@@ -150,8 +148,12 @@
 .editButtonsWrapper {
     display: flex;
     justify-content: space-around;
-    padding: 15px;
-    background-color: #1976d2
+
+
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+
 }
 
 

@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { BookingDetailsCard } from 'src/bookingDetails/BookingDetailsCard';
@@ -19,6 +18,8 @@ export const BookingDetailsWrapper = () => {
   const [isEdit, setIsEdit] = useState(false);
 
   const [startTimeSec, setStartTimeSec] = useState('');
+
+  const [username, setUsername] = useState('');
 
   const [dataFromResponse, setDataFromResponse] = useState({
     firstname: '',
@@ -63,6 +64,8 @@ export const BookingDetailsWrapper = () => {
       setCarLocation(
         bookingsIdResult.currentData.booking.carLocationAfterRideText,
       );
+
+      setUsername(bookingsIdResult.currentData.booking.bookingOwner.username);
 
       setDataFromResponse({
         firstname: bookingsIdResult.currentData.booking.bookingOwner.firstName,
@@ -122,6 +125,8 @@ export const BookingDetailsWrapper = () => {
         <EditBookingPage
           setIsEdit={setIsEdit}
           dataForFormik={dataFromResponse}
+          isComplete={isComplete}
+          username={username}
         />
       )}
     </div>
