@@ -8,7 +8,6 @@ import {
   useLazyFinishRideQuery,
   useLazyGetUserQuery,
 } from 'src/services/hondaApi';
-import { BasicTextFields } from 'src/settings/components';
 import * as Yup from 'yup';
 import dayjs from 'dayjs';
 
@@ -99,10 +98,15 @@ export const CompleteRideWindow = ({
         }}
         enableReinitialize={true}>
         <Form className={'completeRideForm'}>
-          <BasicTextFields
-            label={'Где оставлен автомобиль?'}
-            name={'carLocation'}
-          />
+          <div>
+            <label htmlFor={'carLocation'}>Где оставлен автомобиль?</label>
+            <input
+              name={'carLocation'}
+              id={'carLocation'}
+              type={'text'}
+              defaultValue={carLocationResult}
+            />
+          </div>
 
           <div className={'completedTime'}>
             <label htmlFor={'completeTime'}>Время завершения</label>
