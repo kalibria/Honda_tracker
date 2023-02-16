@@ -38,3 +38,17 @@ export interface IBookingRequest {
   endDateTime: number;
   description: string;
 }
+
+export interface INotifications {
+  getNotifiedWhenBookingChanged: boolean;
+  getNotifiedWhenBookingCreated: boolean;
+}
+
+export interface ISettings {
+  rideCompletionText: string;
+  notifications: INotifications;
+}
+
+export interface IUsersSettings {
+  settings: ISettings;
+}
