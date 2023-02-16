@@ -1,56 +1,166 @@
-import Button from '@mui/material/Button';
-import { Form, Formik } from 'formik';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
+import FormLabel from '@mui/material/FormLabel';
+import Switch from '@mui/material/Switch';
+import TextField from '@mui/material/TextField';
+import { useFormik } from 'formik';
+import React, { useEffect, useState } from 'react';
 import { useCheckIsLoggedIn } from 'src/auth/authenticationManager';
-import { RootState } from 'src/redux/store';
-import { BasicTextFields, SwitchesGroup } from 'src/settings/components';
+import { IUsersSettings } from 'src/createNewBooking/bookingTypes';
+import {
+  useGetMeQuery,
+  useLazyGetUserQuery,
+  useLazyUpdateUserDataQuery,
+} from 'src/services/hondaApi';
+
 import { carProvider } from 'src/settings/constants';
+import { debounce } from 'lodash';
 
 export const SettingsPage = () => {
-  const { isSuccess } = useCheckIsLoggedIn();
-  const selectMyRole = useSelector((state: RootState) => state.userData.role);
+  const { isSuccess: meSuccess, currentData: meCurrentData } = useGetMeQuery(
+    {},
+  );
+  const [getUserTrigger, userResult] = useLazyGetUserQuery();
+  const [myRoles, setMyRoles] = useState<string[]>([]);
 
-  const isCarProvider = selectMyRole.includes(carProvider);
+  const { isSuccess } = useCheckIsLoggedIn();
+
+  const isCarProvider = myRoles.includes(carProvider);
+
+  const [initNotifiedWhenCreated, setInitNotifiedWhenCreated] = useState(false);
+  const [initNotifiedWhenChanged, setNotifiedWhenChanged] = useState(false);
+  const [rideCompletionText, setRideCompletionText] = useState('');
+
+  useEffect(() => {
+    if (meSuccess && meCurrentData) {
+      getUserTrigger(meCurrentData.username);
+    }
+  }, [meSuccess, meCurrentData, getUserTrigger]);
+
+  useEffect(() => {
+    if (userResult.isSuccess && userResult.currentData) {
+      setMyRoles(userResult.currentData.user.roles);
+      setRideCompletionText(
+        userResult.currentData.user.settings.rideCompletionText,
+      );
+      setInitNotifiedWhenCreated(
+        userResult.currentData.user.settings.notifications
+          .getNotifiedAboutNewBookings,
+      );
+
+      setNotifiedWhenChanged(
+        userResult.currentData.user.settings.notifications
+          .getNotifiedAboutBookingChanges,
+      );
+    }
+  }, [userResult.isSuccess, userResult.currentData]);
+
+  const [triggerUpdate, resultAfterUpdate] = useLazyUpdateUserDataQuery();
+
+  useEffect(() => {
+    if (resultAfterUpdate.isSuccess && meCurrentData) {
+      getUserTrigger(meCurrentData.username);
+    }
+
+    if (userResult.isSuccess) {
+      console.log('newData', userResult.currentData);
+    }
+  }, [resultAfterUpdate.isSuccess, meCurrentData, userResult.isSuccess]);
+
+  const formik = useFormik({
+    initialValues: {
+      isCreated: initNotifiedWhenCreated,
+      isChanged: initNotifiedWhenChanged,
+      textField: rideCompletionText,
+    },
+    onSubmit: (values) => {},
+    enableReinitialize: true,
+  });
+
+  const debounceUpdate = debounce(async (newSettings: IUsersSettings) => {
+    const settings: IUsersSettings = {
+      settings: {
+        rideCompletionText: newSettings.settings.rideCompletionText,
+        notifications: {
+          getNotifiedWhenBookingChanged:
+            newSettings.settings.notifications.getNotifiedWhenBookingChanged,
+          getNotifiedWhenBookingCreated:
+            newSettings.settings.notifications.getNotifiedWhenBookingCreated,
+        },
+      },
+    };
+
+    triggerUpdate({ username: meCurrentData?.username, settings });
+  }, 2000);
+
+  useEffect(() => {
+    const newSettings: IUsersSettings = {
+      settings: {
+        rideCompletionText: formik.values.textField,
+        notifications: {
+          getNotifiedWhenBookingChanged: formik.values.isChanged,
+          getNotifiedWhenBookingCreated: formik.values.isCreated,
+        },
+      },
+    };
+    debounceUpdate(newSettings);
+  }, [
+    formik.values.isChanged,
+    formik.values.isCreated,
+    formik.values.textField,
+  ]);
 
   return (
     <div className={'sm:w-60 mainContainer'}>
       {isSuccess && (
-        <Formik
-          initialValues={{
-            isCreated: false,
-            isChanged: false,
-            textField: '',
-          }}
-          onSubmit={(values, { setSubmitting }) => {
-            alert(values.isChanged);
-            setSubmitting(false);
-          }}>
-          <Form className={'flex flex-col space-y-3.5 formWrapper'}>
-            {isCarProvider && (
-              <SwitchesGroup
-                note1={'booking is created'}
-                note2={'booking is changed'}
-                title={'Get notifications when ...'}
-                isCreatedFieldName={'isCreated'}
-                isChangedFieldName={'isChanged'}
-              />
-            )}
+        <form
+          className={'flex flex-col space-y-3.5 formWrapper'}
+          onChange={formik.handleChange}>
+          {isCarProvider && (
             <div className={'widthFormItem'}>
-              <BasicTextFields
-                label={'Где оставлен автомобиль?'}
-                name={'textField'}
-              />
+              <FormControl component="fieldset" variant="standard">
+                <FormLabel component="legend">
+                  {'Get notifications when ...'}
+                </FormLabel>
+                <FormGroup>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        name={'isCreated'}
+                        checked={formik.values.isCreated}
+                        onChange={formik.handleChange}
+                        value={formik.values.isCreated}
+                      />
+                    }
+                    label={'booking is created'}
+                  />
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        name={'isChanged'}
+                        checked={formik.values.isChanged}
+                        onChange={formik.handleChange}
+                        value={formik.values.isChanged}
+                      />
+                    }
+                    label={'booking is changed'}
+                  />
+                </FormGroup>
+              </FormControl>
             </div>
-            <Button
-              className={'place-self-center'}
-              variant="contained"
-              type="submit"
-              size={'small'}>
-              {'Сохранить'}
-            </Button>
-          </Form>
-        </Formik>
+          )}
+          <div className={'widthFormItem'}>
+            <TextField
+              fullWidth
+              id="fullWidth"
+              label={'Где оставлен автомобиль?'}
+              variant="standard"
+              name={'textField'}
+              value={formik.values.textField}
+            />
+          </div>
+        </form>
       )}
     </div>
   );
