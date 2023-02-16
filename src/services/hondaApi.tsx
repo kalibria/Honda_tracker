@@ -11,10 +11,10 @@ export const hondaApi = createApi({
       const refreshToken = myLocalStorage.getItem('RefreshToken');
       const accessToken = sessionStorage.getItem('AccessToken');
       // const idToken = sessionStorage.getItem('IdToken');
-
+      headers.set('origin', window.origin);
       if (refreshToken && endpoint === 'getIdAccessToken') {
         headers.set('x-refresh-token', refreshToken);
-        headers.set('origin', window.origin);
+        // headers.set('origin', window.origin);
         headers.set('content-type', 'application/json');
       } else if (endpoint === 'logOut') {
         headers.delete('accessToken');
@@ -117,10 +117,17 @@ export const hondaApi = createApi({
       invalidatesTags: ['Bookings'],
     }),
     editBooking: builder.mutation({
-      query: ({ username, carId, startTimeSec, endDateTime, description }) => ({
+      query: ({
+        username,
+        carId,
+        startTimeSec,
+        startDateTime,
+        endDateTime,
+        description,
+      }) => ({
         url: `/bookings?username=${username}&carId=${carId}&startTime=${startTimeSec}`,
         method: 'PATCH',
-        body: { startDateTime: startTimeSec, endDateTime, description },
+        body: { startDateTime, endDateTime, description },
       }),
 
       invalidatesTags: ['Bookings'],

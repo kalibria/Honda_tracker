@@ -40,8 +40,9 @@ export const EditBookingPage = ({
           editTrigger({
             username: username,
             carId: values.carId,
-            startTimeSec: +new Date(values.startTime) / 1000,
-            endDateTime: +new Date(values.endTime) / 1000,
+            startTimeSec: +new Date(dataForFormik.startTime) / 1000,
+            startDateTime: +new Date(values.startTime) / 1000,
+            // endDateTime: +new Date(values.endTime) / 1000,
             description: values.description,
           });
         }}
@@ -79,6 +80,7 @@ export const EditBookingPage = ({
                     name={'startTime'}
                     type={'datetime-local'}
                     defaultValue={props.values.startTime}
+                    onChange={props.handleChange}
                   />
                 </div>
                 {isComplete && (
@@ -89,6 +91,7 @@ export const EditBookingPage = ({
                       name={'endTime'}
                       type={'datetime-local'}
                       defaultValue={props.values.endTime}
+                      onChange={props.handleChange}
                     />
                   </div>
                 )}
@@ -100,6 +103,7 @@ export const EditBookingPage = ({
                     name={'description'}
                     type={'text'}
                     defaultValue={props.values.description}
+                    onChange={props.handleChange}
                   />
                 </div>
 
@@ -110,6 +114,7 @@ export const EditBookingPage = ({
                     name={'isCompleted'}
                     type={'text'}
                     defaultValue={props.values.isCompleted}
+                    onChange={props.handleChange}
                   />
                 </div>
 
@@ -123,6 +128,7 @@ export const EditBookingPage = ({
                       name={'carLocation'}
                       type={'text'}
                       defaultValue={props.values.carLocation}
+                      onChange={props.handleChange}
                     />
                   </div>
                 )}
