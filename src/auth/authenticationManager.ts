@@ -3,10 +3,8 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { logOut, setIsAuthenticated } from 'src/redux/authSlice';
-import {
-  bookingListPath,
-  welcomePath,
-} from 'src/router/rootConstants';
+
+import { welcomePath } from 'src/router/rootConstants';
 import {
   useLazyGetIdAccessTokenQuery,
   useLazyLogOutQuery,
@@ -134,13 +132,15 @@ export function useIsIdTokenExpired() {
             refreshTokenTriggerResult.currentData.AccessToken,
           );
 
-          navigate(bookingListPath, { state: pathname });
+          // navigate(bookingListPath, { state: pathname });
         }
       }
     }
   }, [
     currentIdToken,
-    refreshTokenTriggerResult.currentData,
+    pathname,
+    refreshTokenTriggerResult.currentData?.IdToken,
+    refreshTokenTriggerResult.currentData?.AccessToken,
     refreshTokenTriggerResult.isSuccess,
   ]);
 }

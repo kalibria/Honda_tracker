@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IBookingRequest } from 'src/createNewBooking/bookingTypes';
+import {
+  IBookingRequest,
+} from 'src/createNewBooking/bookingTypes';
 import { myLocalStorage } from 'src/services/localStorage';
 
 export const hondaApi = createApi({
@@ -132,6 +134,13 @@ export const hondaApi = createApi({
 
       invalidatesTags: ['Bookings'],
     }),
+    updateUserData: builder.query({
+      query: ({ username, settings }) => ({
+        url: `/users/${username}`,
+        method: 'PATCH',
+        body: settings,
+      }),
+    }),
   }),
 });
 
@@ -148,4 +157,5 @@ export const {
   useLazyFinishRideQuery,
   useDeleteBookingMutation,
   useEditBookingMutation,
+  useLazyUpdateUserDataQuery,
 } = hondaApi;
