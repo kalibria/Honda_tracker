@@ -44,10 +44,13 @@ export const BookingDetailsCard = ({
           <td className={'cellDecoration'}>Время начала поездки</td>
           <td className={'cellDecoration'}>{startTimeUi}</td>
         </tr>
-        <tr>
-          <td className={'cellDecoration'}>Время завершения поездки</td>
-          <td className={'cellDecoration'}>{endTimeUI}</td>
-        </tr>
+        {isComplete && (
+          <tr>
+            <td className={'cellDecoration'}>Время завершения поездки</td>
+            <td className={'cellDecoration'}>{endTimeUI}</td>
+          </tr>
+        )}
+
         <tr>
           <td className={'cellDecoration'}>Описание поездки</td>
           <td className={'cellDecoration'}>{dataForCard.description}</td>

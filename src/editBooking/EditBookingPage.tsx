@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { Formik } from 'formik';
+import { Field, Form, Formik } from 'formik';
 import React from 'react';
 import { IDataForBookingDetailPage } from 'src/bookingDetails/types';
 import { useEditBookingMutation } from 'src/services/hondaApi';
@@ -19,7 +19,6 @@ export const EditBookingPage = ({
   username,
 }: IEditBookingPage) => {
   const [editTrigger, resultEditTrigger] = useEditBookingMutation();
-
   return (
     <div className={'bookingEditWrapper'}>
       <div className={'bookingHeader '}>Сведения о поездке</div>
@@ -49,7 +48,7 @@ export const EditBookingPage = ({
         enableReinitialize={true}>
         {(props) => {
           return (
-            <form onSubmit={props.handleSubmit} aria-readonly={true}>
+            <Form onSubmit={props.handleSubmit} aria-readonly={true}>
               <div className={'formInputs'}>
                 <div className={'formCellDecoration'}>
                   <label htmlFor={'firstname'}>Инициатор поездки</label>
@@ -109,13 +108,16 @@ export const EditBookingPage = ({
 
                 <div className={'formCellDecoration'}>
                   <label htmlFor={'isCompleted'}>Поездка завершена?</label>
-                  <input
-                    id={'isCompleted'}
+                  <select
+                    // as={'select'}
+                    defaultValue={isComplete ? 'true' : 'false'}
                     name={'isCompleted'}
-                    type={'text'}
-                    defaultValue={props.values.isCompleted}
-                    onChange={props.handleChange}
-                  />
+                    id={'isCompleted'}
+                    className={'formCellDecoration'}
+                    onChange={props.handleChange}>
+                    <option value={'true'}>Да</option>
+                    <option value={'false'}>Нет</option>
+                  </select>
                 </div>
 
                 {isComplete && (
@@ -137,7 +139,7 @@ export const EditBookingPage = ({
                 <ButtonUI>{'Отмена'}</ButtonUI>
                 <ButtonUI onClick={props.handleSubmit}>{'Сохранить'}</ButtonUI>
               </div>
-            </form>
+            </Form>
           );
         }}
       </Formik>
