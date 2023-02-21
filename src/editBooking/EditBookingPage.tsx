@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
-import { Field, Form, Formik } from 'formik';
-import React from 'react';
+import { Form, Formik } from 'formik';
+import React, { useEffect, useState } from 'react';
 import { IDataForBookingDetailPage } from 'src/bookingDetails/types';
 import { useEditBookingMutation } from 'src/services/hondaApi';
 import { ButtonUI } from 'src/ui-kit/ButtonUI';
@@ -19,6 +19,9 @@ export const EditBookingPage = ({
   username,
 }: IEditBookingPage) => {
   const [editTrigger, resultEditTrigger] = useEditBookingMutation();
+
+  const [newDataIsComplete, setNewDataIsComplete] = useState(isComplete);
+
   return (
     <div className={'bookingEditWrapper'}>
       <div className={'bookingHeader '}>Сведения о поездке</div>
@@ -34,19 +37,40 @@ export const EditBookingPage = ({
           carLocation: dataForFormik.carLocation,
         }}
         onSubmit={(values, formikHelpers) => {
-          console.log('values', values);
+          console.log('values', values.isCompleted);
+
+          if (values.isCompleted) {
+            editTrigger({
+              username: username,
+              carId: values.carId,
+              startTimeSec: +new Date(dataForFormik.startTime) / 1000,
+              startDateTime: +new Date(values.startTime) / 1000,
+
+              endDateTime: +new Date(values.endTime) / 1000,
+              description: values.description,
+            });
+          } else {
+            editTrigger({
+              username: username,
+              carId: values.carId,
+              startTimeSec: +new Date(dataForFormik.startTime) / 1000,
+              startDateTime: +new Date(values.startTime) / 1000,
+              description: values.description,
+            });
+          }
           setIsEdit(false);
-          editTrigger({
-            username: username,
-            carId: values.carId,
-            startTimeSec: +new Date(dataForFormik.startTime) / 1000,
-            startDateTime: +new Date(values.startTime) / 1000,
-            // endDateTime: +new Date(values.endTime) / 1000,
-            description: values.description,
-          });
+        }}
+        onReset={() => {
+          setIsEdit(false);
         }}
         enableReinitialize={true}>
         {(props) => {
+          // if (props.values.isCompleted === 'true') {
+          //   setNewDataIsComplete(true);
+          // } else {
+          //   setNewDataIsComplete(false);
+          // }
+
           return (
             <Form onSubmit={props.handleSubmit} aria-readonly={true}>
               <div className={'formInputs'}>
@@ -82,18 +106,21 @@ export const EditBookingPage = ({
                     onChange={props.handleChange}
                   />
                 </div>
-                {isComplete && (
-                  <div className={'formCellDecoration'}>
-                    <label htmlFor={'endTime'}>Время завершения поездки</label>
-                    <input
-                      id={'endTime'}
-                      name={'endTime'}
-                      type={'datetime-local'}
-                      defaultValue={props.values.endTime}
-                      onChange={props.handleChange}
-                    />
-                  </div>
-                )}
+                {isComplete ||
+                  (newDataIsComplete && (
+                    <div className={'formCellDecoration'}>
+                      <label htmlFor={'endTime'}>
+                        Время завершения поездки
+                      </label>
+                      <input
+                        id={'endTime'}
+                        name={'endTime'}
+                        type={'datetime-local'}
+                        defaultValue={props.values.endTime}
+                        onChange={props.handleChange}
+                      />
+                    </div>
+                  ))}
 
                 <div className={'formCellDecoration'}>
                   <label htmlFor={'description'}>Описание поездки</label>
@@ -120,23 +147,24 @@ export const EditBookingPage = ({
                   </select>
                 </div>
 
-                {isComplete && (
-                  <div className={'formCellDecoration'}>
-                    <label htmlFor={'carLocation'}>
-                      Местонахождение автомобиля по окончании поездки
-                    </label>
-                    <input
-                      id={'carLocation'}
-                      name={'carLocation'}
-                      type={'text'}
-                      defaultValue={props.values.carLocation}
-                      onChange={props.handleChange}
-                    />
-                  </div>
-                )}
+                {isComplete ||
+                  (newDataIsComplete && (
+                    <div className={'formCellDecoration'}>
+                      <label htmlFor={'carLocation'}>
+                        Местонахождение автомобиля по окончании поездки
+                      </label>
+                      <input
+                        id={'carLocation'}
+                        name={'carLocation'}
+                        type={'text'}
+                        defaultValue={props.values.carLocation}
+                        onChange={props.handleChange}
+                      />
+                    </div>
+                  ))}
               </div>
               <div className={'editButtonsWrapper'}>
-                <ButtonUI>{'Отмена'}</ButtonUI>
+                <ButtonUI onClick={props.handleReset}>{'Отмена'}</ButtonUI>
                 <ButtonUI onClick={props.handleSubmit}>{'Сохранить'}</ButtonUI>
               </div>
             </Form>

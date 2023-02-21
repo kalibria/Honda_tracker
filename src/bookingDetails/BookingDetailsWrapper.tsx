@@ -21,6 +21,8 @@ export const BookingDetailsWrapper = () => {
 
   const [username, setUsername] = useState('');
 
+  // const [] = useState();
+
   const [dataFromResponse, setDataFromResponse] = useState({
     firstname: '',
     carId: '',
