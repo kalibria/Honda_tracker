@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { Form, Formik } from 'formik';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { IDataForBookingDetailPage } from 'src/bookingDetails/types';
 import { useEditBookingMutation } from 'src/services/hondaApi';
 import { ButtonUI } from 'src/ui-kit/ButtonUI';
@@ -19,8 +19,6 @@ export const EditBookingPage = ({
   username,
 }: IEditBookingPage) => {
   const [editTrigger, resultEditTrigger] = useEditBookingMutation();
-
-  const [newDataIsComplete, setNewDataIsComplete] = useState(isComplete);
 
   return (
     <div className={'bookingEditWrapper'}>
@@ -65,12 +63,6 @@ export const EditBookingPage = ({
         }}
         enableReinitialize={true}>
         {(props) => {
-          // if (props.values.isCompleted === 'true') {
-          //   setNewDataIsComplete(true);
-          // } else {
-          //   setNewDataIsComplete(false);
-          // }
-
           return (
             <Form onSubmit={props.handleSubmit} aria-readonly={true}>
               <div className={'formInputs'}>
@@ -106,21 +98,18 @@ export const EditBookingPage = ({
                     onChange={props.handleChange}
                   />
                 </div>
-                {isComplete ||
-                  (newDataIsComplete && (
-                    <div className={'formCellDecoration'}>
-                      <label htmlFor={'endTime'}>
-                        Время завершения поездки
-                      </label>
-                      <input
-                        id={'endTime'}
-                        name={'endTime'}
-                        type={'datetime-local'}
-                        defaultValue={props.values.endTime}
-                        onChange={props.handleChange}
-                      />
-                    </div>
-                  ))}
+                {isComplete || props.values.isCompleted === 'true' ? (
+                  <div className={'formCellDecoration'}>
+                    <label htmlFor={'endTime'}>Время завершения поездки</label>
+                    <input
+                      id={'endTime'}
+                      name={'endTime'}
+                      type={'datetime-local'}
+                      defaultValue={props.values.endTime}
+                      onChange={props.handleChange}
+                    />
+                  </div>
+                ) : null}
 
                 <div className={'formCellDecoration'}>
                   <label htmlFor={'description'}>Описание поездки</label>
@@ -136,7 +125,6 @@ export const EditBookingPage = ({
                 <div className={'formCellDecoration'}>
                   <label htmlFor={'isCompleted'}>Поездка завершена?</label>
                   <select
-                    // as={'select'}
                     defaultValue={isComplete ? 'true' : 'false'}
                     name={'isCompleted'}
                     id={'isCompleted'}
@@ -147,21 +135,20 @@ export const EditBookingPage = ({
                   </select>
                 </div>
 
-                {isComplete ||
-                  (newDataIsComplete && (
-                    <div className={'formCellDecoration'}>
-                      <label htmlFor={'carLocation'}>
-                        Местонахождение автомобиля по окончании поездки
-                      </label>
-                      <input
-                        id={'carLocation'}
-                        name={'carLocation'}
-                        type={'text'}
-                        defaultValue={props.values.carLocation}
-                        onChange={props.handleChange}
-                      />
-                    </div>
-                  ))}
+                {isComplete || props.values.isCompleted === 'true' ? (
+                  <div className={'formCellDecoration'}>
+                    <label htmlFor={'carLocation'}>
+                      Местонахождение автомобиля по окончании поездки
+                    </label>
+                    <input
+                      id={'carLocation'}
+                      name={'carLocation'}
+                      type={'text'}
+                      defaultValue={props.values.carLocation}
+                      onChange={props.handleChange}
+                    />
+                  </div>
+                ) : null}
               </div>
               <div className={'editButtonsWrapper'}>
                 <ButtonUI onClick={props.handleReset}>{'Отмена'}</ButtonUI>

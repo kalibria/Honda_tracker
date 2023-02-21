@@ -83,7 +83,7 @@ export const CompleteRideWindow = ({
           carLocation: Yup.string().required('Required'),
         })}
         onSubmit={(values, { setSubmitting }) => {
-          const fromISOtoDate = new Date(currentTime);
+          const fromISOtoDate = new Date(values.completeTime);
           const dateInSec = fromISOtoDate.getTime() / 1000;
 
           const updateRideCompletionText = values.carLocation;
@@ -97,36 +97,41 @@ export const CompleteRideWindow = ({
           setSubmitting(false);
         }}
         enableReinitialize={true}>
-        <Form className={'completeRideForm'}>
-          <div>
-            <label htmlFor={'carLocation'}>Где оставлен автомобиль?</label>
-            <input
-              name={'carLocation'}
-              id={'carLocation'}
-              type={'text'}
-              defaultValue={carLocationResult}
-            />
-          </div>
+        {(props) => {
+          return (
+            <Form className={'completeRideForm'}>
+              <div>
+                <label htmlFor={'carLocation'}>Где оставлен автомобиль?</label>
+                <input
+                  name={'carLocation'}
+                  id={'carLocation'}
+                  type={'text'}
+                  defaultValue={carLocationResult}
+                />
+              </div>
 
-          <div className={'completedTime'}>
-            <label htmlFor={'completeTime'}>Время завершения</label>
-            <input
-              name={'completeTime'}
-              id={'completeTime'}
-              type={'datetime-local'}
-              defaultValue={currentTime}
-            />
-          </div>
-          <div className={'button'}>
-            <Button
-              className={'place-self-center '}
-              variant="contained"
-              type="submit"
-              size={'small'}>
-              {'Подтвердить'}
-            </Button>
-          </div>
-        </Form>
+              <div className={'completedTime'}>
+                <label htmlFor={'completeTime'}>Время завершения</label>
+                <input
+                  name={'completeTime'}
+                  id={'completeTime'}
+                  type={'datetime-local'}
+                  defaultValue={currentTime}
+                  onChange={props.handleChange}
+                />
+              </div>
+              <div className={'button'}>
+                <Button
+                  className={'place-self-center '}
+                  variant="contained"
+                  type="submit"
+                  size={'small'}>
+                  {'Подтвердить'}
+                </Button>
+              </div>
+            </Form>
+          );
+        }}
       </Formik>
     </div>
   );
