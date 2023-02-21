@@ -6,6 +6,7 @@ import Switch from '@mui/material/Switch';
 import TextField from '@mui/material/TextField';
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useCheckIsLoggedIn } from 'src/auth/authenticationManager';
 import { IUsersSettings } from 'src/createNewBooking/bookingTypes';
 import {
@@ -16,6 +17,7 @@ import {
 
 import { carProvider } from 'src/settings/constants';
 import { debounce } from 'lodash';
+import { ButtonUI } from 'src/ui-kit/ButtonUI';
 
 export const SettingsPage = () => {
   const { isSuccess: meSuccess, currentData: meCurrentData } = useGetMeQuery(
@@ -31,6 +33,8 @@ export const SettingsPage = () => {
   const [initNotifiedWhenCreated, setInitNotifiedWhenCreated] = useState(false);
   const [initNotifiedWhenChanged, setNotifiedWhenChanged] = useState(false);
   const [rideCompletionText, setRideCompletionText] = useState('');
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (meSuccess && meCurrentData) {
@@ -61,10 +65,6 @@ export const SettingsPage = () => {
   useEffect(() => {
     if (resultAfterUpdate.isSuccess && meCurrentData) {
       getUserTrigger(meCurrentData.username);
-    }
-
-    if (userResult.isSuccess) {
-      console.log('newData', userResult.currentData);
     }
   }, [resultAfterUpdate.isSuccess, meCurrentData, userResult.isSuccess]);
 
@@ -110,6 +110,10 @@ export const SettingsPage = () => {
     formik.values.isCreated,
     formik.values.textField,
   ]);
+
+  const handleClick = () => {
+    navigate(-1);
+  };
 
   return (
     <div className={'sm:w-60 mainContainer'}>
@@ -162,6 +166,7 @@ export const SettingsPage = () => {
           </div>
         </form>
       )}
+      <ButtonUI onClick={handleClick}>{'Назад'}</ButtonUI>
     </div>
   );
 };

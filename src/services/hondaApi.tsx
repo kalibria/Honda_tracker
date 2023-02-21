@@ -1,7 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import {
-  IBookingRequest,
-} from 'src/createNewBooking/bookingTypes';
+import { IBookingRequest } from 'src/createNewBooking/bookingTypes';
 import { myLocalStorage } from 'src/services/localStorage';
 
 export const hondaApi = createApi({
@@ -122,12 +120,12 @@ export const hondaApi = createApi({
       query: ({
         username,
         carId,
-        startTimeSec,
+        startTime,
         startDateTime,
         endDateTime,
         description,
       }) => ({
-        url: `/bookings?username=${username}&carId=${carId}&startTime=${startTimeSec}`,
+        url: `/bookings?username=${username}&carId=${carId}&startTime=${startTime}`,
         method: 'PATCH',
         body: { startDateTime, endDateTime, description },
       }),

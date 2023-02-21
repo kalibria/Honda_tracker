@@ -34,14 +34,14 @@ export const EditBookingPage = ({
           isCompleted: dataForFormik.isCompleted,
           carLocation: dataForFormik.carLocation,
         }}
-        onSubmit={(values, formikHelpers) => {
+        onSubmit={(values, { setSubmitting }) => {
           console.log('values', values.isCompleted);
 
           if (values.isCompleted) {
             editTrigger({
               username: username,
               carId: values.carId,
-              startTimeSec: +new Date(dataForFormik.startTime) / 1000,
+              startTime: +new Date(dataForFormik.startTime) / 1000,
               startDateTime: +new Date(values.startTime) / 1000,
 
               endDateTime: +new Date(values.endTime) / 1000,
@@ -51,12 +51,13 @@ export const EditBookingPage = ({
             editTrigger({
               username: username,
               carId: values.carId,
-              startTimeSec: +new Date(dataForFormik.startTime) / 1000,
+              startTime: +new Date(dataForFormik.startTime) / 1000,
               startDateTime: +new Date(values.startTime) / 1000,
               description: values.description,
             });
           }
           setIsEdit(false);
+          setSubmitting(false);
         }}
         onReset={() => {
           setIsEdit(false);
@@ -98,7 +99,7 @@ export const EditBookingPage = ({
                     onChange={props.handleChange}
                   />
                 </div>
-                {isComplete || props.values.isCompleted === 'true' ? (
+                {props.values.isCompleted === 'Да' && (
                   <div className={'formCellDecoration'}>
                     <label htmlFor={'endTime'}>Время завершения поездки</label>
                     <input
@@ -109,7 +110,7 @@ export const EditBookingPage = ({
                       onChange={props.handleChange}
                     />
                   </div>
-                ) : null}
+                )}
 
                 <div className={'formCellDecoration'}>
                   <label htmlFor={'description'}>Описание поездки</label>
@@ -135,7 +136,7 @@ export const EditBookingPage = ({
                   </select>
                 </div>
 
-                {isComplete || props.values.isCompleted === 'true' ? (
+                {props.values.isCompleted === 'Да' && (
                   <div className={'formCellDecoration'}>
                     <label htmlFor={'carLocation'}>
                       Местонахождение автомобиля по окончании поездки
@@ -148,7 +149,7 @@ export const EditBookingPage = ({
                       onChange={props.handleChange}
                     />
                   </div>
-                ) : null}
+                )}
               </div>
               <div className={'editButtonsWrapper'}>
                 <ButtonUI onClick={props.handleReset}>{'Отмена'}</ButtonUI>
