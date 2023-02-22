@@ -4,31 +4,32 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { logOut, setIsAuthenticated } from 'src/redux/authSlice';
 
-import { welcomePath } from 'src/router/rootConstants';
+import { loginPath, welcomePath } from 'src/router/rootConstants';
 import {
   useLazyGetIdAccessTokenQuery,
   useLazyLogOutQuery,
 } from 'src/services/hondaApi';
 import { myLocalStorage } from 'src/services/localStorage';
 
-class AuthenticationManager {
-  setUnauthenticated(dispatch: Dispatch) {
-    myLocalStorage.logOut();
+// class AuthenticationManager {
+//   setUnauthenticated(dispatch: Dispatch) {
+//     myLocalStorage.logOut();
+//
+//     dispatch(logOut());
+//   }
+//
+//   setAuthenticated(dispatch: Dispatch, username: string) {
+//     myLocalStorage.setItem('isAuthenticated', 'true');
+//
+//     dispatch(setIsAuthenticated(username));
+//   }
+// }
 
-    dispatch(logOut());
-  }
-
-  setAuthenticated(dispatch: Dispatch, username: string) {
-    myLocalStorage.setItem('isAuthenticated', 'true');
-
-    dispatch(setIsAuthenticated(username));
-  }
-}
-
-export const authenticationManager = new AuthenticationManager();
+// export const authenticationManager = new AuthenticationManager();
 
 export const useCheckIsLoggedIn = () => {
   const isRefreshToken = myLocalStorage.isRefreshToken();
+  const accessToken = sessionStorage.getItem('AccessToken');
   const [refreshTokenTrigger, refreshTokenTriggerResult] =
     useLazyGetIdAccessTokenQuery();
   const [triggerLogOut] = useLazyLogOutQuery();
@@ -56,7 +57,7 @@ export const useCheckIsLoggedIn = () => {
         setIsLoading(false);
         setIsSuccess(false);
       }
-    } else {
+    } else if (!isRefreshToken && accessToken) {
       setIsLoading(false);
       setIsSuccess(false);
 
@@ -68,18 +69,17 @@ export const useCheckIsLoggedIn = () => {
     pathname,
     refreshTokenTriggerResult.isError,
     refreshTokenTriggerResult.isSuccess,
-    refreshTokenTrigger,
   ]);
 
-  useEffect(() => {
-    const accessToken = sessionStorage.getItem('AccessToken');
-    if (!isRefreshToken && accessToken) {
-      setIsLoading(false);
-      setIsSuccess(false);
-
-      triggerLogOut({ accessToken: accessToken });
-    }
-  }, [isRefreshToken, triggerLogOut]);
+  // useEffect(() => {
+  //   const accessToken = sessionStorage.getItem('AccessToken');
+  //   if (!isRefreshToken && accessToken) {
+  //     setIsLoading(false);
+  //     setIsSuccess(false);
+  //
+  //     // triggerLogOut({ accessToken: accessToken });
+  //   }
+  // }, [isRefreshToken, triggerLogOut]);
 
   return { isLoading, isSuccess };
 };

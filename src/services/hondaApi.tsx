@@ -11,7 +11,7 @@ export const hondaApi = createApi({
       const refreshToken = myLocalStorage.getItem('RefreshToken');
       const accessToken = sessionStorage.getItem('AccessToken');
       // const idToken = sessionStorage.getItem('IdToken');
-      headers.set('origin', window.origin);
+      // headers.set('origin', window.origin);
       if (refreshToken && endpoint === 'getIdAccessToken') {
         headers.set('x-refresh-token', refreshToken);
         // headers.set('origin', window.origin);
@@ -125,7 +125,7 @@ export const hondaApi = createApi({
         endDateTime,
         description,
       }) => ({
-        url: `/bookings?username=${username}&carId=${carId}&startTime=${startTime}`,
+        url: `/bookings/id?username=${username}&carId=${carId}&startTime=${startTime}`,
         method: 'PATCH',
         body: { startDateTime, endDateTime, description },
       }),
