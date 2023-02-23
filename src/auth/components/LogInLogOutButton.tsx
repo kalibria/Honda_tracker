@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import {
-  // authenticationManager,
-  useCheckIsLoggedIn,
-} from 'src/auth/authenticationManager';
-import loginForm from 'src/auth/components/loginForm/LoginForm';
+import { useCheckIsLoggedIn } from 'src/auth/authenticationManager';
 
 import { ButtonUI } from 'src/ui-kit/ButtonUI';
 import { Loading } from 'src/ui-kit/Loading';
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 import { loginPath, welcomePath } from 'src/router/rootConstants';
-import { useLazyLogOutQuery } from 'src/services/hondaApi';
-import { myLocalStorage } from 'src/services/localStorage';
+import { useLogOutMutation } from 'src/services/hondaApi';
 
 export const LogInLogOutButton = () => {
   const { isSuccess } = useCheckIsLoggedIn();
-  const [logOutTrigger, logOutTriggerResult] = useLazyLogOutQuery();
+  const [logOutTrigger, logOutTriggerResult] = useLogOutMutation();
   const [error, setError] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,9 +25,7 @@ export const LogInLogOutButton = () => {
     navigate(loginPath);
   };
 
-  useEffect(() => {
-    console.log('logOut', logOutTriggerResult);
-  }, [logOutTriggerResult]);
+  useEffect(() => {}, [logOutTriggerResult]);
 
   useEffect(() => {
     const { isSuccess, errorMsg, isError } =

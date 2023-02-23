@@ -1,7 +1,9 @@
 import dayjs from 'dayjs';
 import { Form, Formik } from 'formik';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { IDataForBookingDetailPage } from 'src/bookingDetails/types';
+import { bookingListPath } from 'src/router/rootConstants';
 import { useEditBookingMutation } from 'src/services/hondaApi';
 import { ButtonUI } from 'src/ui-kit/ButtonUI';
 
@@ -19,6 +21,13 @@ export const EditBookingPage = ({
   username,
 }: IEditBookingPage) => {
   const [editTrigger, resultEditTrigger] = useEditBookingMutation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (resultEditTrigger.isSuccess) {
+      navigate(bookingListPath);
+    }
+  }, [resultEditTrigger.isSuccess, navigate]);
 
   return (
     <div className={'bookingEditWrapper'}>
@@ -56,7 +65,7 @@ export const EditBookingPage = ({
               description: values.description,
             });
           }
-          setIsEdit(false);
+
           setSubmitting(false);
         }}
         onReset={() => {

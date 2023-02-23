@@ -29,7 +29,7 @@ export const hondaApi = createApi({
     },
   }),
 
-  tagTypes: ['Login', 'Me', 'Bookings'],
+  tagTypes: ['User', 'Me', 'Bookings'],
   endpoints: (builder) => ({
     signUp: builder.query({
       query: ({
@@ -63,15 +63,17 @@ export const hondaApi = createApi({
         body: { password, username },
       }),
     }),
-    logOut: builder.query({
+    logOut: builder.mutation({
       query: (accessToken) => ({
         url: '/logout',
         method: 'POST',
         body: accessToken,
       }),
+      invalidatesTags: ['Me', 'User'],
     }),
     getUser: builder.query({
       query: (username: string) => `/users/${username}`,
+      providesTags: ['User'],
     }),
     getMe: builder.query<{ username: string }, object>({
       query: () => '/me',
@@ -144,7 +146,7 @@ export const hondaApi = createApi({
 
 export const {
   useLazyStatusLoginQuery,
-  useLazyLogOutQuery,
+  useLogOutMutation,
   useLazyGetUserQuery,
   useGetMeQuery,
   useLazyGetBookingsQuery,

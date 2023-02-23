@@ -54,16 +54,14 @@ export const CompleteRideWindow = ({
 
   useEffect(() => {
     if (resultUser.isSuccess) {
-      setCarLocationResult(
-        resultUser.currentData.user.settings.rideCompletionText,
-      );
+      setCarLocationResult(resultUser.data.user.settings.rideCompletionText);
       setQueryParams({
         ...initParamsForFinish,
-        username: resultUser.currentData.user.username,
-        carId: resultUser.currentData.user.availableCars[0],
+        username: resultUser.data.user.username,
+        carId: resultUser.data.user.availableCars[0],
       });
     }
-  }, [resultUser.isSuccess, resultUser.currentData]);
+  }, [resultUser.isSuccess, resultUser.data]);
 
   useEffect(() => {
     if (finishResult.isSuccess) {

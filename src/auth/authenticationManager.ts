@@ -4,10 +4,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { logOut, setIsAuthenticated } from 'src/redux/authSlice';
 
-import { loginPath, welcomePath } from 'src/router/rootConstants';
+import {
+  bookingListPath,
+  loginPath,
+  welcomePath,
+} from 'src/router/rootConstants';
 import {
   useLazyGetIdAccessTokenQuery,
-  useLazyLogOutQuery,
+  useLogOutMutation,
 } from 'src/services/hondaApi';
 import { myLocalStorage } from 'src/services/localStorage';
 
@@ -32,7 +36,7 @@ export const useCheckIsLoggedIn = () => {
   const accessToken = sessionStorage.getItem('AccessToken');
   const [refreshTokenTrigger, refreshTokenTriggerResult] =
     useLazyGetIdAccessTokenQuery();
-  const [triggerLogOut] = useLazyLogOutQuery();
+  const [triggerLogOut] = useLogOutMutation();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [isLoading, setIsLoading] = useState(false);
@@ -40,29 +44,30 @@ export const useCheckIsLoggedIn = () => {
 
   useEffect(() => {
     if (isRefreshToken) {
-      setIsLoading(true);
-      refreshTokenTrigger({});
+      // setIsLoading(true);
+      // refreshTokenTrigger({});
       if (refreshTokenTriggerResult.isSuccess) {
         setIsLoading(false);
         setIsSuccess(true);
         sessionStorage.setItem(
           'IdToken',
-          refreshTokenTriggerResult.currentData.IdToken,
+          refreshTokenTriggerResult.data.IdToken,
         );
         sessionStorage.setItem(
           'AccessToken',
-          refreshTokenTriggerResult.currentData.AccessToken,
+          refreshTokenTriggerResult.data.AccessToken,
         );
       } else if (refreshTokenTriggerResult.isError) {
         setIsLoading(false);
         setIsSuccess(false);
       }
-    } else if (!isRefreshToken && accessToken) {
+    } else {
       setIsLoading(false);
       setIsSuccess(false);
 
       navigate(welcomePath, { state: pathname });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     isRefreshToken,
     navigate,
@@ -122,25 +127,28 @@ export function useIsIdTokenExpired() {
 
       if (isIdTokenExpired) {
         refreshTokenTrigger({});
-        if (refreshTokenTriggerResult.isSuccess) {
-          sessionStorage.setItem(
-            'IdToken',
-            refreshTokenTriggerResult.currentData.IdToken,
-          );
-          sessionStorage.setItem(
-            'AccessToken',
-            refreshTokenTriggerResult.currentData.AccessToken,
-          );
-
-          // navigate(bookingListPath, { state: pathname });
-        }
       }
     }
+  }, [currentIdToken, refreshTokenTrigger]);
+
+  useEffect(() => {
+    if (refreshTokenTriggerResult.isSuccess) {
+      sessionStorage.setItem(
+        'IdToken',
+        refreshTokenTriggerResult.data?.IdToken,
+      );
+      sessionStorage.setItem(
+        'AccessToken',
+        refreshTokenTriggerResult.data?.AccessToken,
+      );
+
+      navigate(bookingListPath, { state: pathname });
+    }
   }, [
-    currentIdToken,
+    navigate,
     pathname,
-    refreshTokenTriggerResult.currentData?.IdToken,
-    refreshTokenTriggerResult.currentData?.AccessToken,
+    refreshTokenTriggerResult.data?.AccessToken,
+    refreshTokenTriggerResult.data?.IdToken,
     refreshTokenTriggerResult.isSuccess,
   ]);
 }

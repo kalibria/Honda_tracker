@@ -16,9 +16,9 @@ export const SignUpForm = () => {
 
   useEffect(() => {
     if (result.isSuccess) {
-      myLocalStorage.setItem('RefreshToken', result.currentData.RefreshToken);
-      sessionStorage.setItem('AccessToken', result.currentData.AccessToken);
-      sessionStorage.setItem('IdToken', result.currentData.IdToken);
+      myLocalStorage.setItem('RefreshToken', result.data.RefreshToken);
+      sessionStorage.setItem('AccessToken', result.data.AccessToken);
+      sessionStorage.setItem('IdToken', result.data.IdToken);
       navigate(bookingListPath);
     } else if (result.isError) {
       setErrorMsg(myRtkQueryResultProcessor.getErrorMessage(result.error));

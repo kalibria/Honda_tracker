@@ -42,6 +42,7 @@ export const BookingDetailsWrapper = () => {
   const [carLocation, setCarLocation] = useState('');
 
   useEffect(() => {
+    console.log('params', idParams);
     if (idParams) {
       const parsedParams = idParams.split('$');
       const username = parsedParams[0];
@@ -62,26 +63,24 @@ export const BookingDetailsWrapper = () => {
 
   useEffect(() => {
     if (bookingsIdResult.isSuccess) {
-      setIsComplete(bookingsIdResult.currentData.booking.isFinished);
-      setCarLocation(
-        bookingsIdResult.currentData.booking.carLocationAfterRideText,
-      );
+      setIsComplete(bookingsIdResult.data.booking.isFinished);
+      setCarLocation(bookingsIdResult.data.booking.carLocationAfterRideText);
 
-      setUsername(bookingsIdResult.currentData.booking.bookingOwner.username);
+      setUsername(bookingsIdResult.data.booking.bookingOwner.username);
 
       setDataFromResponse({
-        firstname: bookingsIdResult.currentData.booking.bookingOwner.firstName,
-        carId: bookingsIdResult.currentData.booking.carNumber,
-        startTime: bookingsIdResult.currentData.booking.bookingStartTime,
-        endTime: bookingsIdResult.currentData.booking.bookingEndTime,
-        description: bookingsIdResult.currentData.booking.bookingDescription,
+        firstname: bookingsIdResult.data.booking.bookingOwner.firstName,
+        carId: bookingsIdResult.data.booking.carNumber,
+        startTime: bookingsIdResult.data.booking.bookingStartTime,
+        endTime: bookingsIdResult.data.booking.bookingEndTime,
+        description: bookingsIdResult.data.booking.bookingDescription,
         isCompleted: isComplete ? 'Да' : 'Нет',
         carLocation: carLocation,
       });
     }
   }, [
     bookingsIdResult.isSuccess,
-    bookingsIdResult.currentData,
+    bookingsIdResult.data,
     isComplete,
     carLocation,
     bookingsIdResult,
@@ -90,11 +89,10 @@ export const BookingDetailsWrapper = () => {
   useEffect(() => {
     if (isComplete) {
       setCarLocation(
-        bookingsIdResult.currentData.booking.bookingOwner.settings
-          .rideCompletionText,
+        bookingsIdResult.data.booking.bookingOwner.settings.rideCompletionText,
       );
     }
-  }, [bookingsIdResult.currentData, isComplete]);
+  }, [bookingsIdResult.data, isComplete]);
 
   return (
     <div className={'bookingPage'}>

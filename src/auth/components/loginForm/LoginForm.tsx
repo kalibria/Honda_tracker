@@ -57,7 +57,7 @@ const LoginForm = () => {
 
     if (isSuccess) {
       // authenticationManager.setAuthenticated(dispatch, username);
-      dispatch(setCurrentUsername(username));
+      // dispatch(setCurrentUsername(username));
       setError('');
       console.log("'refreshToken", loginResult.data.RefreshToken);
       myLocalStorage.setItem('RefreshToken', loginResult.data.RefreshToken);
@@ -75,11 +75,11 @@ const LoginForm = () => {
   }, [dispatch, navigate, loginResult, triggerUser, username]);
 
   useEffect(() => {
-    if (resultUser.isSuccess && resultUser.currentData) {
-      dispatch(setUserRole(resultUser.currentData.user.roles));
+    if (resultUser.isSuccess && resultUser.data) {
+      dispatch(setUserRole(resultUser.data.user.roles));
       redirect(bookingListPath);
     }
-  }, [resultUser.isSuccess, resultUser.currentData, dispatch, navigate]);
+  }, [resultUser.isSuccess, resultUser.data, dispatch, navigate]);
 
   return (
     <div className="mainContainer ">

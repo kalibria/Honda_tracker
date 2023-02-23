@@ -43,22 +43,19 @@ export const SettingsPage = () => {
   }, [meSuccess, meCurrentData, getUserTrigger]);
 
   useEffect(() => {
-    if (userResult.isSuccess && userResult.currentData) {
-      setMyRoles(userResult.currentData.user.roles);
-      setRideCompletionText(
-        userResult.currentData.user.settings.rideCompletionText,
-      );
+    if (userResult.isSuccess && userResult.data) {
+      setMyRoles(userResult.data.user.roles);
+      setRideCompletionText(userResult.data.user.settings.rideCompletionText);
       setInitNotifiedWhenCreated(
-        userResult.currentData.user.settings.notifications
-          .getNotifiedAboutNewBookings,
+        userResult.data.user.settings.notifications.getNotifiedAboutNewBookings,
       );
 
       setNotifiedWhenChanged(
-        userResult.currentData.user.settings.notifications
+        userResult.data.user.settings.notifications
           .getNotifiedAboutBookingChanges,
       );
     }
-  }, [userResult.isSuccess, userResult.currentData]);
+  }, [userResult.isSuccess, userResult.data]);
 
   const [triggerUpdate, resultAfterUpdate] = useLazyUpdateUserDataQuery();
 

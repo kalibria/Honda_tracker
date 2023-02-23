@@ -11,7 +11,7 @@ import { Loading } from 'src/ui-kit/Loading';
 
 export const App = () => {
   const { isLoading, isSuccess } = useCheckIsLoggedIn();
-  // useIsIdTokenExpired();
+  useIsIdTokenExpired();
 
   return isLoading ? (
     <Loading />
