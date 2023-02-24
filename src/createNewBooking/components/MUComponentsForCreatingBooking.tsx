@@ -21,7 +21,7 @@ export function ResponsiveStartDatePicker({
 }: IDatePicker) {
   const currentDate = datesManager.getCurrentDate();
 
-  const [locale, setLocale] = React.useState<typeof locales[number]>('ru');
+  const [locale] = React.useState<typeof locales[number]>('ru');
 
   const [datePickerValue, setDatePickerValue] = React.useState<Dayjs | null>(
     dayjs(currentDate),
@@ -52,7 +52,7 @@ export function ResponsiveEndDatePicker({
 }: IDatePicker) {
   const newEndDate = props.values.startDate;
 
-  const [locale, setLocale] = React.useState<typeof locales[number]>('ru');
+  const [locale] = React.useState<typeof locales[number]>('ru');
 
   const [datePickerValue, setDatePickerValue] = React.useState<Dayjs | null>(
     null,
@@ -83,7 +83,7 @@ export function ResponsiveTimePickers({
 }: IResponsiveTimePickers) {
   const currentDate = datesManager.getCurrentDateTime();
 
-  const [locale, setLocale] = React.useState<typeof locales[number]>('ru');
+  const [locale] = React.useState<typeof locales[number]>('ru');
 
   const [timePickerValue, setTimePickerValue] = React.useState<Dayjs | null>(
     dayjs(currentDate),
@@ -112,7 +112,7 @@ export function ResponsiveTimePickersEndTime({
   newTime,
   ...props
 }: IResponsiveTimePickers) {
-  const [locale, setLocale] = React.useState<typeof locales[number]>('ru');
+  const [locale] = React.useState<typeof locales[number]>('ru');
 
   const endTime = datesManager.addHours(props.values.startTime, 2);
 

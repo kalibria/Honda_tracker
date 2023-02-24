@@ -95,11 +95,16 @@
     flex-direction: column;
 }
 
+.completedTime {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .calendar {
     display: grid;
     margin-top: 2em;
 }
-
 
 
 .cellDecoration {
@@ -129,6 +134,10 @@
 
 .fontBold {
     font-weight: bold;
+}
+
+.finishedRide {
+    text-decoration-line: line-through;
 }
 
 .label{

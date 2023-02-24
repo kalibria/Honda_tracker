@@ -2,12 +2,23 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CompleteRideWindow } from 'src/booking-list/components/CompleteRideWindow';
 import { ButtonUI } from 'src/ui-kit/ButtonUI';
+import { DeleteButton } from '../../redux/deleteButton';
 
 export interface IButtonsBar {
-  rideCompletionText: string;
+  startTimeSec: string;
+  isComplete: boolean;
+  requestData: {
+    username: string;
+    carId: string;
+    startTimeSec: string;
+  };
 }
 
-export const ButtonsBar = ({ rideCompletionText }: IButtonsBar) => {
+export const ButtonsBar = ({
+  startTimeSec,
+  isComplete,
+  requestData,
+}: IButtonsBar) => {
   const navigate = useNavigate();
   const [isOpenCompleteRideWindow, setIsOpenCompleteRideWindow] =
     useState(false);
@@ -19,19 +30,22 @@ export const ButtonsBar = ({ rideCompletionText }: IButtonsBar) => {
     setIsOpenCompleteRideWindow(true);
   };
   const editRide = () => {};
-  const deleteRide = () => {};
 
   return (
     <>
       <div className={'bookingButtonsWrapper'}>
         <ButtonUI onClick={goBack}>{'Назад'}</ButtonUI>
-        <ButtonUI onClick={completeRide}>{'Завершить поездку'}</ButtonUI>
-        <ButtonUI onClick={editRide}>{'Редактировать'}</ButtonUI>
-        <ButtonUI onClick={deleteRide}>{'Удалить'}</ButtonUI>
+        <ButtonUI onClick={completeRide} disabled={isComplete ? true : false}>
+          {'Завершить поездку'}
+        </ButtonUI>
+        <ButtonUI onClick={editRide} disabled={isComplete ? true : false}>
+          {'Редактировать'}
+        </ButtonUI>
+        <DeleteButton requestData={requestData} />
       </div>
       {isOpenCompleteRideWindow && (
         <CompleteRideWindow
-          rideCompletionText={rideCompletionText}
+          startTimeSec={startTimeSec}
           setIsOpenCompleteRideWindow={setIsOpenCompleteRideWindow}
         />
       )}

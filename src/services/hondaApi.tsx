@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
   IBookingRequest,
-  IUsersSettings,
 } from 'src/createNewBooking/bookingTypes';
 import { myLocalStorage } from 'src/services/localStorage';
 
@@ -32,7 +31,7 @@ export const hondaApi = createApi({
     },
   }),
 
-  tagTypes: ['Login', 'Me'],
+  tagTypes: ['Login', 'Me', 'Bookings'],
   endpoints: (builder) => ({
     signUp: builder.query({
       query: ({
@@ -83,6 +82,7 @@ export const hondaApi = createApi({
     getBookings: builder.query({
       query: ({ carId, username }) =>
         `/bookings?carId=${carId}&username=${username}`,
+      providesTags: ['Bookings'],
     }),
     getBookingsId: builder.query({
       query: ({ username, carId, startTime }) => ({
@@ -95,6 +95,28 @@ export const hondaApi = createApi({
         method: 'POST',
         body: bookingRequest,
       }),
+    }),
+    finishRide: builder.query({
+      query: ({
+        username,
+        carId,
+        startTimeSec,
+        rideCompletionText,
+        endDateTime,
+      }) => ({
+        url: `/bookings/finish/id?username=${username}&carId=${carId}&startTime=${startTimeSec}`,
+        method: 'POST',
+        body: { rideCompletionText, endDateTime },
+        invalidatesTags: ['Bookings'],
+      }),
+    }),
+    deleteBooking: builder.mutation({
+      query: ({ username, carId, startTimeSec }) => ({
+        url: `/bookings/id?username=${username}&carId=${carId}&startTime=${startTimeSec}`,
+        method: 'DELETE',
+      }),
+
+      invalidatesTags: ['Bookings'],
     }),
     updateUserData: builder.query({
       query: ({ username, settings }) => ({
@@ -116,5 +138,7 @@ export const {
   useLazyBookingsQuery,
   useLazySignUpQuery,
   useLazyGetIdAccessTokenQuery,
+  useLazyFinishRideQuery,
+  useDeleteBookingMutation,
   useLazyUpdateUserDataQuery,
 } = hondaApi;

@@ -3,13 +3,8 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { logOut, setIsAuthenticated } from 'src/redux/authSlice';
+import { welcomePath } from 'src/router/rootConstants';
 import {
-  bookingListPath,
-  loginPath,
-  welcomePath,
-} from 'src/router/rootConstants';
-import {
-  useGetMeQuery,
   useLazyGetIdAccessTokenQuery,
   useLazyLogOutQuery,
 } from 'src/services/hondaApi';
@@ -31,28 +26,11 @@ class AuthenticationManager {
 
 export const authenticationManager = new AuthenticationManager();
 
-export const useCheckMe = (path: string) => {
-  const navigate = useNavigate();
-  const { data, isSuccess, isError } = useGetMeQuery({});
-  const [username, setUserName] = useState('');
-
-  useEffect(() => {
-    if (isSuccess) {
-      setUserName(data.username);
-      navigate(path);
-    } else if (isError) {
-      navigate(loginPath);
-    }
-  }, [data, isError, isSuccess, navigate, path]);
-
-  return username;
-};
-
 export const useCheckIsLoggedIn = () => {
   const isRefreshToken = myLocalStorage.isRefreshToken();
   const [refreshTokenTrigger, refreshTokenTriggerResult] =
     useLazyGetIdAccessTokenQuery();
-  const [triggerLogOut, logoutResult] = useLazyLogOutQuery();
+  const [triggerLogOut] = useLazyLogOutQuery();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [isLoading, setIsLoading] = useState(false);
@@ -81,7 +59,7 @@ export const useCheckIsLoggedIn = () => {
       setIsLoading(false);
       setIsSuccess(false);
 
-      // navigate(welcomePath, { state: pathname });
+      navigate(welcomePath, { state: pathname });
     }
   }, [
     isRefreshToken,

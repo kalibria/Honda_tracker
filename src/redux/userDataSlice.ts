@@ -1,13 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { logOut, setIsAuthenticated } from 'src/redux/authSlice';
 
-interface IInitState {
-  username: string;
-  firstName: string;
-  role: string;
-  carId: string[];
-}
-
 const initState = {
   username: '',
   firstName: '',

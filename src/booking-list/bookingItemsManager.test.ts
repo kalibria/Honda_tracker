@@ -37,6 +37,7 @@ describe('test bookingItemsManager class', () => {
         description: 'Masha - buy presents for parents',
         carId: 'ho-123456',
         id: 1669719320000,
+        isFinished: false,
       },
       {
         username: 'Мария',
@@ -45,6 +46,7 @@ describe('test bookingItemsManager class', () => {
         description: 'Masha - visit parents',
         carId: 'ho-123456',
         id: 1669722920000,
+        isFinished: false,
       },
       {
         username: 'Мария',
@@ -53,6 +55,7 @@ describe('test bookingItemsManager class', () => {
         description: 'Зоопарк!',
         carId: 'ho-123456',
         id: 1669978520000,
+        isFinished: false,
       },
       {
         username: 'Мария',
@@ -61,6 +64,7 @@ describe('test bookingItemsManager class', () => {
         description: 'За шубой',
         carId: 'ho-123456',
         id: 1670410520000,
+        isFinished: false,
       },
       {
         username: 'Мария',
@@ -69,6 +73,7 @@ describe('test bookingItemsManager class', () => {
         description: 'К психологу в ЛОДЭ',
         carId: 'ho-123456',
         id: 1670583320000,
+        isFinished: false,
       },
     ];
     const output = {

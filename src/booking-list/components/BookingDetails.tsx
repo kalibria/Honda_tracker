@@ -12,23 +12,49 @@ export const BookingDetails = () => {
 
   const idParams = params.bookingId;
 
-  const [rideCompletionText, setRideCompletionText] = useState('');
-
   const [isComplete, setIsComplete] = useState(false);
+
+  const [startTimeSec, setStartTimeSec] = useState('');
+  const [endTime, setEndTime] = useState('');
+  const [requestData, setRequestData] = useState({
+    username: '',
+    carId: '',
+    startTimeSec: '',
+  });
+
+  const [carLocation, setCarLocation] = useState('');
 
   useEffect(() => {
     if (idParams) {
       const parsedParams = idParams.split('$');
       const username = parsedParams[0];
+
       const carId = parsedParams[1];
       const timeSec = parsedParams[2];
+      setStartTimeSec(timeSec);
+
+      setRequestData({
+        username: username,
+        carId: carId,
+        startTimeSec: timeSec,
+      });
 
       trigger({ username, carId, startTime: timeSec });
 
       if (result.isSuccess) {
-        setRideCompletionText(
-          result.currentData.booking.bookingOwner.settings.rideCompletionText,
+        setIsComplete(result.currentData.booking.isFinished);
+        setCarLocation(result.currentData.booking.carLocationAfterRideText);
+
+        const newDate = datesManager.getFormattingDateTime(
+          +new Date(result.currentData.booking.bookingEndTime),
         );
+        setEndTime(newDate);
+
+        if (isComplete) {
+          setCarLocation(
+            result.currentData.booking.bookingOwner.settings.rideCompletionText,
+          );
+        }
       }
     }
   }, [idParams, result.currentData, result.isSuccess, trigger]);
@@ -70,7 +96,7 @@ export const BookingDetails = () => {
                     <td className={'cellDecoration'}>
                       Время завершения поездки
                     </td>
-                    <td className={'cellDecoration'}></td>
+                    <td className={'cellDecoration'}>{endTime}</td>
                   </tr>
                   <tr>
                     <td className={'cellDecoration'}>Описание поездки</td>
@@ -89,7 +115,7 @@ export const BookingDetails = () => {
                       <td className={'cellDecoration'}>
                         Местонахождение автомобиля по окончании поездки
                       </td>
-                      <td className={'cellDecoration'}></td>
+                      <td className={'cellDecoration'}>{carLocation}</td>
                     </tr>
                   )}
                   {/*<tr>*/}
@@ -104,7 +130,11 @@ export const BookingDetails = () => {
               </table>
             )}
           </div>
-          <ButtonsBar rideCompletionText={rideCompletionText} />
+          <ButtonsBar
+            startTimeSec={startTimeSec}
+            isComplete={isComplete}
+            requestData={requestData}
+          />
         </>
       )}
     </div>

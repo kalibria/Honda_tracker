@@ -10,6 +10,7 @@ const initState: { bookingList: IBookingInfo[] } = {
       description: '',
       carId: '',
       id: 0,
+      isFinished: false,
     },
   ],
 };
