@@ -44,19 +44,18 @@ export const EditBookingPage = ({
           carLocation: dataForFormik.carLocation,
         }}
         onSubmit={(values, { setSubmitting }) => {
-          console.log('values', values.isCompleted);
-
-          if (values.isCompleted) {
+          if (values.isCompleted === 'true') {
+            console.log('complete', values.isCompleted);
             editTrigger({
               username: username,
               carId: values.carId,
               startTime: +new Date(dataForFormik.startTime) / 1000,
               startDateTime: +new Date(values.startTime) / 1000,
-
               endDateTime: +new Date(values.endTime) / 1000,
               description: values.description,
             });
           } else {
+            console.log('not complete');
             editTrigger({
               username: username,
               carId: values.carId,

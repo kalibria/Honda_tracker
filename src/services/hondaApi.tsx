@@ -62,6 +62,7 @@ export const hondaApi = createApi({
         method: 'POST',
         body: { password, username },
       }),
+      providesTags: ['Me'],
     }),
     logOut: builder.mutation({
       query: (accessToken) => ({
@@ -69,7 +70,6 @@ export const hondaApi = createApi({
         method: 'POST',
         body: accessToken,
       }),
-      invalidatesTags: ['Me', 'User'],
     }),
     getUser: builder.query({
       query: (username: string) => `/users/${username}`,
@@ -77,7 +77,7 @@ export const hondaApi = createApi({
     }),
     getMe: builder.query<{ username: string }, object>({
       query: () => '/me',
-      providesTags: ['Me'],
+      providesTags: ['Me', 'User'],
     }),
     getBookings: builder.query({
       query: ({ carId, username }) =>

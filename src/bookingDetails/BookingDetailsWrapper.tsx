@@ -42,7 +42,6 @@ export const BookingDetailsWrapper = () => {
   const [carLocation, setCarLocation] = useState('');
 
   useEffect(() => {
-    console.log('params', idParams);
     if (idParams) {
       const parsedParams = idParams.split('$');
       const username = parsedParams[0];

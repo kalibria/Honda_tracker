@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useCheckIsLoggedIn } from 'src/auth/authenticationManager';
 
 import { ButtonUI } from 'src/ui-kit/ButtonUI';
 import { Loading } from 'src/ui-kit/Loading';
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 import { loginPath, welcomePath } from 'src/router/rootConstants';
-import { useLogOutMutation } from 'src/services/hondaApi';
+import { useGetMeQuery, useLogOutMutation } from 'src/services/hondaApi';
 
 export const LogInLogOutButton = () => {
-  const { isSuccess } = useCheckIsLoggedIn();
+  const { isSuccess } = useGetMeQuery({});
   const [logOutTrigger, logOutTriggerResult] = useLogOutMutation();
   const [error, setError] = useState('');
   const dispatch = useDispatch();

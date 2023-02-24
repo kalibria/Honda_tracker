@@ -1,22 +1,18 @@
 import Button from '@mui/material/Button';
 import React, { useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
-import { batch, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { redirect, useLocation, useNavigate } from 'react-router-dom';
 
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
-import {
-  setCarId,
-  setCurrentUsername,
-  setFirstName,
-  setUserRole,
-} from 'src/redux/userDataSlice';
+
 import { bookingListPath } from 'src/router/rootConstants';
 import {
+  hondaApi,
   useLazyGetUserQuery,
   useLazyStatusLoginQuery,
 } from 'src/services/hondaApi';
-// import { authenticationManager } from 'src/auth/authenticationManager';
+
 import { myLocalStorage } from 'src/services/localStorage';
 
 import { AlertForm, MyTextInput } from 'src/ui-kit/components';
@@ -40,26 +36,12 @@ const LoginForm = () => {
     }
   });
 
-  // useEffect(() => {
-  //   if (resultUser.isSuccess) {
-  //     batch(() => {
-  //       dispatch(setCarId(resultUser.data.user.availableCars));
-  //       dispatch(setFirstName(resultUser.data.user.firstName));
-  //     });
-  //
-  //     navigate(location.state || bookingListPath);
-  //   }
-  // }, [dispatch, location.state, navigate, resultUser, resultUser.isSuccess]);
-
   useEffect(() => {
     const { isSuccess, isError, errorMsg } =
       myRtkQueryResultProcessor.parseQueryResult(loginResult);
 
     if (isSuccess) {
-      // authenticationManager.setAuthenticated(dispatch, username);
-      // dispatch(setCurrentUsername(username));
       setError('');
-      console.log("'refreshToken", loginResult.data.RefreshToken);
       myLocalStorage.setItem('RefreshToken', loginResult.data.RefreshToken);
 
       sessionStorage.setItem('AccessToken', loginResult.data.AccessToken);
@@ -76,7 +58,8 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (resultUser.isSuccess && resultUser.data) {
-      dispatch(setUserRole(resultUser.data.user.roles));
+      dispatch(hondaApi.util.invalidateTags(['Me']));
+
       redirect(bookingListPath);
     }
   }, [resultUser.isSuccess, resultUser.data, dispatch, navigate]);
@@ -108,8 +91,6 @@ const LoginForm = () => {
               .required('Required'),
           })}
           onSubmit={(values, { setSubmitting }) => {
-            console.log('login', values.login);
-            console.log('password', values.password);
             let password = values.password;
             let username = values.login;
             trigger({ password, username });

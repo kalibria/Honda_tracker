@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useGetMeQuery, useLazyGetUserQuery } from 'src/services/hondaApi';
+import { useDispatch } from 'react-redux';
+import {
+  hondaApi,
+  useGetMeQuery,
+  useLazyGetUserQuery,
+} from 'src/services/hondaApi';
 import { ISettings } from 'src/settings/types';
 import { IUser } from 'src/user/types';
 
