@@ -94,6 +94,9 @@ export const CompleteRideWindow = ({
 
           setSubmitting(false);
         }}
+        onReset={() => {
+          setIsOpenCompleteRideWindow(false);
+        }}
         enableReinitialize={true}>
         {(props) => {
           return (
@@ -118,13 +121,20 @@ export const CompleteRideWindow = ({
                   onChange={props.handleChange}
                 />
               </div>
-              <div className={'button'}>
+              <div className={'button completeButtons'}>
                 <Button
                   className={'place-self-center '}
                   variant="contained"
                   type="submit"
                   size={'small'}>
                   {'Подтвердить'}
+                </Button>
+                <Button
+                  className={'place-self-center '}
+                  variant="contained"
+                  type="reset"
+                  size={'small'}>
+                  {'Отмена'}
                 </Button>
               </div>
             </Form>

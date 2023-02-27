@@ -48,6 +48,10 @@
     margin-left: auto;
     margin-right: auto;
 }
+.completeButtons {
+    display: grid;
+    row-gap: 15px
+}
 
 .bookingEditWrapper {
     width: 90%;
@@ -72,6 +76,7 @@
 
 .bookingWrapper input {
     background-color: #719ab226;
+    width: 100%;
 }
 
 
