@@ -4,66 +4,54 @@ import FormGroup from '@mui/material/FormGroup';
 import FormLabel from '@mui/material/FormLabel';
 import Switch from '@mui/material/Switch';
 import TextField from '@mui/material/TextField';
+
 import { useFormik } from 'formik';
-import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useCheckIsLoggedIn } from 'src/auth/authenticationManager';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { IUsersSettings } from 'src/createNewBooking/bookingTypes';
-import {
-  useGetMeQuery,
-  useLazyGetUserQuery,
-  useLazyUpdateUserDataQuery,
-} from 'src/services/hondaApi';
+import { hondaApi, useLazyUpdateUserDataQuery } from 'src/services/hondaApi';
 
 import { carProvider } from 'src/settings/constants';
 import { debounce } from 'lodash';
 import { ButtonUI } from 'src/ui-kit/ButtonUI';
 
 export const SettingsPage = () => {
-  const { isSuccess: meSuccess, currentData: meCurrentData } = useGetMeQuery(
-    {},
-  );
-  const [getUserTrigger, userResult] = useLazyGetUserQuery();
-  const [myRoles, setMyRoles] = useState<string[]>([]);
+  const selectMeResult = hondaApi.endpoints.getMe.select({});
+  const meResultSelector = useSelector(selectMeResult);
 
-  const { isSuccess } = useCheckIsLoggedIn();
+  const arg = meResultSelector.data ? meResultSelector.data.username : '';
 
-  const isCarProvider = myRoles.includes(carProvider);
+  const selectUserData = hondaApi.endpoints.getUser.select(arg);
+
+  const {
+    data: { user },
+  } = useSelector(selectUserData);
+
+  const isCarProvider = user.roles.includes(carProvider);
 
   const [initNotifiedWhenCreated, setInitNotifiedWhenCreated] = useState(false);
+
   const [initNotifiedWhenChanged, setNotifiedWhenChanged] = useState(false);
+
   const [rideCompletionText, setRideCompletionText] = useState('');
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (meSuccess && meCurrentData) {
-      getUserTrigger(meCurrentData.username);
-    }
-  }, [meSuccess, meCurrentData, getUserTrigger]);
-
-  useEffect(() => {
-    if (userResult.isSuccess && userResult.data) {
-      setMyRoles(userResult.data.user.roles);
-      setRideCompletionText(userResult.data.user.settings.rideCompletionText);
+    if (meResultSelector.isSuccess && user) {
+      setRideCompletionText(user.settings.rideCompletionText);
       setInitNotifiedWhenCreated(
-        userResult.data.user.settings.notifications.getNotifiedAboutNewBookings,
+        user.settings.notifications.getNotifiedAboutNewBookings,
       );
 
       setNotifiedWhenChanged(
-        userResult.data.user.settings.notifications
-          .getNotifiedAboutBookingChanges,
+        user.settings.notifications.getNotifiedAboutBookingChanges,
       );
     }
-  }, [userResult.isSuccess, userResult.data]);
+  }, [meResultSelector.isSuccess, user]);
 
   const [triggerUpdate, resultAfterUpdate] = useLazyUpdateUserDataQuery();
-
-  useEffect(() => {
-    if (resultAfterUpdate.isSuccess && meCurrentData) {
-      getUserTrigger(meCurrentData.username);
-    }
-  }, [resultAfterUpdate.isSuccess, meCurrentData, userResult.isSuccess]);
 
   const formik = useFormik({
     initialValues: {
@@ -75,21 +63,23 @@ export const SettingsPage = () => {
     enableReinitialize: true,
   });
 
-  const debounceUpdate = debounce(async (newSettings: IUsersSettings) => {
-    const settings: IUsersSettings = {
-      settings: {
-        rideCompletionText: newSettings.settings.rideCompletionText,
-        notifications: {
-          getNotifiedWhenBookingChanged:
-            newSettings.settings.notifications.getNotifiedWhenBookingChanged,
-          getNotifiedWhenBookingCreated:
-            newSettings.settings.notifications.getNotifiedWhenBookingCreated,
+  const debounceUpdate = useCallback(
+    debounce(async (newSettings: IUsersSettings) => {
+      const settings: IUsersSettings = {
+        settings: {
+          rideCompletionText: newSettings.settings.rideCompletionText,
+          notifications: {
+            getNotifiedWhenBookingChanged:
+              newSettings.settings.notifications.getNotifiedWhenBookingChanged,
+            getNotifiedWhenBookingCreated:
+              newSettings.settings.notifications.getNotifiedWhenBookingCreated,
+          },
         },
-      },
-    };
-
-    triggerUpdate({ username: meCurrentData?.username, settings });
-  }, 2000);
+      };
+      triggerUpdate({ username: user.username, settings });
+    }, 2000),
+    [],
+  );
 
   useEffect(() => {
     const newSettings: IUsersSettings = {
@@ -114,7 +104,7 @@ export const SettingsPage = () => {
 
   return (
     <div className={'sm:w-60 mainContainer'}>
-      {isSuccess && (
+      {user && (
         <form
           className={'flex flex-col space-y-3.5 formWrapper'}
           onChange={formik.handleChange}>

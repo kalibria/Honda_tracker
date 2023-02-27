@@ -4,10 +4,6 @@ import { SignUpButton } from 'src/auth/components/signUpForm/SignUpButton';
 import { useGetMeQuery } from 'src/services/hondaApi';
 import { SettingsButton } from 'src/settings/SettingsButton';
 
-// interface IButtonAppBar {
-//   isSuccess: boolean;
-// }
-
 export default function ButtonAppBar() {
   const { isSuccess } = useGetMeQuery({});
 
