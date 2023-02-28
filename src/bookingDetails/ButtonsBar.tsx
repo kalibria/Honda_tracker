@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CompleteRideWindow } from 'src/completeRide/CompleteRideWindow';
 import { ButtonUI } from 'src/ui-kit/ButtonUI';
@@ -41,7 +41,7 @@ export const ButtonsBar = ({
     <>
       <div className={'bookingButtonsWrapper'}>
         <ButtonUI onClick={goBack}>{'Назад'}</ButtonUI>
-        <ButtonUI onClick={completeRide} disabled={isComplete ? true : false}>
+        <ButtonUI onClick={completeRide} disabled={isComplete}>
           {'Завершить поездку'}
         </ButtonUI>
         <ButtonUI onClick={editRide}>{'Редактировать'}</ButtonUI>

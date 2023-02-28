@@ -9,19 +9,12 @@ class DatesTimeManager {
     arrOfDays.length = AMOUNT_OF_DAYS - 1;
     arrOfDays.fill(0);
 
-    const currentDate = new Date();
-    const currentDateMS = currentDate.getTime();
-
-    const arrDatesMs = arrOfDays.reduce(
-      (acc: number[], item, index) => {
-        const currentDate = new Date(acc[index]);
-        const nextDateMS = new Date().setDate(currentDate.getDate() + 1);
-        acc.push(nextDateMS);
-
-        return acc;
-      },
-      [currentDateMS],
-    );
+    const arrDatesMs = arrOfDays.reduce((acc: number[], item, index) => {
+      const currentDate = +new Date();
+      const nextDateMS = currentDate + 86_400_000 * index;
+      acc.push(nextDateMS);
+      return acc;
+    }, []);
     return arrDatesMs;
   }
 
