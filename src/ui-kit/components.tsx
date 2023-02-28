@@ -46,6 +46,7 @@ export const MyTextInputWithBorder: React.FC<MyTextInputWithBorderProps> = ({
           {...field}
           id="component-outlined"
           label={label}
+          disabled={props.disabled}
           startAdornment={
             props.loading && (
               <InputAdornment position="start">
