@@ -3,7 +3,7 @@ import { Form, Formik } from 'formik';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IDataForBookingDetailPage } from 'src/bookingDetails/types';
-import { bookingListPath } from 'src/router/rootConstants';
+import { bookingListPath, loginPath } from 'src/router/rootConstants';
 import { useEditBookingMutation } from 'src/services/hondaApi';
 import { ButtonUI } from 'src/ui-kit/ButtonUI';
 
@@ -12,6 +12,8 @@ interface IEditBookingPage {
   dataForFormik: IDataForBookingDetailPage;
   isComplete: boolean;
   username: string;
+  isOpenCompleteRideWindow: boolean;
+  setIsOpenCompleteRideWindow: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const EditBookingPage = ({
@@ -19,6 +21,8 @@ export const EditBookingPage = ({
   dataForFormik,
   isComplete,
   username,
+  isOpenCompleteRideWindow,
+  setIsOpenCompleteRideWindow,
 }: IEditBookingPage) => {
   const [editTrigger, resultEditTrigger] = useEditBookingMutation();
   const navigate = useNavigate();
@@ -45,7 +49,6 @@ export const EditBookingPage = ({
         }}
         onSubmit={(values, { setSubmitting }) => {
           if (values.isCompleted === 'true') {
-            console.log('complete', values.isCompleted);
             editTrigger({
               username: username,
               carId: values.carId,
@@ -55,7 +58,6 @@ export const EditBookingPage = ({
               description: values.description,
             });
           } else {
-            console.log('not complete');
             editTrigger({
               username: username,
               carId: values.carId,
@@ -72,6 +74,10 @@ export const EditBookingPage = ({
         }}
         enableReinitialize={true}>
         {(props) => {
+          // if (props.values.isCompleted === 'true') {
+          //   setIsOpenCompleteRideWindow(true);
+          // }
+
           return (
             <Form onSubmit={props.handleSubmit} aria-readonly={true}>
               <div className={'formInputs'}>
@@ -138,7 +144,12 @@ export const EditBookingPage = ({
                     name={'isCompleted'}
                     id={'isCompleted'}
                     className={'formCellDecoration'}
-                    onChange={props.handleChange}>
+                    onChange={(event) => {
+                      if (event.currentTarget.value) {
+                        setIsOpenCompleteRideWindow(true);
+                      }
+                    }}>
+                    {/*onChange={props.handleChange}>*/}
                     <option value={'true'}>Да</option>
                     <option value={'false'}>Нет</option>
                   </select>

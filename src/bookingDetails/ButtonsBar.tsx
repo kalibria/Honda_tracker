@@ -7,25 +7,25 @@ import { DeleteButton } from 'src/redux/deleteButton';
 export interface IButtonsBar {
   startTimeSec: string;
   isComplete: boolean;
-  isEdit: boolean;
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
   requestData: {
     username: string;
     carId: string;
     startTimeSec: string;
   };
+  isOpenCompleteRideWindow: boolean;
+  setIsOpenCompleteRideWindow: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const ButtonsBar = ({
   startTimeSec,
   isComplete,
   requestData,
-  isEdit,
   setIsEdit,
+  isOpenCompleteRideWindow,
+  setIsOpenCompleteRideWindow,
 }: IButtonsBar) => {
   const navigate = useNavigate();
-  const [isOpenCompleteRideWindow, setIsOpenCompleteRideWindow] =
-    useState(false);
 
   const goBack = () => {
     navigate(-1);

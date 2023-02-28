@@ -94,9 +94,6 @@ export const CompleteRideWindow = ({
 
           setSubmitting(false);
         }}
-        onReset={() => {
-          setIsOpenCompleteRideWindow(false);
-        }}
         enableReinitialize={true}>
         {(props) => {
           return (
@@ -133,7 +130,10 @@ export const CompleteRideWindow = ({
                   className={'place-self-center '}
                   variant="contained"
                   type="reset"
-                  size={'small'}>
+                  size={'small'}
+                  onClick={() => {
+                    setIsOpenCompleteRideWindow(false);
+                  }}>
                   {'Отмена'}
                 </Button>
               </div>

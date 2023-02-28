@@ -21,7 +21,8 @@ export const BookingDetailsWrapper = () => {
 
   const [username, setUsername] = useState('');
 
-  // const [] = useState();
+  const [isOpenCompleteRideWindow, setIsOpenCompleteRideWindow] =
+    useState(false);
 
   const [dataFromResponse, setDataFromResponse] = useState({
     firstname: '',
@@ -111,8 +112,9 @@ export const BookingDetailsWrapper = () => {
                     startTimeSec={startTimeSec}
                     isComplete={isComplete}
                     requestData={requestData}
-                    isEdit={isEdit}
                     setIsEdit={setIsEdit}
+                    isOpenCompleteRideWindow={isOpenCompleteRideWindow}
+                    setIsOpenCompleteRideWindow={setIsOpenCompleteRideWindow}
                   />
                 </div>
               </>
@@ -126,6 +128,8 @@ export const BookingDetailsWrapper = () => {
           dataForFormik={dataFromResponse}
           isComplete={isComplete}
           username={username}
+          isOpenCompleteRideWindow={isOpenCompleteRideWindow}
+          setIsOpenCompleteRideWindow={setIsOpenCompleteRideWindow}
         />
       )}
     </div>
