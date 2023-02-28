@@ -193,6 +193,13 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
                 <Button variant="contained" type="submit">
                   {'Сохранить'}
                 </Button>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    navigate(-1);
+                  }}>
+                  {'Отмена'}
+                </Button>
               </div>
             </form>
           );
