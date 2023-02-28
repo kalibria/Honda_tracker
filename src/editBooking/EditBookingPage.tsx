@@ -12,7 +12,6 @@ interface IEditBookingPage {
   dataForFormik: IDataForBookingDetailPage;
   isComplete: boolean;
   username: string;
-  isOpenCompleteRideWindow: boolean;
   setIsOpenCompleteRideWindow: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -21,7 +20,6 @@ export const EditBookingPage = ({
   dataForFormik,
   isComplete,
   username,
-  isOpenCompleteRideWindow,
   setIsOpenCompleteRideWindow,
 }: IEditBookingPage) => {
   const [editTrigger, resultEditTrigger] = useEditBookingMutation();
@@ -74,10 +72,6 @@ export const EditBookingPage = ({
         }}
         enableReinitialize={true}>
         {(props) => {
-          // if (props.values.isCompleted === 'true') {
-          //   setIsOpenCompleteRideWindow(true);
-          // }
-
           return (
             <Form onSubmit={props.handleSubmit} aria-readonly={true}>
               <div className={'formInputs'}>
@@ -147,9 +141,10 @@ export const EditBookingPage = ({
                     onChange={(event) => {
                       if (event.currentTarget.value) {
                         setIsOpenCompleteRideWindow(true);
+                      } else {
+                        setIsOpenCompleteRideWindow(false);
                       }
                     }}>
-                    {/*onChange={props.handleChange}>*/}
                     <option value={'true'}>Да</option>
                     <option value={'false'}>Нет</option>
                   </select>

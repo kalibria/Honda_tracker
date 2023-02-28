@@ -128,7 +128,6 @@ export const BookingDetailsWrapper = () => {
           dataForFormik={dataFromResponse}
           isComplete={isComplete}
           username={username}
-          isOpenCompleteRideWindow={isOpenCompleteRideWindow}
           setIsOpenCompleteRideWindow={setIsOpenCompleteRideWindow}
         />
       )}
