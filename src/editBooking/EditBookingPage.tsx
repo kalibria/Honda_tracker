@@ -3,7 +3,7 @@ import { Form, Formik } from 'formik';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IDataForBookingDetailPage } from 'src/bookingDetails/types';
-import { bookingListPath, loginPath } from 'src/router/rootConstants';
+import { bookingListPath } from 'src/router/rootConstants';
 import { useEditBookingMutation } from 'src/services/hondaApi';
 import { ButtonUI } from 'src/ui-kit/ButtonUI';
 
@@ -24,7 +24,6 @@ export const EditBookingPage = ({
 }: IEditBookingPage) => {
   const [editTrigger, resultEditTrigger] = useEditBookingMutation();
   const navigate = useNavigate();
-
   useEffect(() => {
     if (resultEditTrigger.isSuccess) {
       navigate(bookingListPath);
@@ -138,13 +137,14 @@ export const EditBookingPage = ({
                     name={'isCompleted'}
                     id={'isCompleted'}
                     className={'formCellDecoration'}
-                    onChange={(event) => {
+                    onClick={(event) => {
                       if (event.currentTarget.value) {
                         setIsOpenCompleteRideWindow(true);
                       } else {
                         setIsOpenCompleteRideWindow(false);
                       }
-                    }}>
+                    }}
+                    onChange={props.handleChange}>
                     <option value={'true'}>Да</option>
                     <option value={'false'}>Нет</option>
                   </select>
