@@ -31,7 +31,7 @@ export const EditBookingPage = ({
   }, [resultEditTrigger.isSuccess, navigate]);
 
   return (
-    <div className={'bookingEditWrapper bookingWrapper'}>
+    <div className={'bookingEditWrapper'}>
       <div className={'bookingHeader '}>Сведения о поездке</div>
 
       <Formik

@@ -63,14 +63,12 @@
 
 .bookingEditWrapper {
     width: 90%;
-
+    margin-top: -15px;
 }
 
 .bookingPage {
     display: grid;
     justify-items: center;
-
-
 }
 
 .bookingWrapper {
@@ -106,7 +104,7 @@
 }
 .completeRideWindow {
     width: 70%;
-    height: 30%;
+    height: 40%;
     border: 2px solid #0380ab;
     border-radius: 5px;
 
@@ -231,6 +229,13 @@
     width: 750px;
 }
 
+.bookingEditWrapper {
+    width: 750px;
+
+}
+
+
+
 .calendar {
     grid-template-columns: 250px 2fr;
 }
@@ -240,7 +245,7 @@
 }
 
 .editButtonsWrapper {
-    width: 40%;
+    width: 30%;
 }
 .formWrapper {
     width: 30%;

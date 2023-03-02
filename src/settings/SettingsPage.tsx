@@ -51,7 +51,7 @@ export const SettingsPage = () => {
     }
   }, [meResultSelector.isSuccess, user]);
 
-  const [triggerUpdate, resultAfterUpdate] = useLazyUpdateUserDataQuery();
+  const [triggerUpdate] = useLazyUpdateUserDataQuery();
 
   const formik = useFormik({
     initialValues: {
