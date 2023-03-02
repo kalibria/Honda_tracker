@@ -91,6 +91,7 @@ body {
 .bookingDetailCardWrapper {
     display: grid;
     grid-row-gap: 15px;
+
 }
 
 .bookingWrapper input {
@@ -239,15 +240,18 @@ body {
     width: 750px;
 }
 
+.bookingDetailCardWrapper {
+    margin-top: 100px;
+}
+
 .bookingEditWrapper {
     width: 750px;
-
+    margin-top: 100px;
 }
 
 body {
 
     background-image: url("https://static.vecteezy.com/system/resources/previews/004/968/002/original/cute-abstract-modern-background-free-vector.jpg");
-
 
     background-size: cover;
 
