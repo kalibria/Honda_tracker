@@ -35,6 +35,11 @@ body {
 
 }
 
+.bookingDetails {
+    display: grid;
+    justify-items: center;
+}
+
 .box {
     display: grid;
     row-gap: 0.5em;
