@@ -95,7 +95,7 @@ export const BookingDetailsWrapper = () => {
   }, [bookingsIdResult.data, isComplete]);
 
   return (
-    <div className={'bookingPage'}>
+    <div className={'bookingPage appBackground'}>
       {bookingsIdResult.isLoading ? (
         <Loading />
       ) : (

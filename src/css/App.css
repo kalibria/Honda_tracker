@@ -13,6 +13,7 @@
 
 }
 
+
 .bookingButtonsWrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -62,6 +63,7 @@
 
 .bookingEditWrapper {
     width: 90%;
+
 }
 
 .bookingPage {
@@ -74,6 +76,8 @@
 .bookingWrapper {
     margin: 15px;
     width: 90%;
+    height: 100%;
+
 }
 
 .bookingDetailCardWrapper {
@@ -234,6 +238,10 @@
 .completeRideWindow{
     width: 30%;
 }
+
+.editButtonsWrapper {
+    width: 40%;
+}
 .formWrapper {
     width: 30%;
 }
@@ -285,6 +293,11 @@
     grid-row: 5/6;
 }
 
+    body {
+        background: url("https://assets.hongkiat.com/uploads/minimalistic-design-icon-sets/7-free-light-thin-icons.jpg");
+        background-size: cover;
+
+    }
 
 
 

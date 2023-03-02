@@ -103,7 +103,7 @@ export const SettingsPage = () => {
   };
 
   return (
-    <div className={'sm:w-60 mainContainer'}>
+    <div className={'sm:w-60 mainContainer appBackground'}>
       {user && (
         <form
           className={'flex flex-col space-y-3.5 formWrapper'}

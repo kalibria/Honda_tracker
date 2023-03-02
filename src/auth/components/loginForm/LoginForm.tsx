@@ -65,7 +65,7 @@ const LoginForm = () => {
   }, [resultUser.isSuccess, resultUser.data, dispatch, navigate]);
 
   return (
-    <div className="mainContainer ">
+    <div className="mainContainer appBackground">
       {error && <AlertForm message={error} />}
 
       <main className="flex flex-col justify-center items-center formWrapper">
