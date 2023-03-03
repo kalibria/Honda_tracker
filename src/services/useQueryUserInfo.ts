@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react';
-import { useGetMeQuery, useLazyGetUserQuery } from 'src/services/hondaApi';
+import { useDispatch } from 'react-redux';
+import {
+  hondaApi,
+  useGetMeQuery,
+  useLazyGetUserQuery,
+} from 'src/services/hondaApi';
 import { ISettings } from 'src/settings/types';
 import { IUser } from 'src/user/types';
 
 export const useQueryUserInfo = () => {
   const { data: meData, isSuccess } = useGetMeQuery({});
-  const [trigger, result] = useLazyGetUserQuery();
+  const [getUserTrigger, result] = useLazyGetUserQuery();
   const [resultUserInfoIsSuccess, setResultUserInfoIsSuccess] = useState(false);
   const [resultUserInfo, setResultUserInfo] = useState<IUser>({
     username: '',
@@ -19,9 +24,9 @@ export const useQueryUserInfo = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      trigger(meData.username);
+      getUserTrigger(meData.username);
     }
-  }, [isSuccess, meData, trigger]);
+  }, [isSuccess, meData, getUserTrigger]);
 
   useEffect(() => {
     if (result.isLoading) {
@@ -32,10 +37,10 @@ export const useQueryUserInfo = () => {
   useEffect(() => {
     if (result.isSuccess) {
       setResultUserInfoIsSuccess(true);
-      setResultUserInfo(result.currentData.user);
+      setResultUserInfo(result.data.user);
       setIsLoading(false);
     }
-  }, [result.isSuccess, result.currentData]);
+  }, [result.isSuccess, result.data]);
 
   return { resultUserInfoIsSuccess, resultUserInfo, isLoading };
 };

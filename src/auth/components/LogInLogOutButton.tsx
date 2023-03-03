@@ -1,21 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import {
-  authenticationManager,
-  useCheckIsLoggedIn,
-} from 'src/auth/authenticationManager';
 
 import { ButtonUI } from 'src/ui-kit/ButtonUI';
 import { Loading } from 'src/ui-kit/Loading';
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 import { loginPath, welcomePath } from 'src/router/rootConstants';
-import { useLazyLogOutQuery } from 'src/services/hondaApi';
-import { myLocalStorage } from 'src/services/localStorage';
+import { useGetMeQuery, useLogOutMutation } from 'src/services/hondaApi';
 
 export const LogInLogOutButton = () => {
-  const { isSuccess } = useCheckIsLoggedIn();
-  const [trigger, result] = useLazyLogOutQuery();
+  const { isSuccess } = useGetMeQuery({});
+  const [logOutTrigger, logOutTriggerResult] = useLogOutMutation();
   const [error, setError] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -23,30 +18,34 @@ export const LogInLogOutButton = () => {
   const handleLogOutClick = () => {
     const accessToken = sessionStorage.getItem('AccessToken');
 
-    trigger({ accessToken: accessToken });
+    logOutTrigger({ accessToken: accessToken });
   };
   const handleLogInClick = () => {
     navigate(loginPath);
   };
 
+  useEffect(() => {}, [logOutTriggerResult]);
+
   useEffect(() => {
     const { isSuccess, errorMsg, isError } =
-      myRtkQueryResultProcessor.parseQueryResult(result);
+      myRtkQueryResultProcessor.parseQueryResult(logOutTriggerResult);
 
     if (isSuccess) {
-      authenticationManager.setUnauthenticated(dispatch);
+      // authenticationManager.setUnauthenticated(dispatch);
+      localStorage.clear();
+      sessionStorage.clear();
       setError('');
-      navigate(welcomePath);
+      navigate(loginPath);
     } else if (isError) {
       setError(errorMsg);
-      myLocalStorage.logOut();
+      // myLocalStorage.logOut();
       navigate(welcomePath);
     }
-  }, [dispatch, error, navigate, result]);
+  }, [dispatch, error, navigate, logOutTriggerResult]);
 
   return (
     <div>
-      {result.isLoading && <Loading />}
+      {logOutTriggerResult.isLoading && <Loading />}
       <ButtonUI onClick={isSuccess ? handleLogOutClick : handleLogInClick}>
         {isSuccess ? 'Выйти' : 'Войти'}
       </ButtonUI>

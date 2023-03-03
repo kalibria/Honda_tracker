@@ -2,18 +2,18 @@ import { createBrowserRouter } from 'react-router-dom';
 import LoginForm from 'src/auth/components/loginForm/LoginForm';
 import { App } from 'src/App';
 import { SignUpForm } from 'src/auth/components/signUpForm/SignUpForm';
-import { BookingDetails } from 'src/booking-list/components/BookingDetails';
+import { BookingDetailsWrapper } from 'src/bookingDetails/BookingDetailsWrapper';
 import { BookingList } from 'src/booking-list/components/BookingList';
 import { WrapperForCreatingBooking } from 'src/createNewBooking/components/WrapperForCreatingBooking';
+
 import {
-  // bookingDetailsPath,
   bookingListPath,
-  creatingNewBooking,
+  creatingNewBookingPath,
   errorPath,
   initPath,
   loginPath,
   settingsPath,
-  signUpForm,
+  signUpFormPath,
   welcomePath,
 } from 'src/router/rootConstants';
 import { SettingsPage } from 'src/settings/SettingsPage';
@@ -30,10 +30,10 @@ const router = createBrowserRouter([
       },
       {
         path: '/booking-details/:bookingId',
-        element: <BookingDetails />,
+        element: <BookingDetailsWrapper />,
       },
       {
-        path: creatingNewBooking,
+        path: creatingNewBookingPath,
         element: <WrapperForCreatingBooking />,
       },
 
@@ -53,7 +53,7 @@ const router = createBrowserRouter([
     element: <LoginForm />,
   },
   {
-    path: signUpForm,
+    path: signUpFormPath,
     element: <SignUpForm />,
   },
   {

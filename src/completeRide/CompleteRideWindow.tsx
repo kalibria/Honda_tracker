@@ -8,7 +8,6 @@ import {
   useLazyFinishRideQuery,
   useLazyGetUserQuery,
 } from 'src/services/hondaApi';
-import { BasicTextFields } from 'src/settings/components';
 import * as Yup from 'yup';
 import dayjs from 'dayjs';
 
@@ -55,16 +54,14 @@ export const CompleteRideWindow = ({
 
   useEffect(() => {
     if (resultUser.isSuccess) {
-      setCarLocationResult(
-        resultUser.currentData.user.settings.rideCompletionText,
-      );
+      setCarLocationResult(resultUser.data.user.settings.rideCompletionText);
       setQueryParams({
         ...initParamsForFinish,
-        username: resultUser.currentData.user.username,
-        carId: resultUser.currentData.user.availableCars[0],
+        username: resultUser.data.user.username,
+        carId: resultUser.data.user.availableCars[0],
       });
     }
-  }, [resultUser.isSuccess, resultUser.currentData]);
+  }, [resultUser.isSuccess, resultUser.data]);
 
   useEffect(() => {
     if (finishResult.isSuccess) {
@@ -84,7 +81,7 @@ export const CompleteRideWindow = ({
           carLocation: Yup.string().required('Required'),
         })}
         onSubmit={(values, { setSubmitting }) => {
-          const fromISOtoDate = new Date(currentTime);
+          const fromISOtoDate = new Date(values.completeTime);
           const dateInSec = fromISOtoDate.getTime() / 1000;
 
           const updateRideCompletionText = values.carLocation;
@@ -98,31 +95,51 @@ export const CompleteRideWindow = ({
           setSubmitting(false);
         }}
         enableReinitialize={true}>
-        <Form className={'completeRideForm'}>
-          <BasicTextFields
-            label={'Где оставлен автомобиль?'}
-            name={'carLocation'}
-          />
+        {(props) => {
+          return (
+            <Form className={'completeRideForm'}>
+              <div>
+                <label htmlFor={'carLocation'}>Где оставлен автомобиль?</label>
+                <input
+                  name={'carLocation'}
+                  id={'carLocation'}
+                  type={'text'}
+                  defaultValue={carLocationResult}
+                />
+              </div>
 
-          <div className={'completedTime'}>
-            <label htmlFor={'completeTime'}>Время завершения</label>
-            <input
-              name={'completeTime'}
-              id={'completeTime'}
-              type={'datetime-local'}
-              defaultValue={currentTime}
-            />
-          </div>
-          <div className={'button'}>
-            <Button
-              className={'place-self-center '}
-              variant="contained"
-              type="submit"
-              size={'small'}>
-              {'Подтвердить'}
-            </Button>
-          </div>
-        </Form>
+              <div className={'completedTime'}>
+                <label htmlFor={'completeTime'}>Время завершения</label>
+                <input
+                  name={'completeTime'}
+                  id={'completeTime'}
+                  type={'datetime-local'}
+                  defaultValue={currentTime}
+                  onChange={props.handleChange}
+                />
+              </div>
+              <div className={'button completeButtons'}>
+                <Button
+                  className={'place-self-center '}
+                  variant="contained"
+                  type="submit"
+                  size={'small'}>
+                  {'Подтвердить'}
+                </Button>
+                <Button
+                  className={'place-self-center '}
+                  variant="contained"
+                  type="reset"
+                  size={'small'}
+                  onClick={() => {
+                    setIsOpenCompleteRideWindow(false);
+                  }}>
+                  {'Отмена'}
+                </Button>
+              </div>
+            </Form>
+          );
+        }}
       </Formik>
     </div>
   );

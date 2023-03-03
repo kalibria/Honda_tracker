@@ -1,22 +1,18 @@
 import Button from '@mui/material/Button';
 import React, { useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
-import { batch, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { redirect, useLocation, useNavigate } from 'react-router-dom';
 
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
-import {
-  setCarId,
-  setCurrentUsername,
-  setFirstName,
-  setUserRole,
-} from 'src/redux/userDataSlice';
+
 import { bookingListPath } from 'src/router/rootConstants';
 import {
+  hondaApi,
   useLazyGetUserQuery,
   useLazyStatusLoginQuery,
 } from 'src/services/hondaApi';
-import { authenticationManager } from 'src/auth/authenticationManager';
+
 import { myLocalStorage } from 'src/services/localStorage';
 
 import { AlertForm, MyTextInput } from 'src/ui-kit/components';
@@ -25,7 +21,7 @@ import * as Yup from 'yup';
 import 'src/css/App.css';
 
 const LoginForm = () => {
-  const [trigger, result] = useLazyStatusLoginQuery();
+  const [trigger, loginResult] = useLazyStatusLoginQuery();
   const [error, setError] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,47 +32,40 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (resultUser.isSuccess) {
-      batch(() => {
-        dispatch(setCarId(resultUser.data.user.availableCars));
-        dispatch(setFirstName(resultUser.data.user.firstName));
-      });
-
       navigate(location.state || bookingListPath);
     }
-  }, [dispatch, location.state, navigate, resultUser, resultUser.isSuccess]);
+  });
 
   useEffect(() => {
     const { isSuccess, isError, errorMsg } =
-      myRtkQueryResultProcessor.parseQueryResult(result);
+      myRtkQueryResultProcessor.parseQueryResult(loginResult);
 
     if (isSuccess) {
-      authenticationManager.setAuthenticated(dispatch, username);
-      dispatch(setCurrentUsername(username));
       setError('');
+      myLocalStorage.setItem('RefreshToken', loginResult.data.RefreshToken);
 
-      myLocalStorage.setItem('RefreshToken', result.currentData.RefreshToken);
+      sessionStorage.setItem('AccessToken', loginResult.data.AccessToken);
 
-      sessionStorage.setItem('AccessToken', result.currentData.AccessToken);
-
-      sessionStorage.setItem('IdToken', result.currentData.IdToken);
+      sessionStorage.setItem('IdToken', loginResult.data.IdToken);
 
       triggerUser(username);
     }
     if (isError) {
       setError(errorMsg);
-      myRtkQueryResultProcessor.handleErrorCode(result, dispatch);
+      myRtkQueryResultProcessor.handleErrorCode(loginResult, dispatch);
     }
-  }, [dispatch, navigate, result, triggerUser, username]);
+  }, [dispatch, navigate, loginResult, triggerUser, username]);
 
   useEffect(() => {
-    if (resultUser.isSuccess && resultUser.currentData) {
-      dispatch(setUserRole(resultUser.currentData.user.roles));
+    if (resultUser.isSuccess && resultUser.data) {
+      dispatch(hondaApi.util.invalidateTags(['Me']));
+
       redirect(bookingListPath);
     }
-  }, [resultUser.isSuccess, resultUser.currentData, dispatch, navigate]);
+  }, [resultUser.isSuccess, resultUser.data, dispatch, navigate]);
 
   return (
-    <div className="mainContainer ">
+    <div className="mainContainer appBackground">
       {error && <AlertForm message={error} />}
 
       <main className="flex flex-col justify-center items-center formWrapper">

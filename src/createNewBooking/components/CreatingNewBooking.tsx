@@ -120,7 +120,6 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
 
           trigger(dataForBookingRequest);
 
-          // navigate(bookingListPath);
           setSubmitting(false);
         }}>
         {(props) => {
@@ -189,9 +188,16 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
                 />
               </div>
 
-              <div className={'button box8'}>
+              <div className={'buttonsCreateBooking box8'}>
                 <Button variant="contained" type="submit">
                   {'Сохранить'}
+                </Button>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    navigate(-1);
+                  }}>
+                  {'Отмена'}
                 </Button>
               </div>
             </form>
