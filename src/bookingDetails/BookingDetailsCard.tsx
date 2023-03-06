@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 import { IDataForBookingDetailPage } from 'src/bookingDetails/types';
 import { datesManager } from 'src/dates/datesTimeManager';
@@ -16,27 +15,11 @@ export const BookingDetailsCard = ({
   const [endTimeUI, setEndTimeUI] = useState('');
 
   useEffect(() => {
-    console.log('startTime', dataForCard.startTime);
-    console.log('startTime2', dayjs(dataForCard.startTime).format('HH:mm'));
     if (dataForCard.startTime) {
-      setStartTimeUi(dayjs(dataForCard.startTime).format('HH:mm'));
+      setStartTimeUi(
+        datesManager.getFormattingDateTime(+new Date(dataForCard.startTime)),
+      );
     }
-
-    // if (dataForCard.startTime || dataForCard.endTime) {
-    //   setStartTimeUi(dayjs(dataForCard.startTime).format('HH:mm'));
-    //
-    //   // setStartTimeUi(
-    //   //   datesManager.getFormattingDateTime(+new Date(dataForCard.startTime)),
-    //   // );
-    //
-    //   setEndTimeUI(
-    //     datesManager.getFormattingDateTime(+new Date(dataForCard.endTime)),
-    //   );
-    //   // setEndTimeUI(
-    //   //   datesManager.getFormattingDateTime(+new Date(dataForCard.endTime)),
-    //   // );
-    // }
-    //
 
     if (dataForCard.endTime) {
       setEndTimeUI(
