@@ -132,6 +132,12 @@ export function useIsIdTokenExpired() {
   }, [currentIdToken, refreshTokenTrigger]);
 
   useEffect(() => {
+    if (!currentIdToken) {
+      refreshTokenTrigger({});
+    }
+  }, [currentIdToken, refreshTokenTrigger]);
+
+  useEffect(() => {
     if (refreshTokenTriggerResult.isSuccess) {
       sessionStorage.setItem(
         'IdToken',
