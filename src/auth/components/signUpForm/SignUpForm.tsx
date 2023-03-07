@@ -33,8 +33,8 @@ export const SignUpForm = () => {
             src="https://www.nicepng.com/png/detail/138-1388174_login-account-icon.png"
             alt="Sign-up"
           />
+          <h1 className="text-center">Sign up</h1>
         </div>
-        <h1 className="text-center">Регистрация</h1>
 
         <Formik
           initialValues={{
@@ -87,7 +87,7 @@ export const SignUpForm = () => {
 
                 <div className={'button'}>
                   <Button variant="contained" type="submit">
-                    {'Зарегистрироваться'}
+                    {'Sign up'}
                   </Button>
                 </div>
 
