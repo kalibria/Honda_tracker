@@ -2,8 +2,6 @@ import { Dispatch } from '@reduxjs/toolkit';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { logOut, setIsAuthenticated } from 'src/redux/authSlice';
-
 import {
   bookingListPath,
   loginPath,
@@ -132,10 +130,10 @@ export function useIsIdTokenExpired() {
   }, [currentIdToken, refreshTokenTrigger]);
 
   useEffect(() => {
-    if (!currentIdToken) {
+    if (!currentIdToken && pathname !== welcomePath) {
       refreshTokenTrigger({});
     }
-  }, [currentIdToken, refreshTokenTrigger]);
+  }, [currentIdToken, refreshTokenTrigger, pathname]);
 
   useEffect(() => {
     if (refreshTokenTriggerResult.isSuccess) {
@@ -158,5 +156,5 @@ export function useIsIdTokenExpired() {
     refreshTokenTriggerResult.isSuccess,
   ]);
 
-  return refreshTokenTriggerResult.isUninitialized;
+  // return refreshTokenTriggerResult.isUninitialized;
 }

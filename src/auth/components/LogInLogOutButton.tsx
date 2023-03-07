@@ -8,11 +8,11 @@ import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 import { loginPath, welcomePath } from 'src/router/rootConstants';
 import { useGetMeQuery, useLogOutMutation } from 'src/services/hondaApi';
 
-interface ILogInLogOutButton {
-  isUninitialized: boolean;
-}
+// interface ILogInLogOutButton {
+//   isUninitialized: boolean;
+// }
 
-export const LogInLogOutButton = ({ isUninitialized }: ILogInLogOutButton) => {
+export const LogInLogOutButton = () => {
   const { isSuccess } = useGetMeQuery({});
   const [logOutTrigger, logOutTriggerResult] = useLogOutMutation();
   const [error, setError] = useState('');
@@ -48,11 +48,8 @@ export const LogInLogOutButton = ({ isUninitialized }: ILogInLogOutButton) => {
   return (
     <div>
       {logOutTriggerResult.isLoading && <Loading />}
-      <ButtonUI
-        onClick={
-          isUninitialized && isSuccess ? handleLogOutClick : handleLogInClick
-        }>
-        {isUninitialized && isSuccess ? 'Sign out' : 'Sign in'}
+      <ButtonUI onClick={isSuccess ? handleLogOutClick : handleLogInClick}>
+        {isSuccess ? 'Sign out' : 'Sign in'}
       </ButtonUI>
     </div>
   );

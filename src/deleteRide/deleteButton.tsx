@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { ButtonUI } from '../ui-kit/ButtonUI';
-import { useDeleteBookingMutation } from '../services/hondaApi';
+import { ButtonUI } from 'src/ui-kit/ButtonUI';
+import { useDeleteBookingMutation } from 'src/services/hondaApi';
 import { useNavigate } from 'react-router-dom';
-import { bookingListPath } from '../router/rootConstants';
+import { bookingListPath } from 'src/router/rootConstants';
 
 export interface IDeleteButton {
   requestData: { username: string; carId: string; startTimeSec: string };

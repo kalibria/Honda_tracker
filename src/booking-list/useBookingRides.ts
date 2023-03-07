@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { IBookingInfo, IRTKQueryBookingResponse } from 'src/booking-list/types';
-import { setBookingsInfo } from 'src/redux/bookingSlice';
 import { useLazyGetBookingsQuery } from 'src/services/hondaApi';
 import { useQueryUserInfo } from 'src/services/useQueryUserInfo';
 
@@ -42,7 +41,7 @@ export const useBookingRides = () => {
         [],
       );
       setAllBookingInfo(bookingRides);
-      dispatch(setBookingsInfo(bookingRides));
+      // dispatch(setBookingsInfo(bookingRides));
     }
   }, [data.data, data.isSuccess, dispatch]);
 

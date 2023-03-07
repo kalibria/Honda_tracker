@@ -6,12 +6,13 @@ import { useIsIdTokenExpired } from 'src/auth/authenticationManager';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 export const App = () => {
-  const isUninitialized = useIsIdTokenExpired();
-
+  // const isUninitialized = useIsIdTokenExpired();
+  useIsIdTokenExpired();
   return (
     <div>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <ButtonAppBar isUninitialized={isUninitialized} />
+        <ButtonAppBar />
+        {/*<ButtonAppBar isUninitialized={isUninitialized} />*/}
         <Outlet />
       </LocalizationProvider>
     </div>
