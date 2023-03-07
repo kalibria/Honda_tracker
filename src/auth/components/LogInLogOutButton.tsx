@@ -31,14 +31,12 @@ export const LogInLogOutButton = () => {
       myRtkQueryResultProcessor.parseQueryResult(logOutTriggerResult);
 
     if (isSuccess) {
-      // authenticationManager.setUnauthenticated(dispatch);
       localStorage.clear();
       sessionStorage.clear();
       setError('');
       navigate(loginPath);
     } else if (isError) {
       setError(errorMsg);
-      // myLocalStorage.logOut();
       navigate(welcomePath);
     }
   }, [dispatch, error, navigate, logOutTriggerResult]);
@@ -47,9 +45,8 @@ export const LogInLogOutButton = () => {
     <div>
       {logOutTriggerResult.isLoading && <Loading />}
       <ButtonUI onClick={isSuccess ? handleLogOutClick : handleLogInClick}>
-        {isSuccess ? 'Выйти' : 'Войти'}
+        {isSuccess ? 'Sign out' : 'Sign in'}
       </ButtonUI>
-      {/*<div>{error && <AlertForm message={error} />}</div>*/}
     </div>
   );
 };

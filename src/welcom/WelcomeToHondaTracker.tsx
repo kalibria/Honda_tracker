@@ -4,9 +4,9 @@ export const WelcomeToHondaTracker = () => {
   return (
     <div className={'mainContainer welcomeText'}>
       <h1>
-        Добро пожаловать в приложение
+        Welcome to the
         <br />
-        <b> Honda Tracker!</b>
+        <b> Honda Tracker app!</b>
       </h1>
     </div>
   );

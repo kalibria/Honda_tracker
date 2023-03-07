@@ -112,7 +112,7 @@ export const SettingsPage = () => {
             <div className={'widthFormItem'}>
               <FormControl component="fieldset" variant="standard">
                 <FormLabel component="legend">
-                  {'Get notifications when ...'}
+                  {'Получать уведомления когда ...'}
                 </FormLabel>
                 <FormGroup>
                   <FormControlLabel
@@ -124,7 +124,7 @@ export const SettingsPage = () => {
                         value={formik.values.isCreated}
                       />
                     }
-                    label={'booking is created'}
+                    label={'авто забронировано'}
                   />
                   <FormControlLabel
                     control={
@@ -135,7 +135,7 @@ export const SettingsPage = () => {
                         value={formik.values.isChanged}
                       />
                     }
-                    label={'booking is changed'}
+                    label={'бронирование изменено'}
                   />
                 </FormGroup>
               </FormControl>
