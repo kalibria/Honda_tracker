@@ -157,4 +157,6 @@ export function useIsIdTokenExpired() {
     refreshTokenTriggerResult.data?.IdToken,
     refreshTokenTriggerResult.isSuccess,
   ]);
+
+  return refreshTokenTriggerResult.isUninitialized;
 }

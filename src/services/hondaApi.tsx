@@ -29,7 +29,7 @@ export const hondaApi = createApi({
     },
   }),
 
-  tagTypes: ['User', 'Me', 'Bookings'],
+  tagTypes: ['User', 'Me', 'Bookings', 'Refresh'],
   endpoints: (builder) => ({
     signUp: builder.query({
       query: ({
@@ -55,6 +55,7 @@ export const hondaApi = createApi({
         url: '/token/refresh',
         method: 'POST',
       }),
+      providesTags: ['Refresh'],
     }),
     statusLogin: builder.query({
       query: ({ password, username }) => ({

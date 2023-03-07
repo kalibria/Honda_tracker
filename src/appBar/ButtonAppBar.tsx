@@ -4,14 +4,18 @@ import { SignUpButton } from 'src/auth/components/signUpForm/SignUpButton';
 import { useGetMeQuery } from 'src/services/hondaApi';
 import { SettingsButton } from 'src/settings/SettingsButton';
 
-export default function ButtonAppBar() {
+interface IButtonAppBar {
+  isUninitialized: boolean;
+}
+
+export default function ButtonAppBar({ isUninitialized }: IButtonAppBar) {
   const { isSuccess } = useGetMeQuery({});
 
   return (
     <div>
       <div className={'buttonAppContainer'}>
-        {isSuccess ? <SettingsButton /> : <SignUpButton />}
-        <LogInLogOutButton />
+        {isUninitialized && isSuccess ? <SettingsButton /> : <SignUpButton />}
+        <LogInLogOutButton isUninitialized={isUninitialized} />
       </div>
     </div>
   );

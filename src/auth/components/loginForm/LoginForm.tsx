@@ -1,8 +1,9 @@
 import Button from '@mui/material/Button';
 import React, { useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
-import { useDispatch } from 'react-redux';
+import { batch, useDispatch } from 'react-redux';
 import { redirect, useLocation, useNavigate } from 'react-router-dom';
+import { useIsIdTokenExpired } from 'src/auth/authenticationManager';
 
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 
@@ -28,8 +29,6 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [triggerUser, resultUser] = useLazyGetUserQuery();
-  const [triggerRefreshToken, resultRefreshToken] =
-    useLazyGetIdAccessTokenQuery({});
 
   const location = useLocation();
 
@@ -61,7 +60,12 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (resultUser.isSuccess && resultUser.data) {
-      dispatch(hondaApi.util.invalidateTags(['Me']));
+      // dispatch(hondaApi.util.invalidateTags(['Me']));
+
+      batch(() => {
+        dispatch(hondaApi.util.invalidateTags(['Me']));
+        dispatch(hondaApi.util.invalidateTags(['User']));
+      });
 
       redirect(bookingListPath);
     }
@@ -96,8 +100,9 @@ const LoginForm = () => {
           onSubmit={(values, { setSubmitting }) => {
             let password = values.password;
             let username = values.login;
-            loginTrigger({ password, username });
             setUsername(username);
+            loginTrigger({ password, username });
+
             setSubmitting(false);
           }}>
           <Form className="flex flex-col space-y-3.5 widthFormItem">
