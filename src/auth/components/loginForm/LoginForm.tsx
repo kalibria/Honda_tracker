@@ -3,14 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
 import { batch, useDispatch } from 'react-redux';
 import { redirect, useLocation, useNavigate } from 'react-router-dom';
-import { useIsIdTokenExpired } from 'src/auth/authenticationManager';
 
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 
 import { bookingListPath } from 'src/router/rootConstants';
 import {
   hondaApi,
-  useLazyGetIdAccessTokenQuery,
   useLazyGetUserQuery,
   useLazyStatusLoginQuery,
 } from 'src/services/hondaApi';
@@ -60,8 +58,6 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (resultUser.isSuccess && resultUser.data) {
-      // dispatch(hondaApi.util.invalidateTags(['Me']));
-
       batch(() => {
         dispatch(hondaApi.util.invalidateTags(['Me']));
         dispatch(hondaApi.util.invalidateTags(['User']));

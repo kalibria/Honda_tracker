@@ -41,7 +41,6 @@ export const useBookingRides = () => {
         [],
       );
       setAllBookingInfo(bookingRides);
-      // dispatch(setBookingsInfo(bookingRides));
     }
   }, [data.data, data.isSuccess, dispatch]);
 
