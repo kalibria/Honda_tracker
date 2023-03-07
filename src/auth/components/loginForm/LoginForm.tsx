@@ -9,6 +9,7 @@ import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 import { bookingListPath } from 'src/router/rootConstants';
 import {
   hondaApi,
+  useLazyGetIdAccessTokenQuery,
   useLazyGetUserQuery,
   useLazyStatusLoginQuery,
 } from 'src/services/hondaApi';
@@ -21,12 +22,14 @@ import * as Yup from 'yup';
 import 'src/css/App.css';
 
 const LoginForm = () => {
-  const [trigger, loginResult] = useLazyStatusLoginQuery();
+  const [loginTrigger, loginResult] = useLazyStatusLoginQuery();
   const [error, setError] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [triggerUser, resultUser] = useLazyGetUserQuery();
+  const [triggerRefreshToken, resultRefreshToken] =
+    useLazyGetIdAccessTokenQuery({});
 
   const location = useLocation();
 
@@ -93,7 +96,7 @@ const LoginForm = () => {
           onSubmit={(values, { setSubmitting }) => {
             let password = values.password;
             let username = values.login;
-            trigger({ password, username });
+            loginTrigger({ password, username });
             setUsername(username);
             setSubmitting(false);
           }}>

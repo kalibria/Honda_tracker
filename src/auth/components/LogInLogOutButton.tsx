@@ -34,7 +34,7 @@ export const LogInLogOutButton = () => {
       localStorage.clear();
       sessionStorage.clear();
       setError('');
-      navigate(loginPath);
+      navigate(welcomePath);
     } else if (isError) {
       setError(errorMsg);
       navigate(welcomePath);
