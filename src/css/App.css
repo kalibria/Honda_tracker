@@ -201,6 +201,13 @@ body {
     justify-self: center;
 }
 
+.errorWrapperButton {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+
+}
+
 
 .formGroup {
     border: 2px solid #0380ab;

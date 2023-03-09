@@ -1,4 +1,5 @@
 import React from 'react';
+import { ButtonUI } from 'src/ui-kit/ButtonUI';
 
 export const ErrorComponent = () => {
   return (
@@ -9,6 +10,9 @@ export const ErrorComponent = () => {
         }
         alt={'Oops, something went wrong....'}
       />
+      <div className={'errorWrapperButton'}>
+        <ButtonUI>{'Reload'}</ButtonUI>
+      </div>
     </div>
   );
 };

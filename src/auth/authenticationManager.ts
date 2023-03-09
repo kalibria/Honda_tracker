@@ -68,9 +68,7 @@ export function useIsIdTokenExpired() {
       );
 
       navigate(bookingListPath, { state: pathname });
-    }
-
-    if (refreshTokenTriggerResult.error) {
+    } else if (refreshTokenTriggerResult.isError) {
       navigate(errorPath);
     }
   }, [
