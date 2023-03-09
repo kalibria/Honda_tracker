@@ -237,6 +237,12 @@ body {
     text-align: center;
 }
 
+.welcomeText ::after {
+    display: block;
+    content: '';
+    height: 100px;
+}
+
 @media (min-width: 700px) {
     .bookingButtonsWrapper{
         width: 50%;

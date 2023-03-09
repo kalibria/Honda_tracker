@@ -33,10 +33,10 @@ export const LogInLogOutButton = () => {
     if (isSuccess) {
       localStorage.clear();
       sessionStorage.clear();
-      setError('');
+      // setError('');
       navigate(welcomePath);
     } else if (isError) {
-      setError(errorMsg);
+      // setError(errorMsg);
       navigate(welcomePath);
     }
   }, [dispatch, error, navigate, logOutTriggerResult]);
