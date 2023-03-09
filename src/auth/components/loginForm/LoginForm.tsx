@@ -59,7 +59,6 @@ const LoginForm = () => {
     if (isError) {
       setError(errorMsg);
       myRtkQueryResultProcessor.handleErrorCode(loginResult, dispatch);
-      navigate(errorPath);
     }
   }, [dispatch, navigate, loginResult, triggerUser, username]);
 

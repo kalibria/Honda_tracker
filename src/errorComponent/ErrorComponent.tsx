@@ -1,7 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { welcomePath } from 'src/router/rootConstants';
 import { ButtonUI } from 'src/ui-kit/ButtonUI';
 
 export const ErrorComponent = () => {
+  const navigate = useNavigate();
+  const errorClickButton = () => {
+    navigate(welcomePath);
+    // window.location.reload();
+  };
+
   return (
     <div className={'errorWrapper'}>
       <img
@@ -11,7 +19,7 @@ export const ErrorComponent = () => {
         alt={'Oops, something went wrong....'}
       />
       <div className={'errorWrapperButton'}>
-        <ButtonUI>{'Reload'}</ButtonUI>
+        <ButtonUI onClick={errorClickButton}>{'Reload'}</ButtonUI>
       </div>
     </div>
   );

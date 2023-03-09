@@ -37,8 +37,8 @@ export const LogInLogOutButton = () => {
     if (isSuccess) {
       localStorage.clear();
       sessionStorage.clear();
-      // navigate(welcomePath);
-      navigate(initPath);
+      navigate(welcomePath);
+      // navigate(initPath);
     } else if (isError) {
       navigate(errorPath);
     }
