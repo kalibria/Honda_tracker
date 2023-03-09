@@ -10,6 +10,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { IUsersSettings } from 'src/createNewBooking/bookingTypes';
+import { errorPath } from 'src/router/rootConstants';
 import { hondaApi, useLazyUpdateUserDataQuery } from 'src/services/hondaApi';
 
 import { carProvider } from 'src/settings/constants';
@@ -51,7 +52,13 @@ export const SettingsPage = () => {
     }
   }, [meResultSelector.isSuccess, user]);
 
-  const [triggerUpdate] = useLazyUpdateUserDataQuery();
+  const [triggerUpdate, resultUpdate] = useLazyUpdateUserDataQuery();
+
+  useEffect(() => {
+    if (resultUpdate.error) {
+      navigate(errorPath);
+    }
+  }, [resultUpdate.error]);
 
   const formik = useFormik({
     initialValues: {

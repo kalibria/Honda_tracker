@@ -1,7 +1,11 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { bookingListPath, welcomePath } from 'src/router/rootConstants';
+import {
+  bookingListPath,
+  errorPath,
+  welcomePath,
+} from 'src/router/rootConstants';
 import { useLazyGetIdAccessTokenQuery } from 'src/services/hondaApi';
 
 export function decodeToken(token: string) {
@@ -65,11 +69,16 @@ export function useIsIdTokenExpired() {
 
       navigate(bookingListPath, { state: pathname });
     }
+
+    if (refreshTokenTriggerResult.error) {
+      navigate(errorPath);
+    }
   }, [
     navigate,
     pathname,
     refreshTokenTriggerResult.data?.AccessToken,
     refreshTokenTriggerResult.data?.IdToken,
     refreshTokenTriggerResult.isSuccess,
+    refreshTokenTriggerResult.error,
   ]);
 }

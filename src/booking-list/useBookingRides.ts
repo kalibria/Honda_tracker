@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { IBookingInfo, IRTKQueryBookingResponse } from 'src/booking-list/types';
+import { errorPath } from 'src/router/rootConstants';
 import { useLazyGetBookingsQuery } from 'src/services/hondaApi';
 import { useQueryUserInfo } from 'src/services/useQueryUserInfo';
 
@@ -9,6 +11,7 @@ export const useBookingRides = () => {
   const [trigger, data] = useLazyGetBookingsQuery();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [allBookingInfo, setAllBookingInfo] = useState<IBookingInfo[]>([]);
 
@@ -41,6 +44,8 @@ export const useBookingRides = () => {
         [],
       );
       setAllBookingInfo(bookingRides);
+    } else if (data.isError) {
+      navigate(errorPath);
     }
   }, [data.data, data.isSuccess, dispatch]);
 

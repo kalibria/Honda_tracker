@@ -16,7 +16,7 @@ export const App = () => {
     <div>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <ButtonAppBar />
-        {!isRefreshToken && <WelcomeToHondaTracker />}
+        {/*{!isRefreshToken && <WelcomeToHondaTracker />}*/}
         <Outlet />
       </LocalizationProvider>
     </div>

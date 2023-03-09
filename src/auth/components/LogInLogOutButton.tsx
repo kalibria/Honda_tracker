@@ -1,17 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { ButtonUI } from 'src/ui-kit/ButtonUI';
 import { Loading } from 'src/ui-kit/Loading';
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
-import { loginPath, welcomePath } from 'src/router/rootConstants';
+import {
+  errorPath,
+  initPath,
+  loginPath,
+  welcomePath,
+} from 'src/router/rootConstants';
 import { useGetMeQuery, useLogOutMutation } from 'src/services/hondaApi';
 
 export const LogInLogOutButton = () => {
   const { isSuccess } = useGetMeQuery({});
   const [logOutTrigger, logOutTriggerResult] = useLogOutMutation();
-  const [error, setError] = useState('');
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -24,22 +29,18 @@ export const LogInLogOutButton = () => {
     navigate(loginPath);
   };
 
-  useEffect(() => {}, [logOutTriggerResult]);
-
   useEffect(() => {
-    const { isSuccess, errorMsg, isError } =
+    const { isSuccess, isError } =
       myRtkQueryResultProcessor.parseQueryResult(logOutTriggerResult);
 
     if (isSuccess) {
       localStorage.clear();
       sessionStorage.clear();
-      // setError('');
-      navigate(welcomePath);
+      navigate(initPath);
     } else if (isError) {
-      // setError(errorMsg);
-      navigate(welcomePath);
+      navigate(errorPath);
     }
-  }, [dispatch, error, navigate, logOutTriggerResult]);
+  }, [dispatch, navigate, logOutTriggerResult]);
 
   return (
     <div>

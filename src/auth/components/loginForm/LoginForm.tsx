@@ -6,7 +6,7 @@ import { redirect, useLocation, useNavigate } from 'react-router-dom';
 
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 
-import { bookingListPath } from 'src/router/rootConstants';
+import { bookingListPath, errorPath } from 'src/router/rootConstants';
 import {
   hondaApi,
   useLazyGetUserQuery,
@@ -34,7 +34,13 @@ const LoginForm = () => {
     if (resultUser.isSuccess) {
       navigate(location.state || bookingListPath);
     }
-  });
+  }, [resultUser.isSuccess]);
+
+  useEffect(() => {
+    if (resultUser.error) {
+      navigate(errorPath);
+    }
+  }, [resultUser.error, navigate]);
 
   useEffect(() => {
     const { isSuccess, isError, errorMsg } =
@@ -53,6 +59,7 @@ const LoginForm = () => {
     if (isError) {
       setError(errorMsg);
       myRtkQueryResultProcessor.handleErrorCode(loginResult, dispatch);
+      navigate(errorPath);
     }
   }, [dispatch, navigate, loginResult, triggerUser, username]);
 
