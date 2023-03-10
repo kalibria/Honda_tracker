@@ -38,6 +38,12 @@ $ npm start
 
 ## Illustrations 
 
+![Welcome page](./src/imgs/Welcome.png)
+![Sign in page](./src/imgs/Sign_in.png)
+![Settings page](./src/imgs/Settings.png)
+![Booking list](./src/imgs/Booking_list.png)
+![Create booking](./src/imgs/Create_booking.png)
+![Ride details](./src/imgs/Ride_detailes.png)
 
 
 
