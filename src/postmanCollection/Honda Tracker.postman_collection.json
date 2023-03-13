@@ -1,0 +1,664 @@
+{
+	"info": {
+		"_postman_id": "4b202a89-14e5-4cad-91fa-6a40b3b152b6",
+		"name": "Honda Tracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23910020"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const {IdToken, RefreshToken, AccessToken} = pm.response.json();",
+							"",
+							"pm.collectionVariables.set(\"idToken\", IdToken);",
+							"pm.collectionVariables.set(\"accessToken\", AccessToken);",
+							"pm.collectionVariables.set(\"refreshToken\", RefreshToken);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Origin",
+						"value": "http://localhost:3000",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"kushliansky@gmail.com\",\n    \"password\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh tokens",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const {IdToken, AccessToken} = pm.response.json();",
+							"",
+							"pm.collectionVariables.set(\"idToken\", IdToken);",
+							"pm.collectionVariables.set(\"accessToken\", AccessToken);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Origin",
+						"value": "http://localhost:3000",
+						"type": "text"
+					},
+					{
+						"key": "x-refresh-token",
+						"value": "{{refreshToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/token/refresh",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"token",
+						"refresh"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const {IdToken, RefreshToken, AccessToken} = pm.response.json();",
+							"",
+							"pm.collectionVariables.set(\"idToken\", IdToken);",
+							"pm.collectionVariables.set(\"accessToken\", AccessToken);",
+							"pm.collectionVariables.set(\"refreshToken\", RefreshToken);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"kushliansky@gmail.com\",\n  \"password\": \"123456\",\n  \"providedCarIds\": [],\n  \"availableCarIds\": [\"ho-123456\"],\n  \"firstName\": \"Илья\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/signup",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Origin",
+						"value": "http://localhost:3000",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"accessToken\": \"{{accessToken}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/logout",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Telegram send message",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"chat_id\": \"823813562\",\n    \"text\": \"privvet\\n\\\\\\\\*Something like* that\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.telegram.org/bot5460566167:AAEblEpJbi02E1COp8gK6TKzC8Q9nEkE7bM/sendMessage",
+					"protocol": "https",
+					"host": [
+						"api",
+						"telegram",
+						"org"
+					],
+					"path": [
+						"bot5460566167:AAEblEpJbi02E1COp8gK6TKzC8Q9nEkE7bM",
+						"sendMessage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Telegram send message Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"url\": \"https://exlimr6ltc.execute-api.eu-west-1.amazonaws.com/telegram/webhook\",\n    \"secret_token\": \"abramova\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.telegram.org/bot5460566167:AAEblEpJbi02E1COp8gK6TKzC8Q9nEkE7bM/setWebhook",
+					"protocol": "https",
+					"host": [
+						"api",
+						"telegram",
+						"org"
+					],
+					"path": [
+						"bot5460566167:AAEblEpJbi02E1COp8gK6TKzC8Q9nEkE7bM",
+						"setWebhook"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user by username",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Origin",
+						"value": "http://localhost:3000",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{host}}/users/kushliansky@gmail.com",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"users",
+						"kushliansky@gmail.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get booking by ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Origin",
+						"value": "http://localhost:3000",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/bookings/id?username=kushliansky@gmail.com&carId=ho-123456&startTime=1671735444",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"bookings",
+						"id"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "kushliansky@gmail.com"
+						},
+						{
+							"key": "carId",
+							"value": "ho-123456"
+						},
+						{
+							"key": "startTime",
+							"value": "1671735444"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get ilya's booking list",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Origin",
+						"value": "http://localhost:3000",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/bookings?carId=ho-123456&username=kushliansky@gmail.com",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"bookings"
+					],
+					"query": [
+						{
+							"key": "carId",
+							"value": "ho-123456"
+						},
+						{
+							"key": "username",
+							"value": "kushliansky@gmail.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get booking list for family Honda",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Origin",
+						"value": "http://localhost:3000",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/bookings?carId=ho-123456",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"bookings"
+					],
+					"query": [
+						{
+							"key": "carId",
+							"value": "ho-123456"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create booking",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var moment = require(\"moment\")",
+							"",
+							"pm.environment.set('newBookingTime', Math.round(moment().add(5, 'days').valueOf() / 1000))"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"kushliansky@gmail.com\",\n    \"carId\": \"ho-123456\",\n    \"startDateTime\": {{newBookingTime}},\n    \"description\": \"Ilya freshest booking 2!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/bookings",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"bookings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit booking",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\": \"Now it is new time!\",\n    \"startDateTime\": 1671735444\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/bookings/id?username=kushliansky@gmail.com&carId=ho-123456&startTime=1671735443",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"bookings",
+						"id"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "kushliansky@gmail.com"
+						},
+						{
+							"key": "carId",
+							"value": "ho-123456"
+						},
+						{
+							"key": "startTime",
+							"value": "1671735443"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete booking",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Origin",
+						"value": "http://localhost:3000",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/bookings/id?carId=ho-123456&username=kushliansky@gmail.com&startTime=1671735444",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"bookings",
+						"id"
+					],
+					"query": [
+						{
+							"key": "carId",
+							"value": "ho-123456"
+						},
+						{
+							"key": "username",
+							"value": "kushliansky@gmail.com"
+						},
+						{
+							"key": "startTime",
+							"value": "1671735444"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete account",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Origin",
+						"value": "http://localhost:3000",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/account",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"account"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Finish ride",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Origin",
+						"value": "http://localhost:3000",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/bookings/finish/id?username=kushliansky@gmail.com&carId=ho-123456&startTime=1671735444",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"bookings",
+						"finish",
+						"id"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "kushliansky@gmail.com"
+						},
+						{
+							"key": "carId",
+							"value": "ho-123456"
+						},
+						{
+							"key": "startTime",
+							"value": "1671735444"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Me",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/me",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit user",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{accessToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.request.headers.add({",
+					"  key: \"x-id-token\",",
+					"  value: pm.collectionVariables.get(\"idToken\")",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "idToken",
+			"value": "none",
+			"type": "string"
+		},
+		{
+			"key": "accessToken",
+			"value": "none",
+			"type": "string"
+		},
+		{
+			"key": "refreshToken",
+			"value": ""
+		}
+	]
+}
