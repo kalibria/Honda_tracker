@@ -7,7 +7,6 @@ export const ErrorComponent = () => {
   const navigate = useNavigate();
   const errorClickButton = () => {
     navigate(welcomePath);
-    // window.location.reload();
   };
 
   return (

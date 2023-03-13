@@ -36,7 +36,6 @@ export interface MySelectProps {
   id: string;
   data?: string[];
   value?: string;
-  // [key: string]: string | FieldHookConfig<any>;
 }
 
 export interface IAlertForm {

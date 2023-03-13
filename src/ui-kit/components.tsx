@@ -87,7 +87,6 @@ export const MySelect: React.FC<MySelectProps> = ({
           id="demo-simple-select-helper"
           label={label}
           {...field}
-          // value={Array.isArray(field.value) ? field.value?.[0] : field.value}>
           value={field.value}>
           {menuItems}
         </Select>
