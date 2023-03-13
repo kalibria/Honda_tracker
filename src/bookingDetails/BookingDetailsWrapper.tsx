@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { BookingDetailsCard } from 'src/bookingDetails/BookingDetailsCard';
 import { EditBookingPage } from 'src/editBooking/EditBookingPage';
+import { errorPath } from 'src/router/rootConstants';
 import { Loading } from 'src/ui-kit/Loading';
 import { useLazyGetBookingsIdQuery } from 'src/services/hondaApi';
 import { ButtonsBar } from 'src/bookingDetails/ButtonsBar';
@@ -23,6 +24,8 @@ export const BookingDetailsWrapper = () => {
 
   const [isOpenCompleteRideWindow, setIsOpenCompleteRideWindow] =
     useState(false);
+
+  const navigate = useNavigate();
 
   const [dataFromResponse, setDataFromResponse] = useState({
     firstname: '',
@@ -77,6 +80,8 @@ export const BookingDetailsWrapper = () => {
         isCompleted: isComplete ? 'Да' : 'Нет',
         carLocation: carLocation,
       });
+    } else if (bookingsIdResult.isError) {
+      navigate(errorPath);
     }
   }, [
     bookingsIdResult.isSuccess,

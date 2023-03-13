@@ -1,5 +1,5 @@
 body {
-    background: content-box radial-gradient(#d5f0f35e, #b5def0);
+
     background-image: url("https://static.vecteezy.com/system/resources/previews/004/968/002/original/cute-abstract-modern-background-free-vector.jpg");
 
 }
@@ -186,6 +186,28 @@ body {
 
 }
 
+.errorWrapper{
+    display: grid;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    margin-top:200px;
+
+}
+
+.errorWrapper img {
+    align-self: center;
+    justify-self: center;
+}
+
+.errorWrapperButton {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+
+}
+
 
 .formGroup {
     border: 2px solid #0380ab;
@@ -237,6 +259,12 @@ body {
     text-align: center;
 }
 
+.welcomeText ::after {
+    display: block;
+    content: '';
+    height: 100px;
+}
+
 @media (min-width: 700px) {
     .bookingButtonsWrapper{
         width: 50%;
@@ -268,6 +296,10 @@ body {
 
 .completeRideWindow{
     width: 30%;
+}
+
+.errorWrapper {
+margin-top: 50px;
 }
 
 .editButtonsWrapper {

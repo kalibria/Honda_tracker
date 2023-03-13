@@ -1,8 +1,7 @@
 import { Dispatch, SerializedError } from '@reduxjs/toolkit';
 import { UseQueryStateResult } from '@reduxjs/toolkit/dist/query/react/buildHooks';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-//
-// import { authenticationManager } from 'src/auth/authenticationManager';
+
 import { badRequest, unauthorized } from 'src/auth/constants';
 import { IHandleQueryResult } from 'src/ui-kit/components.types';
 
@@ -59,7 +58,6 @@ class RtkQueryResultProcessor {
     const errorCode = this.getErrorCode(result);
 
     if (errorCode === unauthorized) {
-      // authenticationManager.setUnauthenticated(dispatch);
       console.warn(this.getErrorMessage(result));
     } else if (errorCode === badRequest) {
       console.warn(this.getErrorMessage(result));

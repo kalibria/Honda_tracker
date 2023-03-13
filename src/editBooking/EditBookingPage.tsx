@@ -3,7 +3,7 @@ import { Form, Formik } from 'formik';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IDataForBookingDetailPage } from 'src/bookingDetails/types';
-import { bookingListPath } from 'src/router/rootConstants';
+import { bookingListPath, errorPath } from 'src/router/rootConstants';
 import { useEditBookingMutation } from 'src/services/hondaApi';
 import { ButtonUI } from 'src/ui-kit/ButtonUI';
 
@@ -28,7 +28,11 @@ export const EditBookingPage = ({
     if (resultEditTrigger.isSuccess) {
       navigate(bookingListPath);
     }
-  }, [resultEditTrigger.isSuccess, navigate]);
+
+    if (resultEditTrigger.error) {
+      navigate(errorPath);
+    }
+  }, [resultEditTrigger.isSuccess, resultEditTrigger.error, navigate]);
 
   return (
     <div className={'bookingEditWrapper'}>
