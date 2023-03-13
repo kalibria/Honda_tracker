@@ -1,17 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { ButtonUI } from 'src/ui-kit/ButtonUI';
 import { Loading } from 'src/ui-kit/Loading';
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
-import { loginPath, welcomePath } from 'src/router/rootConstants';
+import {
+  errorPath,
+  initPath,
+  loginPath,
+  welcomePath,
+} from 'src/router/rootConstants';
 import { useGetMeQuery, useLogOutMutation } from 'src/services/hondaApi';
 
 export const LogInLogOutButton = () => {
   const { isSuccess } = useGetMeQuery({});
   const [logOutTrigger, logOutTriggerResult] = useLogOutMutation();
-  const [error, setError] = useState('');
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -20,36 +25,30 @@ export const LogInLogOutButton = () => {
 
     logOutTrigger({ accessToken: accessToken });
   };
+
   const handleLogInClick = () => {
     navigate(loginPath);
   };
 
-  useEffect(() => {}, [logOutTriggerResult]);
-
   useEffect(() => {
-    const { isSuccess, errorMsg, isError } =
+    const { isSuccess, isError } =
       myRtkQueryResultProcessor.parseQueryResult(logOutTriggerResult);
 
     if (isSuccess) {
-      // authenticationManager.setUnauthenticated(dispatch);
       localStorage.clear();
       sessionStorage.clear();
-      setError('');
-      navigate(loginPath);
-    } else if (isError) {
-      setError(errorMsg);
-      // myLocalStorage.logOut();
       navigate(welcomePath);
+    } else if (isError) {
+      navigate(errorPath);
     }
-  }, [dispatch, error, navigate, logOutTriggerResult]);
+  }, [dispatch, navigate, logOutTriggerResult]);
 
   return (
     <div>
       {logOutTriggerResult.isLoading && <Loading />}
       <ButtonUI onClick={isSuccess ? handleLogOutClick : handleLogInClick}>
-        {isSuccess ? 'Выйти' : 'Войти'}
+        {isSuccess ? 'Sign out' : 'Sign in'}
       </ButtonUI>
-      {/*<div>{error && <AlertForm message={error} />}</div>*/}
     </div>
   );
 };

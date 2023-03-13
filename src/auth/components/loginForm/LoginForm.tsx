@@ -1,12 +1,12 @@
 import Button from '@mui/material/Button';
 import React, { useEffect, useState } from 'react';
 import { Formik, Form } from 'formik';
-import { useDispatch } from 'react-redux';
+import { batch, useDispatch } from 'react-redux';
 import { redirect, useLocation, useNavigate } from 'react-router-dom';
 
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 
-import { bookingListPath } from 'src/router/rootConstants';
+import { bookingListPath, errorPath } from 'src/router/rootConstants';
 import {
   hondaApi,
   useLazyGetUserQuery,
@@ -21,7 +21,7 @@ import * as Yup from 'yup';
 import 'src/css/App.css';
 
 const LoginForm = () => {
-  const [trigger, loginResult] = useLazyStatusLoginQuery();
+  const [loginTrigger, loginResult] = useLazyStatusLoginQuery();
   const [error, setError] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -34,7 +34,13 @@ const LoginForm = () => {
     if (resultUser.isSuccess) {
       navigate(location.state || bookingListPath);
     }
-  });
+  }, [resultUser.isSuccess]);
+
+  useEffect(() => {
+    if (resultUser.error) {
+      navigate(errorPath);
+    }
+  }, [resultUser.error, navigate]);
 
   useEffect(() => {
     const { isSuccess, isError, errorMsg } =
@@ -58,7 +64,10 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (resultUser.isSuccess && resultUser.data) {
-      dispatch(hondaApi.util.invalidateTags(['Me']));
+      batch(() => {
+        dispatch(hondaApi.util.invalidateTags(['Me']));
+        dispatch(hondaApi.util.invalidateTags(['User']));
+      });
 
       redirect(bookingListPath);
     }
@@ -93,8 +102,9 @@ const LoginForm = () => {
           onSubmit={(values, { setSubmitting }) => {
             let password = values.password;
             let username = values.login;
-            trigger({ password, username });
             setUsername(username);
+            loginTrigger({ password, username });
+
             setSubmitting(false);
           }}>
           <Form className="flex flex-col space-y-3.5 widthFormItem">
@@ -114,7 +124,7 @@ const LoginForm = () => {
             />
             <div className={'button'}>
               <Button variant="contained" type="submit">
-                {'Войти'}
+                {'Sign in'}
               </Button>
             </div>
           </Form>

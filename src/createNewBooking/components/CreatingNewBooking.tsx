@@ -16,7 +16,7 @@ import {
 } from 'src/createNewBooking/components/MUComponentsForCreatingBooking';
 
 import { datesManager } from 'src/dates/datesTimeManager';
-import { bookingListPath } from 'src/router/rootConstants';
+import { bookingListPath, errorPath } from 'src/router/rootConstants';
 import { useLazyBookingsQuery } from 'src/services/hondaApi';
 import {
   AlertForm,
@@ -40,8 +40,10 @@ export const CreatingNewBooking: React.FC<ICreatingNewBooking> = ({
   useEffect(() => {
     if (result.isSuccess) {
       navigate(bookingListPath);
+    } else if (result.error) {
+      navigate(errorPath);
     }
-  }, [result.isSuccess, navigate]);
+  }, [result.isSuccess, result.error, navigate]);
 
   const initialValues: InitialValues = {
     driver: firstName,

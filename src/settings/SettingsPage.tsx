@@ -10,6 +10,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { IUsersSettings } from 'src/createNewBooking/bookingTypes';
+import { errorPath } from 'src/router/rootConstants';
 import { hondaApi, useLazyUpdateUserDataQuery } from 'src/services/hondaApi';
 
 import { carProvider } from 'src/settings/constants';
@@ -51,7 +52,13 @@ export const SettingsPage = () => {
     }
   }, [meResultSelector.isSuccess, user]);
 
-  const [triggerUpdate] = useLazyUpdateUserDataQuery();
+  const [triggerUpdate, resultUpdate] = useLazyUpdateUserDataQuery();
+
+  useEffect(() => {
+    if (resultUpdate.error) {
+      navigate(errorPath);
+    }
+  }, [resultUpdate.error]);
 
   const formik = useFormik({
     initialValues: {
@@ -112,7 +119,7 @@ export const SettingsPage = () => {
             <div className={'widthFormItem'}>
               <FormControl component="fieldset" variant="standard">
                 <FormLabel component="legend">
-                  {'Get notifications when ...'}
+                  {'Получать уведомления когда ...'}
                 </FormLabel>
                 <FormGroup>
                   <FormControlLabel
@@ -124,7 +131,7 @@ export const SettingsPage = () => {
                         value={formik.values.isCreated}
                       />
                     }
-                    label={'booking is created'}
+                    label={'авто забронировано'}
                   />
                   <FormControlLabel
                     control={
@@ -135,7 +142,7 @@ export const SettingsPage = () => {
                         value={formik.values.isChanged}
                       />
                     }
-                    label={'booking is changed'}
+                    label={'бронирование изменено'}
                   />
                 </FormGroup>
               </FormControl>

@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CompleteRideWindow } from 'src/completeRide/CompleteRideWindow';
 import { ButtonUI } from 'src/ui-kit/ButtonUI';
-import { DeleteButton } from 'src/redux/deleteButton';
+import { DeleteButton } from 'src/deleteRide/deleteButton';
 
 export interface IButtonsBar {
   startTimeSec: string;

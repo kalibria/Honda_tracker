@@ -3,7 +3,7 @@ import { Form, Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
-import { bookingListPath } from 'src/router/rootConstants';
+import { bookingListPath, errorPath } from 'src/router/rootConstants';
 import { useLazySignUpQuery } from 'src/services/hondaApi';
 import { myLocalStorage } from 'src/services/localStorage';
 import { AlertForm, MyTextInput } from 'src/ui-kit/components';
@@ -22,6 +22,7 @@ export const SignUpForm = () => {
       navigate(bookingListPath);
     } else if (result.isError) {
       setErrorMsg(myRtkQueryResultProcessor.getErrorMessage(result.error));
+      navigate(errorPath);
     }
   }, [navigate, result]);
 
@@ -33,8 +34,8 @@ export const SignUpForm = () => {
             src="https://www.nicepng.com/png/detail/138-1388174_login-account-icon.png"
             alt="Sign-up"
           />
+          <h1 className="text-center">Sign up</h1>
         </div>
-        <h1 className="text-center">Регистрация</h1>
 
         <Formik
           initialValues={{
@@ -87,7 +88,7 @@ export const SignUpForm = () => {
 
                 <div className={'button'}>
                   <Button variant="contained" type="submit">
-                    {'Зарегистрироваться'}
+                    {'Sign up'}
                   </Button>
                 </div>
 

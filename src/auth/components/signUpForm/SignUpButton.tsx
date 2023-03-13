@@ -7,7 +7,7 @@ export const SignUpButton = () => {
   return (
     <div>
       <Button variant="contained" type="submit" size={'small'}>
-        <Link to={signUpFormPath}>Зарегистрироваться</Link>
+        <Link to={signUpFormPath}>Sign up</Link>
       </Button>
     </div>
   );

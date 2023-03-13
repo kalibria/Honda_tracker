@@ -5,6 +5,7 @@ import { SignUpForm } from 'src/auth/components/signUpForm/SignUpForm';
 import { BookingDetailsWrapper } from 'src/bookingDetails/BookingDetailsWrapper';
 import { BookingList } from 'src/booking-list/components/BookingList';
 import { WrapperForCreatingBooking } from 'src/createNewBooking/components/WrapperForCreatingBooking';
+import { ErrorComponent } from 'src/errorComponent/ErrorComponent';
 
 import {
   bookingListPath,
@@ -58,7 +59,7 @@ const router = createBrowserRouter([
   },
   {
     path: errorPath,
-    element: <h1>Error...Please try reload</h1>,
+    element: <ErrorComponent />,
   },
 ]);
 

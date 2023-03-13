@@ -1,6 +1,6 @@
 import { MiddlewareAPI, isRejectedWithValue } from '@reduxjs/toolkit';
 import { Middleware } from '@reduxjs/toolkit';
-// import { authenticationManager } from 'src/auth/authenticationManager';
+
 import { badRequest, unauthorized } from 'src/auth/constants';
 import { myRtkQueryResultProcessor } from 'src/redux/rtkQueryResultProcessor';
 
@@ -13,7 +13,6 @@ export const rtkQueryErrorLogger: Middleware =
         myRtkQueryResultProcessor.parseQueryResult(action.payload);
 
       if (errorCode === unauthorized) {
-        // authenticationManager.setUnauthenticated(dispatch);
         console.warn(errorMsg);
         return;
       } else if (errorCode === badRequest) {

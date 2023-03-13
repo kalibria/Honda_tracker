@@ -15,11 +15,13 @@ export const BookingDetailsCard = ({
   const [endTimeUI, setEndTimeUI] = useState('');
 
   useEffect(() => {
-    if (dataForCard.startTime && dataForCard.endTime) {
+    if (dataForCard.startTime) {
       setStartTimeUi(
         datesManager.getFormattingDateTime(+new Date(dataForCard.startTime)),
       );
+    }
 
+    if (dataForCard.endTime) {
       setEndTimeUI(
         datesManager.getFormattingDateTime(+new Date(dataForCard.endTime)),
       );

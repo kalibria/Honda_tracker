@@ -6,22 +6,18 @@ export const hondaApi = createApi({
   reducerPath: 'hondaApi',
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_BASE_URL,
-    // credentials: 'include',
     prepareHeaders: (headers, { getState, endpoint }) => {
       const refreshToken = myLocalStorage.getItem('RefreshToken');
       const accessToken = sessionStorage.getItem('AccessToken');
-      // const idToken = sessionStorage.getItem('IdToken');
-      // headers.set('origin', window.origin);
+
       if (refreshToken && endpoint === 'getIdAccessToken') {
         headers.set('x-refresh-token', refreshToken);
-        // headers.set('origin', window.origin);
         headers.set('content-type', 'application/json');
       } else if (endpoint === 'logOut') {
         headers.delete('accessToken');
       } else {
         if (accessToken) {
           headers.set('Authorization', `Bearer ${accessToken}`);
-          // headers.set('x-id-token', accessToken);
         }
       }
 
@@ -29,7 +25,7 @@ export const hondaApi = createApi({
     },
   }),
 
-  tagTypes: ['User', 'Me', 'Bookings'],
+  tagTypes: ['User', 'Me', 'Bookings', 'Refresh'],
   endpoints: (builder) => ({
     signUp: builder.query({
       query: ({
@@ -55,6 +51,7 @@ export const hondaApi = createApi({
         url: '/token/refresh',
         method: 'POST',
       }),
+      providesTags: ['Refresh'],
     }),
     statusLogin: builder.query({
       query: ({ password, username }) => ({

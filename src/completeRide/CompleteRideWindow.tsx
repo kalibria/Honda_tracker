@@ -2,7 +2,7 @@ import Button from '@mui/material/Button';
 import { Form, Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { bookingListPath } from 'src/router/rootConstants';
+import { bookingListPath, errorPath } from 'src/router/rootConstants';
 import {
   useGetMeQuery,
   useLazyFinishRideQuery,
@@ -61,14 +61,27 @@ export const CompleteRideWindow = ({
         carId: resultUser.data.user.availableCars[0],
       });
     }
-  }, [resultUser.isSuccess, resultUser.data]);
+
+    if (resultUser.error) {
+      navigate(errorPath);
+    }
+  }, [resultUser.isSuccess, resultUser.data, resultUser.error, navigate]);
 
   useEffect(() => {
     if (finishResult.isSuccess) {
       setIsOpenCompleteRideWindow(false);
       navigate(bookingListPath);
     }
-  }, [finishResult.isSuccess, navigate, setIsOpenCompleteRideWindow]);
+
+    if (finishResult.error) {
+      navigate(errorPath);
+    }
+  }, [
+    finishResult.isSuccess,
+    finishResult.error,
+    navigate,
+    setIsOpenCompleteRideWindow,
+  ]);
 
   return (
     <div className={'completeRideWindow'}>
