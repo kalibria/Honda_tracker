@@ -1,6 +1,6 @@
 # Honda Tracker - booking app
 
-The app for booking a car.
+A demo app for booking a family car.
 
 ## Table of contents
 
@@ -13,8 +13,8 @@ The app for booking a car.
 
 A simple app to track the time when users book Honda car. This application can be useful if several people use the same car.
 
-It is a responsive design app (mobile and desktop version).
-After logged-in user see a calendar with booking information. User can create, edit, delete a booking, complete a ride, see a booking details, choose settings. All booking information comes from AWS DynamoDB.
+It is a responsive app (mobile and desktop version).
+After logging in, the user sees a calendar with booking information. User can create, edit, delete a booking, complete a ride, see a booking details, choose settings. All booking information comes from DynamoDB.
 
 ## Technologies
 
@@ -38,6 +38,12 @@ $ npm start
 
 ## Illustrations 
 
+![Welcome page](./src/imgs/Welcome.png)
+![Sign in page](./src/imgs/Sign_in.png)
+![Settings page](./src/imgs/Settings.png)
+![Booking list](./src/imgs/Booking_list.png)
+![Create booking](./src/imgs/Create_booking.png)
+![Ride details](./src/imgs/Ride_detailes.png)
 
 
 
