@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Family-car-booking-app/static/css/main.08bef03d.css",
+    "main.js": "/Family-car-booking-app/static/js/main.fe86d01a.js",
+    "index.html": "/Family-car-booking-app/index.html",
+    "main.08bef03d.css.map": "/Family-car-booking-app/static/css/main.08bef03d.css.map",
+    "main.fe86d01a.js.map": "/Family-car-booking-app/static/js/main.fe86d01a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.08bef03d.css",
+    "static/js/main.fe86d01a.js"
+  ]
+}
